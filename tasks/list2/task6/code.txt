@@ -1,0 +1,43 @@
+# Zadanie 6: Przedział ufności dla proporcji - gospodarstwa rolne
+
+# Dane
+n <- 400                  # wielkość próby
+x <- 144                  # liczba gospodarstw z właścicielami > 60 lat
+poziom_ufnosci <- 0.95
+alpha <- 1 - poziom_ufnosci
+
+cat("Dane:\n")
+cat("Wielkość próby: n =", n, "\n")
+cat("Liczba sukcesów: x =", x, "\n")
+cat("Poziom ufności =", poziom_ufnosci, "\n\n")
+
+# Proporcja w próbie
+p_hat <- x / n
+cat("Proporcja w próbie: p̂ =", p_hat, "(", p_hat * 100, "%)\n\n")
+
+# Wartość krytyczna z rozkładu normalnego
+z_krytyczne <- qnorm(1 - alpha/2)
+cat("Wartość krytyczna z =", round(z_krytyczne, 4), "\n\n")
+
+# Błąd standardowy proporcji
+blad_std <- sqrt(p_hat * (1 - p_hat) / n)
+cat("Błąd standardowy =", round(blad_std, 5), "\n\n")
+
+# Margines błędu
+margines <- z_krytyczne * blad_std
+
+# Przedział ufności dla θ
+dolna_granica <- p_hat - margines
+gorna_granica <- p_hat + margines
+
+cat("=== PRZEDZIAŁ UFNOŚCI (95%) dla θ ===\n")
+cat("[", round(dolna_granica, 4), ",", round(gorna_granica, 4), "]\n\n")
+
+cat("=== PRZEDZIAŁ UFNOŚCI (95%) dla 100θ% ===\n")
+cat("[", round(dolna_granica * 100, 2), "%,",
+    round(gorna_granica * 100, 2), "%]\n\n")
+
+cat("INTERPRETACJA:\n")
+cat("Z 95% pewnością możemy stwierdzić, że procent gospodarstw\n")
+cat("rolnych z właścicielami powyżej 60 lat wynosi między\n")
+cat(round(dolna_granica * 100, 2), "% a", round(gorna_granica * 100, 2), "%.\n")

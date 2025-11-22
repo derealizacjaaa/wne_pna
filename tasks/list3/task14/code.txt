@@ -1,0 +1,41 @@
+# Zadanie: Funkcje apply
+
+# Przykładowe dane - macierz 4x5
+set.seed(42)
+macierz <- matrix(rnorm(20), nrow = 4, ncol = 5)
+
+cat("=== MACIERZ ===\n")
+print(macierz)
+
+cat("\n=== APPLY - DZIAŁANIA NA WIERSZACH/KOLUMNACH ===\n")
+
+# apply() - suma dla każdej kolumny
+sumy_kolumn <- apply(macierz, 2, sum)
+cat("\nSumy kolumn:\n")
+print(sumy_kolumn)
+
+# apply() - średnia dla każdego wiersza
+srednie_wierszy <- apply(macierz, 1, mean)
+cat("\nŚrednie wierszy:\n")
+print(srednie_wierszy)
+
+cat("\n=== LAPPLY - ZASTOSOWANIE FUNKCJI DO LISTY ===\n")
+lista <- list(a = 1:5, b = 6:10, c = 11:15)
+wynik_lapply <- lapply(lista, mean)
+cat("\nŚrednie z każdego elementu listy:\n")
+print(wynik_lapply)
+
+cat("\n=== SAPPLY - UPROSZCZONA WERSJA LAPPLY ===\n")
+wynik_sapply <- sapply(lista, mean)
+cat("\nŚrednie (wektor):\n")
+print(wynik_sapply)
+
+cat("\n=== MAPPLY - WIELE ARGUMENTÓW ===\n")
+wynik_mapply <- mapply(rep, 1:4, 4:1)
+cat("\nWynik mapply:\n")
+print(wynik_mapply)
+
+cat("\n=== FUNKCJA ANONIMOWA ===\n")
+# Podniesienie każdego elementu do kwadratu
+kwadraty <- sapply(1:5, function(x) x^2)
+cat("Kwadraty 1:5:", kwadraty, "\n")

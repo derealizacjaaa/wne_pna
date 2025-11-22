@@ -1,0 +1,22 @@
+<h2>Zadanie 1: Sprawdzanie normalności rozkładu</h2>
+
+<p>W tym zadaniu sprawdzisz normalność rozkładu dla kilku zmiennych.</p>
+
+<h3>Polecenie:</h3>
+<p>Sprawdzić normalność rozkładu zmiennej:</p>
+<ol style="list-style-type: lower-alpha">
+  <li><code>vec1</code></li>
+  <li><code>vec2</code></li>
+  <li><code>vec3</code></li>
+  <li><code>vec4</code></li>
+</ol>
+
+<p><strong>Metody sprawdzania normalności:</strong></p>
+<ul>
+  <li>Test Shapiro-Wilka: <code>shapiro.test()</code></li>
+  <li>Test Jarque-Bera: <code>jarque.bera.test()</code> (pakiet tseries)</li>
+  <li>Wykres Q-Q: <code>qqnorm()</code> i <code>qqline()</code></li>
+  <li>Histogram z krzywą normalną</li>
+</ul>
+
+<p><strong>Wskazówka:</strong> Najpierw wygeneruj zmienne testowe lub użyj dostarczonych danych</p>

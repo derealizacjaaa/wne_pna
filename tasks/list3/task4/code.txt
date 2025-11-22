@@ -1,0 +1,39 @@
+# Zadanie 4: Rozkład t-Studenta - Q-Q plots
+
+# Generowanie danych z rozkładu t-Studenta (df=3)
+set.seed(123)
+tSt <- rt(1000, df = 3)
+
+cat("=== STATYSTYKI ROZKŁADU t-STUDENTA (df=3) ===\n")
+cat("Liczba obserwacji:", length(tSt), "\n")
+cat("Średnia:", mean(tSt), "\n")
+cat("Odchylenie std:", sd(tSt), "\n\n")
+
+# Ustawienie układu wykresów (1x2)
+par(mfrow = c(1, 2))
+
+# 1. Q-Q plot względem rozkładu normalnego
+qqnorm(tSt, main = "Q-Q Plot: t-Student vs Normal",
+       xlab = "Kwantyle teoretyczne (normalny)",
+       ylab = "Kwantyle empiryczne (t-Student)",
+       pch = 19, col = "blue", cex = 0.6)
+qqline(tSt, col = "red", lwd = 2)
+grid()
+
+# 2. Q-Q plot względem rozkładu t-Studenta (df=3)
+qqplot(qt(ppoints(1000), df = 3), tSt,
+       main = "Q-Q Plot: t-Student vs t-Student(3)",
+       xlab = "Kwantyle teoretyczne (t-Student df=3)",
+       ylab = "Kwantyle empiryczne",
+       pch = 19, col = "darkgreen", cex = 0.6)
+abline(0, 1, col = "red", lwd = 2)
+grid()
+
+# Przywróć domyślny układ
+par(mfrow = c(1, 1))
+
+cat("INTERPRETACJA:\n")
+cat("- Lewy wykres: t-Student ma grubsze ogony niż rozkład normalny\n")
+cat("  (punkty odstają od linii na końcach)\n")
+cat("- Prawy wykres: dane idealnie pasują do rozkładu t-Student(3)\n")
+cat("  (punkty leżą na linii prostej)\n")

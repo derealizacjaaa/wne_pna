@@ -1,0 +1,26 @@
+<h2>Zadanie 5: Regresja wieloraka - vacation.csv</h2>
+
+<p>Estymacja modelu regresji wielorakiej z użyciem danych z pliku.</p>
+
+<h3>Model:</h3>
+<p>MILES<sub>i</sub> = β₀ + β₁·INCOME<sub>i</sub> + β₂·AGE<sub>i</sub> + β₃·KIDS<sub>i</sub> + ε<sub>i</sub></p>
+
+<h3>Dane:</h3>
+<p>Plik <code>vacation.csv</code> zawiera dane o:</p>
+<ul>
+  <li><strong>MILES</strong> - przejechane mile w wakacje</li>
+  <li><strong>INCOME</strong> - dochód gospodarstwa domowego</li>
+  <li><strong>AGE</strong> - wiek</li>
+  <li><strong>KIDS</strong> - liczba dzieci</li>
+</ul>
+
+<h3>Polecenie:</h3>
+<p>Dla powyższego modelu oblicz:</p>
+<ol>
+  <li>Oszacowania parametrów β₀, β₁, β₂, β₃</li>
+  <li>Wartość wariancji reszt</li>
+</ol>
+
+<p><strong>Źródło:</strong> Zadanie 8.4 z podręcznika <em>Principles of Econometrics (3rd ed.)</em></p>
+
+<p><strong>Wskazówka:</strong> Użyj <code>lm(MILES ~ INCOME + AGE + KIDS, data = ...)</code></p>

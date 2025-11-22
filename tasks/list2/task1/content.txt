@@ -1,0 +1,10 @@
+<h2>Zadanie 1: Wariancja w R</h2>
+
+<p>W tym zadaniu sprawdzisz, którą wariancję wylicza funkcja <code>var()</code> w R.</p>
+
+<h3>Polecenie:</h3>
+<p>Sprawdź, którą wariancję wylicza się w R poleceniem <code>var()</code>.</p>
+
+<p><strong>Pytanie:</strong> Czy R oblicza wariancję z próby (dzieli przez n-1) czy wariancję z populacji (dzieli przez n)?</p>
+
+<p><strong>Wskazówka:</strong> Utwórz prosty wektor danych i porównaj wynik <code>var()</code> z ręcznym obliczeniem</p>

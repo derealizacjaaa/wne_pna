@@ -1,0 +1,97 @@
+/* ========================================
+   PROGRESS SUMMARY CARD
+   Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
+   ======================================== */
+
+.progress-summary-card {
+  background: #F4F6F9;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  padding: 18px;
+  color: #b1404f;
+  flex: 1;
+}
+
+/* Header */
+.summary-header {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #4A4A4A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #b1404f;
+}
+
+.summary-header-text {
+  color: #000000;
+  font-weight: 600;
+}
+
+.summary-header-count {
+  color: #b1404f;
+  font-weight: 700;
+}
+
+/* Stats */
+.summary-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 1.6em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-value-completed {
+  color: #b1404f;
+}
+
+.stat-value-total {
+  color: #000000;
+}
+
+.stat-label {
+  font-size: 0.8em;
+  color: #606060;
+  font-weight: 500;
+}
+
+/* Progress bar */
+.summary-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(45, 45, 45, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.summary-progress-fill {
+  height: 100%;
+  background: #b1404f;
+  transition: width 0.3s ease;
+}
+
+/* Percentage */
+.summary-percentage {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #b1404f;
+}

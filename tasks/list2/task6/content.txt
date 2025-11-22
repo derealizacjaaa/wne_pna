@@ -1,0 +1,15 @@
+<h2>Zadanie 6: Przedział ufności dla proporcji - gospodarstwa rolne</h2>
+
+<p>W tym zadaniu wyznaczysz przedział ufności dla proporcji w populacji.</p>
+
+<h3>Dane:</h3>
+<p>Procent gospodarstw rolnych, których właściciele przekroczyli 60 lat oznaczmy przez <strong>100θ%</strong>.</p>
+
+<p>W celu oszacowania parametru θ, pobrano spośród gospodarstw 400-elementową próbkę losową i okazało się, że <strong>144 właścicieli przekroczyło 60 lat</strong>.</p>
+
+<h3>Polecenie:</h3>
+<p>Zbudować przedział ufności dla parametru θ na poziomie ufności 0.95</p>
+
+<p><strong>Wzór dla proporcji:</strong></p>
+<p>p̂ ± z<sub>α/2</sub> · √(p̂(1-p̂)/n)</p>
+<p>gdzie p̂ = x/n (proporcja w próbie)</p>

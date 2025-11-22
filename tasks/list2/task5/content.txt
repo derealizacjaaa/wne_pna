@@ -1,0 +1,16 @@
+<h2>Zadanie 5: Przedział ufności dla popytu na waluty</h2>
+
+<p>W tym zadaniu wyznaczysz przedział ufności dla wartości oczekiwanej przy małej próbie.</p>
+
+<h3>Dane:</h3>
+<p>Właściciel kantoru wymiany walut na lotnisku chce wyestymować średnią wielkość gotówki potrzebnej do wymiany nocą franków na dolary.</p>
+<ul>
+  <li>Z doświadczenia: wielkość popytu ma rozkład normalny</li>
+  <li>Obserwacje z 10 dni (próba)</li>
+  <li>Poziom ufności: 0.95</li>
+</ul>
+
+<h3>Polecenie:</h3>
+<p>Podać realizację przedziału ufności dla wartości oczekiwanej popytu</p>
+
+<p><strong>Uwaga:</strong> Trzeba  będzie wprowadzić dane z obserwacji z HTML-a lub użyć przykładowych danych</p>

@@ -1,0 +1,12 @@
+<h2>Zadanie 5: Funkcja wiarygodności dla rozkładu normalnego</h2>
+
+<p>Wygenerowano 20 obserwacji z rozkładu <strong>N(μ, σ²)</strong>:</p>
+
+<h3>Zadania:</h3>
+<ol>
+  <li>Sporządzić wykres <strong>logarytmu funkcji wiarygodności</strong> dla parametrów μ i σ²</li>
+  <li>Znaleźć estymatory największej wiarygodności (MLE) dla μ i σ²</li>
+  <li>Porównać uzyskane oszacowania ze średnią i wariancją z próby</li>
+</ol>
+
+<p><strong>Wskazówka:</strong> Funkcja wiarygodności dla rozkładu normalnego zależy od parametrów μ i σ²</p>

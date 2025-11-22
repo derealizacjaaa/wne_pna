@@ -1,0 +1,38 @@
+# Zadanie: Zaawansowane testy statystyczne
+
+# Przykład - porównanie dwóch średnich (test t dla dwóch prób)
+
+# Grupa 1
+grupa1 <- c(23, 25, 21, 24, 26, 22, 25, 24, 23, 25)
+
+# Grupa 2
+grupa2 <- c(28, 30, 27, 29, 31, 28, 30, 29, 28, 30)
+
+cat("=== PORÓWNANIE DWÓCH GRUP ===\n\n")
+
+cat("Grupa 1:\n")
+cat("Średnia:", mean(grupa1), "\n")
+cat("SD:", sd(grupa1), "\n\n")
+
+cat("Grupa 2:\n")
+cat("Średnia:", mean(grupa2), "\n")
+cat("SD:", sd(grupa2), "\n\n")
+
+# Test t dla dwóch prób niezależnych
+wynik <- t.test(grupa1, grupa2)
+
+cat("=== TEST T DLA DWÓCH PRÓB ===\n")
+print(wynik)
+
+cat("\n=== INTERPRETACJA ===\n")
+if (wynik$p.value < 0.05) {
+  cat("Średnie różnią się istotnie statystycznie\n")
+} else {
+  cat("Brak istotnych różnic między średnimi\n")
+}
+
+# Wizualizacja
+boxplot(list(Grupa1 = grupa1, Grupa2 = grupa2),
+        main = "Porównanie grup",
+        ylab = "Wartość",
+        col = c("lightblue", "lightgreen"))

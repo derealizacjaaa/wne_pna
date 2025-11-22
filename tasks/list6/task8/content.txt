@@ -1,0 +1,16 @@
+<h2>Zadanie 8: Algorytm BHHH - optymalizacja parametrów</h2>
+
+<p>Wykorzystując <strong>algorytm Berndta-Halla-Halla-Hausmana (BHHH)</strong>, oszacować parametry modelu z zadania 6.</p>
+
+<h3>Algorytm BHHH:</h3>
+<p>Algorytm BHHH to metoda optymalizacji numerycznej wykorzystywana do estymacji parametrów metodą największej wiarygodności.</p>
+
+<h3>Zadania:</h3>
+<ol>
+  <li>Zaimplementować algorytm BHHH dla modelu regresji liniowej</li>
+  <li>Oszacować parametry β₀ i β₁ z zadania 6</li>
+  <li>Porównać wyniki z estymacją MNK (metoda najmniejszych kwadratów)</li>
+  <li>Ocenić zbieżność algorytmu</li>
+</ol>
+
+<p><strong>Wskazówka:</strong> Algorytm BHHH używa gradientu funkcji wiarygodności</p>

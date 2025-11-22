@@ -1,0 +1,10 @@
+<h2>Zadanie 2: Funkcja Rosenbrocka</h2>
+
+<p>Funkcja <strong>Rosenbrocka</strong> — funkcja niewypukła używana w testowaniu algorytmów optymalizacji.</p>
+
+<p><strong>Funkcja określona jest wzorem:</strong></p>
+<p>f(x,y) = (1-x)² + 100(y - x²)²</p>
+
+<p><strong>Polecenie:</strong> Sporządzić wykres tej funkcji</p>
+
+<p><strong>Wskazówka:</strong> Funkcja ma globalne minimum w punkcie (1, 1), gdzie f(1,1) = 0</p>

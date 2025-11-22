@@ -1,0 +1,35 @@
+# Zadanie 6: Operacje na wektorze g
+
+# Wprowadzenie wektora g
+g <- c(1, 1, -1, 1, 1, 0, 2)
+
+cat("Wektor g:\n")
+print(g)
+
+# a) Suma elementów
+suma_g <- sum(g)
+cat("\na) Suma elementów:", suma_g, "\n")
+
+# b) Iloczyn elementów
+iloczyn_g <- prod(g)
+cat("\nb) Iloczyn elementów:", iloczyn_g, "\n")
+
+# c) Indeks elementu równego 2
+indeks_2 <- which(g == 2)
+cat("\nc) Indeks elementu równego 2:", indeks_2, "\n")
+
+# d) Indeksy elementów niedodatnich (≤ 0)
+indeksy_niedodatnie <- which(g <= 0)
+cat("\nd) Indeksy elementów niedodatnich:", indeksy_niedodatnie, "\n")
+
+# e) Liczba elementów niedodatnich
+liczba_niedodatnich <- sum(g <= 0)
+cat("\ne) Liczba elementów niedodatnich:", liczba_niedodatnich, "\n")
+
+# f) Czy wszystkie elementy są dodatnie?
+wszystkie_dodatnie <- all(g > 0)
+cat("\nf) Czy wszystkie elementy są dodatnie?", wszystkie_dodatnie, "\n")
+
+# g) Czy wszystkie elementy są mniejsze niż 100?
+wszystkie_mniejsze_100 <- all(g < 100)
+cat("\ng) Czy wszystkie elementy są mniejsze niż 100?", wszystkie_mniejsze_100, "\n")

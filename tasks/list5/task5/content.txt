@@ -1,0 +1,17 @@
+<h2>Zadanie 5: Rozkład Cauchy'ego - funkcja wiarygodności</h2>
+
+<p>Funkcja wiarygodności dla rozkładu Cauchy'ego.</p>
+
+<h3>Rozkład Cauchy'ego:</h3>
+<p>Próba losowa (n = 4) z rozkładu Cauchy'ego.</p>
+
+<p><strong>Funkcja gęstości:</strong></p>
+<p>f(x; μ) = 1 / [π(1 + (x - μ)²)], dla -∞ < x < ∞, -∞ < μ < ∞</p>
+
+<h3>Własności:</h3>
+<p>Rozkład Cauchy'ego nie ma wartości oczekiwanej ani wariancji (są nieskończone). Jest przykładem rozkładu o "grubych ogonach".</p>
+
+<h3>Polecenie:</h3>
+<p>Sporządzić wykres funkcji wiarygodności dla parametru μ</p>
+
+<p><strong>Źródło:</strong> Przykład 6.7 z [3]</p>

@@ -1,0 +1,13 @@
+<h2>Zadanie 2: Wprowadzenie wektorów i macierzy</h2>
+
+<p>W tym zadaniu utworzysz wektory i macierze o określonych wartościach.</p>
+
+<h3>Wprowadź następujące wektory:</h3>
+<ul>
+  <li><strong>a</strong> - wektor zawierający 7 elementów: ln(10) (powtórzony 7 razy)</li>
+  <li><strong>b</strong> - wektor zawierający ułamki: 1/3, 1/2, 1/6, 1/7</li>
+  <li><strong>c</strong> - wektor zawierający: π, π/3, π/5, π/7</li>
+  <li><strong>d</strong> - wektor zawierający liczby: -1, 1, 0, -2, 3, 0, 2</li>
+</ul>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>log()</code> dla logarytmu naturalnego i <code>pi</code> dla liczby π</p>

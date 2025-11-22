@@ -1,0 +1,33 @@
+/* Remove gaps and ensure full width */
+.bslib-page-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.content-wrapper {
+  margin-top: -25px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+  border-top: none !important;
+}
+
+.bslib-sidebar-layout {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  border-top: none !important;
+}
+
+.bslib-sidebar-layout > .main {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100%;
+}
+
+/* Main Content Area Styles */
+.main-content {
+  padding: 0px;
+  min-height: 800px;
+  background: white;
+}

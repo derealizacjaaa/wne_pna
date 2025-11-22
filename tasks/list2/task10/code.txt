@@ -1,0 +1,25 @@
+# Zadanie 10: Granica plastyczności stali
+
+granica <- c(3570, 3700, 3650, 3590, 3720, 3710, 3550, 3720, 3580, 3630)
+mu_0 <- 3600  # hipotetyczna średnia
+
+cat("Dane - granica plastyczności:\n")
+print(granica)
+cat("\n")
+
+cat("Test hipotezy H₀: μ = 3600 kg/cm²\n\n")
+
+# Statystyki
+cat("Średnia:", mean(granica), "\n")
+cat("Odchylenie:", sd(granica), "\n\n")
+
+# Test t
+wynik <- t.test(granica, mu = mu_0)
+print(wynik)
+
+cat("\nWniosek: Na podstawie wartości p =", round(wynik$p.value, 4), "\n")
+if (wynik$p.value < 0.05) {
+  cat("Odrzucamy H₀\n")
+} else {
+  cat("Brak podstaw do odrzucenia H₀\n")
+}

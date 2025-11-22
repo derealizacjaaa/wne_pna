@@ -1,0 +1,44 @@
+# Zadanie 6: Definiowanie funkcji
+
+# 1. Prosta funkcja
+kwadrat <- function(x) {
+  return(x^2)
+}
+
+cat("=== PRZYKŁAD 1: PROSTA FUNKCJA ===\n")
+cat("kwadrat(5) =", kwadrat(5), "\n")
+cat("kwadrat(1:5) =", kwadrat(1:5), "\n\n")
+
+# 2. Funkcja z wieloma argumentami
+pole_prostokata <- function(a, b) {
+  pole <- a * b
+  return(pole)
+}
+
+cat("=== PRZYKŁAD 2: WIELE ARGUMENTÓW ===\n")
+cat("Pole prostokąta (3 x 4) =", pole_prostokata(3, 4), "\n\n")
+
+# 3. Funkcja z domyślnymi wartościami
+potega <- function(x, n = 2) {
+  return(x^n)
+}
+
+cat("=== PRZYKŁAD 3: DOMYŚLNE WARTOŚCI ===\n")
+cat("potega(3) =", potega(3), "(domyślnie n=2)\n")
+cat("potega(3, 3) =", potega(3, 3), "\n\n")
+
+# 4. Funkcja zwracająca wiele wartości (lista)
+statystyki <- function(x) {
+  list(
+    srednia = mean(x),
+    mediana = median(x),
+    odchylenie = sd(x),
+    min = min(x),
+    max = max(x)
+  )
+}
+
+cat("=== PRZYKŁAD 4: ZWRACANIE LISTY ===\n")
+dane <- c(5, 10, 15, 20, 25)
+wynik <- statystyki(dane)
+print(wynik)

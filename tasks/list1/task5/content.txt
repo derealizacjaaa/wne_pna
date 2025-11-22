@@ -1,0 +1,16 @@
+<h2>Zadanie 5: Operacje na wektorze</h2>
+
+<p>Dla wektora <strong>d</strong> z Zadania 2 wykonaj następujące operacje:</p>
+
+<h3>Do wykonania:</h3>
+<ol style="list-style-type: lower-alpha">
+  <li>Wskaż elementy równe 0</li>
+  <li>Określ elementy dodatnie</li>
+  <li>Określ elementy ujemne</li>
+  <li>Podaj liczbę elementów nieujemnych</li>
+  <li>Utwórz wektor <strong>d2</strong> z dodatnich elementów d</li>
+  <li>Utwórz wektor <strong>d3</strong> z ujemnych elementów d</li>
+  <li>Utwórz wektor <strong>d4</strong> będący kopią d, gdzie elementy ujemne zastąpione są przez 999 999 999</li>
+</ol>
+
+<p><strong>Wskazówka:</strong> Użyj operatorów logicznych i indeksowania</p>

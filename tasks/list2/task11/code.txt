@@ -1,0 +1,39 @@
+# Zadanie 11: Test dla wariancji
+
+# Przykładowe dane
+dane <- c(12.5, 13.2, 11.8, 12.9, 13.5, 12.1, 13.8, 12.7, 13.1, 12.4)
+sigma2_0 <- 0.5  # hipotetyczna wariancja
+alpha <- 0.05
+
+cat("=== TEST CHI-KWADRAT DLA WARIANCJI ===\n\n")
+cat("H₀: σ² =", sigma2_0, "\n")
+cat("H₁: σ² ≠", sigma2_0, "\n\n")
+
+n <- length(dane)
+s2 <- var(dane)
+df <- n - 1
+
+cat("n =", n, "\n")
+cat("s² =", round(s2, 4), "\n\n")
+
+# Statystyka chi-kwadrat
+chi2_stat <- (n - 1) * s2 / sigma2_0
+cat("Statystyka χ² =", round(chi2_stat, 4), "\n\n")
+
+# Wartości krytyczne
+chi2_lower <- qchisq(alpha/2, df)
+chi2_upper <- qchisq(1 - alpha/2, df)
+
+cat("Wartości krytyczne:\n")
+cat("χ²_lower =", round(chi2_lower, 4), "\n")
+cat("χ²_upper =", round(chi2_upper, 4), "\n\n")
+
+# Decyzja
+cat("=== DECYZJA ===\n")
+if (chi2_stat < chi2_lower || chi2_stat > chi2_upper) {
+  cat("ODRZUCAMY H₀\n")
+  cat("Wariancja różni się istotnie od", sigma2_0, "\n")
+} else {
+  cat("NIE MA PODSTAW do odrzucenia H₀\n")
+  cat("Wariancja nie różni się istotnie od", sigma2_0, "\n")
+}

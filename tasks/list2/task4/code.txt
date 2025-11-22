@@ -1,0 +1,54 @@
+# Zadanie 4: Przedział ufności dla czasu rozmów
+
+# Dane
+n <- 20                    # liczebność próby
+srednia <- 14.5            # średnia z próby
+odchylenie_std <- 5.6      # odchylenie standardowe z próby
+poziom_ufnosci <- 0.95     # poziom ufności
+alpha <- 1 - poziom_ufnosci
+
+cat("Dane:\n")
+cat("n =", n, "\n")
+cat("Średnia =", srednia, "minut\n")
+cat("Odchylenie std =", odchylenie_std, "minut\n")
+cat("Poziom ufności =", poziom_ufnosci, "\n\n")
+
+# Stopnie swobody
+df <- n - 1
+
+# Wartość krytyczna z rozkładu t-Studenta
+t_krytyczne <- qt(1 - alpha/2, df)
+cat("Wartość krytyczna t(", df, ") =", round(t_krytyczne, 4), "\n\n")
+
+# Błąd standardowy
+blad_std <- odchylenie_std / sqrt(n)
+cat("Błąd standardowy =", round(blad_std, 4), "\n\n")
+
+# Margines błędu
+margines <- t_krytyczne * blad_std
+
+# Przedział ufności
+dolna_granica <- srednia - margines
+gorna_granica <- srednia + margines
+
+cat("=== PRZEDZIAŁ UFNOŚCI (95%) ===\n")
+cat("[", round(dolna_granica, 2), ",", round(gorna_granica, 2), "]\n\n")
+
+# Długość przedziału
+dlugosc_przedzialu <- gorna_granica - dolna_granica
+cat("Długość przedziału:", round(dlugosc_przedzialu, 2), "minut\n\n")
+
+# Odpowiedź na pytanie dodatkowe
+cat("ODPOWIEDŹ: Gdy poziom ufności wzrośnie (np. do 0.99),\n")
+cat("wartość krytyczna t będzie większa, więc przedział\n")
+cat("będzie DŁUŻSZY (mniej precyzyjny, ale bardziej pewny).\n\n")
+
+# Porównanie dla różnych poziomów ufności
+cat("Porównanie dla różnych poziomów ufności:\n")
+poziomy <- c(0.90, 0.95, 0.99)
+for (p in poziomy) {
+  t_val <- qt(1 - (1-p)/2, df)
+  marg <- t_val * blad_std
+  cat(sprintf("  %.0f%%: [%.2f, %.2f], długość = %.2f\n",
+              p*100, srednia - marg, srednia + marg, 2*marg))
+}

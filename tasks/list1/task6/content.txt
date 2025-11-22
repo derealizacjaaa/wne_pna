@@ -1,0 +1,16 @@
+<h2>Zadanie 6: Operacje na wektorze g</h2>
+
+<p>Dla wektora <strong>g</strong> = [1, 1, -1, 1, 1, 0, 2]ᵀ oblicz lub podaj:</p>
+
+<h3>Do wykonania:</h3>
+<ol style="list-style-type: lower-alpha">
+  <li>Sumę elementów</li>
+  <li>Iloczyn elementów</li>
+  <li>Indeks elementu równego 2</li>
+  <li>Indeksy elementów niedodatnich</li>
+  <li>Liczbę elementów niedodatnich</li>
+  <li>Sprawdź, czy wszystkie elementy są dodatnie</li>
+  <li>Sprawdź, czy wszystkie elementy są mniejsze niż 100</li>
+</ol>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>sum()</code>, <code>prod()</code>, <code>which()</code>, <code>all()</code></p>

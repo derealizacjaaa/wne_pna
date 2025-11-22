@@ -1,0 +1,20 @@
+<h2>Zadanie 1: Asymetryczna moneta - funkcja wiarygodności</h2>
+
+<p>Wprowadzenie do funkcji wiarygodności (likelihood function).</p>
+
+<h3>Sytuacja:</h3>
+<p>Kupiliśmy monetę w sklepie z magicznymi rekwizytami. Moneta wygląda na symetryczną, ale niekoniecznie taka jest.</p>
+
+<p>Rzuciliśmy monetą 8 razy i otrzymaliśmy: <strong>OOOROROR</strong> (5 orłów, 3 reszki)</p>
+
+<h3>Model:</h3>
+<p>Niech <em>p</em> będzie prawdopodobieństwem wyrzucenia orła.</p>
+
+<p><strong>Funkcja wiarygodności:</strong></p>
+<p>L(p) = P(X₁=1, X₂=1, X₃=1, X₄=0, X₅=1, X₆=0, X₇=1, X₈=0)</p>
+<p>L(p) = p⁵(1-p)³</p>
+
+<h3>Polecenie:</h3>
+<p>Sporządzić wykres funkcji wiarygodności dla powyższego przykładu z asymetryczną monetą</p>
+
+<p><strong>Wskazówka:</strong> Narysuj L(p) dla p ∈ [0, 1]</p>
