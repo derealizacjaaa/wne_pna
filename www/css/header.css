@@ -1,0 +1,71 @@
+/* Hero Header Styles */
+.hero-header {
+  padding: 12px 30px;
+  color: #4A4A4A;
+  margin: 0;
+  border-radius: 0;
+  background: #F4F6F9;
+  border-bottom: 4px solid #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  font-family: 'Montserrat';
+}
+
+.hero-text {
+  flex: 1;
+  border-left: 3px solid #b1404f;
+  padding-left: 25px;
+}
+
+.hero-header h1 {
+  margin: 0;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #4A4A4A;
+}
+
+.hero-header .subtitle-top {
+  margin: 2px 0 0 0;
+  font-size: 1.3em;
+  color: #606060;
+}
+
+.hero-header .subtitle-top-red {
+  margin: 2px 0 0 0;
+  font-size: 1.3em;
+  color: #b1404f;
+}
+
+.hero-divider {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(to right, #990000, #b1404f, #F4F6F9);
+  margin: 4px 0;
+  width: 300px;
+  max-width: 100%;
+}
+
+.hero-header .subtitle-bottom {
+  margin: 0;
+  font-size: 1em;
+  color: #4A4A4A;
+}
+
+.hero-header .subtitle-bottom-red {
+  margin: 0;
+  font-size: 1em;
+  color: #b1404f;
+}
+
+.hero-logo {
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.hero-logo img {
+  height: 100px;
+  width: auto;
+  transform: scale(1.3);
+}

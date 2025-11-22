@@ -14,30 +14,34 @@
 
 - **Primary Language:** R (v4.5.2)
 - **Framework:** Shiny (reactive web framework)
-- **Document Type:** R Markdown (.Rmd)
+- **Application Type:** Traditional Shiny app (app.R)
 - **Package Manager:** renv (for reproducible environments)
-- **Styling:** Custom CSS (8 modular CSS files)
-- **Runtime:** Shiny Server (runtime: shiny in YAML)
+- **Styling:** Custom CSS (8 modular CSS files in www/css/)
+- **Runtime:** Shiny Server
 
 ## Repository Structure
 
 ```
 wne_pna/
-├── app.Rmd                    # Main application file (R Markdown with Shiny)
+├── app.R                      # Main Shiny application file
+├── app.Rmd                    # Legacy R Markdown version (deprecated)
 ├── manifest.json              # Shiny Server deployment manifest
 ├── renv.lock                  # Locked R package dependencies
 ├── .Rprofile                  # R environment configuration
 ├── wne_pna.Rproj              # RStudio project file
 │
-├── css/                       # Modular CSS files (loaded in specific order)
-│   ├── main.css              # Base styles
-│   ├── header.css            # Hero header styling
-│   ├── navbar.css            # Navigation bar
-│   ├── layout.css            # Overall layout
-│   ├── left-sidebar.css      # List selection sidebar
-│   ├── right-sidebar.css     # Task selection sidebar
-│   ├── progress-card.css     # Progress tracking components
-│   └── main-content.css      # Main content area
+├── www/                       # Static web resources (Shiny convention)
+│   └── css/                   # Modular CSS files (loaded in specific order)
+│       ├── main.css          # Base styles
+│       ├── header.css        # Hero header styling
+│       ├── navbar.css        # Navigation bar
+│       ├── layout.css        # Overall layout
+│       ├── left-sidebar.css  # List selection sidebar
+│       ├── right-sidebar.css # Task selection sidebar
+│       ├── progress-card.css # Progress tracking components
+│       └── main-content.css  # Main content area
+│
+├── css/                       # Original CSS directory (kept for compatibility)
 │
 ├── tasks/                     # Task content organized by lists
 │   ├── helpers.R             # Helper functions for code display
@@ -61,6 +65,52 @@ wne_pna/
     ├── activate.R
     └── settings.json
 ```
+
+## Application Structure (app.R)
+
+The application follows the standard **Shiny app.R** structure with UI and Server components:
+
+### Main Components
+
+1. **Libraries & Setup** (Lines 1-13)
+   - Loads required packages: shiny, bslib, dplyr, base64enc, fontawesome, maxLik
+   - Sources helper functions: `tasks/helpers.R`
+   - Sources task loader: `tasks/task_loader.R`
+   - Loads all tasks: `all_lists <- load_all_tasks()`
+
+2. **List Metadata** (Lines 20-59)
+   - Defines 7 lists (list1-list7) with names and subtitles
+   - Used for navigation and display
+
+3. **UI Helper Functions** (Lines 64-229)
+   - `generate_list_sidebar()`: Creates left sidebar with list navigation
+   - `generate_task_sidebar()`: Creates right sidebar with task navigation
+
+4. **UI Definition** (Lines 234-316)
+   - `fluidPage()` container
+   - CSS includes from `www/css/` directory
+   - Hero header with course information
+   - Dynamic layout container
+
+5. **Server Logic** (Lines 321-461)
+   - Reactive values: `current_list()`, `current_task()`, `sidebar_collapsed()`
+   - Observers for navigation events
+   - Rendering functions: `output$list_sidebar`, `output$task_sidebar`, `output$main_content`
+   - Dynamic layout rendering
+
+6. **App Initialization** (Lines 466-468)
+   - `shinyApp(ui = ui, server = server)`
+
+### Key Differences from app.Rmd
+
+| Aspect | app.Rmd (Old) | app.R (New) |
+|--------|---------------|-------------|
+| Structure | R Markdown chunks | Traditional Shiny structure |
+| CSS Loading | Inline via `readLines()` | External links in `<head>` |
+| CSS Location | `css/` directory | `www/css/` directory (Shiny convention) |
+| Execution | `rmarkdown::run()` | `shiny::runApp()` |
+| Debugging | More complex | Easier with standard Shiny tools |
+| Deployment | Works but non-standard | Standard Shiny Server deployment |
 
 ## Task Organization System
 
@@ -257,8 +307,9 @@ css_order <- c(
 renv::restore()
 
 # 3. Run the Shiny app
-# Click "Run Document" button in RStudio
-# Or use: rmarkdown::run("app.Rmd")
+# Click "Run App" button in RStudio
+# Or use: shiny::runApp()
+# Or from command line: R -e "shiny::runApp()"
 ```
 
 ### Adding a New Task
@@ -458,18 +509,18 @@ mkdir -p tasks/list2/task18
 
 **Modifying UI layout:**
 1. Identify the component (header, sidebar, content)
-2. Edit the corresponding CSS file
-3. For structural changes, edit `app.Rmd` sections
+2. Edit the corresponding CSS file in `www/css/`
+3. For structural changes, edit `app.R` (ui or server sections)
 4. Test in browser
 
 ### Key Files to Reference
 
 | File | Purpose | When to Modify |
 |------|---------|----------------|
-| `app.Rmd` | Main application | Changing layout, adding features |
+| `app.R` | Main Shiny application (UI + Server) | Changing layout, adding features, modifying reactivity |
 | `tasks/helpers.R` | Display functions | Changing code/output rendering |
 | `tasks/task_loader.R` | Task loading | Changing task organization |
-| `css/*.css` | Styling | Changing appearance |
+| `www/css/*.css` | Styling | Changing appearance |
 | `renv.lock` | Dependencies | After adding packages |
 | `manifest.json` | Deployment | Changing Shiny Server config |
 

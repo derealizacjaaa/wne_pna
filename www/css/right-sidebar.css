@@ -1,0 +1,139 @@
+/* ========================================
+   RIGHT SIDEBAR - Task Selection
+   Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
+   ======================================== */
+
+.right-sidebar {
+  width: 260px;
+  background: white;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.tasks-sidebar-content {
+  padding: 0px 15px 20px 15px;
+}
+
+.tasks-sidebar-content h3 {
+  margin: 0;
+  padding: 16px 15px;
+  background: #b1404f;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-bottom: 4px solid #4A4A4A;
+  margin-left: -15px;
+  margin-right: -15px;
+  height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+/* Tasks menu */
+.tasks-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 4px solid #b1404f;
+  padding-left: 15px;
+  margin-left: -15px;
+  padding-top: 15px;
+}
+
+/* Task items */
+.task-item {
+  margin-bottom: 8px;
+  background: #F4F6F9;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  background: white;
+  border-color: #b1404f;
+}
+
+.task-item.active {
+  background: white;
+  border-color: #b1404f;
+  box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
+}
+
+.task-item a {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #606060;
+}
+
+.task-item a > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Task number badge */
+.task-number {
+  width: 28px;
+  height: 28px;
+  background: #b1404f;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85em;
+  flex-shrink: 0;
+}
+
+.task-item.active .task-number {
+  background: #4A4A4A;
+}
+
+/* Task name */
+.task-name {
+  flex: 1;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #606060;
+}
+
+/* Task status icon */
+.task-status {
+  margin-left: auto;
+  font-size: 1.2em;
+}
+
+.task-status.status-completed {
+  color: #b1404f;
+}
+
+/* Hover effects */
+.task-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
+  transition: left 0.5s;
+}
+
+.task-item:hover::before {
+  left: 100%;
+}
+
+/* Focus states */
+.task-item a:focus {
+  outline: 2px solid #b1404f;
+  outline-offset: 2px;
+}
