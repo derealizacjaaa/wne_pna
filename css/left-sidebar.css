@@ -239,14 +239,38 @@
   width: 15px;    /* Szerokość białych prostokątów */
   height: 100%;
   background:
-    repeating-linear-gradient(
+    linear-gradient(
       to bottom,
-      white 0px,
-      white 54px,           /* Wysokość: border-top(2px) + content(50px) + border-bottom(2px) */
-      transparent 54px,
-      transparent 66px      /* 54px + margin-bottom(12px) */
+      #b1404f 0px,
+      #b1404f 15px,         /* Czerwone 15px na górze */
+      white 15px,
+      white 69px,           /* Pierwszy prostokąt: 15px + 54px */
+      transparent 69px,
+      transparent 81px,     /* Odstęp: 69px + 12px */
+      white 81px,
+      white 135px,          /* Drugi prostokąt: 81px + 54px */
+      transparent 135px,
+      transparent 147px,    /* Odstęp: 135px + 12px */
+      white 147px,
+      white 201px,          /* Trzeci prostokąt: 147px + 54px */
+      transparent 201px,
+      transparent 213px,    /* Odstęp: 201px + 12px */
+      white 213px,
+      white 267px,          /* Czwarty prostokąt: 213px + 54px */
+      transparent 267px,
+      transparent 279px,    /* Odstęp: 267px + 12px */
+      white 279px,
+      white 333px,          /* Piąty prostokąt: 279px + 54px */
+      transparent 333px,
+      transparent 345px,    /* Odstęp: 333px + 12px */
+      white 345px,
+      white 399px,          /* Szósty prostokąt: 345px + 54px */
+      transparent 399px,
+      transparent 411px,    /* Odstęp: 399px + 12px */
+      white 411px,
+      white 465px,          /* Siódmy prostokąt: 411px + 54px */
+      transparent 465px
     );
-  background-position: 0 15px;  /* Start pierwszego prostokąta 15px niżej */
   pointer-events: none;
 }
 
