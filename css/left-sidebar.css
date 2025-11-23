@@ -340,8 +340,8 @@
   position: absolute;
   width: 100%;
   background: linear-gradient(180deg, #c5465a 0%, #b1404f 100%);
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
+  transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inset-progress-bar.partial {
@@ -353,36 +353,43 @@
 .inset-progress-bar:nth-child(1) {
   bottom: calc(100% - 68.2px);  /* Wgłębienie kończy się na 68.2px */
   max-height: 52.2px;           /* Wysokość wgłębienia (68.2px - 16px) */
+  transition-delay: 0s;
 }
 
 .inset-progress-bar:nth-child(2) {
   bottom: calc(100% - 133.4px);
   max-height: 52.2px;
+  transition-delay: 0.1s;
 }
 
 .inset-progress-bar:nth-child(3) {
   bottom: calc(100% - 198.6px);
   max-height: 52.2px;
+  transition-delay: 0.2s;
 }
 
 .inset-progress-bar:nth-child(4) {
   bottom: calc(100% - 263.8px);
   max-height: 52.2px;
+  transition-delay: 0.3s;
 }
 
 .inset-progress-bar:nth-child(5) {
   bottom: calc(100% - 329px);
   max-height: 52.2px;
+  transition-delay: 0.4s;
 }
 
 .inset-progress-bar:nth-child(6) {
   bottom: calc(100% - 394.2px);
   max-height: 52.2px;
+  transition-delay: 0.5s;
 }
 
 .inset-progress-bar:nth-child(7) {
   bottom: calc(100% - 459.4px);
   max-height: 52.2px;
+  transition-delay: 0.6s;
 }
 
 /* List items */

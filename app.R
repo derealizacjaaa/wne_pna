@@ -275,7 +275,21 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
+    # JavaScript dla animacji pasków postępu
+    tags$script(HTML("
+      $(document).ready(function() {
+        setTimeout(function() {
+          $('.inset-progress-bar').each(function(index) {
+            var targetHeight = $(this).css('height');
+            $(this).css('height', '0%');
+            setTimeout(function(bar, height) {
+              $(bar).css('height', height);
+            }, index * 100, this, targetHeight);
+          });
+        }, 100);
+      });
+    "))
   ),
 
   # Hero Header Section
