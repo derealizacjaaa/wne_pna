@@ -246,7 +246,6 @@
       transparent 54px,
       transparent 66px      /* 54px + margin-bottom(12px) */
     );
-  background-position: 0 15px;  /* Wyrównanie z padding-top .lists-menu */
   pointer-events: none;
 }
 
