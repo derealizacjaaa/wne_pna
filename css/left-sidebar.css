@@ -407,7 +407,7 @@
 .list-item {
   margin-bottom: 12px;
   background: white;
-  border-radius: 2px 18px 8px 24px;  /* Irregular asymmetric corners */
+  border-radius: 2px 18px 14px 24px;  /* Irregular asymmetric corners - bottom-left increased for wider progress bar */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1.5px solid #b1404f;
   border-left: 4px solid #b1404f;  /* Thicker left accent */
@@ -455,13 +455,14 @@
 
 /* Vertical progress bar */
 .progress-bar-container-vertical {
-  width: 8px;
+  width: 12px;
   background: #f0f0f0;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   flex-shrink: 0;
+  border-radius: 0 0 0 14px;  /* Match bottom-left corner of button */
 }
 
 .progress-bar-fill-vertical {
@@ -469,11 +470,13 @@
   background: linear-gradient(180deg, #c5465a 0%, #b1404f 100%);
   transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
+  border-radius: 0 0 0 14px;  /* Match container corner */
 }
 
 .progress-bar-fill-vertical.partial {
   background: linear-gradient(180deg, #f5c542 0%, #e8b520 100%);
   box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
+  border-radius: 0 0 0 14px;  /* Match container corner */
 }
 
 /* List text */
