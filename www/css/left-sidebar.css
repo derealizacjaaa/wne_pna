@@ -204,6 +204,7 @@
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
   padding: 0px 20px 0px 20px;
   border-bottom: 4px solid #4A4A4A;
+  position: relative;  /* Positioning context for overlay */
 }
 
 /* Section 3: Summary */
@@ -327,12 +328,12 @@
 /* Progress overlay for insets */
 .inset-progress-overlay {
   position: absolute;
-  left: -17.5px;  /* Align with insets */
+  left: -17.5px;  /* Same position as .lists-menu::before */
   top: 0;
   width: 15px;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;     /* Above ::before pseudo-element */
 }
 
 .inset-progress-bar {

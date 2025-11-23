@@ -160,7 +160,7 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     # Section 2: List of lists
     div(
       class = "lists-sidebar-menu",
-      # Progress overlay for insets
+      # Progress overlay for insets - positioned relative to .lists-menu
       div(
         class = "inset-progress-overlay",
         progress_bars
