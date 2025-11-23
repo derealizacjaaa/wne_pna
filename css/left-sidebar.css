@@ -244,32 +244,32 @@
       #b1404f 0px,
       #b1404f 15px,         /* Czerwone 15px na górze */
       white 15px,
-      white 69px,           /* Pierwszy prostokąt: 15px + 54px */
-      transparent 69px,
-      transparent 81px,     /* Odstęp: 69px + 12px */
-      white 81px,
-      white 135px,          /* Drugi prostokąt: 81px + 54px */
-      transparent 135px,
-      transparent 147px,    /* Odstęp: 135px + 12px */
-      white 147px,
-      white 201px,          /* Trzeci prostokąt: 147px + 54px */
-      transparent 201px,
-      transparent 213px,    /* Odstęp: 201px + 12px */
-      white 213px,
-      white 267px,          /* Czwarty prostokąt: 213px + 54px */
-      transparent 267px,
-      transparent 279px,    /* Odstęp: 267px + 12px */
-      white 279px,
-      white 333px,          /* Piąty prostokąt: 279px + 54px */
-      transparent 333px,
-      transparent 345px,    /* Odstęp: 333px + 12px */
-      white 345px,
-      white 399px,          /* Szósty prostokąt: 345px + 54px */
-      transparent 399px,
-      transparent 411px,    /* Odstęp: 399px + 12px */
-      white 411px,
-      white 465px,          /* Siódmy prostokąt: 411px + 54px */
-      transparent 465px
+      white 68.2px,         /* Pierwszy prostokąt: 15px + 53.2px */
+      transparent 68.2px,
+      transparent 80.2px,   /* Odstęp: 68.2px + 12px */
+      white 80.2px,
+      white 133.4px,        /* Drugi prostokąt: 80.2px + 53.2px */
+      transparent 133.4px,
+      transparent 145.4px,  /* Odstęp: 133.4px + 12px */
+      white 145.4px,
+      white 198.6px,        /* Trzeci prostokąt: 145.4px + 53.2px */
+      transparent 198.6px,
+      transparent 210.6px,  /* Odstęp: 198.6px + 12px */
+      white 210.6px,
+      white 263.8px,        /* Czwarty prostokąt: 210.6px + 53.2px */
+      transparent 263.8px,
+      transparent 275.8px,  /* Odstęp: 263.8px + 12px */
+      white 275.8px,
+      white 329px,          /* Piąty prostokąt: 275.8px + 53.2px */
+      transparent 329px,
+      transparent 341px,    /* Odstęp: 329px + 12px */
+      white 341px,
+      white 394.2px,        /* Szósty prostokąt: 341px + 53.2px */
+      transparent 394.2px,
+      transparent 406.2px,  /* Odstęp: 394.2px + 12px */
+      white 406.2px,
+      white 459.4px,        /* Siódmy prostokąt: 406.2px + 53.2px */
+      transparent 459.4px
     );
   pointer-events: none;
 }
