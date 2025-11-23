@@ -239,17 +239,8 @@
   width: 15px;    /* Szerokość wgłębień */
   height: 100%;
   background:
-    /* Przekątne linie 3D - 45 stopni */
-    repeating-linear-gradient(
-      45deg,
-      transparent 0px,
-      transparent 8px,
-      #3a3a3a 8px,       /* Ciemny cień - efekt 3D */
-      #4A4A4A 9.5px,     /* Główna linia */
-      #5a5a5a 11px,      /* Jasny highlight - efekt 3D */
-      transparent 11px,
-      transparent 19px
-    ),
+    /* Zygzakowata linia - 345° i 195° z efektem 3D */
+    url("data:image/svg+xml,%3Csvg width='15' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath d='M 0,0 L 15,4 L 0,8' stroke='%233a3a3a' stroke-width='3.5' fill='none' stroke-linecap='square'/%3E%3Cpath d='M 0,0.5 L 15,4.5 L 0,8.5' stroke='%234A4A4A' stroke-width='2.5' fill='none' stroke-linecap='square'/%3E%3Cpath d='M 0,1 L 15,5 L 0,9' stroke='%235a5a5a' stroke-width='1.5' fill='none' stroke-linecap='square'/%3E%3C/g%3E%3C/svg%3E"),
     /* Gradient wgłębień */
     linear-gradient(
       to bottom,
@@ -369,6 +360,7 @@
   );
   box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
   transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.95;  /* Lekka przezroczystość żeby linia była widoczna */
 }
 
 .inset-progress-fill.partial {
@@ -379,6 +371,7 @@
     #ffd700 100%     /* Jaśniejszy żółty na dole */
   );
   box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
+  opacity: 0.95;  /* Lekka przezroczystość żeby linia była widoczna */
 }
 
 /* Position each container in its inset - start from shadow top */
