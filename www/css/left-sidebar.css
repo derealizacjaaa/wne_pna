@@ -246,6 +246,7 @@
       transparent 54px,
       transparent 66px      /* 54px + margin-bottom(12px) */
     );
+  background-position: 0 15px;  /* Start pierwszego prostokąta 15px niżej */
   pointer-events: none;
 }
 
