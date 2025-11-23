@@ -121,21 +121,6 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
   overall_stats <- get_overall_stats(all_lists)
   progress_percentage <- overall_stats$percentage
 
-  # Create progress bars for insets - each in its own container
-  progress_bars <- lapply(list_metadata, function(list_info) {
-    stats <- get_list_stats(all_lists, list_info$id)
-    progress_pct <- if(stats$total > 0) (stats$completed / stats$total) * 100 else 0
-    is_partial <- progress_pct > 0 && progress_pct < 100
-
-    div(
-      class = "inset-progress-container",
-      div(
-        class = if(is_partial) "inset-progress-fill partial" else "inset-progress-fill",
-        style = sprintf("height: %s%%;", progress_pct)
-      )
-    )
-  })
-
   tagList(
     # Section 1: Header
     div(
@@ -167,11 +152,6 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
       class = "lists-sidebar-menu",
       tagAppendChildren(
         tags$ul(class = "lists-menu"),
-        # Progress overlay for insets - inside .lists-menu
-        div(
-          class = "inset-progress-overlay",
-          progress_bars
-        ),
         list_items
       )
     ),
@@ -279,21 +259,7 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
-    # JavaScript dla animacji pasków postępu
-    tags$script(HTML("
-      $(document).ready(function() {
-        setTimeout(function() {
-          $('.inset-progress-fill').each(function(index) {
-            var targetHeight = $(this).attr('style').match(/height:\\s*([\\d.]+)%/)[1];
-            $(this).css('height', '0%');
-            setTimeout(function(bar, height) {
-              $(bar).css('height', height + '%');
-            }, index * 100, this, targetHeight);
-          });
-        }, 100);
-      });
-    "))
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
   ),
 
   # Hero Header Section
