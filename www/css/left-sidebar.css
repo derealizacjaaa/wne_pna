@@ -403,15 +403,15 @@
   top: 406.2px;  /* Include top shadow */
 }
 
-/* List items */
+/* List items - Modern with irregular borders */
 .list-item {
   margin-bottom: 12px;
   background: white;
-  border-radius: 0 12px 12px 0;
+  border-radius: 2px 18px 8px 24px;  /* Irregular asymmetric corners */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #b1404f;
-  border-left: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid #b1404f;
+  border-left: 4px solid #b1404f;  /* Thicker left accent */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   position: relative;
 }
@@ -419,14 +419,17 @@
 .list-item:hover {
   background: white;
   border-color: #b1404f;
-  transform: translateX(3px);
-  box-shadow: 0 2px 8px rgba(177, 64, 79, 0.12);
+  border-left-color: #4A4A4A;  /* Dark accent on hover */
+  transform: translateX(4px) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(177, 64, 79, 0.15), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .list-item.active {
-  background: #b1404f;
-  border-color: #000000;
-  box-shadow: 0 3px 12px rgba(177, 64, 79, 0.3);
+  background: linear-gradient(135deg, #b1404f 0%, #9a3848 100%);
+  border-color: #4A4A4A;
+  border-left-color: #4A4A4A;
+  box-shadow: 0 6px 16px rgba(177, 64, 79, 0.35), 0 3px 6px rgba(0, 0, 0, 0.12);
+  transform: translateX(2px);
 }
 
 .list-item.active .list-text h4 {
