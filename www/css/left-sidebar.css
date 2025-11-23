@@ -239,6 +239,18 @@
   width: 15px;    /* Szerokość wgłębień */
   height: 100%;
   background:
+    /* Przekątne linie 3D - 45 stopni */
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 8px,
+      #3a3a3a 8px,       /* Ciemny cień - efekt 3D */
+      #4A4A4A 9.5px,     /* Główna linia */
+      #5a5a5a 11px,      /* Jasny highlight - efekt 3D */
+      transparent 11px,
+      transparent 19px
+    ),
+    /* Gradient wgłębień */
     linear-gradient(
       to bottom,
       #b1404f 0px,
