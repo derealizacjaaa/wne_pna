@@ -243,35 +243,84 @@
       to bottom,
       #b1404f 0px,
       #b1404f 15px,         /* Czerwone tło na górze */
-      #8a2f3a 15px,
-      #8a2f3a 68.2px,       /* Pierwsze wgłębienie (ciemniejszy czerwony) */
+
+      /* Wgłębienie 1 - efekt 3D */
+      #6d2029 15px,         /* Ciemny cień górny */
+      #6d2029 16px,
+      #8a2f3a 16px,         /* Główne wgłębienie */
+      #8a2f3a 67.2px,
+      #9a3f4a 67.2px,       /* Odbite światło u dołu */
+      #9a3f4a 68.2px,
+
       #b1404f 68.2px,
-      #b1404f 80.2px,       /* Odstęp - normalne tło */
-      #8a2f3a 80.2px,
-      #8a2f3a 133.4px,      /* Drugie wgłębienie */
+      #b1404f 80.2px,       /* Odstęp */
+
+      /* Wgłębienie 2 - efekt 3D */
+      #6d2029 80.2px,
+      #6d2029 81.2px,
+      #8a2f3a 81.2px,
+      #8a2f3a 132.4px,
+      #9a3f4a 132.4px,
+      #9a3f4a 133.4px,
+
       #b1404f 133.4px,
       #b1404f 145.4px,      /* Odstęp */
-      #8a2f3a 145.4px,
-      #8a2f3a 198.6px,      /* Trzecie wgłębienie */
+
+      /* Wgłębienie 3 - efekt 3D */
+      #6d2029 145.4px,
+      #6d2029 146.4px,
+      #8a2f3a 146.4px,
+      #8a2f3a 197.6px,
+      #9a3f4a 197.6px,
+      #9a3f4a 198.6px,
+
       #b1404f 198.6px,
       #b1404f 210.6px,      /* Odstęp */
-      #8a2f3a 210.6px,
-      #8a2f3a 263.8px,      /* Czwarte wgłębienie */
+
+      /* Wgłębienie 4 - efekt 3D */
+      #6d2029 210.6px,
+      #6d2029 211.6px,
+      #8a2f3a 211.6px,
+      #8a2f3a 262.8px,
+      #9a3f4a 262.8px,
+      #9a3f4a 263.8px,
+
       #b1404f 263.8px,
       #b1404f 275.8px,      /* Odstęp */
-      #8a2f3a 275.8px,
-      #8a2f3a 329px,        /* Piąte wgłębienie */
+
+      /* Wgłębienie 5 - efekt 3D */
+      #6d2029 275.8px,
+      #6d2029 276.8px,
+      #8a2f3a 276.8px,
+      #8a2f3a 328px,
+      #9a3f4a 328px,
+      #9a3f4a 329px,
+
       #b1404f 329px,
       #b1404f 341px,        /* Odstęp */
-      #8a2f3a 341px,
-      #8a2f3a 394.2px,      /* Szóste wgłębienie */
+
+      /* Wgłębienie 6 - efekt 3D */
+      #6d2029 341px,
+      #6d2029 342px,
+      #8a2f3a 342px,
+      #8a2f3a 393.2px,
+      #9a3f4a 393.2px,
+      #9a3f4a 394.2px,
+
       #b1404f 394.2px,
       #b1404f 406.2px,      /* Odstęp */
-      #8a2f3a 406.2px,
-      #8a2f3a 459.4px,      /* Siódme wgłębienie */
+
+      /* Wgłębienie 7 - efekt 3D */
+      #6d2029 406.2px,
+      #6d2029 407.2px,
+      #8a2f3a 407.2px,
+      #8a2f3a 458.4px,
+      #9a3f4a 458.4px,
+      #9a3f4a 459.4px,
+
       #b1404f 459.4px
     );
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);  /* Subtelny cień dla głębi */
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);  /* Wzmocniony cień dla głębi */
   pointer-events: none;
 }
 
