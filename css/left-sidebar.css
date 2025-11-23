@@ -234,15 +234,18 @@
 .lists-menu::before {
   content: '';
   position: absolute;
-  left: -20px;
+  left: -17.5px;  /* Wyśrodkowane: -20px + 2.5px offset */
   top: 0;
-  width: 20px;
+  width: 15px;    /* Szerokość białych prostokątów */
   height: 100%;
   background:
-    linear-gradient(45deg, transparent 48%, white 48%, white 52%, transparent 52%);
-  background-size: 30px 30px;
-  background-position: 0 0, 0 15px;
-  background-repeat: repeat-y;
+    repeating-linear-gradient(
+      to bottom,
+      white 0px,
+      white 50px,           /* Wysokość list-item-content */
+      transparent 50px,
+      transparent 62px      /* 50px + 12px margines */
+    );
   pointer-events: none;
 }
 
