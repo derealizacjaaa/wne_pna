@@ -121,6 +121,16 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
   overall_stats <- get_overall_stats(all_lists)
   progress_percentage <- overall_stats$percentage
 
+  # Create progress bars for insets
+  progress_bars <- lapply(list_metadata, function(list_info) {
+    stats <- get_list_stats(all_lists, list_info$id)
+    progress_pct <- if(stats$total > 0) (stats$completed / stats$total) * 100 else 0
+    div(
+      class = "inset-progress-bar",
+      style = sprintf("height: %s%%;", progress_pct)
+    )
+  })
+
   tagList(
     # Section 1: Header
     div(
@@ -150,6 +160,11 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     # Section 2: List of lists
     div(
       class = "lists-sidebar-menu",
+      # Progress overlay for insets
+      div(
+        class = "inset-progress-overlay",
+        progress_bars
+      ),
       tags$ul(class = "lists-menu", list_items)
     ),
 
