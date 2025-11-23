@@ -344,6 +344,11 @@
   box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
 }
 
+.inset-progress-bar.partial {
+  background: linear-gradient(180deg, #f5c542 0%, #e8b520 100%);
+  box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
+}
+
 /* Position each progress bar in its inset - wypełniają od dołu */
 .inset-progress-bar:nth-child(1) {
   bottom: calc(100% - 68.2px);  /* Wgłębienie kończy się na 68.2px */

@@ -125,8 +125,9 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
   progress_bars <- lapply(list_metadata, function(list_info) {
     stats <- get_list_stats(all_lists, list_info$id)
     progress_pct <- if(stats$total > 0) (stats$completed / stats$total) * 100 else 0
+    is_partial <- progress_pct > 0 && progress_pct < 100
     div(
-      class = "inset-progress-bar",
+      class = if(is_partial) "inset-progress-bar partial" else "inset-progress-bar",
       style = sprintf("height: %s%%;", progress_pct)
     )
   })
