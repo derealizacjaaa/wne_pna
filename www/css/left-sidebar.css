@@ -336,60 +336,56 @@
   z-index: 2;     /* Above ::before (z-index: 1) */
 }
 
-.inset-progress-bar {
+/* Each progress container positioned in its inset */
+.inset-progress-container {
   position: absolute;
+  width: 15px;
+  height: 52.2px;  /* Height of each inset (excluding borders) */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;  /* Align to bottom like original */
+}
+
+/* Progress fill inside containers */
+.inset-progress-fill {
   width: 100%;
   background: linear-gradient(180deg, #c5465a 0%, #b1404f 100%);
   box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
   transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.inset-progress-bar.partial {
+.inset-progress-fill.partial {
   background: linear-gradient(180deg, #f5c542 0%, #e8b520 100%);
   box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
 }
 
-/* Position each progress bar in its inset - wypełniają od dołu */
-.inset-progress-bar:nth-child(1) {
-  bottom: calc(100% - 68.2px);  /* Wgłębienie kończy się na 68.2px */
-  max-height: 52.2px;           /* Wysokość wgłębienia (68.2px - 16px) */
-  transition-delay: 0s;
+/* Position each container in its inset */
+.inset-progress-container:nth-child(1) {
+  top: 16px;  /* Start of first inset */
 }
 
-.inset-progress-bar:nth-child(2) {
-  bottom: calc(100% - 133.4px);
-  max-height: 52.2px;
-  transition-delay: 0.1s;
+.inset-progress-container:nth-child(2) {
+  top: 81.2px;  /* Start of second inset */
 }
 
-.inset-progress-bar:nth-child(3) {
-  bottom: calc(100% - 198.6px);
-  max-height: 52.2px;
-  transition-delay: 0.2s;
+.inset-progress-container:nth-child(3) {
+  top: 146.4px;  /* Start of third inset */
 }
 
-.inset-progress-bar:nth-child(4) {
-  bottom: calc(100% - 263.8px);
-  max-height: 52.2px;
-  transition-delay: 0.3s;
+.inset-progress-container:nth-child(4) {
+  top: 211.6px;  /* Start of fourth inset */
 }
 
-.inset-progress-bar:nth-child(5) {
-  bottom: calc(100% - 329px);
-  max-height: 52.2px;
-  transition-delay: 0.4s;
+.inset-progress-container:nth-child(5) {
+  top: 276.8px;  /* Start of fifth inset */
 }
 
-.inset-progress-bar:nth-child(6) {
-  bottom: calc(100% - 394.2px);
-  max-height: 52.2px;
-  transition-delay: 0.5s;
+.inset-progress-container:nth-child(6) {
+  top: 342px;  /* Start of sixth inset */
 }
 
-.inset-progress-bar:nth-child(7) {
-  bottom: calc(100% - 459.4px);
-  max-height: 52.2px;
-  transition-delay: 0.6s;
+.inset-progress-container:nth-child(7) {
+  top: 407.2px;  /* Start of seventh inset */
 }
 
 /* List items */

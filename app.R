@@ -121,14 +121,18 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
   overall_stats <- get_overall_stats(all_lists)
   progress_percentage <- overall_stats$percentage
 
-  # Create progress bars for insets
+  # Create progress bars for insets - each in its own container
   progress_bars <- lapply(list_metadata, function(list_info) {
     stats <- get_list_stats(all_lists, list_info$id)
     progress_pct <- if(stats$total > 0) (stats$completed / stats$total) * 100 else 0
     is_partial <- progress_pct > 0 && progress_pct < 100
+
     div(
-      class = if(is_partial) "inset-progress-bar partial" else "inset-progress-bar",
-      style = sprintf("height: %s%%;", progress_pct)
+      class = "inset-progress-container",
+      div(
+        class = if(is_partial) "inset-progress-fill partial" else "inset-progress-fill",
+        style = sprintf("height: %s%%;", progress_pct)
+      )
     )
   })
 
@@ -280,11 +284,11 @@ ui <- fluidPage(
     tags$script(HTML("
       $(document).ready(function() {
         setTimeout(function() {
-          $('.inset-progress-bar').each(function(index) {
-            var targetHeight = $(this).css('height');
+          $('.inset-progress-fill').each(function(index) {
+            var targetHeight = $(this).attr('style').match(/height:\\s*([\\d.]+)%/)[1];
             $(this).css('height', '0%');
             setTimeout(function(bar, height) {
-              $(bar).css('height', height);
+              $(bar).css('height', height + '%');
             }, index * 100, this, targetHeight);
           });
         }, 100);
