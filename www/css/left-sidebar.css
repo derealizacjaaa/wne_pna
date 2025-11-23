@@ -242,9 +242,9 @@
     repeating-linear-gradient(
       to bottom,
       white 0px,
-      white 50px,           /* Wysokość list-item-content */
-      transparent 50px,
-      transparent 62px      /* 50px + 12px margines */
+      white 54px,           /* Wysokość: border-top(2px) + content(50px) + border-bottom(2px) */
+      transparent 54px,
+      transparent 66px      /* 54px + margin-bottom(12px) */
     );
   background-position: 0 15px;  /* Wyrównanie z padding-top .lists-menu */
   pointer-events: none;
