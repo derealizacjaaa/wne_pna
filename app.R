@@ -161,12 +161,15 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     # Section 2: List of lists
     div(
       class = "lists-sidebar-menu",
-      # Progress overlay for insets - positioned relative to .lists-menu
-      div(
-        class = "inset-progress-overlay",
-        progress_bars
-      ),
-      tags$ul(class = "lists-menu", list_items)
+      tagAppendChildren(
+        tags$ul(class = "lists-menu"),
+        # Progress overlay for insets - inside .lists-menu
+        div(
+          class = "inset-progress-overlay",
+          progress_bars
+        ),
+        list_items
+      )
     ),
 
     # Section 3: Summary card
