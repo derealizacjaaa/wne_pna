@@ -176,8 +176,6 @@
 .lists-sidebar-header .sidebar-toggle-btn {
   background: transparent;
   border: none;
-  border-bottom: 2px solid #4A4A4A;  /* Linia pod przyciskiem */
-  border-left: 2px solid #F4F6F9;    /* Linia po lewej stronie */
   color: #F4F6F9;
   font-size: 1em;
   cursor: pointer;
@@ -193,6 +191,28 @@
   position: absolute;
   top: 2px;
   right: 2px;
+}
+
+/* Linia pod przyciskiem */
+.lists-sidebar-header .sidebar-toggle-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #4A4A4A;
+}
+
+/* Linia po lewej stronie */
+.lists-sidebar-header .sidebar-toggle-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #F4F6F9;
 }
 
 .lists-sidebar-header .sidebar-toggle-btn:hover {
