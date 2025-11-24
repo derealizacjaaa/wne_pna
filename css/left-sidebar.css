@@ -241,20 +241,25 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border-right: 5px solid #b1404f;
-  padding-right: 20px;
-  padding-left: 24px;  /* 20px dla gradientu + 4px oryginalny padding */
+  padding-right: 14px;  /* 10px dla gradientu + 4px spacing */
+  padding-left: 24px;   /* 20px dla gradientu + 4px spacing */
   margin-right: -20px;
   margin-left: -20px;
   padding-top: 15px;
   padding-bottom: 15px;
   box-shadow: inset 4px 0 0 0 #4A4A4A;
   position: relative;
-  background: linear-gradient(270deg,
-    #b1404f 0%,    /* Prawa krawędź (godz. 3) - kolor cienia */
-    #d95e6f 50%,   /* Środek - jasny "połysk" tworzący wypukłość */
-    #b1404f 100%   /* Lewa krawędź (godz. 9) - kolor cienia */
-  ) left / 20px 100% no-repeat;
+  background:
+    linear-gradient(270deg,
+      #b1404f 0%,    /* Prawa krawędź (godz. 3) - kolor cienia */
+      #d95e6f 50%,   /* Środek - jasny "połysk" tworzący wypukłość */
+      #b1404f 100%   /* Lewa krawędź (godz. 9) - kolor cienia */
+    ) left / 20px 100% no-repeat,
+    linear-gradient(90deg,
+      #b1404f 0%,    /* Lewa krawędź (godz. 9) - kolor cienia */
+      #d95e6f 50%,   /* Środek - jasny "połysk" tworzący wypukłość */
+      #b1404f 100%   /* Prawa krawędź (godz. 3) - kolor cienia */
+    ) right / 10px 100% no-repeat;
 }
 
 /* List items - Modern with irregular borders */
