@@ -176,6 +176,8 @@
 .lists-sidebar-header .sidebar-toggle-btn {
   background: transparent;
   border: none;
+  border-bottom: 2px solid #4A4A4A;  /* Linia pod przyciskiem */
+  border-left: 2px solid #F4F6F9;    /* Linia po lewej stronie */
   color: #F4F6F9;
   font-size: 1em;
   cursor: pointer;
