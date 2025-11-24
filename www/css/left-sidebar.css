@@ -136,12 +136,12 @@
 }
 
 .sidebar-home-btn i {
-  -webkit-text-stroke: 1px #b1404f;
+  -webkit-text-stroke: 2px #b1404f;
 }
 
 .sidebar-home-btn:hover {
   background: rgba(255, 255, 255, 0.15);
-  color: #c5465a;
+  color: #b1404f;
   transform: scale(1.05);
 }
 
@@ -197,9 +197,9 @@
 .lists-sidebar-header .sidebar-toggle-btn::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 26px;
+  bottom: -2px;
+  left: -7px;
+  width: 29px;
   height: 2px;
   background: #4A4A4A;
 }
@@ -208,8 +208,8 @@
 .lists-sidebar-header .sidebar-toggle-btn::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -2px;
+  top: -2px;
   width: 2px;
   height: 26px;
   background: #F4F6F9;
@@ -269,7 +269,7 @@
   border-radius: 2px 18px 14px 24px;  /* Irregular asymmetric corners - bottom-left increased for wider progress bar */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1.5px solid #b1404f;
-  border-left: 4px solid #b1404f;  /* Thicker left accent */
+  border-left: 5px solid #b1404f;  /* Thicker left accent */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   position: relative;
@@ -321,21 +321,16 @@
   flex-direction: column;
   justify-content: flex-end;
   flex-shrink: 0;
-  border-radius: 0 0 0 14px;  /* Match bottom-left corner of button */
 }
 
 .progress-bar-fill-vertical {
   width: 100%;
   background: linear-gradient(180deg, #c5465a 0%, #b1404f 100%);
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
-  border-radius: 0 0 0 14px;  /* Match container corner */
 }
 
 .progress-bar-fill-vertical.partial {
   background: linear-gradient(180deg, #f5c542 0%, #e8b520 100%);
   box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
-  border-radius: 0 0 0 14px;  /* Match container corner */
 }
 
 /* List text */
