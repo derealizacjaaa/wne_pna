@@ -193,23 +193,33 @@
   right: 2px;
 }
 
-/* Linia pod przyciskiem */
+/* 1. Linia pod przyciskiem (::after) */
 .lists-sidebar-header .sidebar-toggle-btn::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: -2;
+  
+  /* ZMIANA TUTAJ: Odsunięcie w dół */
+  bottom: -2px; /* Było 0. Minusowa wartość przesuwa linię w dół */
+  
+  /* Poprawka błędu: dodane 'px' */
+  left: -5px; 
+  
   width: 28px;
   height: 3px;
   background: #4A4A4A;
 }
 
-/* Linia po lewej stronie */
+/* 2. Linia po lewej stronie (::before) */
 .lists-sidebar-header .sidebar-toggle-btn::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: -2;
+  
+  /* ZMIANA TUTAJ: Odsunięcie w lewo */
+  left: -2px; /* Było 0. Minusowa wartość przesuwa linię w lewo */
+  
+  /* Poprawka błędu: dodane 'px' */
+  top: -2px;
+  
   width: 2px;
   height: 26px;
   background: #F4F6F9;
