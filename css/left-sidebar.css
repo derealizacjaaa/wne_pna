@@ -136,7 +136,7 @@
 }
 
 .sidebar-home-btn i {
-  -webkit-text-stroke: 1px #b1404f;
+  -webkit-text-stroke: 1.5px #b1404f;
 }
 
 .sidebar-home-btn:hover {
@@ -198,9 +198,9 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 26px;
-  height: 2px;
+  left: -2;
+  width: 28px;
+  height: 3px;
   background: #4A4A4A;
 }
 
@@ -209,7 +209,7 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0;
+  top: -2;
   width: 2px;
   height: 26px;
   background: #F4F6F9;
@@ -241,7 +241,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border-right: 4px solid #b1404f;
+  border-right: 5px solid #b1404f;
   padding-right: 20px;
   padding-left: 24px;  /* 20px dla gradientu + 4px oryginalny padding */
   margin-right: -20px;
