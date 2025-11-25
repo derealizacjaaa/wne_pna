@@ -362,7 +362,7 @@ server <- function(input, output, session) {
     if (is.null(current_list())) {
       return(div(
         class = "tasks-sidebar-content",
-        h3("Zadania"),
+        h3(icon("list"), " Zadania"),
         p(style = "color: #606060; padding: 20px; text-align: center;",
           "Wybierz listę z lewego panelu")
       ))
