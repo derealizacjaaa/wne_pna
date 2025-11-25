@@ -4,7 +4,7 @@
    ======================================== */
 
 .right-sidebar {
-  width: 260px;
+  width: 300px;
   background: white;
   overflow-y: auto;
   transition: all 0.3s ease;
