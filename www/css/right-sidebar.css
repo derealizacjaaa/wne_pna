@@ -9,6 +9,7 @@
   overflow-y: auto;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  height: 100%;
 }
 
 .tasks-sidebar-content {
@@ -82,7 +83,6 @@
   flex-direction: row;
   flex: 1;
   overflow: hidden;
-  height: 100vh;
   align-items: stretch;
 }
 
