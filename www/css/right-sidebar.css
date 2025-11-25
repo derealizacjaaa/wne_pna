@@ -17,7 +17,7 @@
 
 .tasks-sidebar-content h3 {
   margin: 0;
-  padding: 16px 15px;
+  padding: 16px 15px 16px 20px;
   background: linear-gradient(
     to bottom,        /* Gradient idzie z góry na dół */
     #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
@@ -41,7 +41,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 /* Tasks menu */
