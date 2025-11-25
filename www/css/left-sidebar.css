@@ -21,7 +21,12 @@
 
 /* Section 1: Header */
 .lists-sidebar-header {
-  background: #b1404f;
+  background: linear-gradient(
+  to bottom,        /* Gradient idzie z góry na dół */
+    #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
+    #b1404f 8px,     /* 2. Do 11px: Przejście w bordowy */
+    #b1404f 46px,     /* 3. Od 11px do 41px (30px total): Lity bordowy */
+    #4A4A4A 52px      /* 4. Od 41px do końca: Przejście w ciemny szary */);
   border-bottom: 4px solid #4A4A4A;
   padding-left: 0px;
   height: 56px;
@@ -135,9 +140,7 @@
   margin-left: 15.5px;
 }
 
-.sidebar-home-btn i {
-  -webkit-text-stroke: 2px #b1404f;
-}
+
 
 .sidebar-home-btn:hover {
   background: rgba(255, 255, 255, 0.15);
