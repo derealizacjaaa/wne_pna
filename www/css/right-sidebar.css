@@ -48,7 +48,21 @@
   position: relative;
 }
 
-/* Triangle on the right edge of header pointing left */
+/* Triangle border on the right edge of header */
+.tasks-sidebar-content h3::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 32px 54px 32px 0;
+  border-color: transparent #4A4A4A transparent transparent;
+  z-index: 1;
+}
+
+/* Triangle fill on the right edge of header pointing left */
 .tasks-sidebar-content h3::after {
   content: '';
   position: absolute;
@@ -57,8 +71,9 @@
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 28px 40px 28px 0;
-  border-color: transparent #4A4A4A transparent transparent;
+  border-width: 28px 50px 28px 0;
+  border-color: transparent #F4F6F9 transparent transparent;
+  z-index: 2;
 }
 
 /* 3-part body container */
