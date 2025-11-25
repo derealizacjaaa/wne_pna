@@ -6,7 +6,7 @@
 .right-sidebar {
   width: 300px;
   background: white;
-  overflow-y: auto;
+  overflow: hidden;
   transition: all 0.3s ease;
   flex-shrink: 0;
   height: 100%;
@@ -84,6 +84,7 @@
   flex: 1;
   overflow: hidden;
   align-items: stretch;
+  min-height: 0;
 }
 
 /* Part 1: Pattern background (leftmost, 80px) */
