@@ -198,7 +198,15 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
     return(div(
       class = "tasks-sidebar-content",
       h3(icon("list"), " Zadania"),
-      p("Brak zadań w tej liście")
+      div(
+        class = "tasks-sidebar-body",
+        div(class = "sidebar-pattern"),
+        div(class = "sidebar-gradient"),
+        div(
+          class = "sidebar-tasks-list",
+          p("Brak zadań w tej liście")
+        )
+      )
     ))
   }
 
@@ -238,7 +246,15 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
   div(
     class = "tasks-sidebar-content",
     h3(icon("list"), " ", current_list_name),
-    tags$ul(class = "tasks-menu", task_items)
+    div(
+      class = "tasks-sidebar-body",
+      div(class = "sidebar-pattern"),
+      div(class = "sidebar-gradient"),
+      div(
+        class = "sidebar-tasks-list",
+        tags$ul(class = "tasks-menu", task_items)
+      )
+    )
   )
 }
 
@@ -363,8 +379,16 @@ server <- function(input, output, session) {
       return(div(
         class = "tasks-sidebar-content",
         h3(icon("list"), " Zadania"),
-        p(style = "color: #606060; padding: 20px; text-align: center;",
-          "Wybierz listę z lewego panelu")
+        div(
+          class = "tasks-sidebar-body",
+          div(class = "sidebar-pattern"),
+          div(class = "sidebar-gradient"),
+          div(
+            class = "sidebar-tasks-list",
+            p(style = "color: #606060; padding: 20px; text-align: center;",
+              "Wybierz listę z lewego panelu")
+          )
+        )
       ))
     }
     current_list_name <- list_metadata[[current_list()]]$name
