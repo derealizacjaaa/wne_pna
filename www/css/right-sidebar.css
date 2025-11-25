@@ -82,7 +82,7 @@
   flex-direction: row;
   flex: 1;
   overflow: hidden;
-  min-height: 100vh;
+  height: 100vh;
   align-items: stretch;
 }
 
