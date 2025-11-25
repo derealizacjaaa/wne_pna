@@ -197,7 +197,7 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
   if (is.null(tasks) || length(tasks) == 0) {
     return(div(
       class = "tasks-sidebar-content",
-      h3("Zadania"),
+      h3(icon("clipboard-list"), " Zadania"),
       p("Brak zadań w tej liście")
     ))
   }
@@ -237,7 +237,7 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
 
   div(
     class = "tasks-sidebar-content",
-    h3(current_list_name),
+    h3(icon("clipboard-list"), " ", current_list_name),
     tags$ul(class = "tasks-menu", task_items)
   )
 }
