@@ -18,9 +18,15 @@
 .tasks-sidebar-content h3 {
   margin: 0;
   padding: 16px 15px;
-  background: #b1404f;
+  background: linear-gradient(
+    to bottom,        /* Gradient idzie z góry na dół */
+    #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
+    #b1404f 8px,      /* 2. Do 8px: Przejście w bordowy */
+    #b1404f 46px,     /* 3. Od 8px do 46px: Lity bordowy */
+    #4A4A4A 52px      /* 4. Od 46px do końca: Przejście w ciemny szary */
+  );
   color: white;
-  font-size: 1.1em;
+  font-size: 1.4em;
   font-weight: 600;
   border-bottom: 4px solid #4A4A4A;
   margin-left: -15px;
