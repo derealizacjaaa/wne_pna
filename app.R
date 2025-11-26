@@ -468,38 +468,39 @@ server <- function(input, output, session) {
     if (is.null(current_task())) {
       return(div(
         class = "main-content",
-        # Navbar to match task navbars
+        # Header
         div(
-          class = "navbar",
-          style = "background: #b1404f; color: white; border-bottom: 4px solid #4A4A4A; min-height: 56px; height: 56px; box-sizing: border-box; display: flex; align-items: center; padding: 0 20px; margin: 0;",
-          h3(style = "margin: 0; color: white; font-size: 1.1em; font-weight: 600;",
-             icon("home"), " Strona główna")
+          class = "main-content-header",
+          h3(icon("home"), " Strona główna")
         ),
-        # Main content
+        # Main content body
         div(
-          class = "main-content-empty",
-          style = "padding: 60px 40px;",
-          icon("graduation-cap", class = "fa-3x", style = "color: #b1404f; opacity: 0.7; margin-bottom: 20px;"),
-          h2("Witaj w Hub'ie Zadań!", style = "color: #4A4A4A; margin-bottom: 15px;"),
-          p(style = "color: #606060; font-size: 1.1em; max-width: 600px; margin: 0 auto 30px;",
-            "System zarządzania zadaniami z kursu Programowanie Narzędzi Analitycznych"),
+          class = "main-content-body",
           div(
-            style = "background: #F4F6F9; padding: 30px; border-radius: 8px;
-                     border-left: 4px solid #b1404f; max-width: 700px; margin: 0 auto;",
-            h3(style = "color: #4A4A4A; margin-top: 0;", icon("lightbulb"), " Jak zacząć?"),
-            tags$ol(
-              style = "text-align: left; color: #606060; line-height: 1.8;",
-              tags$li("Wybierz listę zadań z ", tags$strong("lewego panelu"), " (np. Lista I - Podstawy R)"),
-              tags$li("Następnie wybierz konkretne zadanie z ", tags$strong("prawego panelu")),
-              tags$li("Zadanie wyświetli się tutaj wraz z kodem i rozwiązaniami")
+            class = "main-content-empty",
+            style = "padding: 60px 40px;",
+            icon("graduation-cap", class = "fa-3x", style = "color: #b1404f; opacity: 0.7; margin-bottom: 20px;"),
+            h2("Witaj w Hub'ie Zadań!", style = "color: #4A4A4A; margin-bottom: 15px;"),
+            p(style = "color: #606060; font-size: 1.1em; max-width: 600px; margin: 0 auto 30px;",
+              "System zarządzania zadaniami z kursu Programowanie Narzędzi Analitycznych"),
+            div(
+              style = "background: #F4F6F9; padding: 30px; border-radius: 8px;
+                       border-left: 4px solid #b1404f; max-width: 700px; margin: 0 auto;",
+              h3(style = "color: #4A4A4A; margin-top: 0;", icon("lightbulb"), " Jak zacząć?"),
+              tags$ol(
+                style = "text-align: left; color: #606060; line-height: 1.8;",
+                tags$li("Wybierz listę zadań z ", tags$strong("lewego panelu"), " (np. Lista I - Podstawy R)"),
+                tags$li("Następnie wybierz konkretne zadanie z ", tags$strong("prawego panelu")),
+                tags$li("Zadanie wyświetli się tutaj wraz z kodem i rozwiązaniami")
+              )
+            ),
+            div(
+              style = "margin-top: 40px; padding: 20px; background: white;
+                       border-radius: 8px; border: 2px dashed #b1404f;
+                       max-width: 500px; margin-left: auto; margin-right: auto;",
+              p(style = "color: #b1404f; font-weight: 600; margin: 0;",
+                icon("arrow-left"), " Zacznij od wyboru listy po lewej stronie")
             )
-          ),
-          div(
-            style = "margin-top: 40px; padding: 20px; background: white;
-                     border-radius: 8px; border: 2px dashed #b1404f;
-                     max-width: 500px; margin-left: auto; margin-right: auto;",
-            p(style = "color: #b1404f; font-weight: 600; margin: 0;",
-              icon("arrow-left"), " Zacznij od wyboru listy po lewej stronie")
           )
         )
       ))
@@ -508,10 +509,19 @@ server <- function(input, output, session) {
     tasks <- current_list_tasks()
     task <- tasks[[current_task()]]
 
-    # Simply render task content
+    # Render task with header
     div(
       class = "main-content",
-      task$content
+      # Header
+      div(
+        class = "main-content-header",
+        h3(icon("file-alt"), " ", task$name %||% sprintf("Zadanie %d", task$task_num))
+      ),
+      # Task content body
+      div(
+        class = "main-content-body",
+        task$content
+      )
     )
   })
 

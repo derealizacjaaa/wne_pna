@@ -6,7 +6,7 @@
 .main-area {
   flex: 1;
   background: white;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -18,12 +18,82 @@
   margin-left: 60px;
 }
 
+/* Main content container with header */
 .main-content {
   padding: 0;
-  min-height: 100%;
+  height: 100%;
   background: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+/* Main content header */
+.main-content-header {
+  background: linear-gradient(
+    to bottom,
+    #4A4A4A 0px,
+    #b1404f 8px,
+    #b1404f 46px,
+    #4A4A4A 52px
+  );
+  border-bottom: 4px solid #4A4A4A;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.main-content-header h3 {
+  margin: 0;
+  color: #F4F6F9;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  padding-bottom: 4px;
+  box-shadow: 0 1px 0 #F4F6F9, 0 2px 0 #F4F6F9, 0 3px 0 #4A4A4A, 0 4px 0 #4A4A4A;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Scrollable body */
+.main-content-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  min-height: 0;
+}
+
+/* Scrollbar styling for body */
+.main-content-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content-body::-webkit-scrollbar-track {
+  background: #F4F6F9;
+}
+
+.main-content-body::-webkit-scrollbar-thumb {
+  background: #606060;
+  border-radius: 4px;
+}
+
+.main-content-body::-webkit-scrollbar-thumb:hover {
+  background: #4A4A4A;
+}
+
+/* Empty state */
 .main-content-empty {
   display: flex;
   flex-direction: column;
