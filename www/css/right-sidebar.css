@@ -81,11 +81,10 @@
 .tasks-sidebar-body {
   display: flex;
   flex-direction: row;
-  flex: 1 1 auto;
+  flex: 1;
   overflow: hidden;
   align-items: stretch;
   min-height: 0;
-  height: 100%;
 }
 
 /* Part 1: Pattern background (leftmost, 80px) */
