@@ -232,6 +232,8 @@
   overflow: hidden;
   height: 520px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 /* Section 3: Summary */
@@ -240,6 +242,8 @@
   padding: 10px;
   flex: 1;
   border-bottom: 4px solid #4A4A4A;
+  position: relative;
+  z-index: 1;
 }
 
 /* List menu */
@@ -251,8 +255,10 @@
   padding-left: 24px;   /* 20px dla gradientu + 4px spacing */
   margin-right: -20px;
   margin-left: -20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   box-shadow: inset 4px 0 0 0 #4A4A4A;
   position: relative;
   background:
