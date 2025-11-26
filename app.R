@@ -57,6 +57,16 @@ list_metadata <- list(
     id = "list7",
     name = "Lista VII",
     subtitle = "Projekty"
+  ),
+  list8 = list(
+    id = "list8",
+    name = "Lista VIII",
+    subtitle = ""
+  ),
+  list9 = list(
+    id = "list9",
+    name = "Lista IX",
+    subtitle = ""
   )
 )
 
@@ -290,27 +300,35 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
     tags$script(HTML("
       $(document).ready(function() {
-        // Function to update scroll button visibility
-        function updateScrollButtons() {
-          var menu = $('.lists-sidebar-menu');
-          if (menu.length === 0) return;
+        var currentOffset = 0;
+        var maxVisible = 8;
+        var scrollStep = 4;
 
-          var scrollTop = menu.scrollTop();
-          var scrollHeight = menu.prop('scrollHeight');
-          var clientHeight = menu.height();
+        // Function to update list visibility and button states
+        function updateListView() {
+          var items = $('.list-item');
+          var totalItems = items.length;
+
+          // Hide all items first
+          items.hide();
+
+          // Show items from currentOffset to currentOffset + maxVisible
+          for (var i = currentOffset; i < Math.min(currentOffset + maxVisible, totalItems); i++) {
+            $(items[i]).show();
+          }
 
           var upBtn = $('#left_sidebar_scroll_up');
           var downBtn = $('#left_sidebar_scroll_down');
 
-          // Show up button if not at top
-          if (scrollTop > 10) {
+          // Show up button if we can scroll up (not at start)
+          if (currentOffset > 0) {
             upBtn.addClass('visible');
           } else {
             upBtn.removeClass('visible');
           }
 
-          // Show down button if not at bottom
-          if (scrollTop < scrollHeight - clientHeight - 10) {
+          // Show down button if we can scroll down (more items below)
+          if (currentOffset + maxVisible < totalItems) {
             downBtn.addClass('visible');
           } else {
             downBtn.removeClass('visible');
@@ -320,35 +338,26 @@ ui <- fluidPage(
         // Scroll up button click
         $(document).on('click', '#left_sidebar_scroll_up', function(e) {
           e.preventDefault();
-          var menu = $('.lists-sidebar-menu');
-          var listHeight = $('.list-item').outerHeight(true);
-          menu.animate({
-            scrollTop: menu.scrollTop() - (listHeight * 4)
-          }, 300, updateScrollButtons);
+          currentOffset = Math.max(0, currentOffset - scrollStep);
+          updateListView();
         });
 
         // Scroll down button click
         $(document).on('click', '#left_sidebar_scroll_down', function(e) {
           e.preventDefault();
-          var menu = $('.lists-sidebar-menu');
-          var listHeight = $('.list-item').outerHeight(true);
-          menu.animate({
-            scrollTop: menu.scrollTop() + (listHeight * 4)
-          }, 300, updateScrollButtons);
+          var totalItems = $('.list-item').length;
+          currentOffset = Math.min(totalItems - maxVisible, currentOffset + scrollStep);
+          if (currentOffset < 0) currentOffset = 0;
+          updateListView();
         });
 
-        // Update on scroll
-        $(document).on('scroll', '.lists-sidebar-menu', updateScrollButtons);
-
-        // Update on window resize
-        $(window).on('resize', updateScrollButtons);
-
         // Initial update with delay to ensure DOM is ready
-        setTimeout(updateScrollButtons, 100);
+        setTimeout(updateListView, 100);
 
         // Update when Shiny re-renders
         $(document).on('shiny:value', function() {
-          setTimeout(updateScrollButtons, 100);
+          currentOffset = 0; // Reset to beginning when content changes
+          setTimeout(updateListView, 100);
         });
       });
     "))
