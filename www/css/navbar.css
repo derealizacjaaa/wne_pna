@@ -5,21 +5,19 @@
 /* Main navbar container - integrate with header gradient */
 .main-content-body .navbar {
   margin: 0 !important;
+  margin-top: -60px !important;
   padding: 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   min-height: 0 !important;
-  height: auto !important;
-  position: absolute;
-  top: -60px;
-  left: 0;
-  right: 8px;
+  height: 56px !important;
+  position: relative;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px !important;
+  padding-right: 28px !important;
 }
 
 /* Remove any container padding/margin around navbar */
@@ -119,6 +117,16 @@
 .task-tab-content-simple {
   padding: 30px 35px;
   animation: fadeIn 0.4s ease;
+}
+
+/* Adjust spacing for navbar tabs container */
+.main-content-body .tab-content {
+  margin-top: 0 !important;
+}
+
+/* Hide the page navbar container */
+.main-content-body .bslib-page-navbar > .navbar {
+  border-bottom: none !important;
 }
 
 @keyframes fadeIn {
