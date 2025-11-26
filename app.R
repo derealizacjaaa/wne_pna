@@ -53,6 +53,18 @@ list_metadata <- list(
     name = "Lista VI",
     subtitle = "Zaawansowane",
     visible = FALSE
+  ),
+  list7 = list(
+    id = "list7",
+    name = "Lista VII",
+    subtitle = "Projekty",
+    visible = FALSE
+  ),
+  list8 = list(
+    id = "list8",
+    name = "Lista VIII",
+    subtitle = "Aplikacje",
+    visible = FALSE
   )
 )
 
@@ -61,13 +73,23 @@ list_metadata <- list(
 # ============================================
 
 # Generate LEFT sidebar (List Selection)
-generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sidebar_collapsed) {
-  # Filter out invisible lists
-  visible_lists <- Filter(function(list_info) {
-    is.null(list_info$visible) || list_info$visible == TRUE
-  }, list_metadata)
+generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sidebar_collapsed, page = 1) {
+  # Get ALL lists (including invisible ones)
+  all_metadata_lists <- list_metadata
 
-  list_items <- lapply(visible_lists, function(list_info) {
+  # Pagination settings
+  items_per_page <- 5
+  total_lists <- length(all_metadata_lists)
+  total_pages <- ceiling(total_lists / items_per_page)
+
+  # Calculate which lists to show on this page
+  start_idx <- (page - 1) * items_per_page + 1
+  end_idx <- min(page * items_per_page, total_lists)
+
+  # Get lists for current page
+  page_lists <- all_metadata_lists[start_idx:end_idx]
+
+  list_items <- lapply(page_lists, function(list_info) {
     # Handle NULL current_list_id - no list is active
     is_active <- !is.null(current_list_id) && list_info$id == current_list_id
 
@@ -118,11 +140,13 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     )
   })
 
-  # Calculate overall stats only for visible lists
-  visible_list_ids <- sapply(visible_lists, function(x) x$id)
-  visible_all_lists <- all_lists[visible_list_ids]
-  overall_stats <- get_overall_stats(visible_all_lists)
+  # Calculate overall stats for ALL lists
+  overall_stats <- get_overall_stats(all_lists)
   progress_percentage <- overall_stats$percentage
+
+  # Navigation buttons
+  has_prev <- page > 1
+  has_next <- page < total_pages
 
   tagList(
     # Section 1: Header
@@ -153,10 +177,33 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     # Section 2: List of lists
     div(
       class = "lists-sidebar-menu",
+      # Navigation button - previous page (up arrow)
+      if(has_prev) {
+        actionButton(
+          "list_page_prev",
+          label = NULL,
+          icon = icon("chevron-up"),
+          class = "list-nav-btn list-nav-prev"
+        )
+      } else {
+        div(class = "list-nav-spacer")
+      },
+      # List items
       tagAppendChildren(
         tags$ul(class = "lists-menu"),
         list_items
-      )
+      ),
+      # Navigation button - next page (down arrow)
+      if(has_next) {
+        actionButton(
+          "list_page_next",
+          label = NULL,
+          icon = icon("chevron-down"),
+          class = "list-nav-btn list-nav-next"
+        )
+      } else {
+        div(class = "list-nav-spacer")
+      }
     ),
 
     # Section 3: Summary card
@@ -323,6 +370,7 @@ server <- function(input, output, session) {
   current_list <- reactiveVal(NULL)  # Start with no list selected
   current_task <- reactiveVal(NULL)
   sidebar_collapsed <- reactiveVal(FALSE)
+  list_page <- reactiveVal(1)  # Current page for list navigation
 
   # Reactive: Get tasks for current list
   current_list_tasks <- reactive({
@@ -342,6 +390,23 @@ server <- function(input, output, session) {
     current_list(NULL)
     current_task(NULL)
   }, priority = 100)
+
+  # Observer for list page navigation - previous
+  observeEvent(input$list_page_prev, {
+    current_page <- list_page()
+    if (current_page > 1) {
+      list_page(current_page - 1)
+    }
+  }, ignoreInit = TRUE, priority = 100)
+
+  # Observer for list page navigation - next
+  observeEvent(input$list_page_next, {
+    total_pages <- ceiling(length(list_metadata) / 5)
+    current_page <- list_page()
+    if (current_page < total_pages) {
+      list_page(current_page + 1)
+    }
+  }, ignoreInit = TRUE, priority = 100)
 
   # Create observers for list selection
   observe({
@@ -373,7 +438,7 @@ server <- function(input, output, session) {
 
   # Render left sidebar
   output$list_sidebar <- renderUI({
-    generate_list_sidebar(list_metadata, current_list(), all_lists, sidebar_collapsed())
+    generate_list_sidebar(list_metadata, current_list(), all_lists, sidebar_collapsed(), list_page())
   })
 
   # Render right sidebar
