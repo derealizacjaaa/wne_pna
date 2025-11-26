@@ -21,10 +21,11 @@
 /* Main content container with header */
 .main-content {
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   background: white;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 /* Main content header */
