@@ -51,7 +51,8 @@ list_metadata <- list(
   list6 = list(
     id = "list6",
     name = "Lista VI",
-    subtitle = "Zaawansowane"
+    subtitle = "Zaawansowane",
+    visible = FALSE
   )
 )
 
@@ -61,7 +62,12 @@ list_metadata <- list(
 
 # Generate LEFT sidebar (List Selection)
 generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sidebar_collapsed) {
-  list_items <- lapply(list_metadata, function(list_info) {
+  # Filter out invisible lists
+  visible_lists <- Filter(function(list_info) {
+    is.null(list_info$visible) || list_info$visible == TRUE
+  }, list_metadata)
+
+  list_items <- lapply(visible_lists, function(list_info) {
     # Handle NULL current_list_id - no list is active
     is_active <- !is.null(current_list_id) && list_info$id == current_list_id
 
@@ -112,8 +118,10 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
     )
   })
 
-  # Calculate overall stats
-  overall_stats <- get_overall_stats(all_lists)
+  # Calculate overall stats only for visible lists
+  visible_list_ids <- sapply(visible_lists, function(x) x$id)
+  visible_all_lists <- all_lists[visible_list_ids]
+  overall_stats <- get_overall_stats(visible_all_lists)
   progress_percentage <- overall_stats$percentage
 
   tagList(
