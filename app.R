@@ -188,6 +188,18 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
         ),
         div(class = "summary-percentage", sprintf("%d%%", progress_percentage))
       )
+    ),
+
+    # Scroll buttons
+    tags$button(
+      id = "left_sidebar_scroll_up",
+      class = "left-sidebar-scroll-up",
+      icon("chevron-up")
+    ),
+    tags$button(
+      id = "left_sidebar_scroll_down",
+      class = "left-sidebar-scroll-down",
+      icon("chevron-down")
     )
   )
 }
@@ -275,7 +287,71 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
+    tags$script(HTML("
+      $(document).ready(function() {
+        // Function to update scroll button visibility
+        function updateScrollButtons() {
+          var menu = $('.lists-sidebar-menu');
+          if (menu.length === 0) return;
+
+          var scrollTop = menu.scrollTop();
+          var scrollHeight = menu.prop('scrollHeight');
+          var clientHeight = menu.height();
+
+          var upBtn = $('#left_sidebar_scroll_up');
+          var downBtn = $('#left_sidebar_scroll_down');
+
+          // Show up button if not at top
+          if (scrollTop > 10) {
+            upBtn.addClass('visible');
+          } else {
+            upBtn.removeClass('visible');
+          }
+
+          // Show down button if not at bottom
+          if (scrollTop < scrollHeight - clientHeight - 10) {
+            downBtn.addClass('visible');
+          } else {
+            downBtn.removeClass('visible');
+          }
+        }
+
+        // Scroll up button click
+        $(document).on('click', '#left_sidebar_scroll_up', function(e) {
+          e.preventDefault();
+          var menu = $('.lists-sidebar-menu');
+          var listHeight = $('.list-item').outerHeight(true);
+          menu.animate({
+            scrollTop: menu.scrollTop() - (listHeight * 4)
+          }, 300, updateScrollButtons);
+        });
+
+        // Scroll down button click
+        $(document).on('click', '#left_sidebar_scroll_down', function(e) {
+          e.preventDefault();
+          var menu = $('.lists-sidebar-menu');
+          var listHeight = $('.list-item').outerHeight(true);
+          menu.animate({
+            scrollTop: menu.scrollTop() + (listHeight * 4)
+          }, 300, updateScrollButtons);
+        });
+
+        // Update on scroll
+        $(document).on('scroll', '.lists-sidebar-menu', updateScrollButtons);
+
+        // Update on window resize
+        $(window).on('resize', updateScrollButtons);
+
+        // Initial update with delay to ensure DOM is ready
+        setTimeout(updateScrollButtons, 100);
+
+        // Update when Shiny re-renders
+        $(document).on('shiny:value', function() {
+          setTimeout(updateScrollButtons, 100);
+        });
+      });
+    "))
   ),
 
   # Hero Header Section
