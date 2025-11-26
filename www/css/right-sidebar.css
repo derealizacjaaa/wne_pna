@@ -85,7 +85,7 @@
   flex: 1;
   overflow: hidden;
   align-items: stretch;
-  min-height: 0;
+  height: calc(100vh - 120px - 56px);
 }
 
 /* Part 1: Pattern background (leftmost, 80px) */
