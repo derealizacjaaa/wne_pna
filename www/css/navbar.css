@@ -5,19 +5,21 @@
 /* Main navbar container - integrate with header gradient */
 .main-content-body .navbar {
   margin: 0 !important;
-  margin-top: -60px !important;
   padding: 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   min-height: 0 !important;
   height: 56px !important;
-  position: relative;
-  z-index: 20;
+  position: fixed;
+  top: 120px;
+  right: 8px;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 28px !important;
+  padding-right: 20px !important;
+  width: auto !important;
 }
 
 /* Remove any container padding/margin around navbar */
