@@ -69,13 +69,15 @@
   flex: 1;
   background: white;
   min-height: 0;
-  overflow-y: auto;
+  overflow-y: scroll !important;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Scrollbar styling for main-content-body */
 .main-content-body::-webkit-scrollbar {
   width: 8px;
+  display: block;
 }
 
 .main-content-body::-webkit-scrollbar-track {

@@ -1,88 +1,78 @@
 /* ========================================
-   MODERN NAVBAR STYLES
+   MODERN NAVBAR STYLES - INTEGRATED WITH HEADER
    ======================================== */
 
-.main-content .navbar {
-  margin-bottom: 0;
-  margin-top: 0 !important;
-  background: linear-gradient(135deg, #b1404f 0%, #9a3642 100%) !important;
-  color: white !important;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.15) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-height: 60px !important;
-  height: 60px !important;
-  box-sizing: border-box !important;
-  position: relative;
-  z-index: 100;
-}
-
-/* Subtle shine effect on navbar */
-.main-content .navbar::after {
-  content: '';
+/* Main navbar container - integrate with header gradient */
+.main-content-body .navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  height: auto !important;
   position: absolute;
-  top: 0;
+  top: -60px;
   left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.3) 50%,
-    transparent 100%);
+  right: 8px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px !important;
 }
 
 /* Remove any container padding/margin around navbar */
-.main-content > div:first-child {
+.main-content-body > div:first-child {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-.main-content .bslib-page-navbar {
+.main-content-body .bslib-page-navbar {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* Modern navbar brand styling */
-.main-content .navbar-brand {
-  color: white !important;
-  font-weight: 600;
-  font-size: 1.1em;
-  transition: all 0.3s ease;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+/* Hide navbar brand - we have it in header */
+.main-content-body .navbar-brand {
+  display: none !important;
 }
 
-.main-content .navbar-brand:hover {
-  color: rgba(255, 255, 255, 0.9) !important;
-  transform: translateY(-1px);
+/* Navigation tabs styling - positioned in header */
+.main-content-body .nav-tabs {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  height: 56px;
 }
 
-/* Navigation tabs styling */
-.main-content .nav-tabs {
-  border-bottom: none !important;
-  background: transparent;
-  padding-left: 10px;
-}
-
-.main-content .nav-link {
+.main-content-body .nav-link {
   color: rgba(255, 255, 255, 0.85) !important;
   border: none !important;
   background: transparent !important;
-  padding: 18px 24px !important;
+  padding: 16px 20px !important;
   font-weight: 500;
   font-size: 0.95em;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   border-radius: 0 !important;
-  margin-right: 4px;
+  margin: 0 2px !important;
+  height: 56px;
+  display: flex;
+  align-items: center;
 }
 
 /* Hover effect for nav tabs */
-.main-content .nav-link:hover {
+.main-content-body .nav-link:hover {
   color: white !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Active tab styling */
-.main-content .nav-link.active {
+.main-content-body .nav-link.active {
   color: white !important;
   background: rgba(255, 255, 255, 0.15) !important;
   font-weight: 600;
@@ -90,7 +80,7 @@
 }
 
 /* Underline animation for tabs */
-.main-content .nav-link::after {
+.main-content-body .nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -102,26 +92,26 @@
   transform: translateX(-50%);
 }
 
-.main-content .nav-link:hover::after {
+.main-content-body .nav-link:hover::after {
   width: 80%;
 }
 
-.main-content .nav-link.active::after {
+.main-content-body .nav-link.active::after {
   width: 100%;
 }
 
 /* Icons in navbar */
-.main-content .navbar .fa,
-.main-content .navbar .fas,
-.main-content .navbar .far {
-  margin-right: 8px;
+.main-content-body .navbar .fa,
+.main-content-body .navbar .fas,
+.main-content-body .navbar .far {
+  margin-right: 6px;
   opacity: 0.9;
   transition: opacity 0.3s ease;
 }
 
-.main-content .nav-link:hover .fa,
-.main-content .nav-link:hover .fas,
-.main-content .nav-link:hover .far {
+.main-content-body .nav-link:hover .fa,
+.main-content-body .nav-link:hover .fas,
+.main-content-body .nav-link:hover .far {
   opacity: 1;
 }
 
@@ -144,12 +134,7 @@
 
 /* Responsive navbar adjustments */
 @media (max-width: 768px) {
-  .main-content .navbar {
-    min-height: 56px !important;
-    height: auto !important;
-  }
-
-  .main-content .nav-link {
+  .main-content-body .nav-link {
     padding: 14px 16px !important;
     font-size: 0.9em;
   }
