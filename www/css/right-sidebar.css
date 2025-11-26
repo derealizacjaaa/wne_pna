@@ -85,8 +85,8 @@
   flex-direction: row;
   align-items: stretch;
   overflow: hidden;
-  height: calc(100vh - 120px - 56px);
-  flex-shrink: 0;
+  flex: 1;
+  min-height: 0;
 }
 
 /* Part 1: Pattern background (leftmost, 80px) */
