@@ -6,7 +6,8 @@
 .main-area {
   flex: 1;
   background: white;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -18,14 +19,31 @@
   margin-left: 60px;
 }
 
+/* Scrollbar styling for main-area */
+.main-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-area::-webkit-scrollbar-track {
+  background: #F4F6F9;
+}
+
+.main-area::-webkit-scrollbar-thumb {
+  background: #606060;
+  border-radius: 4px;
+}
+
+.main-area::-webkit-scrollbar-thumb:hover {
+  background: #4A4A4A;
+}
+
 /* Main content container with header */
 .main-content {
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   background: white;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* Main content header */
@@ -46,7 +64,9 @@
   align-items: center;
   padding: 0 20px;
   flex-shrink: 0;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .main-content-header h3 {
@@ -69,28 +89,8 @@
 /* Scrollable body */
 .main-content-body {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
   background: white;
   min-height: 0;
-}
-
-/* Scrollbar styling for body */
-.main-content-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-.main-content-body::-webkit-scrollbar-track {
-  background: #F4F6F9;
-}
-
-.main-content-body::-webkit-scrollbar-thumb {
-  background: #606060;
-  border-radius: 4px;
-}
-
-.main-content-body::-webkit-scrollbar-thumb:hover {
-  background: #4A4A4A;
 }
 
 /* Empty state */
