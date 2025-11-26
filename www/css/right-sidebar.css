@@ -83,7 +83,6 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  align-items: stretch;
   height: calc(100vh - 120px - 56px);
   flex-shrink: 0;
 }
@@ -91,8 +90,8 @@
 /* Part 1: Pattern background (leftmost, 80px) */
 .sidebar-pattern {
   width: 80px;
+  height: 100%;
   flex-shrink: 0;
-  align-self: stretch;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
   order: 1;
 }
@@ -100,8 +99,8 @@
 /* Part 2: Gradient (middle, 20px) */
 .sidebar-gradient {
   width: 20px;
+  height: 100%;
   flex-shrink: 0;
-  align-self: stretch;
   background: linear-gradient(270deg,
     #b1404f 0%,    /* Prawa krawędź - kolor cienia */
     #d95e6f 50%,   /* Środek - jasny połysk */
@@ -113,11 +112,11 @@
 /* Part 3: Tasks list (rightmost, 200px) */
 .sidebar-tasks-list {
   width: 200px;
+  height: 100%;
   flex-shrink: 0;
-  align-self: stretch;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(2) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linecap='square' stroke-width='0.5' stroke='%234a4a4aff' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linecap='square' stroke-width='0.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,-62)' fill='url(%23a)'/></svg>");
   overflow-y: auto;
-  padding: 0px 15px 20px 15px;
+  padding: 0px 15px 50px 15px;
   order: 3;
 }
 
