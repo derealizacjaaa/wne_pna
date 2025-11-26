@@ -52,11 +52,6 @@ list_metadata <- list(
     id = "list6",
     name = "Lista VI",
     subtitle = "Zaawansowane"
-  ),
-  list7 = list(
-    id = "list7",
-    name = "Lista VII",
-    subtitle = "Projekty"
   )
 )
 
