@@ -14,7 +14,7 @@
 .app-container {
   display: flex;
   height: calc(100vh - 120px);
-  min-height: 474px;
+  min-height: 508px;
   position: relative;
   transition: all 0.3s ease;
 }
