@@ -57,16 +57,6 @@ list_metadata <- list(
     id = "list7",
     name = "Lista VII",
     subtitle = "Projekty"
-  ),
-  list8 = list(
-    id = "list8",
-    name = "Lista VIII",
-    subtitle = ""
-  ),
-  list9 = list(
-    id = "list9",
-    name = "Lista IX",
-    subtitle = ""
   )
 )
 
@@ -198,18 +188,6 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists, sid
         ),
         div(class = "summary-percentage", sprintf("%d%%", progress_percentage))
       )
-    ),
-
-    # Scroll buttons
-    tags$button(
-      id = "left_sidebar_scroll_up",
-      class = "left-sidebar-scroll-up",
-      icon("chevron-up")
-    ),
-    tags$button(
-      id = "left_sidebar_scroll_down",
-      class = "left-sidebar-scroll-down",
-      icon("chevron-down")
     )
   )
 }
@@ -297,70 +275,7 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
-    tags$script(HTML("
-      $(document).ready(function() {
-        var currentOffset = 0;
-        var maxVisible = 8;
-        var scrollStep = 4;
-
-        // Function to update list visibility and button states
-        function updateListView() {
-          var items = $('.list-item');
-          var totalItems = items.length;
-
-          // Hide all items first
-          items.hide();
-
-          // Show items from currentOffset to currentOffset + maxVisible
-          for (var i = currentOffset; i < Math.min(currentOffset + maxVisible, totalItems); i++) {
-            $(items[i]).show();
-          }
-
-          var upBtn = $('#left_sidebar_scroll_up');
-          var downBtn = $('#left_sidebar_scroll_down');
-
-          // Show up button if we can scroll up (not at start)
-          if (currentOffset > 0) {
-            upBtn.addClass('visible');
-          } else {
-            upBtn.removeClass('visible');
-          }
-
-          // Show down button if we can scroll down (more items below)
-          if (currentOffset + maxVisible < totalItems) {
-            downBtn.addClass('visible');
-          } else {
-            downBtn.removeClass('visible');
-          }
-        }
-
-        // Scroll up button click
-        $(document).on('click', '#left_sidebar_scroll_up', function(e) {
-          e.preventDefault();
-          currentOffset = Math.max(0, currentOffset - scrollStep);
-          updateListView();
-        });
-
-        // Scroll down button click
-        $(document).on('click', '#left_sidebar_scroll_down', function(e) {
-          e.preventDefault();
-          var totalItems = $('.list-item').length;
-          currentOffset = Math.min(totalItems - maxVisible, currentOffset + scrollStep);
-          if (currentOffset < 0) currentOffset = 0;
-          updateListView();
-        });
-
-        // Initial update with delay to ensure DOM is ready
-        setTimeout(updateListView, 100);
-
-        // Update when Shiny re-renders
-        $(document).on('shiny:value', function() {
-          currentOffset = 0; // Reset to beginning when content changes
-          setTimeout(updateListView, 100);
-        });
-      });
-    "))
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
   ),
 
   # Hero Header Section
