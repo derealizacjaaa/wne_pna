@@ -286,6 +286,13 @@ parse_content_blocks <- function(content) {
     if (paren_count == 0) {
       # Found matching closing paren
       func_content <- substring(content, paren_start, i - 2)
+
+      # Debug: show what we extracted
+      cat("\n=== Extracted", func_name, "block ===\n")
+      cat("Start:", paren_start, "End:", i - 2, "\n")
+      cat("Content preview (first 100 chars):", substring(func_content, 1, 100), "\n")
+      cat("Content length:", nchar(func_content), "\n\n")
+
       blocks <- c(blocks, list(list(type = func_name, content = func_content)))
       pos <- i
     } else {
