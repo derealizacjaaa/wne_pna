@@ -1,0 +1,19 @@
+<h3>Część B: Statystyki</h3>
+
+<p>Obliczmy podstawowe statystyki dla naszego wektora:</p>
+
+code(
+# Obliczanie statystyk
+mean(numbers)     # Średnia
+sd(numbers)       # Odchylenie standardowe
+median(numbers)   # Mediana
+)
+
+<p>Wynik wykonania:</p>
+
+execute(
+numbers <- 1:20
+cat("Średnia:", mean(numbers), "\n")
+cat("Odchylenie:", round(sd(numbers), 2), "\n")
+cat("Mediana:", median(numbers), "\n")
+)

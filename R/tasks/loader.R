@@ -139,14 +139,21 @@ load_folder_task <- function(task_path, list_id, task_id) {
     }
   }
 
-  # Priority 2: File-based mode (numbered .txt files)
-  task <- build_task_from_files(task_path)
+  # Priority 2: File-based V3 mode (inline code/execute/plot functions)
+  task <- build_task_from_files_v3(task_path)
   if (!is.null(task)) {
-    cat(sprintf("✓ Loaded %s/%s (file-based)\n", list_id, task_id))
+    cat(sprintf("✓ Loaded %s/%s (file-based-v3)\n", list_id, task_id))
     return(task)
   }
 
-  # Priority 3: Old auto-generation mode (content.txt + code.txt)
+  # Priority 3: File-based V2 mode (numbered .txt files with types)
+  task <- build_task_from_files(task_path)
+  if (!is.null(task)) {
+    cat(sprintf("✓ Loaded %s/%s (file-based-v2)\n", list_id, task_id))
+    return(task)
+  }
+
+  # Priority 4: Old auto-generation mode (content.txt + code.txt)
   task <- auto_generate_basic_task(task_path)
   if (!is.null(task)) {
     cat(sprintf("✓ Loaded %s/%s (auto-generated-old)\n", list_id, task_id))
