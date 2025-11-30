@@ -132,7 +132,7 @@ progress_summary_card <- function(overall_stats) {
 #' Create navigation buttons for pagination
 #' @param has_prev Whether previous page exists
 #' @param has_next Whether next page exists
-#' @return List with prev and next button elements
+#' @return List with prev and next_btn button elements
 pagination_buttons <- function(has_prev, has_next) {
   list(
     prev = if (has_prev) {
@@ -141,7 +141,7 @@ pagination_buttons <- function(has_prev, has_next) {
     } else {
       div(class = "list-nav-spacer")
     },
-    next = if (has_next) {
+    next_btn = if (has_next) {
       actionButton("list_page_next", label = NULL, icon = icon("chevron-down"),
                    class = "list-nav-btn list-nav-next")
     } else {

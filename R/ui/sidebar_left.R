@@ -127,7 +127,7 @@ sidebar_menu <- function(list_items, nav_buttons) {
     class = "lists-sidebar-menu",
     nav_buttons$prev,
     tagAppendChildren(tags$ul(class = "lists-menu"), list_items),
-    nav_buttons$next
+    nav_buttons$next_btn
   )
 }
 
