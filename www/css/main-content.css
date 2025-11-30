@@ -78,20 +78,28 @@
 
 /* Scrollbar styling for main-content-body */
 .main-content-body::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;  /* Wider for better visibility */
 }
 
 .main-content-body::-webkit-scrollbar-track {
   background: #F4F6F9;
+  border-left: 1px solid #dee2e6;
 }
 
 .main-content-body::-webkit-scrollbar-thumb {
-  background: #606060;
-  border-radius: 4px;
+  background: #b1404f;  /* Brand color for visibility */
+  border-radius: 6px;
+  border: 2px solid #F4F6F9;  /* Add border for better definition */
 }
 
 .main-content-body::-webkit-scrollbar-thumb:hover {
-  background: #4A4A4A;
+  background: #8b3040;  /* Darker on hover */
+}
+
+/* Firefox scrollbar styling */
+.main-content-body {
+  scrollbar-width: thin;
+  scrollbar-color: #b1404f #F4F6F9;
 }
 
 /* Empty state */
