@@ -127,9 +127,9 @@
   padding-top: 56px !important;  /* Push content below navbar */
 }
 
-/* Tab panes should scroll properly */
+/* Tab panes don't force height */
 .main-content-body .tab-pane {
-  min-height: calc(100vh - 120px);  /* Ensure content is scrollable */
+  min-height: 0;
 }
 
 /* Hide the page navbar container */

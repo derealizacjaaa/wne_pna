@@ -21,11 +21,11 @@
 /* Main content container with header */
 .main-content {
   padding: 0;
-  min-height: 100%;
+  height: calc(100vh - 120px);  /* Fixed height matching sidebar */
   background: white;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-shrink: 0;
   position: relative;
 }
 
