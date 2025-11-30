@@ -209,18 +209,15 @@ build_content_block_v3 <- function(file, task_dir) {
 #' @return List of block objects
 parse_content_blocks <- function(content) {
   blocks <- list()
-
-  # Pattern to match: code(...), execute(...), plot(...)
-  # Using non-greedy matching and proper parenthesis balancing
-  pattern <- "(code|execute|plot)\\(([^)]*(?:\\([^)]*\\)[^)]*)*)\\)"
-
   pos <- 1
-  repeat {
-    # Find next function block
+
+  while (pos <= nchar(content)) {
+    # Find next function: code(, execute(, or plot(
+    pattern <- "(code|execute|plot)\\("
     match <- regexpr(pattern, substring(content, pos), perl = TRUE)
 
     if (match == -1) {
-      # No more matches, add remaining content as HTML
+      # No more functions, add remaining content as HTML
       remaining <- substring(content, pos)
       if (nchar(trimws(remaining)) > 0) {
         blocks <- c(blocks, list(list(type = "html", content = remaining)))
@@ -229,24 +226,44 @@ parse_content_blocks <- function(content) {
     }
 
     # Add HTML content before match
-    before <- substring(content, pos, pos + match - 2)
-    if (nchar(trimws(before)) > 0) {
-      blocks <- c(blocks, list(list(type = "html", content = before)))
+    match_start <- pos + match - 1
+    if (match > 1) {
+      before <- substring(content, pos, match_start - 1)
+      if (nchar(trimws(before)) > 0) {
+        blocks <- c(blocks, list(list(type = "html", content = before)))
+      }
     }
 
-    # Extract function name and content
-    match_start <- pos + match - 1
-    match_text <- substring(content, match_start, match_start + attr(match, "match.length") - 1)
+    # Extract function name
+    func_text <- substring(content, match_start, match_start + attr(match, "match.length") - 1)
+    func_name <- sub("\\($", "", func_text)
 
-    func_name <- sub("^(code|execute|plot)\\(.*", "\\1", match_text)
-    func_content <- sub("^(code|execute|plot)\\((.*)\\)$", "\\2", match_text)
+    # Find matching closing parenthesis by tracking balance
+    paren_start <- match_start + nchar(func_text)
+    paren_count <- 1
+    i <- paren_start
 
-    blocks <- c(blocks, list(list(type = func_name, content = func_content)))
+    while (i <= nchar(content) && paren_count > 0) {
+      char <- substring(content, i, i)
+      if (char == "(") {
+        paren_count <- paren_count + 1
+      } else if (char == ")") {
+        paren_count <- paren_count - 1
+      }
+      i <- i + 1
+    }
 
-    # Move position forward
-    pos <- match_start + attr(match, "match.length")
-
-    if (pos > nchar(content)) break
+    if (paren_count == 0) {
+      # Found matching closing paren
+      func_content <- substring(content, paren_start, i - 2)
+      blocks <- c(blocks, list(list(type = func_name, content = func_content)))
+      pos <- i
+    } else {
+      # Unmatched parenthesis - treat as HTML
+      warning("Unmatched parenthesis in ", func_name, "() at position ", match_start)
+      blocks <- c(blocks, list(list(type = "html", content = substring(content, match_start, nchar(content)))))
+      break
+    }
   }
 
   blocks
