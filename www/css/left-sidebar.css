@@ -500,3 +500,19 @@
   outline: 2px solid #b1404f;
   outline-offset: 2px;
 }
+
+/* Empty list slot styling */
+.list-item-empty {
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.list-item-empty:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+.list-item-empty::before {
+  display: none !important;
+}

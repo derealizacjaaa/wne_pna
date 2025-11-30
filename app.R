@@ -40,7 +40,8 @@ source("R/server/renderers.R")
 # INITIALIZE DATA
 # ============================================
 
-# Load list metadata and tasks
+# Dynamically discover and load lists from tasks directory
+# Lists are auto-generated based on existing folders (list1, list2, etc.)
 list_metadata <- get_list_metadata()
 all_lists <- load_all_tasks()
 
