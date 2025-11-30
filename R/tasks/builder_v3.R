@@ -245,30 +245,38 @@ parse_content_blocks <- function(content) {
     i <- paren_start
     in_string <- FALSE
     string_char <- ""
+    escape_next <- FALSE
 
     while (i <= nchar(content) && paren_count > 0) {
       char <- substring(content, i, i)
-      prev_char <- if (i > 1) substring(content, i - 1, i - 1) else ""
 
-      # Handle string boundaries (skip escaped quotes)
-      if ((char == '"' || char == "'") && prev_char != "\\") {
-        if (!in_string) {
-          # Entering a string
-          in_string <- TRUE
-          string_char <- char
-        } else if (char == string_char) {
-          # Exiting the string
-          in_string <- FALSE
-          string_char <- ""
+      # Handle escape sequences
+      if (escape_next) {
+        escape_next <- FALSE
+      } else if (char == "\\") {
+        escape_next <- TRUE
+      } else {
+        # Handle string boundaries (only when not escaping)
+        if (char == '"' || char == "'") {
+          if (!in_string) {
+            # Entering a string
+            in_string <- TRUE
+            string_char <- char
+          } else if (char == string_char) {
+            # Exiting the string (matching quote)
+            in_string <- FALSE
+            string_char <- ""
+          }
+          # else: it's a different quote type inside a string, ignore it
         }
-      }
 
-      # Only count parentheses outside of strings
-      if (!in_string) {
-        if (char == "(") {
-          paren_count <- paren_count + 1
-        } else if (char == ")") {
-          paren_count <- paren_count - 1
+        # Only count parentheses outside of strings
+        if (!in_string) {
+          if (char == "(") {
+            paren_count <- paren_count + 1
+          } else if (char == ")") {
+            paren_count <- paren_count - 1
+          }
         }
       }
 
