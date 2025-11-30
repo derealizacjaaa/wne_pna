@@ -315,6 +315,12 @@
   height: 8px;
 }
 
+/* Hidden navigation button - keeps space but invisible */
+.list-nav-btn.btn-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* Section 3: Summary - FIXED */
 .lists-sidebar-summary {
   background: #b1404f;
@@ -499,20 +505,4 @@
 .list-item a:focus {
   outline: 2px solid #b1404f;
   outline-offset: 2px;
-}
-
-/* Empty list slot styling */
-.list-item-empty {
-  cursor: default !important;
-  pointer-events: none;
-  opacity: 0.4;
-}
-
-.list-item-empty:hover {
-  background: transparent !important;
-  transform: none !important;
-}
-
-.list-item-empty::before {
-  display: none !important;
 }

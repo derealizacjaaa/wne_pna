@@ -130,22 +130,26 @@ progress_summary_card <- function(overall_stats) {
 }
 
 #' Create navigation buttons for pagination
+#'
+#' Buttons are always rendered to maintain consistent spacing,
+#' but hidden when not needed (visibility: hidden)
+#'
 #' @param has_prev Whether previous page exists
 #' @param has_next Whether next page exists
 #' @return List with prev and next_btn button elements
 pagination_buttons <- function(has_prev, has_next) {
   list(
-    prev = if (has_prev) {
-      actionButton("list_page_prev", label = NULL, icon = icon("chevron-up"),
-                   class = "list-nav-btn list-nav-prev")
-    } else {
-      div(class = "list-nav-spacer")
-    },
-    next_btn = if (has_next) {
-      actionButton("list_page_next", label = NULL, icon = icon("chevron-down"),
-                   class = "list-nav-btn list-nav-next")
-    } else {
-      div(class = "list-nav-spacer")
-    }
+    prev = actionButton(
+      "list_page_prev",
+      label = NULL,
+      icon = icon("chevron-up"),
+      class = paste("list-nav-btn list-nav-prev", if (!has_prev) "btn-hidden" else "")
+    ),
+    next_btn = actionButton(
+      "list_page_next",
+      label = NULL,
+      icon = icon("chevron-down"),
+      class = paste("list-nav-btn list-nav-next", if (!has_next) "btn-hidden" else "")
+    )
   )
 }
