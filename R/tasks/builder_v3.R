@@ -239,17 +239,39 @@ parse_content_blocks <- function(content) {
     func_name <- sub("\\($", "", func_text)
 
     # Find matching closing parenthesis by tracking balance
+    # Must skip over quoted strings to avoid counting parens inside strings
     paren_start <- match_start + nchar(func_text)
     paren_count <- 1
     i <- paren_start
+    in_string <- FALSE
+    string_char <- ""
 
     while (i <= nchar(content) && paren_count > 0) {
       char <- substring(content, i, i)
-      if (char == "(") {
-        paren_count <- paren_count + 1
-      } else if (char == ")") {
-        paren_count <- paren_count - 1
+      prev_char <- if (i > 1) substring(content, i - 1, i - 1) else ""
+
+      # Handle string boundaries (skip escaped quotes)
+      if ((char == '"' || char == "'") && prev_char != "\\") {
+        if (!in_string) {
+          # Entering a string
+          in_string <- TRUE
+          string_char <- char
+        } else if (char == string_char) {
+          # Exiting the string
+          in_string <- FALSE
+          string_char <- ""
+        }
       }
+
+      # Only count parentheses outside of strings
+      if (!in_string) {
+        if (char == "(") {
+          paren_count <- paren_count + 1
+        } else if (char == ")") {
+          paren_count <- paren_count - 1
+        }
+      }
+
       i <- i + 1
     }
 
