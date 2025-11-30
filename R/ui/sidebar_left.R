@@ -2,11 +2,11 @@
 # LEFT SIDEBAR - LIST SELECTION
 # ============================================
 # Generates the left sidebar for selecting task lists
-# Dynamic list discovery with pagination
+# Fixed 5-slot layout with invisible empty slots
 
 #' Generate left sidebar with list selection and pagination
 #'
-#' Shows only actual lists (no placeholders), with fixed navigation button positions
+#' Always shows 5 slots (for consistent spacing), empty slots are invisible
 #'
 #' @param list_metadata List metadata from get_list_metadata()
 #' @param current_list_id Currently selected list ID (or NULL)
@@ -17,29 +17,31 @@
 generate_list_sidebar <- function(list_metadata, current_list_id, all_lists,
                                   sidebar_collapsed, page = 1) {
 
-  # Pagination configuration - 5 lists per page
-  lists_per_page <- 5
+  # Fixed configuration - always 5 slots
+  slots_per_page <- 5
   total_lists <- length(list_metadata)
 
-  # Calculate page range
-  page_range <- get_page_range(page, lists_per_page, total_lists)
+  # Calculate which list indices to show on this page
+  list_indices <- get_page_list_indices(page, slots_per_page, total_lists)
 
-  # Get lists for current page (only actual lists, no placeholders)
-  if (total_lists > 0) {
-    page_lists <- list_metadata[page_range$start:page_range$end]
-  } else {
-    page_lists <- list()
-  }
+  # Build exactly 5 slots (some may be invisible)
+  list_items <- lapply(1:slots_per_page, function(slot_idx) {
+    list_idx <- list_indices[slot_idx]
 
-  # Build list items (only for actual lists)
-  list_items <- lapply(page_lists, function(list_info) {
-    is_active <- !is.null(current_list_id) && list_info$id == current_list_id
-    stats <- get_list_stats(all_lists, list_info$id)
-    create_list_item(list_info, is_active, stats)
+    if (is.na(list_idx) || list_idx > total_lists) {
+      # Invisible empty slot (takes up space but not visible)
+      create_invisible_slot()
+    } else {
+      # Real list item
+      list_info <- list_metadata[[list_idx]]
+      is_active <- !is.null(current_list_id) && list_info$id == current_list_id
+      stats <- get_list_stats(all_lists, list_info$id)
+      create_list_item(list_info, is_active, stats)
+    }
   })
 
   # Calculate total pages
-  total_pages <- if (total_lists > 0) ceiling(total_lists / lists_per_page) else 1
+  total_pages <- if (total_lists > 0) ceiling(total_lists / slots_per_page) else 1
 
   # Get navigation buttons (always present, just hidden when not needed)
   nav_buttons <- pagination_buttons(
@@ -58,15 +60,44 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists,
   )
 }
 
-#' Calculate page range for pagination
+#' Get list indices for current page
+#'
+#' Returns indices for all 5 slots, with NA for empty slots
+#'
 #' @param page Current page number
-#' @param lists_per_page Number of lists per page
+#' @param slots_per_page Number of slots per page (always 5)
 #' @param total_lists Total number of discovered lists
-#' @return List with start and end indices
-get_page_range <- function(page, lists_per_page, total_lists) {
-  start_idx <- (page - 1) * lists_per_page + 1
-  end_idx <- min(page * lists_per_page, total_lists)
-  list(start = start_idx, end = end_idx)
+#' @return Vector of 5 list indices (may contain NAs)
+get_page_list_indices <- function(page, slots_per_page, total_lists) {
+  # Calculate starting index for this page
+  start_idx <- (page - 1) * slots_per_page + 1
+
+  # Create vector of 5 indices
+  indices <- start_idx:(start_idx + slots_per_page - 1)
+
+  # Mark indices beyond total_lists as NA
+  indices[indices > total_lists] <- NA
+
+  indices
+}
+
+#' Create invisible empty slot
+#'
+#' Takes up space but is completely invisible
+#'
+#' @return Shiny li tag
+create_invisible_slot <- function() {
+  tags$li(
+    class = "list-item list-item-invisible",
+    style = "visibility: hidden;",
+    div(
+      class = "list-item-content",
+      div(class = "progress-bar-container-vertical",
+          div(class = "progress-bar-fill-vertical", style = "height: 0%;")),
+      div(class = "list-text", h4("")),
+      div(class = "list-progress", tags$span(class = "progress-text", ""))
+    )
+  )
 }
 
 #' Create sidebar header section
@@ -89,7 +120,7 @@ sidebar_header <- function() {
 }
 
 #' Create sidebar menu section with list items
-#' @param list_items List of list item elements
+#' @param list_items List of list item elements (always 5)
 #' @param nav_buttons Pagination button elements
 #' @return Shiny div with menu
 sidebar_menu <- function(list_items, nav_buttons) {

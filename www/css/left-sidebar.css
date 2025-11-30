@@ -506,3 +506,17 @@
   outline: 2px solid #b1404f;
   outline-offset: 2px;
 }
+
+/* Invisible list slot - takes up space but not visible */
+.list-item-invisible {
+  pointer-events: none;
+}
+
+.list-item-invisible:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+.list-item-invisible::before {
+  display: none !important;
+}
