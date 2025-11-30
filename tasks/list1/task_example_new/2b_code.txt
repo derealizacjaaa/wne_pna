@@ -1,0 +1,4 @@
+# Obliczanie statystyk
+mean(numbers)  # Średnia
+sd(numbers)    # Odchylenie standardowe
+sum(numbers)   # Suma

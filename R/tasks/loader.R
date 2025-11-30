@@ -120,7 +120,7 @@ load_single_task <- function(task_path, list_id, list_num) {
   })
 }
 
-#' Load task from folder (manual or auto-generated)
+#' Load task from folder (manual, file-based, or auto-generated)
 #' @param task_path Path to task folder
 #' @param list_id List identifier
 #' @param task_id Task identifier
@@ -128,8 +128,8 @@ load_single_task <- function(task_path, list_id, list_num) {
 load_folder_task <- function(task_path, list_id, task_id) {
   manual_script <- file.path(task_path, "task.R")
 
+  # Priority 1: Manual mode (task.R)
   if (file.exists(manual_script)) {
-    # Manual mode
     task_env <- new.env()
     source(manual_script, local = task_env)
 
@@ -137,13 +137,20 @@ load_folder_task <- function(task_path, list_id, task_id) {
       cat(sprintf("✓ Loaded %s/%s (manual)\n", list_id, task_id))
       return(task_env$create_task())
     }
-  } else {
-    # Auto-generation mode
-    task <- auto_generate_basic_task(task_path)
-    if (!is.null(task)) {
-      cat(sprintf("✓ Loaded %s/%s (auto-generated)\n", list_id, task_id))
-      return(task)
-    }
+  }
+
+  # Priority 2: File-based mode (numbered .txt files)
+  task <- build_task_from_files(task_path)
+  if (!is.null(task)) {
+    cat(sprintf("✓ Loaded %s/%s (file-based)\n", list_id, task_id))
+    return(task)
+  }
+
+  # Priority 3: Old auto-generation mode (content.txt + code.txt)
+  task <- auto_generate_basic_task(task_path)
+  if (!is.null(task)) {
+    cat(sprintf("✓ Loaded %s/%s (auto-generated-old)\n", list_id, task_id))
+    return(task)
   }
 
   NULL

@@ -1,0 +1,4 @@
+# Tworzenie prostego wykresu
+x <- 1:50
+y <- x^2
+plot(x, y, type = "l", col = "blue", main = "Wykres f(x) = x²", xlab = "x", ylab = "y")

@@ -23,6 +23,7 @@ source("R/config/metadata.R")
 source("R/tasks/display.R")
 source("R/tasks/executor.R")
 source("R/tasks/builder.R")
+source("R/tasks/builder_v2.R")  # New file-based builder
 source("R/tasks/loader.R")
 
 # UI components

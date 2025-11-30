@@ -1,0 +1,5 @@
+# Wykonanie przykładowego kodu
+x <- 1:20
+cat("Wektor:", x, "\n")
+cat("Średnia:", mean(x), "\n")
+cat("Mediana:", median(x), "\n")
