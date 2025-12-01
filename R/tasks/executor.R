@@ -65,7 +65,15 @@ capture_plot <- function(line_code, line_idx, envir) {
   plot_file <- file.path(temp_dir, paste0("plot_", line_idx, "_", as.numeric(Sys.time()), ".png"))
 
   png(plot_file, width = 450, height = 300, res = 90)
-  eval(parse(text = line_code), envir = envir)
+
+  # Execute code and capture result
+  result <- eval(parse(text = line_code), envir = envir)
+
+  # ggplot objects need to be explicitly printed to render
+  if (inherits(result, "ggplot")) {
+    print(result)
+  }
+
   dev.off()
 
   if (file.exists(plot_file) && file.size(plot_file) > 0) {
