@@ -56,10 +56,13 @@ render_dynamic_layout <- function(output, state) {
 #' Render left sidebar
 render_list_sidebar <- function(output, state, list_metadata, all_lists) {
   output$list_sidebar <- renderUI({
+    # Trigger re-render when all_lists changes
+    loaded_lists <- all_lists()
+
     generate_list_sidebar(
       list_metadata,
       state$current_list(),
-      all_lists,
+      loaded_lists,
       state$sidebar_collapsed(),
       state$list_page()
     )

@@ -43,10 +43,10 @@ source("R/server/renderers.R")
 # INITIALIZE DATA
 # ============================================
 
-# Dynamically discover and load lists from tasks directory
+# Dynamically discover list metadata from tasks directory
 # Lists are auto-generated based on existing folders (list1, list2, etc.)
+# Tasks are loaded lazily when user selects a list
 list_metadata <- get_list_metadata()
-all_lists <- load_all_tasks()
 
 # ============================================
 # USER INTERFACE
@@ -108,10 +108,13 @@ server <- function(input, output, session) {
   # Initialize reactive state
   state <- init_reactive_state()
 
+  # Reactive value for loaded lists (initially empty, loaded on demand)
+  all_lists <- reactiveVal(list())
+
   # Create reactive expressions
   current_list_tasks <- create_current_list_tasks(state, all_lists)
 
-  # Setup observers
+  # Setup observers (includes lazy loading logic)
   setup_observers(input, state, list_metadata, all_lists, current_list_tasks)
 
   # Setup renderers

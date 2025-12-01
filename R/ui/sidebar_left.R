@@ -35,7 +35,7 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists,
       # Real list item
       list_info <- list_metadata[[list_idx]]
       is_active <- !is.null(current_list_id) && list_info$id == current_list_id
-      stats <- get_list_stats(all_lists, list_info$id)
+      stats <- get_list_stats(all_lists, list_info$id, tasks_dir = "tasks")
       create_list_item(list_info, is_active, stats)
     }
   })
@@ -50,7 +50,7 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists,
   )
 
   # Get overall statistics
-  overall_stats <- get_overall_stats(all_lists)
+  overall_stats <- get_overall_stats(all_lists, list_metadata, tasks_dir = "tasks")
 
   # Build sidebar structure
   tagList(

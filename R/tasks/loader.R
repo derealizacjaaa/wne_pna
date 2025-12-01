@@ -50,6 +50,96 @@ load_all_tasks <- function(tasks_dir = "tasks") {
   all_lists
 }
 
+#' Load tasks from a single list (for lazy loading)
+#' @param list_id List identifier (e.g., "list1")
+#' @param tasks_dir Root directory containing task lists
+#' @return List of tasks for the specified list
+load_single_list <- function(list_id, tasks_dir = "tasks") {
+  list_dir <- file.path(tasks_dir, list_id)
+
+  if (!dir.exists(list_dir)) {
+    warning(sprintf("List directory '%s' not found", list_dir))
+    return(list())
+  }
+
+  list_num <- extract_number(list_id)
+  list_tasks <- list()
+
+  # Find all tasks in this list
+  tasks <- find_all_tasks(list_dir)
+
+  # Load each task
+  for (task_path in tasks) {
+    task <- load_single_task(task_path, list_id, list_num)
+    if (!is.null(task)) {
+      task_id <- task$task_id
+      list_tasks[[task_id]] <- task
+    }
+  }
+
+  list_tasks
+}
+
+#' Count tasks in a list without loading them (lightweight)
+#' @param list_id List identifier
+#' @param tasks_dir Root directory containing task lists
+#' @return List with total and completed counts
+count_tasks_in_list <- function(list_id, tasks_dir = "tasks") {
+  list_dir <- file.path(tasks_dir, list_id)
+
+  if (!dir.exists(list_dir)) {
+    return(list(total = 0, completed = 0, percentage = 0))
+  }
+
+  # Find all tasks (quick scan without loading)
+  tasks <- find_all_tasks(list_dir)
+  total <- length(tasks)
+
+  if (total == 0) {
+    return(list(total = 0, completed = 0, remaining = 0, percentage = 0))
+  }
+
+  # Quick check for completion: if code.txt exists, consider completed
+  completed <- 0
+  for (task_path in tasks) {
+    is_folder <- file.info(task_path)$isdir
+
+    if (is_folder) {
+      # Check if code.txt exists (quick heuristic for completion)
+      code_file <- file.path(task_path, "code.txt")
+      if (file.exists(code_file)) {
+        completed <- completed + 1
+      }
+    }
+    # Legacy files considered completed if they exist
+    else {
+      completed <- completed + 1
+    }
+  }
+
+  list(
+    total = total,
+    completed = completed,
+    remaining = total - completed,
+    percentage = round(completed / total * 100)
+  )
+}
+
+#' Get lightweight metadata for all lists (without loading tasks)
+#' @param tasks_dir Root directory containing task lists
+#' @return List with metadata for each list
+get_lists_metadata_light <- function(tasks_dir = "tasks") {
+  list_dirs <- find_list_directories(tasks_dir)
+
+  metadata <- list()
+  for (list_dir in list_dirs) {
+    list_id <- basename(list_dir)
+    metadata[[list_id]] <- count_tasks_in_list(list_id, tasks_dir)
+  }
+
+  metadata
+}
+
 #' Find all list directories in tasks folder
 #' @param tasks_dir Root tasks directory
 #' @return Sorted vector of list directory paths
@@ -222,42 +312,61 @@ get_task <- function(all_lists, list_id, task_id) {
 # ============================================
 
 #' Get task completion statistics for a list
-#' @param all_lists Full task structure
+#' @param all_lists Full task structure (may contain loaded or unloaded lists)
 #' @param list_id List identifier
+#' @param tasks_dir Root directory (used if list not loaded)
 #' @return List with total, completed, remaining, percentage
-get_list_stats <- function(all_lists, list_id) {
-  tasks <- get_list_tasks(all_lists, list_id)
-  total <- length(tasks)
+get_list_stats <- function(all_lists, list_id, tasks_dir = "tasks") {
+  # Check if list is loaded (has actual task objects)
+  if (list_id %in% names(all_lists) && length(all_lists[[list_id]]) > 0) {
+    # Use loaded tasks
+    tasks <- all_lists[[list_id]]
+    total <- length(tasks)
 
-  if (total == 0) {
-    return(list(total = 0, completed = 0, remaining = 0, percentage = 0))
+    if (total == 0) {
+      return(list(total = 0, completed = 0, remaining = 0, percentage = 0))
+    }
+
+    completed <- sum(sapply(tasks, function(t) isTRUE(t$completed)))
+
+    return(list(
+      total = total,
+      completed = completed,
+      remaining = total - completed,
+      percentage = round(completed / total * 100)
+    ))
   }
 
-  completed <- sum(sapply(tasks, function(t) isTRUE(t$completed)))
-
-  list(
-    total = total,
-    completed = completed,
-    remaining = total - completed,
-    percentage = round(completed / total * 100)
-  )
+  # List not loaded - use lightweight counting
+  count_tasks_in_list(list_id, tasks_dir)
 }
 
 #' Get overall statistics across all lists
-#' @param all_lists Full task structure
+#' @param all_lists Full task structure (may contain loaded or unloaded lists)
+#' @param list_metadata Metadata for all lists
+#' @param tasks_dir Root directory (used for unloaded lists)
 #' @return List with totals and percentage
-get_overall_stats <- function(all_lists) {
+get_overall_stats <- function(all_lists, list_metadata = NULL, tasks_dir = "tasks") {
   total_tasks <- 0
   completed_tasks <- 0
 
-  for (list_id in names(all_lists)) {
-    stats <- get_list_stats(all_lists, list_id)
+  # If list_metadata provided, use it for counting
+  if (!is.null(list_metadata)) {
+    list_ids <- names(list_metadata)
+  } else {
+    # Fall back to scanning directory
+    list_dirs <- find_list_directories(tasks_dir)
+    list_ids <- basename(list_dirs)
+  }
+
+  for (list_id in list_ids) {
+    stats <- get_list_stats(all_lists, list_id, tasks_dir)
     total_tasks <- total_tasks + stats$total
     completed_tasks <- completed_tasks + stats$completed
   }
 
   list(
-    total_lists = length(all_lists),
+    total_lists = length(list_ids),
     total_tasks = total_tasks,
     completed_tasks = completed_tasks,
     remaining_tasks = total_tasks - completed_tasks,

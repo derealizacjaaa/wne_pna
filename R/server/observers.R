@@ -63,15 +63,31 @@ observe_list_pagination <- function(input, state, list_metadata) {
   }, ignoreInit = TRUE, priority = 100)
 }
 
-#' Observers for list selection
+#' Observers for list selection (with lazy loading)
 observe_list_selection <- function(input, state, list_metadata, all_lists) {
   observe({
     lapply(names(list_metadata), function(list_id) {
       observeEvent(input[[paste0("select_", list_id)]], {
+        # Set current list
         state$current_list(list_id)
 
-        # Reset to first task of new list
-        tasks <- all_lists[[list_id]]
+        # Load list if not already loaded (LAZY LOADING)
+        loaded <- all_lists()
+        if (!list_id %in% names(loaded)) {
+          cat(sprintf("🔄 Loading tasks for %s...\n", list_id))
+
+          # Load tasks for this list
+          list_tasks <- load_single_list(list_id)
+
+          # Add to loaded lists
+          loaded[[list_id]] <- list_tasks
+          all_lists(loaded)
+
+          cat(sprintf("✓ %s loaded (%d tasks)\n", list_id, length(list_tasks)))
+        }
+
+        # Reset to first task of newly selected list
+        tasks <- all_lists()[[list_id]]
         if (!is.null(tasks) && length(tasks) > 0) {
           state$current_task(names(tasks)[1])
         } else {
