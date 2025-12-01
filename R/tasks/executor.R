@@ -136,34 +136,72 @@ execute_code <- function(code, use_auto_labels = TRUE, use_comments = TRUE, envi
   tryCatch({
     output_text <- c()
     plot_files <- c()
-    lines <- strsplit(code, "\n")[[1]]
 
-    for (line_idx in seq_along(lines)) {
-      line <- lines[line_idx]
+    # Parse code into complete R expressions instead of splitting by lines
+    # This handles multi-line expressions like ggplot2 with + operators
+    exprs <- tryCatch({
+      parse(text = code)
+    }, error = function(e) {
+      # If parsing fails, fall back to line-by-line
+      return(NULL)
+    })
 
-      # Skip empty lines
-      if (!nzchar(trimws(line))) next
+    if (!is.null(exprs) && length(exprs) > 0) {
+      # Execute each complete expression
+      for (expr_idx in seq_along(exprs)) {
+        expr_code <- deparse(exprs[[expr_idx]])
+        expr_text <- paste(expr_code, collapse = "\n")
 
-      # Extract comment and code
-      comment <- regmatches(line, regexpr("#.*$", line))
-      if (length(comment) == 0) comment <- NULL
-      line_code <- trimws(sub("#.*$", "", line))
-
-      # Skip comment-only lines
-      if (!nzchar(line_code)) next
-
-      # Handle plotting vs text output
-      if (is_plotting_code(line_code)) {
-        plot_file <- capture_plot(line_code, line_idx, envir)
-        if (!is.null(plot_file)) {
-          plot_files <- c(plot_files, plot_file)
+        # Check if this is plotting code
+        if (is_plotting_code(expr_text)) {
+          plot_file <- capture_plot(expr_text, expr_idx, envir)
+          if (!is.null(plot_file)) {
+            plot_files <- c(plot_files, plot_file)
+          }
+        } else {
+          # Execute and capture output
+          result <- capture.output({
+            eval_result <- eval(exprs[[expr_idx]], envir = envir)
+            if (!is.null(eval_result) && !inherits(eval_result, "ggplot")) {
+              print(eval_result)
+            }
+          })
+          if (length(result) > 0) {
+            output_text <- c(output_text, result)
+          }
         }
-      } else {
-        text_output <- capture_text_output(
-          line_code, comment, use_auto_labels, use_comments, envir
-        )
-        if (length(text_output) > 0) {
-          output_text <- c(output_text, text_output)
+      }
+    } else {
+      # Fallback: process line by line (old behavior)
+      lines <- strsplit(code, "\n")[[1]]
+
+      for (line_idx in seq_along(lines)) {
+        line <- lines[line_idx]
+
+        # Skip empty lines
+        if (!nzchar(trimws(line))) next
+
+        # Extract comment and code
+        comment <- regmatches(line, regexpr("#.*$", line))
+        if (length(comment) == 0) comment <- NULL
+        line_code <- trimws(sub("#.*$", "", line))
+
+        # Skip comment-only lines
+        if (!nzchar(line_code)) next
+
+        # Handle plotting vs text output
+        if (is_plotting_code(line_code)) {
+          plot_file <- capture_plot(line_code, line_idx, envir)
+          if (!is.null(plot_file)) {
+            plot_files <- c(plot_files, plot_file)
+          }
+        } else {
+          text_output <- capture_text_output(
+            line_code, comment, use_auto_labels, use_comments, envir
+          )
+          if (length(text_output) > 0) {
+            output_text <- c(output_text, text_output)
+          }
         }
       }
     }
