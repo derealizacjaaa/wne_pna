@@ -258,9 +258,8 @@ parse_content_blocks <- function(content) {
 
           if (char == "\\") {
             # Skip the next character (it's escaped)
-            if (i + 1 <= nchar(content)) {
-              i <- i + 2
-            } else {
+            i <- i + 1
+            if (i <= nchar(content)) {
               i <- i + 1
             }
           } else if (char == quote_char) {
@@ -271,14 +270,17 @@ parse_content_blocks <- function(content) {
             i <- i + 1
           }
         }
-        # Don't increment i - we're already past the string
+        # Continue to next iteration without incrementing i again
+      } else if (char == "(") {
+        # Opening parenthesis
+        paren_count <- paren_count + 1
+        i <- i + 1
+      } else if (char == ")") {
+        # Closing parenthesis
+        paren_count <- paren_count - 1
+        i <- i + 1
       } else {
-        # Count parentheses (we're outside of strings here)
-        if (char == "(") {
-          paren_count <- paren_count + 1
-        } else if (char == ")") {
-          paren_count <- paren_count - 1
-        }
+        # Any other character
         i <- i + 1
       }
     }
