@@ -258,7 +258,11 @@ parse_content_blocks <- function(content) {
 
           if (char == "\\") {
             # Skip the next character (it's escaped)
-            i <- i + 2
+            if (i + 1 <= nchar(content)) {
+              i <- i + 2
+            } else {
+              i <- i + 1
+            }
           } else if (char == quote_char) {
             # Found closing quote
             i <- i + 1
@@ -267,39 +271,25 @@ parse_content_blocks <- function(content) {
             i <- i + 1
           }
         }
-        next  # Continue main loop without incrementing i again
+        # Don't increment i - we're already past the string
+      } else {
+        # Count parentheses (we're outside of strings here)
+        if (char == "(") {
+          paren_count <- paren_count + 1
+        } else if (char == ")") {
+          paren_count <- paren_count - 1
+        }
+        i <- i + 1
       }
-
-      # Count parentheses (we're outside of strings here)
-      if (char == "(") {
-        paren_count <- paren_count + 1
-      } else if (char == ")") {
-        paren_count <- paren_count - 1
-      }
-
-      i <- i + 1
     }
 
     if (paren_count == 0) {
       # Found matching closing paren
       func_content <- substring(content, paren_start, i - 2)
-
-      # Debug: show what we extracted
-      cat("\n=== Extracted", func_name, "block ===\n")
-      cat("Start:", paren_start, "End:", i - 2, "\n")
-      cat("Content length:", nchar(func_content), "chars\n")
-      cat("--- FULL CONTENT START ---\n")
-      cat(func_content)
-      cat("\n--- FULL CONTENT END ---\n\n")
-
       blocks <- c(blocks, list(list(type = func_name, content = func_content)))
       pos <- i
     } else {
       # Unmatched parenthesis - treat as HTML
-      cat("\n!!! ERROR: Unmatched parenthesis in", func_name, "() !!!\n")
-      cat("Position:", match_start, "\n")
-      cat("Paren count when stopped:", paren_count, "\n")
-      cat("Reached end of content at position:", i, "of", nchar(content), "\n\n")
       warning("Unmatched parenthesis in ", func_name, "() at position ", match_start)
       blocks <- c(blocks, list(list(type = "html", content = substring(content, match_start, nchar(content)))))
       break

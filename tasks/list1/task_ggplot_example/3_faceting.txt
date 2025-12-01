@@ -1,0 +1,48 @@
+<h3>Wykresy z podziałem (faceting)</h3>
+
+<p>ggplot2 umożliwia tworzenie wielu paneli wykresów na podstawie wartości zmiennej kategorycznej przy użyciu funkcji <code>facet_wrap()</code> lub <code>facet_grid()</code>:</p>
+
+code(
+# Wykres pudełkowy z podziałem na liczbę cylindrów
+ggplot(mtcars, aes(x = factor(gear), y = mpg, fill = factor(gear))) +
+  geom_boxplot(alpha = 0.7) +
+  facet_wrap(~ cyl, labeller = labeller(cyl = c(
+    "4" = "4 cylindry",
+    "6" = "6 cylindrów",
+    "8" = "8 cylindrów"
+  ))) +
+  scale_fill_brewer(palette = "Set2", name = "Liczba biegów") +
+  labs(
+    title = "Zużycie paliwa w zależności od liczby biegów",
+    x = "Liczba biegów",
+    y = "Mile na galon (MPG)"
+  ) +
+  theme_light()
+)
+
+<p>Wygenerujmy ten wykres:</p>
+
+plot(
+library(ggplot2)
+
+ggplot(mtcars, aes(x = factor(gear), y = mpg, fill = factor(gear))) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 2) +
+  facet_wrap(~ cyl, labeller = labeller(cyl = c(
+    "4" = "4 cylindry",
+    "6" = "6 cylindrów",
+    "8" = "8 cylindrów"
+  ))) +
+  scale_fill_brewer(palette = "Set2", name = "Liczba biegów") +
+  labs(
+    title = "Zużycie paliwa w zależności od liczby biegów",
+    subtitle = "Podział według liczby cylindrów",
+    x = "Liczba biegów",
+    y = "Mile na galon (MPG)"
+  ) +
+  theme_light() +
+  theme(
+    strip.text = element_text(size = 12, face = "bold"),
+    strip.background = element_rect(fill = "#3498db")
+  )
+)
