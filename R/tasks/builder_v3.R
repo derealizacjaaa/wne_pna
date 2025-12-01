@@ -287,25 +287,10 @@ parse_content_blocks <- function(content) {
     if (paren_count == 0) {
       # Found matching closing paren
       func_content <- substring(content, paren_start, i - 2)
-
-      # Debug output
-      cat("\n========== EXTRACTED", toupper(func_name), "BLOCK ==========\n")
-      cat("Position in file: char", paren_start, "to", i - 2, "\n")
-      cat("Content length:", nchar(func_content), "characters\n")
-      cat("---------- CONTENT START ----------\n")
-      cat(func_content)
-      cat("\n---------- CONTENT END ----------\n\n")
-
       blocks <- c(blocks, list(list(type = func_name, content = func_content)))
       pos <- i
     } else {
       # Unmatched parenthesis - treat as HTML
-      cat("\n!!!!!! ERROR: UNMATCHED PARENTHESES !!!!!!\n")
-      cat("Function:", func_name, "\n")
-      cat("Position:", match_start, "\n")
-      cat("Paren count at end:", paren_count, "(should be 0)\n")
-      cat("Reached position:", i, "out of", nchar(content), "total chars\n\n")
-
       warning("Unmatched parenthesis in ", func_name, "() at position ", match_start)
       blocks <- c(blocks, list(list(type = "html", content = substring(content, match_start, nchar(content)))))
       break
