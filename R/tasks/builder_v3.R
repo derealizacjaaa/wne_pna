@@ -243,41 +243,38 @@ parse_content_blocks <- function(content) {
     paren_start <- match_start + nchar(func_text)
     paren_count <- 1
     i <- paren_start
-    in_string <- FALSE
-    string_char <- ""
-    escape_next <- FALSE
 
     while (i <= nchar(content) && paren_count > 0) {
       char <- substring(content, i, i)
 
-      # Handle escape sequences
-      if (escape_next) {
-        escape_next <- FALSE
-      } else if (char == "\\") {
-        escape_next <- TRUE
-      } else {
-        # Handle string boundaries (only when not escaping)
-        if (char == '"' || char == "'") {
-          if (!in_string) {
-            # Entering a string
-            in_string <- TRUE
-            string_char <- char
-          } else if (char == string_char) {
-            # Exiting the string (matching quote)
-            in_string <- FALSE
-            string_char <- ""
-          }
-          # else: it's a different quote type inside a string, ignore it
-        }
+      # If we hit a quote, skip the entire string
+      if (char == '"' || char == "'") {
+        quote_char <- char
+        i <- i + 1  # Move past opening quote
 
-        # Only count parentheses outside of strings
-        if (!in_string) {
-          if (char == "(") {
-            paren_count <- paren_count + 1
-          } else if (char == ")") {
-            paren_count <- paren_count - 1
+        # Scan to find closing quote, handling escapes
+        while (i <= nchar(content)) {
+          char <- substring(content, i, i)
+
+          if (char == "\\") {
+            # Skip the next character (it's escaped)
+            i <- i + 2
+          } else if (char == quote_char) {
+            # Found closing quote
+            i <- i + 1
+            break
+          } else {
+            i <- i + 1
           }
         }
+        next  # Continue main loop without incrementing i again
+      }
+
+      # Count parentheses (we're outside of strings here)
+      if (char == "(") {
+        paren_count <- paren_count + 1
+      } else if (char == ")") {
+        paren_count <- paren_count - 1
       }
 
       i <- i + 1
