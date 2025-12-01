@@ -3,6 +3,8 @@
 <p>Prosty wykres zależności między masą a zużyciem paliwa:</p>
 
 plot(
+library(ggplot2)
+
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(size = 3, color = "blue")
 )

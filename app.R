@@ -11,6 +11,7 @@ library(dplyr)
 library(base64enc)
 library(fontawesome)
 library(maxLik)
+library(ggplot2)
 
 # ============================================
 # SOURCE MODULES

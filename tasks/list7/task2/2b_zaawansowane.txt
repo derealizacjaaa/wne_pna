@@ -1,0 +1,53 @@
+<h3>Wykres z wieloma warstwami</h3>
+
+<p>ggplot2 pozwala na dodawanie wielu warstw geometrii i mapowanie dodatkowych zmiennych na kolor, kształt, rozmiar itp.:</p>
+
+code(
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl), size = hp)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = 1),
+              color = "darkblue", linetype = "dashed") +
+  scale_color_manual(
+    values = c("4" = "#e74c3c", "6" = "#f39c12", "8" = "#27ae60"),
+    name = "Liczba cylindrów"
+  ) +
+  scale_size_continuous(name = "Moc (HP)", range = c(2, 10)) +
+  labs(
+    title = "Analiza parametrów pojazdów",
+    subtitle = "Dane: mtcars dataset",
+    x = "Masa pojazdu (1000 lbs)",
+    y = "Zużycie paliwa (MPG)"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "bottom"
+  )
+)
+
+<p>Wygenerujmy ten wykres:</p>
+
+plot(
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl), size = hp)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = 1),
+              color = "darkblue", linetype = "dashed") +
+  scale_color_manual(
+    values = c("4" = "#e74c3c", "6" = "#f39c12", "8" = "#27ae60"),
+    name = "Liczba cylindrów"
+  ) +
+  scale_size_continuous(name = "Moc (HP)", range = c(2, 10)) +
+  labs(
+    title = "Analiza parametrów pojazdów",
+    subtitle = "Dane: mtcars dataset",
+    x = "Masa pojazdu (1000 lbs)",
+    y = "Zużycie paliwa (MPG)"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "bottom"
+  )
+)
