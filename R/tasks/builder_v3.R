@@ -254,35 +254,34 @@ parse_content_blocks <- function(content) {
 
         # Scan to find closing quote, handling escapes
         while (i <= nchar(content)) {
-          char <- substring(content, i, i)
+          current_char <- substring(content, i, i)
 
-          if (char == "\\") {
-            # Skip the next character (it's escaped)
-            i <- i + 1
-            if (i <= nchar(content)) {
-              i <- i + 1
-            }
-          } else if (char == quote_char) {
-            # Found closing quote
+          if (current_char == "\\") {
+            # Backslash - skip it and the next character
+            i <- i + 2
+          } else if (current_char == quote_char) {
+            # Found closing quote - move past it and exit string loop
             i <- i + 1
             break
           } else {
+            # Regular character in string
             i <- i + 1
           }
         }
-        # Continue to next iteration without incrementing i again
-      } else if (char == "(") {
-        # Opening parenthesis
-        paren_count <- paren_count + 1
-        i <- i + 1
-      } else if (char == ")") {
-        # Closing parenthesis
-        paren_count <- paren_count - 1
-        i <- i + 1
-      } else {
-        # Any other character
-        i <- i + 1
+        # Now i is positioned past the closing quote
+        # Loop back to top to read next char
+        next
       }
+
+      # Not in a string - count parentheses
+      if (char == "(") {
+        paren_count <- paren_count + 1
+      } else if (char == ")") {
+        paren_count <- paren_count - 1
+      }
+      # For all other characters (including +, -, *, etc.), just continue
+
+      i <- i + 1
     }
 
     if (paren_count == 0) {
