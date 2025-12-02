@@ -246,6 +246,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* Left gradient for menu */
@@ -333,6 +334,7 @@
   border-bottom: 4px solid #4A4A4A;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* List menu - FIXED, NO SCROLLING */
