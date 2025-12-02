@@ -289,7 +289,7 @@
   background: #4A4A4A;
   border: none;
   color: #F4F6F9;
-  font-size: 1em;
+  font-size: 1.2em;
   cursor: pointer;
   padding: 0;
   transition: all 0.3s ease;
@@ -318,7 +318,7 @@
 }
 
 .list-nav-spacer {
-  height: 8px;
+  height: 5px;
 }
 
 /* Hidden navigation button - keeps space but invisible */
