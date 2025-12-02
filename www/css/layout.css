@@ -125,9 +125,3 @@
     min-height: 420px;
   }
 }
-
-@media (max-height: 480px) {
-  .app-container {
-    min-height: 340px;
-  }
-}
