@@ -142,13 +142,13 @@ pagination_buttons <- function(has_prev, has_next) {
     prev = actionButton(
       "list_page_prev",
       label = NULL,
-      icon = icon("arrow-up"),
+      icon = icon("chevron-up"),
       class = paste("list-nav-btn list-nav-prev", if (!has_prev) "btn-hidden" else "")
     ),
     next_btn = actionButton(
       "list_page_next",
       label = NULL,
-      icon = icon("arrow-down"),
+      icon = icon("chevron-down"),
       class = paste("list-nav-btn list-nav-next", if (!has_next) "btn-hidden" else "")
     )
   )

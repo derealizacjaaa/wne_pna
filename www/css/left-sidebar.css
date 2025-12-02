@@ -282,39 +282,39 @@
   z-index: 1;
 }
 
-/* Navigation buttons */
+/* Navigation buttons - circular style */
 .list-nav-btn {
-  width: 100%;
+  width: 32px;
+  height: 32px;
   background: #4A4A4A;
   border: none;
   color: #F4F6F9;
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
-  padding: 8px;
+  padding: 0;
   transition: all 0.3s ease;
-  border-radius: 0;
+  border-radius: 50%;
   position: relative;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  margin: 0 auto;
 }
 
 .list-nav-btn:hover {
   background: #606060;
   color: white;
-  transform: scaleY(1.1);
+  transform: scale(1.1);
 }
 
 .list-nav-prev {
   margin-bottom: 5px;
-  border-bottom: 2px solid #b1404f;
 }
 
 .list-nav-next {
   margin-top: 5px;
-  border-top: 2px solid #b1404f;
 }
 
 .list-nav-spacer {
