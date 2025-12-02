@@ -112,3 +112,16 @@
 .right-sidebar::-webkit-scrollbar-thumb:hover {
   background: #4A4A4A;
 }
+
+/* Responsive height adjustments */
+@media (max-height: 620px) {
+  .app-container {
+    min-height: 440px;
+  }
+}
+
+@media (max-height: 540px) {
+  .app-container {
+    min-height: 380px;
+  }
+}
