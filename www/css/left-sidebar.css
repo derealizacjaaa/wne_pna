@@ -5,7 +5,7 @@
 
 .left-sidebar {
   width: 250px;
-  height: 100%;
+  height: calc(100vh - 120px);
   background: #b1404f;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -240,9 +240,12 @@
   padding: 10px 20px;
   border-bottom: 4px solid #4A4A4A;
   overflow: hidden;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
+  max-height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Left gradient for menu */
@@ -293,6 +296,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
 }
 
 .list-nav-btn:hover {
@@ -346,6 +350,11 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 0;
 }
 
 /* List items - Modern with irregular borders */
@@ -359,6 +368,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   position: relative;
+  flex: 0 0 auto;
 }
 
 .list-item:hover {
@@ -523,20 +533,28 @@
 
 /* ========================================
    RESPONSIVE: Reduce visible list items based on screen height
-   Desktop only
+   Desktop only - adapts to available vertical space
    ======================================== */
 
-/* Medium-high screens: Show only 4 items (hide 5th) */
-@media (max-height: 700px) {
+/* Small screens: Show only 2 items (hide 3rd, 4th, and 5th) */
+@media (max-height: 500px) and (min-width: 993px) {
+  .lists-menu .list-item:nth-child(n+3) {
+    display: none !important;
+  }
+}
+
+/* Medium-small screens: Show only 3 items (hide 4th and 5th) */
+@media (min-height: 501px) and (max-height: 620px) and (min-width: 993px) {
+  .lists-menu .list-item:nth-child(n+4) {
+    display: none !important;
+  }
+}
+
+/* Medium screens: Show only 4 items (hide 5th) */
+@media (min-height: 621px) and (max-height: 740px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
   }
 }
 
-/* Medium screens: Show only 3 items (hide 4th and 5th) */
-@media (max-height: 600px) {
-  .lists-menu .list-item:nth-child(4),
-  .lists-menu .list-item:nth-child(5) {
-    display: none !important;
-  }
-}
+/* Large screens: Show all 5 items (default, no hiding needed) */
