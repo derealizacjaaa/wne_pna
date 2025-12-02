@@ -99,3 +99,22 @@
   color: #b1404f;
   line-height: 1;
 }
+
+/* ========================================
+   RESPONSIVE: Short completion counter
+   ======================================== */
+
+/* Below 694px: Hide bar + percentage for "short" counter (Header + Stats only) */
+@media (max-height: 693px) and (min-width: 993px) {
+  .summary-progress-bar {
+    display: none !important;
+  }
+
+  .summary-percentage {
+    display: none !important;
+  }
+
+  .progress-summary-card {
+    max-height: 70px !important;
+  }
+}
