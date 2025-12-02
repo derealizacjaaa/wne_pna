@@ -1,0 +1,14 @@
+<h2>Zadanie Przykładowe: System V3</h2>
+
+<p>To jest przykład zadania utworzonego przy użyciu <strong>nowego systemu V3</strong>.</p>
+
+<h3>Główne cechy:</h3>
+<ul>
+  <li>Nazwa pliku określa <strong>tytuł zakładki</strong> (np. <code>2_rozwiazanie.txt</code> → "Rozwiązanie")</li>
+  <li>Wewnątrz pliku używamy funkcji: <code>code(...)</code>, <code>execute(...)</code>, <code>plot(...)</code></li>
+  <li>Możliwość mieszania HTML z kodem R w jednym pliku</li>
+  <li>Wszystkie pliki w formacie <code>.txt</code></li>
+</ul>
+
+<h3>Zadanie:</h3>
+<p>Przeanalizuj kod w kolejnych zakładkach. Każda zakładka pokazuje różne możliwości systemu.</p>

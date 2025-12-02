@@ -1,0 +1,226 @@
+/* ========================================
+   RIGHT SIDEBAR - Task Selection
+   Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
+   ======================================== */
+
+.right-sidebar {
+  width: 300px;
+  background: white;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.tasks-sidebar-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Header */
+.tasks-sidebar-content h3 {
+  margin: 0;
+  padding: 16px 15px 16px 110px;
+  background: linear-gradient(
+    to bottom,        /* Gradient idzie z góry na dół */
+    #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
+    #b1404f 8px,      /* 2. Do 8px: Przejście w bordowy */
+    #b1404f 46px,     /* 3. Od 8px do 46px: Lity bordowy */
+    #4A4A4A 52px      /* 4. Od 46px do końca: Przejście w ciemny szary */
+  );
+  color: white;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  box-shadow: 0 1px 0 #F4F6F9, 0 2px 0 #F4F6F9, 0 3px 0 #4A4A4A, 0 4px 0 #4A4A4A;
+  border-bottom: 4px solid #4A4A4A;
+  height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Triangle border on the right edge of header */
+.tasks-sidebar-content h3::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 32px 54px 32px 0;
+  border-color: transparent #4A4A4A transparent transparent;
+  z-index: 1;
+}
+
+/* Triangle fill on the right edge of header pointing left */
+.tasks-sidebar-content h3::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 28px 50px 28px 0;
+  border-color: transparent #F4F6F9 transparent transparent;
+  z-index: 2;
+}
+
+/* 3-part body container */
+.tasks-sidebar-body {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  align-items: stretch;
+  height: calc(100vh - 120px - 56px);
+  flex-shrink: 0;
+}
+
+/* Part 1: Pattern background (leftmost, 80px) */
+.sidebar-pattern {
+  width: 80px;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
+  order: 1;
+}
+
+/* Part 2: Gradient (middle, 20px) */
+.sidebar-gradient {
+  width: 20px;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: linear-gradient(270deg,
+    #b1404f 0%,    /* Prawa krawędź - kolor cienia */
+    #d95e6f 50%,   /* Środek - jasny połysk */
+    #b1404f 100%   /* Lewa krawędź - kolor cienia */
+  );
+  order: 2;
+}
+
+/* Part 3: Tasks list (rightmost, 200px) */
+.sidebar-tasks-list {
+  width: 200px;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(2) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linecap='square' stroke-width='0.5' stroke='%234a4a4aff' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linecap='square' stroke-width='0.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,-62)' fill='url(%23a)'/></svg>");
+  overflow-y: auto;
+  padding: 0px 15px 20px 15px;
+  order: 3;
+}
+
+/* Tasks menu */
+.tasks-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 15px;
+}
+
+/* Task items */
+.task-item {
+  margin-bottom: 8px;
+  background: #FFFFFF;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 2px solid #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  background: white;
+  border-color: #b1404f;
+}
+
+.task-item.active {
+  background: white;
+  border-color: #b1404f;
+  box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
+}
+
+.task-item a {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #606060;
+}
+
+.task-item a > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Task number badge */
+.task-number {
+  width: 28px;
+  height: 28px;
+  background: #b1404f;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85em;
+  flex-shrink: 0;
+}
+
+.task-item.active .task-number {
+  background: #4A4A4A;
+}
+
+/* Task name */
+.task-name {
+  flex: 1;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #606060;
+}
+
+/* Task status icon */
+.task-status {
+  margin-left: auto;
+  font-size: 1.2em;
+}
+
+.task-status.status-completed {
+  color: #b1404f;
+}
+
+/* Hover effects */
+.task-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
+  transition: left 0.5s;
+}
+
+.task-item:hover::before {
+  left: 100%;
+}
+
+/* Focus states */
+.task-item a:focus {
+  outline: 2px solid #b1404f;
+  outline-offset: 2px;
+}

@@ -1,0 +1,129 @@
+/* ========================================
+   MAIN CONTENT AREA
+   Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
+   ======================================== */
+
+.main-area {
+  flex: 1;
+  background: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  border-left: 4px solid #4A4A4A;
+  border-right: 4px solid #4A4A4A;
+}
+
+.sidebar-collapsed .main-area {
+  margin-left: 60px;
+}
+
+/* Main content container with header */
+.main-content {
+  padding: 0;
+  height: calc(100vh - 120px);  /* Fixed height matching sidebar */
+  background: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Main content header */
+.main-content-header {
+  background: linear-gradient(
+    to bottom,
+    #4A4A4A 0px,
+    #b1404f 8px,
+    #b1404f 46px,
+    #4A4A4A 52px
+  );
+  border-bottom: 4px solid #4A4A4A;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+.main-content-header h3 {
+  margin: 0;
+  color: #F4F6F9;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  padding-bottom: 4px;
+  box-shadow: 0 1px 0 #F4F6F9, 0 2px 0 #F4F6F9, 0 3px 0 #4A4A4A, 0 4px 0 #4A4A4A;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Scrollable body */
+.main-content-body {
+  flex: 1;
+  background: white;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: static;
+}
+
+/* Scrollbar styling for main-content-body */
+.main-content-body::-webkit-scrollbar {
+  width: 12px;  /* Wider for better visibility */
+}
+
+.main-content-body::-webkit-scrollbar-track {
+  background: #F4F6F9;
+  border-left: 1px solid #dee2e6;
+}
+
+.main-content-body::-webkit-scrollbar-thumb {
+  background: #b1404f;  /* Brand color for visibility */
+  border-radius: 6px;
+  border: 2px solid #F4F6F9;  /* Add border for better definition */
+}
+
+.main-content-body::-webkit-scrollbar-thumb:hover {
+  background: #8b3040;  /* Darker on hover */
+}
+
+/* Firefox scrollbar styling */
+.main-content-body {
+  scrollbar-width: thin;
+  scrollbar-color: #b1404f #F4F6F9;
+}
+
+/* Empty state */
+.main-content-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #606060;
+  text-align: center;
+  padding: 40px;
+}
+
+.main-content-empty h2 {
+  margin-top: 20px;
+  color: #4A4A4A;
+}
+
+.main-content-empty p {
+  color: #606060;
+}
+
+.main-content-empty .fa-3x {
+  color: #b1404f;
+  opacity: 0.3;
+}

@@ -1,0 +1,20 @@
+<h3>Wizualizacja danych</h3>
+
+<p>Narysujemy wykres funkcji kwadratowej:</p>
+
+code(
+x <- seq(-10, 10, length.out = 100)
+y <- x^2
+plot(x, y, type = "l", col = "blue",
+     main = "Funkcja f(x) = x²",
+     xlab = "x", ylab = "y")
+grid()
+)
+
+<p>Poniżej widzimy wygenerowany wykres:</p>
+
+plot(
+x <- seq(-10, 10, length.out = 100)
+y <- x^2
+plot(x, y, type = "l", main = "Funkcja f(x) = x²")
+)

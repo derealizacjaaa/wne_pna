@@ -1,5 +1,5 @@
 /* ========================================
-   LEFT SIDEBAR - List Selection
+   LEFT SIDEBAR - List Selection (FIXED - NO SCROLLING)
    Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
    ======================================== */
 
@@ -7,12 +7,19 @@
   width: 250px;
   height: 100%;
   background: #b1404f;
-  overflow-y: auto;
+  overflow: hidden;
   transition: all 0.3s ease;
   flex-shrink: 0;
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+/* Hide scrollbar completely */
+.left-sidebar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .sidebar-collapsed .left-sidebar {
@@ -21,14 +28,22 @@
 
 /* Section 1: Header */
 .lists-sidebar-header {
-  background: #b1404f;
+  background: linear-gradient(
+  to bottom,        /* Gradient idzie z góry na dół */
+    #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
+    #b1404f 8px,     /* 2. Do 11px: Przejście w bordowy */
+    #b1404f 46px,     /* 3. Od 11px do 41px (30px total): Lity bordowy */
+    #4A4A4A 52px      /* 4. Od 41px do końca: Przejście w ciemny szary */);
   border-bottom: 4px solid #4A4A4A;
   padding-left: 0px;
   height: 56px;
+  min-height: 56px;
+  max-height: 56px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   position: relative;
+  flex-shrink: 0;
 }
 
 /* Zigzag dark section
@@ -135,13 +150,11 @@
   margin-left: 15.5px;
 }
 
-.sidebar-home-btn i {
-  -webkit-text-stroke: 1px #b1404f;
-}
+
 
 .sidebar-home-btn:hover {
   background: rgba(255, 255, 255, 0.15);
-  color: #c5465a;
+  color: #b1404f;
   transform: scale(1.05);
 }
 
@@ -193,68 +206,157 @@
   right: 2px;
 }
 
+/* Linia pod przyciskiem */
+.lists-sidebar-header .sidebar-toggle-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -7px;
+  width: 29px;
+  height: 2px;
+  background: #4A4A4A;
+}
+
+/* Linia po lewej stronie */
+.lists-sidebar-header .sidebar-toggle-btn::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 2px;
+  height: 26px;
+  background: #F4F6F9;
+}
+
 .lists-sidebar-header .sidebar-toggle-btn:hover {
   color: #4A4A4A;
   background: rgba(244, 246, 249, 0.2);
 }
 
-/* Section 2: List of lists */
+/* Section 2: List of lists - FIXED, NO SCROLLING */
 .lists-sidebar-menu {
   background-color: #b1404f;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
-  padding: 0px 20px 0px 20px;
+  padding: 10px 20px;
   border-bottom: 4px solid #4A4A4A;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  position: relative;
 }
 
-/* Section 3: Summary */
+/* Left gradient for menu */
+.lists-sidebar-menu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(270deg,
+    #b1404f 0%,
+    #d95e6f 50%,
+    #b1404f 100%
+  );
+  z-index: 1;
+}
+
+/* Right gradient for menu */
+.lists-sidebar-menu::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(90deg,
+    #b1404f 0%,
+    #d95e6f 50%,
+    #b1404f 100%
+  );
+  z-index: 1;
+}
+
+/* Navigation buttons */
+.list-nav-btn {
+  width: 100%;
+  background: #4A4A4A;
+  border: none;
+  color: #F4F6F9;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 8px;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-nav-btn:hover {
+  background: #606060;
+  color: white;
+  transform: scaleY(1.1);
+}
+
+.list-nav-prev {
+  margin-bottom: 5px;
+  border-bottom: 2px solid #b1404f;
+}
+
+.list-nav-next {
+  margin-top: 5px;
+  border-top: 2px solid #b1404f;
+}
+
+.list-nav-spacer {
+  height: 8px;
+}
+
+/* Hidden navigation button - keeps space but invisible */
+.list-nav-btn.btn-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Section 3: Summary - FIXED */
 .lists-sidebar-summary {
   background: #b1404f;
   padding: 10px;
-  flex: 1;
+  flex-shrink: 0;
   border-bottom: 4px solid #4A4A4A;
+  position: relative;
+  overflow: hidden;
 }
 
-/* List menu */
+/* List menu - FIXED, NO SCROLLING */
 .lists-menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  border-right: 4px solid #b1404f;
-  border-left: 20px solid #b1404f;
-  padding-right: 20px;
-  padding-left: 4px;
+  padding-right: 14px;  /* 10px dla gradientu + 4px spacing */
+  padding-left: 24px;   /* 20px dla gradientu + 4px spacing */
   margin-right: -20px;
   margin-left: -20px;
   padding-top: 15px;
   padding-bottom: 15px;
   box-shadow: inset 4px 0 0 0 #4A4A4A;
   position: relative;
+  z-index: 2;
+  overflow: hidden;
 }
 
-.lists-menu::before {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 0;
-  width: 20px;
-  height: 100%;
-  background:
-    linear-gradient(45deg, transparent 48%, white 48%, white 52%, transparent 52%);
-  background-size: 30px 30px;
-  background-position: 0 0, 0 15px;
-  background-repeat: repeat-y;
-  pointer-events: none;
-}
-
-/* List items */
+/* List items - Modern with irregular borders */
 .list-item {
   margin-bottom: 12px;
   background: white;
-  border-radius: 0 12px 12px 0;
+  border-radius: 2px 18px 14px 24px;  /* Irregular asymmetric corners - bottom-left increased for wider progress bar */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #b1404f;
-  border-left: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid #b1404f;
+  border-left: 5px solid #b1404f;  /* Thicker left accent */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   position: relative;
 }
@@ -262,14 +364,17 @@
 .list-item:hover {
   background: white;
   border-color: #b1404f;
-  transform: translateX(3px);
-  box-shadow: 0 2px 8px rgba(177, 64, 79, 0.12);
+  border-left-color: #4A4A4A;  /* Dark accent on hover */
+  transform: translateX(4px) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(177, 64, 79, 0.15), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .list-item.active {
-  background: #b1404f;
-  border-color: #000000;
-  box-shadow: 0 3px 12px rgba(177, 64, 79, 0.3);
+  background: linear-gradient(135deg, #b1404f 0%, #9a3848 100%);
+  border-color: #4A4A4A;
+  border-left-color: #4A4A4A;
+  box-shadow: 0 6px 16px rgba(177, 64, 79, 0.35), 0 3px 6px rgba(0, 0, 0, 0.12);
+  transform: translateX(2px);
 }
 
 .list-item.active .list-text h4 {
@@ -295,7 +400,7 @@
 
 /* Vertical progress bar */
 .progress-bar-container-vertical {
-  width: 8px;
+  width: 12px;
   background: #f0f0f0;
   position: relative;
   display: flex;
@@ -307,8 +412,6 @@
 .progress-bar-fill-vertical {
   width: 100%;
   background: linear-gradient(180deg, #c5465a 0%, #b1404f 100%);
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 4px rgba(177, 64, 79, 0.3);
 }
 
 .progress-bar-fill-vertical.partial {
@@ -326,7 +429,7 @@
 
 .list-text h4 {
   margin: 0;
-  font-size: 1.15em;
+  font-size: 1.4em;
   font-weight: 600;
   color: #606060;
   letter-spacing: 0.01em;
@@ -402,4 +505,59 @@
 .list-item a:focus {
   outline: 2px solid #b1404f;
   outline-offset: 2px;
+}
+
+/* Invisible list slot - takes up space but not visible */
+.list-item-invisible {
+  pointer-events: none;
+}
+
+.list-item-invisible:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+.list-item-invisible::before {
+  display: none !important;
+}
+
+/* ========================================
+   RESPONSIVE: Reduce visible list items based on screen height
+   ======================================== */
+
+/* Medium height screens: Show only 4 items (hide 5th) */
+@media (max-height: 620px) {
+  .lists-menu .list-item:nth-child(5) {
+    display: none !important;
+  }
+
+  /* Reduce spacing to fit better */
+  .list-item {
+    margin-bottom: 10px;
+  }
+
+  .lists-sidebar-summary {
+    padding: 8px 10px;
+  }
+}
+
+/* Small height screens: Show only 3 items (hide 4th and 5th) */
+@media (max-height: 540px) {
+  .lists-menu .list-item:nth-child(4),
+  .lists-menu .list-item:nth-child(5) {
+    display: none !important;
+  }
+
+  /* Further reduce spacing */
+  .list-item {
+    margin-bottom: 8px;
+  }
+
+  .lists-sidebar-menu {
+    padding: 8px 20px;
+  }
+
+  .lists-sidebar-summary {
+    padding: 6px 10px;
+  }
 }

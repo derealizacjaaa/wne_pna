@@ -1,0 +1,14 @@
+<h2>Wizualizacja z ggplot2</h2>
+
+<p><strong>ggplot2</strong> to zaawansowany pakiet do tworzenia wizualizacji w R, oparty na <em>Grammar of Graphics</em>. Oferuje znacznie większą elastyczność i lepszą estetykę niż podstawowa funkcja <code>plot()</code>.</p>
+
+<h3>Podstawowe elementy ggplot2:</h3>
+<ul>
+  <li><code>ggplot()</code> - inicjalizacja wykresu i określenie danych</li>
+  <li><code>aes()</code> - mapowanie zmiennych na właściwości wizualne (aesthetics)</li>
+  <li><code>geom_*()</code> - geometrie (punkty, linie, słupki, etc.)</li>
+  <li><code>theme_*()</code> - motywy wizualne</li>
+  <li><code>labs()</code> - etykiety i tytuły</li>
+</ul>
+
+<p>ggplot2 wykorzystuje operator <code>+</code> do dodawania kolejnych warstw do wykresu.</p>

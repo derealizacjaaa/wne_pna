@@ -1,0 +1,17 @@
+<h3>Część A: Tworzenie wektora</h3>
+
+<p>Najpierw utworzymy wektor liczb od 1 do 20:</p>
+
+code(
+# Utworzenie wektora
+numbers <- 1:20
+numbers
+)
+
+<p>Teraz wykonajmy kod i zobaczmy wynik:</p>
+
+execute(
+numbers <- 1:20
+cat("Wektor:", numbers, "\n")
+cat("Długość:", length(numbers), "\n")
+)

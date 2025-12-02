@@ -1,0 +1,25 @@
+<h3>Podstawowy wykres punktowy</h3>
+
+<p>Załadujmy bibliotekę ggplot2 i stwórzmy prosty wykres punktowy używając wbudowanego zbioru danych <code>mtcars</code>:</p>
+
+code(
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+)
+
+<p>Wykonajmy ten kod i zobaczmy rezultat:</p>
+
+execute(
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    title = "Zależność zużycia paliwa od masy pojazdu",
+    x = "Masa pojazdu (1000 lbs)",
+    y = "Mile na galon (MPG)"
+  ) +
+  theme_minimal()
+)

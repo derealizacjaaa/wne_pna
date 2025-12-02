@@ -1,0 +1,157 @@
+/* ========================================
+   MODERN NAVBAR STYLES - INTEGRATED WITH HEADER
+   ======================================== */
+
+/* Main navbar container - integrate with header gradient */
+.main-content-body .navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  height: 56px !important;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0 !important;
+  width: auto !important;
+}
+
+/* Remove any container padding/margin around navbar */
+.main-content-body > div:first-child {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main-content-body .bslib-page-navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide navbar brand - we have it in header */
+.main-content-body .navbar-brand {
+  display: none !important;
+}
+
+/* Navigation tabs styling - positioned in header */
+.main-content-body .nav-tabs {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+
+.main-content-body .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 16px 20px !important;
+  font-weight: 500;
+  font-size: 0.95em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-radius: 0 !important;
+  margin: 0 2px !important;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover effect for nav tabs */
+.main-content-body .nav-link:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Active tab styling */
+.main-content-body .nav-link.active {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  font-weight: 600;
+  border-bottom: 3px solid white !important;
+}
+
+/* Underline animation for tabs */
+.main-content-body .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.main-content-body .nav-link:hover::after {
+  width: 80%;
+}
+
+.main-content-body .nav-link.active::after {
+  width: 100%;
+}
+
+/* Icons in navbar */
+.main-content-body .navbar .fa,
+.main-content-body .navbar .fas,
+.main-content-body .navbar .far {
+  margin-right: 6px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.main-content-body .nav-link:hover .fa,
+.main-content-body .nav-link:hover .fas,
+.main-content-body .nav-link:hover .far {
+  opacity: 1;
+}
+
+/* Tab content area styling */
+.task-tab-content-simple {
+  padding: 30px 35px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Adjust spacing for navbar tabs container */
+.main-content-body .tab-content {
+  margin-top: 0 !important;
+  padding-top: 56px !important;  /* Push content below navbar */
+}
+
+/* Tab panes don't force height */
+.main-content-body .tab-pane {
+  min-height: 0;
+}
+
+/* Hide the page navbar container */
+.main-content-body .bslib-page-navbar > .navbar {
+  border-bottom: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive navbar adjustments */
+@media (max-width: 768px) {
+  .main-content-body .nav-link {
+    padding: 14px 16px !important;
+    font-size: 0.9em;
+  }
+}

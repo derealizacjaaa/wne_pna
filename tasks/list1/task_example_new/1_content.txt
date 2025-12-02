@@ -1,0 +1,14 @@
+<h2>Zadanie Przykładowe: Nowy System Plików</h2>
+
+<p>To jest przykład zadania utworzonego przy użyciu nowego systemu opartego na plikach.</p>
+
+<h3>Cechy nowego systemu:</h3>
+<ul>
+  <li>Pliki numerowane określają kolejność zakładek</li>
+  <li>Typ pliku określa zawartość (content, code, execute, plot)</li>
+  <li>Wiele plików z tym samym numerem tworzy podpunkty (2a, 2b, 2c)</li>
+  <li>Wszystkie pliki w formacie <code>.txt</code></li>
+</ul>
+
+<h3>Zadanie:</h3>
+<p>Przeanalizuj kod w kolejnych zakładkach i sprawdź wyniki wykonania.</p>
