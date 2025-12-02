@@ -13,6 +13,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* Hide scrollbar completely */
@@ -536,27 +537,46 @@
 /* ========================================
    RESPONSIVE: Reduce visible list items based on screen height
    Desktop only - adapts to available vertical space
+
+   Calculation basis:
+   - Total sidebar: calc(100vh - 120px)
+   - Fixed sections: Header 56px + Summary ~120px + Nav buttons ~90px = 266px
+   - Available for items: 100vh - 120px - 266px = 100vh - 386px
+   - Each item: ~62px (50px + 12px margin)
    ======================================== */
 
-/* Small screens: Show only 2 items (hide 3rd, 4th, and 5th) */
-@media (max-height: 500px) and (min-width: 993px) {
+/* Very small screens: Show only 2 items (100vh < 510px)
+   Available: 510 - 386 = 124px → fits 2 items (124px) */
+@media (max-height: 510px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(n+3) {
     display: none !important;
   }
 }
 
-/* Medium-small screens: Show only 3 items (hide 4th and 5th) */
-@media (min-height: 501px) and (max-height: 620px) and (min-width: 993px) {
+/* Small screens: Show 3 items (510px ≤ 100vh < 575px)
+   Available: 575 - 386 = 189px → fits 3 items (186px) */
+@media (min-height: 511px) and (max-height: 574px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(n+4) {
     display: none !important;
   }
 }
 
-/* Medium screens: Show only 4 items (hide 5th) */
-@media (min-height: 621px) and (max-height: 740px) and (min-width: 993px) {
+/* Medium screens: Show 4 items (575px ≤ 100vh < 640px)
+   Available: 640 - 386 = 254px → fits 4 items (248px) */
+@media (min-height: 575px) and (max-height: 639px) and (min-width: 993px) {
+  .lists-menu .list-item:nth-child(n+5) {
+    display: none !important;
+  }
+}
+
+/* Large screens: Show all 5 items (100vh ≥ 640px)
+   Available: 640 - 386 = 254px+ → fits 5 items (310px needs 696px total)
+   Actually, for 5 items we need 100vh ≥ 696px, so add another breakpoint */
+@media (min-height: 640px) and (max-height: 695px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
   }
 }
 
-/* Large screens: Show all 5 items (default, no hiding needed) */
+/* Extra large screens: Show all 5 items (100vh ≥ 696px) */
+/* No rules needed - default shows all 5 */
