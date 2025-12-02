@@ -327,15 +327,17 @@
   pointer-events: none;
 }
 
-/* Section 3: Summary - FIXED */
+/* Section 3: Summary - FIXED with max-height */
 .lists-sidebar-summary {
   background: #b1404f;
   padding: 10px;
+  flex: 0 0 auto;
   flex-shrink: 0;
   border-bottom: 4px solid #4A4A4A;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  max-height: 160px;
 }
 
 /* List menu - FIXED, NO SCROLLING */
@@ -535,48 +537,36 @@
 }
 
 /* ========================================
-   RESPONSIVE: Reduce visible list items based on screen height
-   Desktop only - adapts to available vertical space
+   RESPONSIVE: Adjust visible list items based on screen height
+   Desktop only - minimum 3 items, maximum 5 items
 
-   Calculation basis:
+   Height calculation:
    - Total sidebar: calc(100vh - 120px)
-   - Fixed sections: Header 56px + Summary ~120px + Nav buttons ~90px = 266px
-   - Available for items: 100vh - 120px - 266px = 100vh - 386px
-   - Each item: ~62px (50px + 12px margin)
+   - Header: 56px (fixed)
+   - Summary: max 160px (fixed)
+   - Nav buttons: ~70px (both buttons + spacing)
+   - Available for items: 100vh - 120px - 56px - 160px - 70px = 100vh - 406px
+   - Each item: ~62px (50px content + 12px margin)
+
+   Breakpoints:
+   - 3 items need: 186px → total 406px + 186px = 592px viewport
+   - 4 items need: 248px → total 406px + 248px = 654px viewport
+   - 5 items need: 310px → total 406px + 310px = 716px viewport
    ======================================== */
 
-/* Very small screens: Show only 2 items (100vh < 510px)
-   Available: 510 - 386 = 124px → fits 2 items (124px) */
-@media (max-height: 510px) and (min-width: 993px) {
-  .lists-menu .list-item:nth-child(n+3) {
-    display: none !important;
-  }
-}
-
-/* Small screens: Show 3 items (510px ≤ 100vh < 575px)
-   Available: 575 - 386 = 189px → fits 3 items (186px) */
-@media (min-height: 511px) and (max-height: 574px) and (min-width: 993px) {
+/* Small screens: Show 3 items minimum (100vh < 654px) */
+@media (max-height: 653px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(n+4) {
     display: none !important;
   }
 }
 
-/* Medium screens: Show 4 items (575px ≤ 100vh < 640px)
-   Available: 640 - 386 = 254px → fits 4 items (248px) */
-@media (min-height: 575px) and (max-height: 639px) and (min-width: 993px) {
-  .lists-menu .list-item:nth-child(n+5) {
-    display: none !important;
-  }
-}
-
-/* Large screens: Show all 5 items (100vh ≥ 640px)
-   Available: 640 - 386 = 254px+ → fits 5 items (310px needs 696px total)
-   Actually, for 5 items we need 100vh ≥ 696px, so add another breakpoint */
-@media (min-height: 640px) and (max-height: 695px) and (min-width: 993px) {
+/* Medium screens: Show 4 items (654px ≤ 100vh < 716px) */
+@media (min-height: 654px) and (max-height: 715px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
   }
 }
 
-/* Extra large screens: Show all 5 items (100vh ≥ 696px) */
+/* Large screens: Show all 5 items (100vh ≥ 716px) */
 /* No rules needed - default shows all 5 */
