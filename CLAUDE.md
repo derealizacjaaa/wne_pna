@@ -14,6 +14,7 @@
 
 - **Primary Language:** R (v4.5.2)
 - **Framework:** Shiny (reactive web framework)
+- **Architecture:** Modular (rebuilt 2025-11-30)
 - **Application Type:** Traditional Shiny app (app.R)
 - **Package Manager:** renv (for reproducible environments)
 - **Styling:** Custom CSS (8 modular CSS files in www/css/)
@@ -23,12 +24,35 @@
 
 ```
 wne_pna/
-├── app.R                      # Main Shiny application file
+├── app.R                      # Main Shiny application (122 lines - orchestrator)
 ├── app.Rmd                    # Legacy R Markdown version (deprecated)
 ├── manifest.json              # Shiny Server deployment manifest
 ├── renv.lock                  # Locked R package dependencies
 ├── .Rprofile                  # R environment configuration
 ├── wne_pna.Rproj              # RStudio project file
+│
+├── R/                         # Modular R source code (NEW!)
+│   ├── config/
+│   │   └── metadata.R         # Dynamic list discovery & metadata
+│   │
+│   ├── tasks/
+│   │   ├── display.R          # Code block rendering (code_block, code_output)
+│   │   ├── executor.R         # Code execution engine with smart labeling
+│   │   ├── builder.R          # Task tab builders (V1 manual tasks)
+│   │   ├── builder_v2.R       # File-based builder (typed files)
+│   │   ├── builder_v3.R       # File-based builder (inline functions)
+│   │   └── loader.R           # Task loading system
+│   │
+│   ├── ui/
+│   │   ├── components.R       # Reusable UI components
+│   │   ├── sidebar_left.R     # List selection sidebar (5-slot pagination)
+│   │   ├── sidebar_right.R    # Task selection sidebar
+│   │   └── main_content.R     # Main content area & welcome screen
+│   │
+│   └── server/
+│       ├── state.R            # Reactive state management
+│       ├── observers.R        # Event handlers
+│       └── renderers.R        # Output rendering
 │
 ├── www/                       # Static web resources (Shiny convention)
 │   └── css/                   # Modular CSS files (loaded in specific order)
@@ -41,238 +65,355 @@ wne_pna/
 │       ├── progress-card.css # Progress tracking components
 │       └── main-content.css  # Main content area
 │
-├── css/                       # Original CSS directory (kept for compatibility)
-│
 ├── tasks/                     # Task content organized by lists
-│   ├── helpers.R             # Helper functions for code display
-│   ├── task_loader.R         # Unified task loading system
+│   ├── helpers.R             # Legacy helper functions (kept for compatibility)
+│   ├── task_loader.R         # Legacy task loader (kept for compatibility)
 │   │
-│   ├── list1/                # Lista I - Podstawy R
+│   ├── list1/                # Lista I (auto-discovered)
 │   │   ├── task1/
-│   │   │   ├── content.txt   # Task description (HTML supported)
-│   │   │   └── code.txt      # Solution code (optional)
+│   │   │   ├── 1_tresc.txt           # V3: Tab title from filename
+│   │   │   └── 2_rozwiazanie.txt     # V3: Mixed HTML + inline functions
 │   │   ├── task2/
-│   │   └── ...
+│   │   │   ├── 1_content.txt         # V2: Content tab
+│   │   │   ├── 2_code.txt           # V2: Code display
+│   │   │   └── 3_execute.txt        # V2: Code execution
+│   │   └── task3/
+│   │       └── task.R                # V1: Manual create_task() function
 │   │
-│   ├── list2/                # Lista II - Wizualizacja
-│   ├── list3/                # Lista III - Struktury danych
-│   ├── list4/                # Lista IV - Analiza statystyczna
-│   ├── list5/                # Lista V - Programowanie
-│   ├── list6/                # Lista VI - Zaawansowane
-│   └── list7/                # Lista VII - Projekty
+│   ├── list2/                # Lista II
+│   ├── list3/                # Lista III
+│   ├── list4/                # Lista IV
+│   ├── list5/                # Lista V
+│   ├── list6/                # Lista VI
+│   └── list7/                # Lista VII
+│
+├── backup/                    # Backup of old monolithic files
+│   ├── helpers.R.bak
+│   └── task_loader.R.bak
+│
+├── CLAUDE.md                  # This file
+├── REBUILD_NOTES.md          # Architecture rebuild documentation
+├── TASK_SYSTEM_V3_GUIDE.md   # V3 inline functions guide
+├── FILE_BASED_TASKS_GUIDE.md # V2 typed files guide
+├── DYNAMIC_LISTS_GUIDE.md    # Dynamic list discovery guide
 │
 └── renv/                      # R package environment (managed by renv)
     ├── activate.R
     └── settings.json
 ```
 
+## Major Architecture Changes (2025-11-30)
+
+### Before: Monolithic Structure
+```
+app.R                (570 lines - mixed concerns)
+tasks/helpers.R      (399 lines - fat functions)
+tasks/task_loader.R  (233 lines)
+```
+
+### After: Modular Architecture
+```
+app.R                (122 lines - clean orchestrator)
+R/                   (14 focused modules)
+├── config/          (Dynamic list discovery)
+├── tasks/           (Display, execution, building, loading)
+├── ui/              (Components, sidebars, content)
+└── server/          (State, observers, renderers)
+```
+
+**Benefits:**
+- ✅ **79% reduction** in app.R lines
+- ✅ **Smaller, focused functions** (~50 lines avg, was ~170 max)
+- ✅ **Clear separation of concerns**
+- ✅ **Easy to navigate and modify**
+- ✅ **Better testability**
+- ✅ **Preserved all functionality**
+
 ## Application Structure (app.R)
 
-The application follows the standard **Shiny app.R** structure with UI and Server components:
+The main app.R is now a **minimal orchestrator** that sources modules and initializes the app:
 
-### Main Components
+### Main Sections (126 lines total)
 
-1. **Libraries & Setup** (Lines 1-13)
-   - Loads required packages: shiny, bslib, dplyr, base64enc, fontawesome, maxLik
-   - Sources helper functions: `tasks/helpers.R`
-   - Sources task loader: `tasks/task_loader.R`
-   - Loads all tasks: `all_lists <- load_all_tasks()`
+1. **Libraries** (Lines 7-14)
+   - Loads: shiny, bslib, dplyr, base64enc, fontawesome, maxLik, ggplot2
 
-2. **List Metadata** (Lines 20-59)
-   - Defines 7 lists (list1-list7) with names and subtitles
-   - Used for navigation and display
+2. **Source Modules** (Lines 16-40)
+   - Configuration: `R/config/metadata.R`
+   - Task system: `R/tasks/*.R`
+   - UI components: `R/ui/*.R`
+   - Server logic: `R/server/*.R`
 
-3. **UI Helper Functions** (Lines 64-229)
-   - `generate_list_sidebar()`: Creates left sidebar with list navigation
-   - `generate_task_sidebar()`: Creates right sidebar with task navigation
+3. **Data Initialization** (Lines 42-49)
+   - **Dynamic list discovery**: `list_metadata <- get_list_metadata()`
+   - Auto-loads all tasks: `all_lists <- load_all_tasks()`
 
-4. **UI Definition** (Lines 234-316)
+4. **UI Definition** (Lines 51-100)
    - `fluidPage()` container
-   - CSS includes from `www/css/` directory
-   - Hero header with course information
+   - CSS includes (8 files in order)
+   - Hero header with course info
    - Dynamic layout container
 
-5. **Server Logic** (Lines 321-461)
-   - Reactive values: `current_list()`, `current_task()`, `sidebar_collapsed()`
-   - Observers for navigation events
-   - Rendering functions: `output$list_sidebar`, `output$task_sidebar`, `output$main_content`
-   - Dynamic layout rendering
+5. **Server Logic** (Lines 102-119)
+   - Initializes reactive state
+   - Creates reactive expressions
+   - Sets up observers and renderers
 
-6. **App Initialization** (Lines 466-468)
+6. **App Launch** (Line 125)
    - `shinyApp(ui = ui, server = server)`
 
-### Key Differences from app.Rmd
+## Modular Architecture Details
 
-| Aspect | app.Rmd (Old) | app.R (New) |
-|--------|---------------|-------------|
-| Structure | R Markdown chunks | Traditional Shiny structure |
-| CSS Loading | Inline via `readLines()` | External links in `<head>` |
-| CSS Location | `css/` directory | `www/css/` directory (Shiny convention) |
-| Execution | `rmarkdown::run()` | `shiny::runApp()` |
-| Debugging | More complex | Easier with standard Shiny tools |
-| Deployment | Works but non-standard | Standard Shiny Server deployment |
+### Configuration Layer (`R/config/`)
+
+**R/config/metadata.R** - Dynamic list discovery
+- `discover_lists(tasks_dir)` - Scans `tasks/` for `listN` folders
+- `generate_list_metadata(list_id)` - Creates metadata on-the-fly
+- `get_list_metadata()` - Returns all discovered lists
+- **No manual configuration needed!** Just create `tasks/listN/` folder
+
+### Task System (`R/tasks/`)
+
+**R/tasks/display.R** - Visual rendering
+- `code_block(code, language, padding)` - Syntax-highlighted code display
+- `code_output(output)` - Execution output display
+- Gray background, red border for code; green border for output
+
+**R/tasks/executor.R** - Code execution engine
+- `execute_code(code, use_auto_labels, use_comments, envir)` - Smart execution
+- `capture_plot(code, envir)` - Plot capture and embedding
+- `capture_text_output(code, envir)` - Console output capture
+- Three-tier labeling: `cat()` > comments > auto-labels
+
+**R/tasks/builder.R** - V1 Manual task builders
+- `create_code_output_tabs(code, ...)` - Standard Kod/Wynik tabs
+- `create_multi_code_tabs(exercises, ...)` - Multi-part exercises
+- `auto_generate_basic_task(task_dir)` - Simple content.txt + code.txt
+
+**R/tasks/builder_v2.R** - V2 Typed file tasks
+- Filenames indicate type: `2_code.txt`, `3_execute.txt`, `4_plot.txt`
+- `build_task_from_typed_files(task_dir)` - Assembles tabs from files
+
+**R/tasks/builder_v3.R** - V3 Inline function tasks
+- Filenames = tab titles: `2_rozwiazanie.txt` → "Rozwiązanie" tab
+- Inline functions: `code(...)`, `execute(...)`, `plot(...)`
+- `build_task_from_inline_files(task_dir)` - Parses mixed HTML + R
+
+**R/tasks/loader.R** - Task loading system
+- `load_all_tasks(tasks_dir)` - Main loader
+- `find_list_directories(tasks_dir)` - Discovers lists
+- `find_all_tasks(list_dir)` - Finds tasks (folders & legacy files)
+- `load_single_task(task_path, list_id, list_num)` - Loads one task
+- Returns structure: `all_lists[[list_id]][[task_id]]`
+
+### UI Layer (`R/ui/`)
+
+**R/ui/components.R** - Reusable UI elements
+- `create_progress_bar(percentage, ...)` - Vertical progress bars
+- `create_task_counter(completed, total)` - Task completion badges
+- `create_list_item(list_id, ...)` - List sidebar buttons
+- `create_empty_list_slot()` - Empty slot placeholders
+
+**R/ui/sidebar_left.R** - List selection sidebar
+- `generate_list_sidebar(all_lists, list_metadata, ...)` - Main generator
+- **Fixed 5-slot layout** with pagination
+- Progress bars and overall stats
+- Home button and collapsible
+
+**R/ui/sidebar_right.R** - Task selection sidebar
+- `generate_task_sidebar(tasks, list_id, ...)` - Task list generator
+- Numbered task buttons with completion icons
+- Current list header
+
+**R/ui/main_content.R** - Main content area
+- `generate_main_content(task)` - Renders task content
+- `generate_welcome_screen()` - Landing page
+- Task navigation navbar
+
+### Server Layer (`R/server/`)
+
+**R/server/state.R** - Reactive state management
+- `init_reactive_state()` - Initializes reactive values
+- `current_list()`, `current_task()`, `sidebar_collapsed()`
+- `create_current_list_tasks(state, all_lists)` - Reactive expression
+
+**R/server/observers.R** - Event handlers
+- `setup_observers(input, state, ...)` - Configures all observers
+- List selection clicks
+- Task selection clicks
+- Navigation buttons (prev/next task, home)
+- Sidebar collapse/expand
+- Pagination (prev/next page)
+
+**R/server/renderers.R** - Output rendering
+- `setup_renderers(output, state, ...)` - Configures all renderers
+- `output$dynamic_layout` - Main layout
+- `output$list_sidebar` - Left sidebar
+- `output$task_sidebar` - Right sidebar
+- `output$main_content` - Content area
 
 ## Task Organization System
 
-### Three Loading Modes
+The app supports **THREE task creation methods**, auto-detected by the loader:
 
-The application supports **three different modes** for loading tasks:
+### V1: Manual Tasks (Full Control)
 
-#### 1. AUTO-GENERATED (Recommended for Simple Tasks)
+**Use for:** Complex tasks with custom layouts
 
-**Mode A: Content Only (Uncompleted Task)**
 ```
 tasks/list1/task1/
-  └── content.txt    # Task description (HTML supported)
+  └── task.R         # Must define create_task() function
 ```
-- Creates **single tab**: "Treść"
-- Marks as `completed = FALSE`
-- Use for tasks awaiting solution
 
-**Mode B: Content + Code (Completed Task)**
+**task.R example:**
+```r
+create_task <- function() {
+  list(
+    content = page_navbar(
+      title = "",
+      id = "task_tabs",
+      nav_panel(
+        title = "Treść",
+        div(class = "task-tab-content-simple", h2("Custom Task"))
+      ),
+      nav_panel(
+        title = "Rozwiązanie",
+        div(class = "task-tab-content-simple", p("Custom content..."))
+      )
+    ),
+    completed = TRUE,
+    name = "Custom Task Name"  # Optional
+  )
+}
 ```
-tasks/list1/task1/
-  ├── content.txt    # Task description
-  └── code.txt       # R code solution
-```
-- Creates **3 tabs**: "Treść", "Kod", "Wynik"
-- Marks as `completed = TRUE`
-- Auto-executes code and displays output
 
-#### 2. MANUAL (For Complex/Special Tasks)
+### V2: Typed Files (Simple File-Based)
+
+**Use for:** Standard tasks with separate code/execution files
+
+**Filename types:**
+- `N_content.txt` → Content tab (HTML)
+- `N_code.txt` → Code display tab (R code, not executed)
+- `N_execute.txt` → Execution tab (R code, executed, shows output)
+- `N_plot.txt` → Plot tab (R code, executed, shows plot)
 
 ```
 tasks/list1/task2/
-  ├── task.R         # Custom create_task() function
-  ├── content.txt    # (ignored if task.R exists)
-  └── code.txt       # (ignored if task.R exists)
-```
-- Full control over task rendering
-- Must define `create_task()` function
-- Can create custom tab layouts
-
-#### 3. LEGACY (Backward Compatibility)
-
-```
-tasks/list1/
-  └── task3.R        # Old-style task file
-```
-- Supports older task structure
-- Must define `create_task()` function
-
-### Task Metadata
-
-Metadata is **automatically inferred**:
-- **List number:** From folder name (`list1` → 1)
-- **Task number:** From folder/file name (`task1` → 1)
-- **Completion status:** From task definition or auto-determined
-
-## Key Helper Functions
-
-### In `tasks/helpers.R`
-
-1. **`code_block(code, language = "r", padding = "15px")`**
-   - Creates styled code block with syntax highlighting
-   - Removes leading/trailing empty lines
-   - Uses consistent styling (gray background, red left border)
-
-2. **`code_output(output)`**
-   - Displays execution output
-   - Supports both text and plots
-   - Green left border for output blocks
-
-3. **`execute_code(code, use_auto_labels = TRUE, use_comments = TRUE, envir = NULL)`**
-   - Executes R code with smart output formatting
-   - Captures both text output and plots
-   - Three labeling methods:
-     - **OPTION 1:** `cat()` in code (highest priority)
-     - **OPTION 2:** Comments as labels (medium priority)
-     - **OPTION 3:** Automatic labels (lowest priority)
-
-4. **`create_code_output_tabs(code, ...)`**
-   - Creates two tabs: "Kod" and "Wynik"
-   - Auto-executes code if `auto_execute = TRUE`
-   - Supports custom tab titles
-
-5. **`create_multi_code_tabs(exercises, ...)`**
-   - For exercises with multiple sub-tasks
-   - Uses **shared environment** between code blocks
-   - Variables persist across sub-tasks
-
-6. **`auto_generate_basic_task(task_dir)`**
-   - Core auto-generation function
-   - Reads `content.txt` and `code.txt`
-   - Returns task structure with completion status
-
-### In `tasks/task_loader.R`
-
-1. **`load_all_tasks(tasks_dir = "tasks")`**
-   - Main loader function
-   - Scans all list directories
-   - Loads tasks using appropriate mode
-   - Returns nested list structure: `all_lists[[list_id]][[task_id]]`
-
-2. **`get_list_stats(all_lists, list_id)`**
-   - Calculates completion statistics for a list
-   - Returns: total, completed, remaining, percentage
-
-3. **`get_overall_stats(all_lists)`**
-   - Calculates overall progress across all lists
-   - Returns: total_lists, total_tasks, completed_tasks, percentage
-
-## Application Architecture
-
-### Reactive Structure
-
-The app uses Shiny's reactive programming model:
-
-```r
-# Reactive values
-current_list <- reactiveVal(NULL)    # Selected list ID
-current_task <- reactiveVal(NULL)    # Selected task ID
-sidebar_collapsed <- reactiveVal(FALSE)
-
-# Reactive expression
-current_list_tasks <- reactive({
-  if (is.null(current_list())) return(NULL)
-  all_lists[[current_list()]]
-})
+  ├── 1_content.txt    # HTML content
+  ├── 2_code.txt       # R code to display
+  └── 3_execute.txt    # R code to execute
 ```
 
-### Three-Panel Layout
+**Order number (N)** determines tab position (1, 2, 3, ...)
 
-1. **Left Sidebar** - List selection (collapsible)
-   - Lists 1-7 with progress bars
-   - Overall progress summary card
-   - Home button to reset view
+**See:** FILE_BASED_TASKS_GUIDE.md for details
 
-2. **Main Content** - Task display area
-   - Dynamic navbar with task navigation
-   - Tabbed content (Treść/Kod/Wynik)
-   - Welcome screen when no task selected
+### V3: Inline Functions (Recommended)
 
-3. **Right Sidebar** - Task selection within list
-   - Numbered task list
-   - Completion status indicators (checkmark icons)
-   - Current list name header
+**Use for:** Rich narrative content mixing HTML and R code
+
+**Filename = Tab title:**
+- `1_tresc.txt` → "Treść" tab
+- `2_rozwiazanie.txt` → "Rozwiązanie" tab
+- `2a_przyklad.txt`, `2b_przyklad.txt` → Both in "Przyklad" tab (subtasks)
+
+**Inside files, mix HTML and inline functions:**
+
+```html
+<h3>Rozwiązanie zadania</h3>
+
+<p>Najpierw utworzymy wektor:</p>
+
+code(
+x <- 1:10
+mean(x)
+)
+
+<p>Teraz wykonajmy kod:</p>
+
+execute(
+x <- 1:10
+cat("Średnia:", mean(x), "\n")
+)
+
+<p>I narysujmy wykres:</p>
+
+plot(
+x <- 1:10
+barplot(x, col = "steelblue")
+)
+```
+
+**Inline functions:**
+- `code(...)` - Display R code (syntax highlighted, not executed)
+- `execute(...)` - Execute R code and show output
+- `plot(...)` - Execute R code and embed plot
+
+**See:** TASK_SYSTEM_V3_GUIDE.md for detailed guide
+
+### Auto-Generation (Legacy/Fallback)
+
+**Simplest method** for basic tasks:
+
+```
+tasks/list1/task3/
+  ├── content.txt    # HTML content
+  └── code.txt       # Optional: R code (if present, creates Kod/Wynik tabs)
+```
+
+- With `code.txt`: Creates 3 tabs (Treść/Kod/Wynik), `completed = TRUE`
+- Without `code.txt`: Creates 1 tab (Treść), `completed = FALSE`
+
+### Task Loading Priority
+
+When loading tasks, the system checks in this order:
+
+1. **Inline functions (V3)?** → Files matching `N_*.txt` with `code(...)` etc.
+2. **Typed files (V2)?** → Files matching `N_content.txt`, `N_code.txt`, etc.
+3. **Manual (V1)?** → `task.R` file exists
+4. **Auto-generation?** → `content.txt` (± `code.txt`)
+
+## Dynamic List Discovery
+
+**No manual configuration needed!** Lists are auto-discovered.
+
+### How It Works
+
+1. **Scan `tasks/` directory** for folders matching `listN` pattern
+2. **Generate metadata on-the-fly** with Roman numerals
+3. **Display in fixed 5-slot layout** with pagination
+
+```bash
+# Just create a folder - it appears automatically!
+mkdir tasks/list8
+# Reload app → "Lista VIII" appears in sidebar
+```
+
+### 5-Slot Pagination
+
+The left sidebar **always shows exactly 5 list slots** per page:
+
+**Example with 7 lists:**
+- **Page 1:** Lists 1-5
+- **Page 2:** Lists 6-7 + 3 empty slots (grayed out, non-clickable)
+
+**See:** DYNAMIC_LISTS_GUIDE.md for details
 
 ## Styling System
 
 ### CSS Loading Order
 
-CSS files are loaded in **specific order** for proper cascading (see app.Rmd:36-45):
+**IMPORTANT:** CSS files must load in this order (app.R:60-67):
 
 ```r
-css_order <- c(
-  "css/main.css",           # 1. Base styles
-  "css/header.css",         # 2. Hero header
-  "css/navbar.css",         # 3. Navigation
-  "css/layout.css",         # 4. Layout grid
-  "css/left-sidebar.css",   # 5. Left panel
-  "css/right-sidebar.css",  # 6. Right panel
-  "css/progress-card.css",  # 7. Progress UI
-  "css/main-content.css"    # 8. Content area
-)
+tags$link(rel = "stylesheet", type = "text/css", href = "css/main.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/header.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/navbar.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/layout.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
+tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
 ```
 
 ### Color Scheme
@@ -287,13 +428,32 @@ css_order <- c(
 ### Key CSS Classes
 
 - `.hero-header` - Top banner with logo
-- `.app-container` - Main layout container
+- `.app-container` / `.content-wrapper-dual` - Main layout
 - `.left-sidebar` / `.right-sidebar` - Side panels
 - `.main-content` - Central content area
-- `.code-block` - Code display blocks
-- `.code-output` - Execution output blocks
-- `.task-item` / `.list-item` - Navigation items
+- `.code-block` - Code display (gray bg, red left border)
+- `.code-output` - Execution output (green left border)
+- `.task-item` / `.list-item` - Navigation buttons
+- `.list-item-empty` - Empty list slots (grayed out)
 - `.progress-bar-container-vertical` - Progress indicators
+
+### Three-Panel Responsive Layout
+
+1. **Left Sidebar** - List selection (collapsible on small screens)
+   - 5-slot fixed layout
+   - Progress bars per list
+   - Overall stats card
+   - Pagination controls
+
+2. **Main Content** - Task display
+   - Dynamic navbar for task tabs
+   - Tabbed content (Treść/Kod/Wynik/etc.)
+   - Welcome screen when no selection
+
+3. **Right Sidebar** - Task selection
+   - Numbered task buttons
+   - Completion status icons (✓)
+   - Current list header
 
 ## Development Workflow
 
@@ -307,66 +467,87 @@ css_order <- c(
 renv::restore()
 
 # 3. Run the Shiny app
-# Click "Run App" button in RStudio
-# Or use: shiny::runApp()
-# Or from command line: R -e "shiny::runApp()"
+# Option A: Click "Run App" button in RStudio
+# Option B: In R console
+shiny::runApp()
+
+# Option C: From command line
+R -e "shiny::runApp()"
 ```
 
 ### Adding a New Task
 
-**Simple Task (Auto-Generated):**
+**Method 1: V3 Inline Functions (Recommended)**
 
 ```bash
 # 1. Create task directory
-mkdir -p tasks/list1/task11
+mkdir -p tasks/list1/task20
 
-# 2. Add content
-cat > tasks/list1/task11/content.txt << 'EOF'
-<h2>Zadanie 11: Nowe zadanie</h2>
-<p>Opis zadania...</p>
+# 2. Add content tab
+cat > tasks/list1/task20/1_tresc.txt << 'EOF'
+<h2>Zadanie 20: Nowe zadanie</h2>
+<p>Opis zadania tutaj...</p>
 EOF
 
-# 3. Add solution (optional)
-cat > tasks/list1/task11/code.txt << 'EOF'
-# Rozwiązanie
-x <- 1:10
+# 3. Add solution tab with mixed content
+cat > tasks/list1/task20/2_rozwiazanie.txt << 'EOF'
+<h3>Rozwiązanie</h3>
+<p>Kod:</p>
+
+code(
+x <- 1:100
 mean(x)
+)
+
+<p>Wynik:</p>
+
+execute(
+x <- 1:100
+cat("Średnia:", mean(x), "\n")
+)
 EOF
 
-# 4. Reload app - task appears automatically!
+# 4. Reload app → Task appears automatically!
 ```
 
-**Complex Task (Manual):**
+**Method 2: V2 Typed Files**
+
+```bash
+mkdir -p tasks/list1/task21
+echo "<h2>Zadanie 21</h2>" > tasks/list1/task21/1_content.txt
+echo "x <- 1:10\nmean(x)" > tasks/list1/task21/2_code.txt
+echo "x <- 1:10\ncat('Mean:', mean(x))" > tasks/list1/task21/3_execute.txt
+```
+
+**Method 3: V1 Manual (Complex Tasks)**
+
+Create `tasks/list1/task22/task.R` with `create_task()` function.
+
+### Adding a New List
+
+```bash
+# Just create the directory!
+mkdir tasks/list8
+
+# Add first task
+mkdir tasks/list8/task1
+echo "<h2>First task in list 8</h2>" > tasks/list8/task1/1_tresc.txt
+
+# Reload app → "Lista VIII" appears automatically
+```
+
+### Modifying UI Components
 
 ```r
-# tasks/list1/task12/task.R
+# Example: Change list sidebar appearance
+# Edit: R/ui/sidebar_left.R
 
-create_task <- function() {
-  list(
-    content = page_navbar(
-      title = "",
-      id = "task_tabs",
-      nav_panel(
-        title = "Treść",
-        div(
-          class = "task-tab-content-simple",
-          h2("Custom Task"),
-          p("Custom content...")
-        )
-      )
-    ),
-    completed = FALSE,
-    name = "Custom Task Name"  # Optional
-  )
-}
+# Example: Change task display
+# Edit: R/ui/main_content.R
+
+# Example: Change CSS styling
+# Edit: www/css/[component].css
 ```
-
-### Modifying CSS
-
-1. **Identify the appropriate CSS file** based on the component
-2. **Edit the file** - changes apply immediately on reload
-3. **Test across different screen sizes** (responsive design)
-4. **Maintain the color scheme** consistency
 
 ### Adding New R Dependencies
 
@@ -376,11 +557,13 @@ renv::install("package_name")
 
 # Update lockfile
 renv::snapshot()
+
+# Commit both renv.lock and (if changed) manifest.json
 ```
 
 ## R Code Conventions
 
-### Code Style (from .Rproj)
+### Code Style (.Rproj settings)
 
 - **Indentation:** 2 spaces (not tabs)
 - **Encoding:** UTF-8
@@ -388,141 +571,203 @@ renv::snapshot()
 
 ### Naming Conventions
 
-- **Functions:** `snake_case` (e.g., `create_code_output_tabs`)
-- **Variables:** `snake_case` (e.g., `current_list`, `task_id`)
-- **Lists:** `list1`, `list2`, ... `list7`
-- **Tasks:** `task1`, `task2`, ... `taskN`
+- **Functions:** `snake_case` (e.g., `generate_list_sidebar`, `load_all_tasks`)
+- **Variables:** `snake_case` (e.g., `current_list`, `task_id`, `all_lists`)
+- **Reactive values:** `camelCase()` (e.g., `current_list()`, `sidebar_collapsed()`)
+- **Lists:** `list1`, `list2`, ..., `listN`
+- **Tasks:** `task1`, `task2`, ..., `taskN`
 
 ### Common Patterns
 
-**Creating Task Tabs:**
+**Creating task tabs (V1 manual):**
 ```r
-# Pattern 1: Simple code/output
+# Simple code/output tabs
 create_code_output_tabs(
   code = "x <- 1:10\nmean(x)",
   code_tab_title = "Kod",
   output_tab_title = "Wynik"
 )
 
-# Pattern 2: Multiple exercises with shared environment
+# Multi-part exercise with shared environment
 create_multi_code_tabs(
   exercises = list(
     list(title = "A)", code = "x <- 1:10"),
-    list(title = "B)", code = "mean(x)")  # uses x from A)
+    list(title = "B)", code = "mean(x)")  # x available from A)
   )
 )
 ```
 
-**HTML in content.txt:**
+**HTML in content files:**
 ```html
 <h2>Zadanie X: Tytuł</h2>
-<p>Opis...</p>
+<p>Opis zadania z <strong>formatowaniem</strong>.</p>
 <ol style="list-style-type: lower-alpha">
   <li>Podpunkt a)</li>
   <li>Podpunkt b)</li>
 </ol>
-<code>kod_inline</code>
-<strong>Uwaga:</strong>
+<code>inline_code()</code>
 ```
 
 ## Git Workflow
 
+### Current Branch
+
+**Development branch:** `claude/claude-md-miojn0a5oswhhnd9-01YSMpwnYoMcJ7CWR8feDfa2`
+
 ### Branch Naming Convention
 
-- **Feature branches:** `claude/claude-md-{session-id}`
-- **Main branch:** (not specified - check with `git branch`)
+- **Feature branches:** `claude/claude-md-{random-id}-{session-id}`
+- Must start with `claude/` and end with matching session ID
+- Main branch: (check with `git branch` or GitHub)
 
 ### Git Operations Guidelines
 
 **Pushing:**
-- Always use: `git push -u origin <branch-name>`
-- Branch must start with `claude/` and match session ID
-- Retry on network errors: up to 4 times with exponential backoff (2s, 4s, 8s, 16s)
+```bash
+# Always use -u flag for first push
+git push -u origin claude/claude-md-miojn0a5oswhhnd9-01YSMpwnYoMcJ7CWR8feDfa2
+
+# Retry on network errors: up to 4 times with exponential backoff
+# (2s, 4s, 8s, 16s)
+```
 
 **Fetching/Pulling:**
-- Prefer specific branches: `git fetch origin <branch-name>`
-- Retry on network errors: up to 4 times with exponential backoff
+```bash
+# Prefer specific branch
+git fetch origin claude/claude-md-miojn0a5oswhhnd9-01YSMpwnYoMcJ7CWR8feDfa2
+git pull origin claude/claude-md-miojn0a5oswhhnd9-01YSMpwnYoMcJ7CWR8feDfa2
+
+# Retry on network errors with same backoff strategy
+```
 
 **Committing:**
-- Use descriptive commit messages in Polish or English
-- Follow conventional format: "Add task X to list Y" or "Update CSS styling"
+- Use descriptive messages in Polish or English
+- Examples:
+  - "Add task 5 to list 3"
+  - "Update left sidebar CSS for better responsiveness"
+  - "Fix ggplot rendering in execute_code"
+  - "Dodaj zadanie 7 do listy 2"
 
 ## AI Assistant Guidelines
 
 ### When Working on This Codebase
 
-1. **Always check task organization** before adding tasks
-   - Use auto-generation for simple tasks (content.txt + code.txt)
-   - Use manual mode (task.R) only for complex layouts
+1. **Understand the modular architecture**
+   - Find code by function: check R/ subdirectories
+   - UI changes → `R/ui/*.R` + `www/css/*.css`
+   - Task behavior → `R/tasks/*.R`
+   - Server logic → `R/server/*.R`
 
-2. **Preserve the Polish language** in:
-   - Task descriptions (content.txt files)
-   - UI labels and buttons
-   - Comments in R code (optional but preferred)
+2. **Choose the right task creation method**
+   - **V3 (inline functions):** For educational content with narrative
+   - **V2 (typed files):** For simple separation of code/execution
+   - **V1 (manual):** For complex custom layouts
+   - **Auto-generation:** For very simple tasks
+
+3. **Preserve the Polish language** in:
+   - Task descriptions and content
+   - UI labels (tab titles, buttons)
    - Commit messages (Polish or English acceptable)
 
-3. **Maintain CSS consistency**
-   - Load CSS files in the specified order
+4. **Maintain CSS consistency**
+   - Load CSS in the specified order
    - Use the established color scheme
-   - Test responsive behavior
+   - Test responsive behavior (desktop, tablet, mobile)
 
-4. **R code execution**
+5. **R code execution**
    - Use `execute_code()` for automatic output generation
    - Leverage shared environments for multi-part exercises
-   - Follow the three-tier labeling system (cat > comments > auto)
+   - Follow three-tier labeling: `cat()` > comments > auto-labels
 
-5. **Dependencies**
+6. **Dependencies**
    - Always update `renv.lock` after adding packages
    - Use `renv::install()` and `renv::snapshot()`
 
-6. **Testing**
-   - Test task loading with `load_all_tasks()`
-   - Check progress calculations with `get_list_stats()`
+7. **Testing before committing**
+   - Test task loading: `source("R/tasks/loader.R"); load_all_tasks()`
+   - Check list discovery: `source("R/config/metadata.R"); get_list_metadata()`
    - Verify UI rendering in browser
+   - Test on multiple screen sizes
 
-7. **File modifications**
-   - Read existing files before editing
+8. **File modifications**
+   - **Always read files before editing**
    - Preserve formatting and indentation (2 spaces)
    - Maintain UTF-8 encoding
+   - Don't modify files outside the project scope
 
 ### Common Tasks for AI Assistants
 
-**Adding a new task to a list:**
-```bash
-# 1. Create directory structure
-mkdir -p tasks/list2/task18
+#### Adding a new task to existing list
 
-# 2. Create content.txt with task description
-# 3. Create code.txt with solution (optional)
-# 4. Reload app to see changes
+```bash
+# V3 method (recommended)
+mkdir -p tasks/list2/task25
+cat > tasks/list2/task25/1_tresc.txt << 'EOF'
+<h2>Zadanie 25: Opis</h2>
+<p>Treść zadania...</p>
+EOF
+
+cat > tasks/list2/task25/2_rozwiazanie.txt << 'EOF'
+<p>Rozwiązanie:</p>
+code(...)
+execute(...)
+EOF
 ```
 
-**Updating task completion status:**
-- Add or remove `code.txt` file
-- OR modify `create_task()` to set `completed = TRUE/FALSE`
+#### Updating task completion status
 
-**Fixing broken tasks:**
-1. Check task directory structure
-2. Verify `content.txt` exists and has valid HTML
-3. Check `code.txt` for syntax errors
-4. Review error messages in R console
+- **V3/V2:** Presence of execution determines completion
+- **V1 manual:** Set `completed = TRUE/FALSE` in `create_task()`
+- **Auto-generation:** Add or remove `code.txt`
 
-**Modifying UI layout:**
-1. Identify the component (header, sidebar, content)
-2. Edit the corresponding CSS file in `www/css/`
-3. For structural changes, edit `app.R` (ui or server sections)
-4. Test in browser
+#### Fixing broken tasks
 
-### Key Files to Reference
+1. Check directory structure: `ls -la tasks/listN/taskM/`
+2. Verify files exist and have valid syntax
+3. Check R console for error messages during `load_all_tasks()`
+4. Test task parsing manually:
+   ```r
+   source("R/tasks/loader.R")
+   task <- load_single_task("tasks/list1/task1", "list1", 1)
+   ```
+
+#### Modifying UI layout
+
+1. **Identify component:** Header? Sidebar? Content?
+2. **For structure changes:** Edit `R/ui/[component].R`
+3. **For styling changes:** Edit `www/css/[component].css`
+4. **Test in browser** after changes
+5. **Check responsive behavior** on different screen sizes
+
+#### Adding a new feature to task system
+
+1. **Display functions:** Add to `R/tasks/display.R`
+2. **Execution logic:** Modify `R/tasks/executor.R`
+3. **Task building:** Extend appropriate builder (`R/tasks/builder*.R`)
+4. **Update documentation:** Add examples to relevant guide
+
+### Key Files Reference
 
 | File | Purpose | When to Modify |
 |------|---------|----------------|
-| `app.R` | Main Shiny application (UI + Server) | Changing layout, adding features, modifying reactivity |
-| `tasks/helpers.R` | Display functions | Changing code/output rendering |
-| `tasks/task_loader.R` | Task loading | Changing task organization |
-| `www/css/*.css` | Styling | Changing appearance |
-| `renv.lock` | Dependencies | After adding packages |
-| `manifest.json` | Deployment | Changing Shiny Server config |
+| `app.R` | Main orchestrator | Rarely (only for major structural changes) |
+| `R/config/metadata.R` | List discovery | To customize list metadata logic |
+| `R/tasks/display.R` | Code rendering | To change code/output appearance |
+| `R/tasks/executor.R` | Code execution | To modify execution behavior |
+| `R/tasks/builder.R` | V1 task builder | To add new V1 task patterns |
+| `R/tasks/builder_v2.R` | V2 task builder | To modify typed file behavior |
+| `R/tasks/builder_v3.R` | V3 task builder | To modify inline function parsing |
+| `R/tasks/loader.R` | Task loading | To change task discovery logic |
+| `R/ui/sidebar_left.R` | List sidebar | To modify list navigation |
+| `R/ui/sidebar_right.R` | Task sidebar | To modify task navigation |
+| `R/ui/main_content.R` | Content area | To modify task display |
+| `R/ui/components.R` | UI components | To add reusable UI elements |
+| `R/server/state.R` | Reactive state | To add new reactive values |
+| `R/server/observers.R` | Event handlers | To add new interactions |
+| `R/server/renderers.R` | Output rendering | To add new outputs |
+| `www/css/*.css` | Styling | To change appearance |
+| `renv.lock` | Dependencies | After `renv::snapshot()` |
+| `manifest.json` | Deployment | After changing R version or dependencies |
 
 ### Warning: Do Not Modify
 
@@ -530,6 +775,34 @@ mkdir -p tasks/list2/task18
 - `renv/` directory contents (managed by renv)
 - `.Rprofile` (unless changing renv configuration)
 - File encoding (must stay UTF-8)
+- `backup/` directory (historical reference)
+
+### Best Practices
+
+1. **Read before you write**
+   - Always read existing files before modifying
+   - Understand context and conventions
+
+2. **Test incrementally**
+   - Test after each change
+   - Don't batch multiple untested changes
+
+3. **Use appropriate abstraction level**
+   - V3 for most new tasks (easiest for content creators)
+   - V2 for simple code/execution separation
+   - V1 only when custom layouts are essential
+
+4. **Keep functions focused**
+   - Each function should do one thing well
+   - Average function size: ~30-50 lines
+
+5. **Document complex logic**
+   - Add comments for non-obvious code
+   - Update guides when adding new features
+
+6. **Commit atomically**
+   - One logical change per commit
+   - Clear, descriptive commit messages
 
 ## Deployment
 
@@ -541,47 +814,257 @@ The application is configured for **Shiny Server** deployment via `manifest.json
 - Package Manager: renv
 
 **Deployment Steps:**
-1. Ensure `renv.lock` is up to date
-2. Commit all changes
+1. Ensure all changes committed
+2. Ensure `renv.lock` is up to date
 3. Push to deployment server
-4. Shiny Server reads `manifest.json` and restores environment
+4. Shiny Server reads `manifest.json` and restores environment via renv
 
 ## Troubleshooting
 
 ### Task Not Loading
 
-- **Check:** Does `content.txt` exist?
-- **Check:** Is the task directory named correctly? (`taskN` format)
-- **Check:** Are there R syntax errors in `code.txt` or `task.R`?
-- **Solution:** Review console output for error messages
+**Symptoms:** Task doesn't appear in UI
+
+**Diagnosis:**
+```r
+# Check if task is loaded
+source("R/tasks/loader.R")
+all_lists <- load_all_tasks()
+all_lists$list1$task1  # Should show task object
+```
+
+**Common causes:**
+- Task directory named incorrectly (must be `taskN`)
+- Missing required files (V3: no `N_*.txt`, V2: no `N_content.txt`, etc.)
+- Syntax errors in R code
+- Malformed `create_task()` function (V1)
+
+**Solution:** Check R console for error messages during loading
 
 ### CSS Not Applying
 
-- **Check:** Is the CSS file in the correct order in `css_order`?
-- **Check:** Are there syntax errors in the CSS file?
-- **Solution:** Clear browser cache and reload
+**Symptoms:** Styles not visible or incorrect
+
+**Diagnosis:**
+- Check CSS file exists in `www/css/`
+- Check CSS file linked in correct order in `app.R`
+- Clear browser cache and hard reload (Ctrl+Shift+R)
+
+**Solution:**
+- Verify CSS file path
+- Check for syntax errors in CSS
+- Ensure CSS loaded before files that depend on it
 
 ### Code Output Not Displaying
 
-- **Check:** Does the code have syntax errors?
-- **Check:** Is `auto_execute = TRUE` in `create_code_output_tabs()`?
-- **Solution:** Test code in R console first
+**Symptoms:** Code executes but no output shown
+
+**Diagnosis:**
+```r
+# Test execution directly
+source("R/tasks/executor.R")
+source("R/tasks/display.R")
+result <- execute_code("x <- 1:10\ncat('Mean:', mean(x))")
+print(result)
+```
+
+**Common causes:**
+- Code has no output (no `cat()`, `print()`, or return value)
+- Code has errors (check for error messages)
+- Inline function syntax error (V3): unbalanced parentheses
+
+**Solution:**
+- Add explicit output with `cat()` or `print()`
+- Fix code syntax errors
+- Check parentheses balance in `code(...)`, `execute(...)`, `plot(...)`
+
+### List Not Discovered
+
+**Symptoms:** New list folder doesn't appear in sidebar
+
+**Diagnosis:**
+```r
+source("R/config/metadata.R")
+discover_lists("tasks")  # Should include your new list
+```
+
+**Common causes:**
+- Folder not named `listN` (must match pattern exactly)
+- Folder empty (no tasks inside)
+
+**Solution:**
+- Rename folder to `listN` format
+- Add at least one task to the list
 
 ### Package Installation Fails
 
-- **Check:** Is the package name correct?
-- **Check:** Is CRAN repository accessible?
-- **Solution:** Use `renv::install("package", repos = "https://cran.r-project.org")`
+**Symptoms:** `renv::install()` fails
+
+**Common causes:**
+- Package name incorrect
+- CRAN repository unreachable
+- Package requires system dependencies
+
+**Solution:**
+```r
+# Try with explicit CRAN repo
+renv::install("package_name", repos = "https://cran.r-project.org")
+
+# Check available packages
+available.packages()
+
+# For system dependencies, install via system package manager first
+# Example: sudo apt-get install libcurl4-openssl-dev
+```
+
+### App Won't Start
+
+**Symptoms:** `shiny::runApp()` fails
+
+**Diagnosis:**
+- Check R console for error messages
+- Verify all source files exist
+- Check for syntax errors in R files
+
+**Common causes:**
+- Missing source file in `R/` directory
+- Syntax error in sourced file
+- Missing required package
+
+**Solution:**
+```r
+# Test sourcing files individually
+source("R/config/metadata.R")
+source("R/tasks/display.R")
+# ... etc
+
+# Restore packages if needed
+renv::restore()
+```
+
+## Performance Considerations
+
+### Task Loading
+
+- Tasks loaded once at app startup
+- Large numbers of tasks: consider lazy loading (future enhancement)
+- Complex V1 tasks: cache rendered content (future enhancement)
+
+### Code Execution
+
+- Code executed on demand (when tab opened)
+- Plots cached as base64 PNG
+- Text output captured efficiently
+
+### CSS and Assets
+
+- CSS files loaded once, cached by browser
+- External logo image (WNE UW) - consider local copy for offline use
 
 ## Additional Resources
 
-- **Shiny Documentation:** https://shiny.rstudio.com/
-- **R Markdown Guide:** https://rmarkdown.rstudio.com/
+### Official Documentation
+
+- **Shiny:** https://shiny.rstudio.com/
 - **bslib Package:** https://rstudio.github.io/bslib/
-- **renv Documentation:** https://rstudio.github.io/renv/
+- **renv:** https://rstudio.github.io/renv/
+- **R Markdown:** https://rmarkdown.rstudio.com/
+
+### Project-Specific Guides
+
+- **REBUILD_NOTES.md** - Architecture refactoring details
+- **TASK_SYSTEM_V3_GUIDE.md** - V3 inline functions comprehensive guide
+- **FILE_BASED_TASKS_GUIDE.md** - V2 typed files guide
+- **DYNAMIC_LISTS_GUIDE.md** - Dynamic list discovery guide
+
+### Learning Resources
+
+- **R for Data Science:** https://r4ds.had.co.nz/
+- **Advanced R:** https://adv-r.hadley.nz/
+- **Shiny Tutorial:** https://shiny.rstudio.com/tutorial/
 
 ---
 
-**Last Updated:** 2025-11-22
+## Quick Reference
+
+### Task Creation Cheat Sheet
+
+```bash
+# V3 (Recommended) - Inline functions
+mkdir -p tasks/list1/task99
+cat > tasks/list1/task99/1_tresc.txt << 'EOF'
+<h2>Zadanie</h2>
+EOF
+
+cat > tasks/list1/task99/2_rozwiazanie.txt << 'EOF'
+code(...)
+execute(...)
+plot(...)
+EOF
+
+# V2 - Typed files
+mkdir -p tasks/list1/task99
+echo "content" > tasks/list1/task99/1_content.txt
+echo "code" > tasks/list1/task99/2_code.txt
+echo "code" > tasks/list1/task99/3_execute.txt
+
+# V1 - Manual
+mkdir -p tasks/list1/task99
+cat > tasks/list1/task99/task.R << 'EOF'
+create_task <- function() {
+  list(content = ..., completed = TRUE)
+}
+EOF
+```
+
+### Common Commands
+
+```r
+# Restore environment
+renv::restore()
+
+# Run app
+shiny::runApp()
+
+# Add package
+renv::install("package_name")
+renv::snapshot()
+
+# Test task loading
+source("R/tasks/loader.R")
+all_lists <- load_all_tasks()
+
+# Test list discovery
+source("R/config/metadata.R")
+get_list_metadata()
+```
+
+### File Structure Quick Lookup
+
+```
+Need to modify...         →  Edit file...
+─────────────────────────────────────────────────────
+List discovery logic      →  R/config/metadata.R
+Task loading logic        →  R/tasks/loader.R
+Code rendering            →  R/tasks/display.R
+Code execution            →  R/tasks/executor.R
+V1 task building          →  R/tasks/builder.R
+V2 task building          →  R/tasks/builder_v2.R
+V3 task building          →  R/tasks/builder_v3.R
+Left sidebar UI           →  R/ui/sidebar_left.R
+Right sidebar UI          →  R/ui/sidebar_right.R
+Main content UI           →  R/ui/main_content.R
+UI components             →  R/ui/components.R
+Reactive state            →  R/server/state.R
+Event handling            →  R/server/observers.R
+Output rendering          →  R/server/renderers.R
+Styling                   →  www/css/[component].css
+```
+
+---
+
+**Last Updated:** 2025-12-02
 **Repository:** derealizacjaaa/wne_pna
-**Current Branch:** claude/claude-md-miaq6a6vfckupui9-01Jead37LZox8k923nxytkCF
+**Current Branch:** claude/claude-md-miojn0a5oswhhnd9-01YSMpwnYoMcJ7CWR8feDfa2
+**Architecture Version:** 2.0 (Modular, post-rebuild)
+**Task System:** V1 (Manual) + V2 (Typed Files) + V3 (Inline Functions)
