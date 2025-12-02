@@ -523,47 +523,20 @@
 
 /* ========================================
    RESPONSIVE: Reduce visible list items based on screen height
-   Only applies to desktop layout (width > 992px)
+   Desktop only
    ======================================== */
 
 /* Medium-high screens: Show only 4 items (hide 5th) */
-@media (max-height: 700px) and (min-width: 993px) {
+@media (max-height: 700px) {
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
   }
 }
 
 /* Medium screens: Show only 3 items (hide 4th and 5th) */
-@media (max-height: 600px) and (min-width: 993px) {
+@media (max-height: 600px) {
   .lists-menu .list-item:nth-child(4),
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
-  }
-}
-
-/* ========================================
-   MOBILE/TABLET: Prevent overflow on horizontal layout
-   ======================================== */
-
-/* On mobile/tablet, allow scrolling if content overflows */
-@media (max-width: 992px) {
-  .left-sidebar {
-    overflow-y: auto;
-    max-height: 400px;
-  }
-
-  /* Show scrollbar on mobile if needed */
-  .left-sidebar::-webkit-scrollbar {
-    display: block !important;
-    width: 6px !important;
-  }
-
-  .left-sidebar::-webkit-scrollbar-track {
-    background: #b1404f;
-  }
-
-  .left-sidebar::-webkit-scrollbar-thumb {
-    background: #4A4A4A;
-    border-radius: 3px;
   }
 }
