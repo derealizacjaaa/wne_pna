@@ -114,14 +114,20 @@
 }
 
 /* Responsive height adjustments */
-@media (max-height: 620px) {
+@media (max-height: 700px) {
   .app-container {
-    min-height: 440px;
+    min-height: 480px;
   }
 }
 
-@media (max-height: 540px) {
+@media (max-height: 600px) {
   .app-container {
-    min-height: 380px;
+    min-height: 420px;
+  }
+}
+
+@media (max-height: 480px) {
+  .app-container {
+    min-height: 340px;
   }
 }
