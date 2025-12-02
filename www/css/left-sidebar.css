@@ -520,3 +520,44 @@
 .list-item-invisible::before {
   display: none !important;
 }
+
+/* ========================================
+   RESPONSIVE: Reduce visible list items based on screen height
+   ======================================== */
+
+/* Medium height screens: Show only 4 items (hide 5th) */
+@media (max-height: 620px) {
+  .lists-menu .list-item:nth-child(5) {
+    display: none !important;
+  }
+
+  /* Reduce spacing to fit better */
+  .list-item {
+    margin-bottom: 10px;
+  }
+
+  .lists-sidebar-summary {
+    padding: 8px 10px;
+  }
+}
+
+/* Small height screens: Show only 3 items (hide 4th and 5th) */
+@media (max-height: 540px) {
+  .lists-menu .list-item:nth-child(4),
+  .lists-menu .list-item:nth-child(5) {
+    display: none !important;
+  }
+
+  /* Further reduce spacing */
+  .list-item {
+    margin-bottom: 8px;
+  }
+
+  .lists-sidebar-menu {
+    padding: 8px 20px;
+  }
+
+  .lists-sidebar-summary {
+    padding: 6px 10px;
+  }
+}
