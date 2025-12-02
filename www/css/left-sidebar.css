@@ -310,15 +310,15 @@
 }
 
 .list-nav-prev {
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .list-nav-next {
-  margin-top: 5px;
+  margin-top: 0;
 }
 
 .list-nav-spacer {
-  height: 5px;
+  height: 0;
 }
 
 /* Hidden navigation button - keeps space but invisible */
