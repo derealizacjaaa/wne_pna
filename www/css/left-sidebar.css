@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  /* Simple flex layout: header (fixed) -> menu (fixed) -> spacer (grows) -> summary (fixed at bottom) */
 }
 
 /* Hide scrollbar completely */
@@ -27,7 +28,7 @@
   display: none;
 }
 
-/* Section 1: Header */
+/* Section 1: Header - Fixed height, no grow/shrink */
 .lists-sidebar-header {
   background: linear-gradient(
   to bottom,        /* Gradient idzie z góry na dół */
@@ -44,7 +45,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  flex-shrink: 0;
+  flex: 0 0 56px; /* Fixed: don't grow, don't shrink, 56px tall */
 }
 
 /* Zigzag dark section
@@ -234,7 +235,7 @@
   background: rgba(244, 246, 249, 0.2);
 }
 
-/* Section 2: List of lists - FIXED, NO SCROLLING */
+/* Section 2: Menu - Fixed height based on content, no grow/shrink */
 .lists-sidebar-menu {
   background-color: #b1404f;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
@@ -242,7 +243,7 @@
   padding-left: 20px;
   border-bottom: 4px solid #4A4A4A;
   overflow: hidden;
-  flex: 0 0 auto; /* Don't grow - only take space needed for content */
+  flex: 0 0 auto; /* Fixed: take only space needed for content */
   min-height: 0;
   position: relative;
   display: flex;
@@ -327,25 +328,24 @@
   pointer-events: none;
 }
 
-/* Flexible spacer - grows to push summary to bottom */
+/* Flexible spacer - GROWS to fill space and push summary to bottom */
 .lists-sidebar-spacer {
   background: #b1404f;
-  flex: 1 0 auto; /* Grow to fill available space */
+  flex: 1 1 auto; /* Grow AND shrink to fill available space */
   min-height: 0;
+  height: 100%; /* Explicitly take all available height */
 }
 
-/* Section 3: Summary - FIXED with max-height, glued to bottom */
+/* Section 3: Summary - FIXED at bottom, no grow/shrink */
 .lists-sidebar-summary {
   background: #b1404f;
   padding: 10px;
-  flex: 0 0 auto;
-  flex-shrink: 0;
+  flex: 0 0 auto; /* Fixed: don't grow, don't shrink, take content size */
   border-bottom: 4px solid #4A4A4A;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   max-height: 200px; /* Expanded for progress card (180px) + padding (20px) */
-  /* margin-top: auto removed - menu section grows instead */
 }
 
 /* List menu - FIXED, NO SCROLLING */
