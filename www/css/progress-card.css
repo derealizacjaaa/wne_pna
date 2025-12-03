@@ -11,7 +11,7 @@
   color: #b1404f;
   flex: 0 0 auto;
   box-sizing: border-box;
-  max-height: 150px; /* Increased to fit full counter with extra spacing */
+  max-height: 180px; /* Expanded for more spacious full counter */
   overflow: hidden;
 }
 
