@@ -338,7 +338,7 @@
   position: relative;
   overflow: visible; /* Allow debug info to show */
   box-sizing: border-box;
-  max-height: 120px;
+  max-height: 160px; /* Fit progress card (140px) + padding (20px) */
 }
 
 /* List menu - FIXED, NO SCROLLING */
@@ -541,10 +541,10 @@
    Desktop only - minimum 3 items, maximum 5 items
 
    PRIORITY SYSTEM (screen height):
-   1. Full counter + 5 lists: 100vh >= 756px
-   2. Full counter + 4 lists: 694px <= 100vh < 756px
-   3. Short counter + 4 lists: 663px <= 100vh < 694px
-   4. Short counter + 3 lists: 100vh < 663px
+   1. Full counter + 5 lists: 100vh >= 816px
+   2. Full counter + 4 lists: 754px <= 100vh < 816px
+   3. Short counter + 4 lists: 724px <= 100vh < 754px
+   4. Short counter + 3 lists: 100vh < 724px
 
    ACTUAL HEIGHT CALCULATION:
    Total sidebar: calc(100vh - 120px)
@@ -561,32 +561,32 @@
      - Spacer: 8px
      - Nav button (next): 42px (5px margin + 37px button)
    Section 3 - Summary:
-     * Full counter: 100px (Header + Stats + Bar + Percentage)
-     * Short counter: 70px (Header + Stats only)
+     * Full counter: 140px card + 20px padding = 160px total
+     * Short counter: 110px card + 20px padding = 130px total
 
-   With FULL counter:
-   - 5 items: 56 + 460 + 100 = 616px → needs 100vh ≥ 756px
-   - 4 items: 56 + 398 + 100 = 554px → needs 100vh ≥ 694px
-   - 3 items: 56 + 336 + 100 = 492px → needs 100vh ≥ 632px
+   With FULL counter (160px):
+   - 5 items: 56 + 460 + 160 = 676px → needs 100vh ≥ 816px
+   - 4 items: 56 + 398 + 160 = 614px → needs 100vh ≥ 754px
+   - 3 items: 56 + 336 + 160 = 552px → needs 100vh ≥ 692px
 
-   With SHORT counter (saves 30px):
-   - 4 items: 554 - 30 = 524px → needs 100vh ≥ 663px
-   - 3 items: 492 - 30 = 462px → needs 100vh ≥ 601px
+   With SHORT counter (130px, saves 30px):
+   - 4 items: 614 - 30 = 584px → needs 100vh ≥ 724px
+   - 3 items: 552 - 30 = 522px → needs 100vh ≥ 662px
    ======================================== */
 
-/* Priority 4: Short counter + 3 lists (100vh < 663px) */
-@media (max-height: 662px) and (min-width: 993px) {
+/* Priority 4: Short counter + 3 lists (100vh < 724px) */
+@media (max-height: 723px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(n+4) {
     display: none !important;
   }
 }
 
-/* Priority 3 + 2: Show 4 items (663px ≤ 100vh < 756px) */
-@media (min-height: 663px) and (max-height: 755px) and (min-width: 993px) {
+/* Priority 3 + 2: Show 4 items (724px ≤ 100vh < 816px) */
+@media (min-height: 724px) and (max-height: 815px) and (min-width: 993px) {
   .lists-menu .list-item:nth-child(5) {
     display: none !important;
   }
 }
 
-/* Priority 1: Full counter + 5 lists (100vh ≥ 756px) */
+/* Priority 1: Full counter + 5 lists (100vh ≥ 816px) */
 /* No rules needed - default shows all 5 */

@@ -11,7 +11,7 @@
   color: #b1404f;
   flex: 0 0 auto;
   box-sizing: border-box;
-  max-height: 100px;
+  max-height: 140px; /* Increased to fit full counter: Header + Stats + Bar + Percentage */
   overflow: visible; /* Allow debug info to show */
 }
 
@@ -120,8 +120,8 @@
    RESPONSIVE: Short completion counter
    ======================================== */
 
-/* Below 694px: Hide bar + percentage for "short" counter (Header + Stats only) */
-@media (max-height: 693px) and (min-width: 993px) {
+/* Below 754px: Hide bar + percentage for "short" counter (Header + Stats only) */
+@media (max-height: 753px) and (min-width: 993px) {
   .summary-progress-bar {
     display: none !important;
   }
@@ -131,6 +131,6 @@
   }
 
   .progress-summary-card {
-    max-height: 70px !important;
+    max-height: 110px !important; /* Fit short counter: Header + Stats only */
   }
 }
