@@ -338,7 +338,7 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  max-height: 160px; /* Fit progress card (140px) + padding (20px) */
+  max-height: 170px; /* Fit progress card (150px) + padding (20px) */
 }
 
 /* List menu - FIXED, NO SCROLLING */

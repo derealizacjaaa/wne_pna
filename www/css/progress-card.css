@@ -11,7 +11,7 @@
   color: #b1404f;
   flex: 0 0 auto;
   box-sizing: border-box;
-  max-height: 140px; /* Increased to fit full counter: Header + Stats + Bar + Percentage */
+  max-height: 150px; /* Increased to fit full counter with extra spacing */
   overflow: hidden;
 }
 
@@ -44,7 +44,7 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 16px; /* Increased from 8px to add visual break before progress bar */
 }
 
 .summary-stat {
@@ -115,6 +115,6 @@
   }
 
   .progress-summary-card {
-    max-height: 110px !important; /* Fit short counter: Header + Stats only */
+    max-height: 120px !important; /* Fit short counter with extra spacing */
   }
 }
