@@ -13,7 +13,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Push header to top, summary to bottom */
   box-sizing: border-box;
 }
 
@@ -326,6 +325,13 @@
 .list-nav-btn.btn-hidden {
   visibility: hidden;
   pointer-events: none;
+}
+
+/* Flexible spacer - grows to push summary to bottom */
+.lists-sidebar-spacer {
+  background: #b1404f;
+  flex: 1 0 auto; /* Grow to fill available space */
+  min-height: 0;
 }
 
 /* Section 3: Summary - FIXED with max-height, glued to bottom */
