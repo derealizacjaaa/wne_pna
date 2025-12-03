@@ -12,23 +12,7 @@
   flex: 0 0 auto;
   box-sizing: border-box;
   max-height: 140px; /* Increased to fit full counter: Header + Stats + Bar + Percentage */
-  overflow: visible; /* Allow debug info to show */
-}
-
-/* DEBUG: Height indicator */
-.height-debug {
-  position: absolute;
-  top: -25px;
-  right: 10px;
-  background: #000000;
-  color: #00ff00;
-  padding: 3px 8px;
-  border-radius: 3px;
-  font-size: 0.75em;
-  font-family: monospace;
-  font-weight: bold;
-  z-index: 9999;
-  border: 1px solid #00ff00;
+  overflow: hidden;
 }
 
 /* Header */

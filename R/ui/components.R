@@ -98,19 +98,6 @@ create_task_item <- function(task_id, task_info, is_active) {
 progress_summary_card <- function(overall_stats) {
   div(
     class = "progress-summary-card",
-    # DEBUG: Height detector
-    tags$div(
-      id = "height-debug",
-      class = "height-debug",
-      "Height: ", tags$span(id = "height-value", "---"), "px"
-    ),
-    tags$script(HTML("
-      function updateHeight() {
-        document.getElementById('height-value').textContent = window.innerHeight;
-      }
-      updateHeight();
-      window.addEventListener('resize', updateHeight);
-    ")),
     div(
       class = "summary-header",
       icon("chart-pie"),
