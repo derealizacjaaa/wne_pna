@@ -331,9 +331,8 @@
 /* Flexible spacer - GROWS to fill space and push summary to bottom */
 .lists-sidebar-spacer {
   background: #b1404f;
-  flex: 1 1 auto; /* Grow AND shrink to fill available space */
+  flex: 1 1 auto; /* Grow to fill REMAINING space (not all space) */
   min-height: 0;
-  height: 100%; /* Explicitly take all available height */
 }
 
 /* Section 3: Summary - FIXED at bottom, no grow/shrink */
