@@ -328,7 +328,7 @@
   pointer-events: none;
 }
 
-/* Section 3: Summary - FIXED with max-height */
+/* Section 3: Summary - FIXED with max-height, glued to bottom */
 .lists-sidebar-summary {
   background: #b1404f;
   padding: 10px;
@@ -339,6 +339,7 @@
   overflow: hidden;
   box-sizing: border-box;
   max-height: 200px; /* Expanded for progress card (180px) + padding (20px) */
+  margin-top: auto; /* Push to bottom, creating space above */
 }
 
 /* List menu - FIXED, NO SCROLLING */
