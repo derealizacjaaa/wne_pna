@@ -242,7 +242,7 @@
   padding-left: 20px;
   border-bottom: 4px solid #4A4A4A;
   overflow: hidden;
-  flex: 0 1 auto; /* Changed from 1 1 auto - don't grow, allow shrink */
+  flex: 1 1 auto; /* Back to growing - will fill space, pushing summary to bottom */
   min-height: 0;
   max-height: 100%;
   position: relative;
@@ -339,7 +339,7 @@
   overflow: hidden;
   box-sizing: border-box;
   max-height: 200px; /* Expanded for progress card (180px) + padding (20px) */
-  margin-top: auto; /* Push to bottom, creating space above */
+  /* margin-top: auto removed - menu section grows instead */
 }
 
 /* List menu - FIXED, NO SCROLLING */
