@@ -336,7 +336,7 @@
   flex-shrink: 0;
   border-bottom: 4px solid #4A4A4A;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Allow debug info to show */
   box-sizing: border-box;
   max-height: 120px;
 }
