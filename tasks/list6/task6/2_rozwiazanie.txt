@@ -18,8 +18,6 @@ summary(vacation)
 <p><strong>ℓ(θ) = -n/2 · ln(2π) - n/2 · ln(σ²) - 1/(2σ²) · ∑(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)²</strong></p>
 <p>gdzie θ = (β₀, β₁, ln(σ)) - parametryzujemy przez ln(σ) aby zapewnić σ > 0</p>
 
-<p><strong>Definicja funkcji:</strong></p>
-
 code(
 # Funkcja log-wiarygodności
 # Parametry: theta = c(beta0, beta1, log_sigma)
@@ -45,8 +43,8 @@ log_likelihood <- function(theta, y, x) {
 }
 )
 
-execute(
-# Definicja funkcji log-wiarygodności
+run(
+# Definicja funkcji (wykonywana w tle)
 log_likelihood <- function(theta, y, x) {
   beta0 <- theta[1]
   beta1 <- theta[2]
@@ -62,8 +60,6 @@ log_likelihood <- function(theta, y, x) {
 
   return(ll)
 }
-
-cat("✓ Funkcja log_likelihood() zdefiniowana\n")
 )
 
 <h4>Krok 3: Gradient (wektor pierwszych pochodnych)</h4>
@@ -77,8 +73,6 @@ cat("✓ Funkcja log_likelihood() zdefiniowana\n")
   <li>∂ℓ/∂β₁ = 1/σ² · ∑x<sub>i</sub>(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)</li>
   <li>∂ℓ/∂log(σ) = -n + 1/σ² · ∑(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)²</li>
 </ul>
-
-<p><strong>Definicja funkcji:</strong></p>
 
 code(
 # Gradient funkcji log-wiarygodności
@@ -103,8 +97,8 @@ gradient_log_likelihood <- function(theta, y, x) {
 }
 )
 
-execute(
-# Definicja funkcji gradient
+run(
+# Definicja funkcji (wykonywana w tle)
 gradient_log_likelihood <- function(theta, y, x) {
   beta0 <- theta[1]
   beta1 <- theta[2]
@@ -121,16 +115,12 @@ gradient_log_likelihood <- function(theta, y, x) {
 
   return(c(d_beta0, d_beta1, d_log_sigma))
 }
-
-cat("✓ Funkcja gradient_log_likelihood() zdefiniowana\n")
 )
 
 <h4>Krok 4: Hesjan (macierz drugich pochodnych)</h4>
 
 <p>Hesjan to macierz 3×3 drugich pochodnych cząstkowych:</p>
 <p><strong>H<sub>ij</sub> = ∂²ℓ/(∂θ<sub>i</sub>∂θ<sub>j</sub>)</strong></p>
-
-<p><strong>Definicja funkcji:</strong></p>
 
 code(
 # Hesjan funkcji log-wiarygodności
@@ -163,8 +153,8 @@ hessian_log_likelihood <- function(theta, y, x) {
 }
 )
 
-execute(
-# Definicja funkcji Hessian
+run(
+# Definicja funkcji (wykonywana w tle)
 hessian_log_likelihood <- function(theta, y, x) {
   beta0 <- theta[1]
   beta1 <- theta[2]
@@ -188,8 +178,6 @@ hessian_log_likelihood <- function(theta, y, x) {
 
   return(H)
 }
-
-cat("✓ Funkcja hessian_log_likelihood() zdefiniowana\n")
 )
 
 <h4>Krok 5: Estymacja z użyciem maxLik (z śledzeniem ścieżki)</h4>

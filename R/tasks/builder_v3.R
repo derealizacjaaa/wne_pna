@@ -9,10 +9,16 @@
 #   title: Tab title in navbar (e.g., "rozwiazanie" → "Rozwiązanie")
 #
 # Inside files, use special functions:
-#   code(...) - Display R code with syntax highlighting
+#   code(...) - Display R code with syntax highlighting (not executed)
 #   execute(...) - Execute R code and show output
 #   plot(...) - Execute R code and show plot
+#   run(...) - Execute R code silently without output (for setup/initialization)
 #   Plain HTML/text - Display as-is
+#
+# Shared environment:
+#   All execute(), plot(), and run() blocks across ALL TABS share the same environment
+#   Variables and functions defined in one block are available in all subsequent blocks
+#   This enables multi-step analyses spanning multiple tabs
 #
 # Examples:
 #   1_tresc.txt           → Tab: "Treść"
@@ -52,16 +58,20 @@ build_task_from_files_v3 <- function(task_dir) {
     return(NULL)
   }
 
+  # Create a shared environment for the entire task
+  # All execute(), plot(), and run() blocks across all tabs will share this environment
+  task_env <- new.env(parent = .GlobalEnv)
+
   # Group files by tab order
-  tabs <- create_tabs_from_files_v3(file_info, task_dir)
+  tabs <- create_tabs_from_files_v3(file_info, task_dir, task_env)
 
   # Build navbar with tabs
   content <- page_navbar(title = "", id = "task_tabs", !!!tabs)
 
-  # Determine completion status (has execute or plot blocks)
+  # Determine completion status (has execute, plot, or run blocks)
   completed <- any(sapply(file_info, function(f) {
     file_content <- paste(readLines(f$path, warn = FALSE), collapse = "\n")
-    grepl("execute\\(|plot\\(", file_content)
+    grepl("execute\\(|plot\\(|run\\(", file_content)
   }))
 
   list(
@@ -111,8 +121,9 @@ parse_task_files_v3 <- function(files) {
 #'
 #' @param file_info List of parsed file objects
 #' @param task_dir Task directory path
+#' @param task_env Shared environment for the entire task
 #' @return List of nav_panel objects
-create_tabs_from_files_v3 <- function(file_info, task_dir) {
+create_tabs_from_files_v3 <- function(file_info, task_dir, task_env) {
   # Sort by order, then by subtask
   file_info <- file_info[order(
     sapply(file_info, function(x) x$order),
@@ -129,8 +140,8 @@ create_tabs_from_files_v3 <- function(file_info, task_dir) {
     # Get tab title (capitalize first letter)
     tab_title <- get_tab_title_v3(tab_files[[1]]$title)
 
-    # Build tab content
-    tab_content <- build_tab_content_v3(tab_files, task_dir)
+    # Build tab content with shared task environment
+    tab_content <- build_tab_content_v3(tab_files, task_dir, task_env)
 
     nav_panel(
       title = tab_title,
@@ -154,15 +165,18 @@ get_tab_title_v3 <- function(title) {
 #'
 #' @param tab_files Files for this tab
 #' @param task_dir Task directory path
+#' @param task_env Shared environment for the entire task
 #' @return Shiny div with tab content
-build_tab_content_v3 <- function(tab_files, task_dir) {
-  # Create a shared environment for this tab
-  # All execute() and plot() blocks within this tab will share this environment
-  shared_env <- new.env(parent = .GlobalEnv)
+build_tab_content_v3 <- function(tab_files, task_dir, task_env = NULL) {
+  # Use provided task environment, or create a new one if not provided
+  # (for backward compatibility)
+  if (is.null(task_env)) {
+    task_env <- new.env(parent = .GlobalEnv)
+  }
 
   # Build content blocks for each file
   content_blocks <- lapply(tab_files, function(file) {
-    build_content_block_v3(file, task_dir, shared_env)
+    build_content_block_v3(file, task_dir, task_env)
   })
 
   # Wrap in div with padding
@@ -174,13 +188,13 @@ build_tab_content_v3 <- function(tab_files, task_dir) {
 
 #' Build content block for a single file (V3)
 #'
-#' Parses content for code(...), execute(...), plot(...) blocks
+#' Parses content for code(...), execute(...), plot(...), run(...) blocks
 #'
 #' @param file File info object
 #' @param task_dir Task directory path
-#' @param shared_env Shared environment for execute/plot blocks
+#' @param task_env Shared environment for execute/plot/run blocks
 #' @return Shiny HTML element
-build_content_block_v3 <- function(file, task_dir, shared_env = NULL) {
+build_content_block_v3 <- function(file, task_dir, task_env = NULL) {
   # Read file content
   content <- paste(readLines(file$path, warn = FALSE), collapse = "\n")
 
@@ -199,16 +213,16 @@ build_content_block_v3 <- function(file, task_dir, shared_env = NULL) {
   # Parse content for special functions
   parsed_blocks <- parse_content_blocks(content)
 
-  # Render each parsed block with shared environment
+  # Render each parsed block with task environment
   for (block in parsed_blocks) {
-    blocks <- c(blocks, list(render_content_block(block, shared_env)))
+    blocks <- c(blocks, list(render_content_block(block, task_env)))
   }
 
   # Return all blocks wrapped in div
   div(blocks)
 }
 
-#' Parse content into blocks (HTML, code(), execute(), plot())
+#' Parse content into blocks (HTML, code(), execute(), plot(), run())
 #'
 #' @param content File content as string
 #' @return List of block objects
@@ -217,8 +231,8 @@ parse_content_blocks <- function(content) {
   pos <- 1
 
   while (pos <= nchar(content)) {
-    # Find next function: code(, execute(, or plot(
-    pattern <- "(code|execute|plot)\\("
+    # Find next function: code(, execute(, plot(, or run(
+    pattern <- "(code|execute|plot|run)\\("
     match <- regexpr(pattern, substring(content, pos), perl = TRUE)
 
     if (match == -1) {
@@ -308,26 +322,42 @@ parse_content_blocks <- function(content) {
 #' Render a content block based on its type
 #'
 #' @param block Block object with type and content
-#' @param shared_env Shared environment for execute/plot blocks
+#' @param task_env Shared environment for execute/plot/run blocks
 #' @return Shiny HTML element
-render_content_block <- function(block, shared_env = NULL) {
+render_content_block <- function(block, task_env = NULL) {
   if (block$type == "html") {
     # Raw HTML content
     div(class = "task-tab-content-simple", HTML(block$content))
 
   } else if (block$type == "code") {
-    # Display code with syntax highlighting
+    # Display code with syntax highlighting (not executed)
     code_block(block$content, language = "r")
 
   } else if (block$type == "execute") {
-    # Execute code and show output with shared environment
-    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = shared_env)
+    # Execute code and show output with task environment
+    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = task_env)
     code_output(output)
 
   } else if (block$type == "plot") {
-    # Execute code with plot handling with shared environment
-    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = shared_env)
+    # Execute code with plot handling with task environment
+    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = task_env)
     code_output(output)
+
+  } else if (block$type == "run") {
+    # Execute code silently without displaying output (for initialization/setup)
+    # This is useful for loading libraries, defining functions, preparing data, etc.
+    tryCatch({
+      eval(parse(text = block$content), envir = task_env)
+    }, error = function(e) {
+      # If there's an error, show it
+      div(
+        style = "padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 10px 0;",
+        tags$strong("Error in run() block:"),
+        tags$pre(style = "margin-top: 10px;", conditionMessage(e))
+      )
+    })
+    # Return empty div (no visible output)
+    div()
 
   } else {
     # Unknown type - display as text
