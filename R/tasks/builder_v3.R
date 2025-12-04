@@ -179,11 +179,8 @@ build_tab_content_v3 <- function(tab_files, task_dir, task_env = NULL) {
     build_content_block_v3(file, task_dir, task_env)
   })
 
-  # Wrap in div with padding (20px top/bottom, 30px left/right)
-  div(
-    style = "padding: 20px 30px;",
-    content_blocks
-  )
+  # Wrap in div (no padding - elements handle their own)
+  div(content_blocks)
 }
 
 #' Build content block for a single file (V3)
@@ -351,7 +348,7 @@ render_content_block <- function(block, task_env = NULL) {
     }, error = function(e) {
       # If there's an error, show it
       div(
-        style = "padding: 20px 30px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 15px 0;",
+        style = "padding: 20px 60px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 15px 0;",
         tags$strong("Error in run() block:"),
         tags$pre(style = "margin-top: 10px;", conditionMessage(e))
       )
@@ -362,7 +359,7 @@ render_content_block <- function(block, task_env = NULL) {
   } else {
     # Unknown type - display as text
     div(
-      style = "padding: 20px 30px; background: #f8f9fa; border-left: 4px solid #b1404f;",
+      style = "padding: 20px 60px; background: #f8f9fa; border-left: 4px solid #b1404f;",
       pre(block$content)
     )
   }
