@@ -124,7 +124,7 @@
 /* Adjust spacing for navbar tabs container */
 .main-content-body .tab-content {
   margin-top: 0 !important;
-  padding-top: 56px !important;  /* Push content below navbar */
+  padding-top: -10px !important;  /* Push content below navbar */
 }
 
 /* Tab panes don't force height */
