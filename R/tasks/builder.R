@@ -31,11 +31,11 @@ create_code_output_tabs <- function(code,
   list(
     nav_panel(
       title = code_tab_title,
-      div(style = "padding: 20px;", code_block(code, language))
+      div(style = "padding: 20px 30px;", code_block(code, language))
     ),
     nav_panel(
       title = output_tab_title,
-      div(style = "padding: 20px;", code_output(output))
+      div(style = "padding: 20px 30px;", code_output(output))
     )
   )
 }
@@ -89,11 +89,11 @@ create_multi_code_tabs <- function(exercises,
   list(
     nav_panel(
       title = code_tab_title,
-      div(style = "padding: 20px;", all_code_blocks)
+      div(style = "padding: 20px 30px;", all_code_blocks)
     ),
     nav_panel(
       title = output_tab_title,
-      div(style = "padding: 20px;", all_output_blocks)
+      div(style = "padding: 20px 30px;", all_output_blocks)
     )
   )
 }

@@ -159,9 +159,9 @@ build_tab_content <- function(tab_files) {
     build_content_block(file)
   })
 
-  # Wrap in div with padding
+  # Wrap in div with padding (20px top/bottom, 30px left/right)
   div(
-    style = "padding: 20px;",
+    style = "padding: 20px 30px;",
     content_blocks
   )
 }
@@ -218,7 +218,7 @@ build_content_block <- function(file) {
     # Unknown type - display as text
     blocks <- c(blocks, list(
       div(
-        style = "padding: 15px; background: #f8f9fa; border-left: 4px solid #b1404f;",
+        style = "padding: 20px 30px; background: #f8f9fa; border-left: 4px solid #b1404f;",
         pre(content)
       )
     ))

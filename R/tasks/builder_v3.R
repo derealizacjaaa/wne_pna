@@ -351,7 +351,7 @@ render_content_block <- function(block, task_env = NULL) {
     }, error = function(e) {
       # If there's an error, show it
       div(
-        style = "padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 10px 0;",
+        style = "padding: 20px 30px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 15px 0;",
         tags$strong("Error in run() block:"),
         tags$pre(style = "margin-top: 10px;", conditionMessage(e))
       )
@@ -362,7 +362,7 @@ render_content_block <- function(block, task_env = NULL) {
   } else {
     # Unknown type - display as text
     div(
-      style = "padding: 15px; background: #f8f9fa; border-left: 4px solid #b1404f;",
+      style = "padding: 20px 30px; background: #f8f9fa; border-left: 4px solid #b1404f;",
       pre(block$content)
     )
   }

@@ -8,7 +8,7 @@
 #' @param language Programming language (default: "r")
 #' @param padding CSS padding value
 #' @return Shiny HTML tag for code block
-code_block <- function(code, language = "r", padding = "15px") {
+code_block <- function(code, language = "r", padding = "20px 30px") {
   # Clean up code: remove leading/trailing empty lines
   lines <- strsplit(code, "\n")[[1]]
 
@@ -51,7 +51,7 @@ code_output <- function(output) {
       content <- c(content, list(
         tags$pre(
           class = "code-output",
-          style = "background: #ffffff; padding: 15px; border: 1px solid #dee2e6; border-left: 4px solid #28a745; border-radius: 4px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; color: #333; white-space: pre;",
+          style = "background: #ffffff; padding: 20px 30px; border: 1px solid #dee2e6; border-left: 4px solid #28a745; border-radius: 4px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; color: #333; white-space: pre;",
           output$text
         )
       ))
@@ -83,7 +83,7 @@ code_output <- function(output) {
   # Simple text output
   tags$pre(
     class = "code-output",
-    style = "background: #ffffff; padding: 15px; border: 1px solid #dee2e6; border-left: 4px solid #28a745; border-radius: 4px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; color: #333; white-space: pre;",
+    style = "background: #ffffff; padding: 20px 30px; border: 1px solid #dee2e6; border-left: 4px solid #28a745; border-radius: 4px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; color: #333; white-space: pre;",
     output
   )
 }
