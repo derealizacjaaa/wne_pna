@@ -52,10 +52,11 @@ generate_list_sidebar <- function(list_metadata, current_list_id, all_lists,
   # Get overall statistics
   overall_stats <- get_overall_stats(all_lists)
 
-  # Build sidebar structure
+  # Build sidebar structure with flexible spacer
   tagList(
     sidebar_header(),
     sidebar_menu(list_items, nav_buttons),
+    sidebar_spacer(),  # Flexible spacer that grows to push summary to bottom
     sidebar_summary(overall_stats)
   )
 }
@@ -130,6 +131,12 @@ sidebar_menu <- function(list_items, nav_buttons) {
     tagAppendChildren(tags$ul(class = "lists-menu"), list_items),
     nav_buttons$next_btn
   )
+}
+
+#' Create flexible spacer that pushes summary to bottom
+#' @return Shiny div with spacer
+sidebar_spacer <- function() {
+  div(class = "lists-sidebar-spacer")
 }
 
 #' Create sidebar summary section

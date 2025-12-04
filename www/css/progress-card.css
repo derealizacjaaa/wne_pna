@@ -11,7 +11,7 @@
   color: #b1404f;
   flex: 0 0 auto;
   box-sizing: border-box;
-  max-height: 100px;
+  max-height: 180px; /* Expanded for more spacious full counter */
   overflow: hidden;
 }
 
@@ -44,7 +44,7 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 16px; /* Increased from 8px to add visual break before progress bar */
 }
 
 .summary-stat {
@@ -98,4 +98,23 @@
   font-weight: 700;
   color: #b1404f;
   line-height: 1;
+}
+
+/* ========================================
+   RESPONSIVE: Short completion counter
+   ======================================== */
+
+/* Below 754px: Hide bar + percentage for "short" counter (Header + Stats only) */
+@media (max-height: 753px) and (min-width: 993px) {
+  .summary-progress-bar {
+    display: none !important;
+  }
+
+  .summary-percentage {
+    display: none !important;
+  }
+
+  .progress-summary-card {
+    max-height: 120px !important; /* Fit short counter with extra spacing */
+  }
 }
