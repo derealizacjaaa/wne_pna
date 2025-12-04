@@ -179,9 +179,9 @@ build_tab_content_v3 <- function(tab_files, task_dir, task_env = NULL) {
     build_content_block_v3(file, task_dir, task_env)
   })
 
-  # Wrap in div with padding
+  # Wrap in div with padding (20px top/bottom, 30px left/right)
   div(
-    style = "padding: 20px;",
+    style = "padding: 20px 30px;",
     content_blocks
   )
 }
