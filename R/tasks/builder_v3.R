@@ -156,9 +156,13 @@ get_tab_title_v3 <- function(title) {
 #' @param task_dir Task directory path
 #' @return Shiny div with tab content
 build_tab_content_v3 <- function(tab_files, task_dir) {
+  # Create a shared environment for this tab
+  # All execute() and plot() blocks within this tab will share this environment
+  shared_env <- new.env(parent = .GlobalEnv)
+
   # Build content blocks for each file
   content_blocks <- lapply(tab_files, function(file) {
-    build_content_block_v3(file, task_dir)
+    build_content_block_v3(file, task_dir, shared_env)
   })
 
   # Wrap in div with padding
@@ -174,8 +178,9 @@ build_tab_content_v3 <- function(tab_files, task_dir) {
 #'
 #' @param file File info object
 #' @param task_dir Task directory path
+#' @param shared_env Shared environment for execute/plot blocks
 #' @return Shiny HTML element
-build_content_block_v3 <- function(file, task_dir) {
+build_content_block_v3 <- function(file, task_dir, shared_env = NULL) {
   # Read file content
   content <- paste(readLines(file$path, warn = FALSE), collapse = "\n")
 
@@ -194,9 +199,9 @@ build_content_block_v3 <- function(file, task_dir) {
   # Parse content for special functions
   parsed_blocks <- parse_content_blocks(content)
 
-  # Render each parsed block
+  # Render each parsed block with shared environment
   for (block in parsed_blocks) {
-    blocks <- c(blocks, list(render_content_block(block)))
+    blocks <- c(blocks, list(render_content_block(block, shared_env)))
   }
 
   # Return all blocks wrapped in div
@@ -303,8 +308,9 @@ parse_content_blocks <- function(content) {
 #' Render a content block based on its type
 #'
 #' @param block Block object with type and content
+#' @param shared_env Shared environment for execute/plot blocks
 #' @return Shiny HTML element
-render_content_block <- function(block) {
+render_content_block <- function(block, shared_env = NULL) {
   if (block$type == "html") {
     # Raw HTML content
     div(class = "task-tab-content-simple", HTML(block$content))
@@ -314,13 +320,13 @@ render_content_block <- function(block) {
     code_block(block$content, language = "r")
 
   } else if (block$type == "execute") {
-    # Execute code and show output
-    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE)
+    # Execute code and show output with shared environment
+    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = shared_env)
     code_output(output)
 
   } else if (block$type == "plot") {
-    # Execute code with plot handling
-    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE)
+    # Execute code with plot handling with shared environment
+    output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = shared_env)
     code_output(output)
 
   } else {
