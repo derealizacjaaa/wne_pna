@@ -1,0 +1,479 @@
+/* ============================================
+   TASK CONTENT STYLING FRAMEWORK
+   ============================================
+   Standardized HTML elements for V3 task content
+   ============================================ */
+
+/* ============================================
+   HEADINGS
+   ============================================ */
+
+/* Main Title (H1) - Red accent with bottom border */
+.task-tab-content-simple h1 {
+  color: #b1404f;
+  font-size: 28px;
+  font-weight: 700;
+  border-bottom: 3px solid #b1404f;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Subtitle (H2) - Dark gray with subtle red left border */
+.task-tab-content-simple h2 {
+  color: #4A4A4A;
+  font-size: 24px;
+  font-weight: 600;
+  border-left: 4px solid #b1404f;
+  padding-left: 15px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Sub-subtitle (H3) - Medium gray with lighter red accent */
+.task-tab-content-simple h3 {
+  color: #606060;
+  font-size: 20px;
+  font-weight: 600;
+  border-left: 3px solid #d1808c;
+  padding-left: 12px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+/* Small heading (H4) */
+.task-tab-content-simple h4 {
+  color: #4A4A4A;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   TEXT ELEMENTS
+   ============================================ */
+
+/* Paragraphs - Standard text */
+.task-tab-content-simple p {
+  color: #4A4A4A;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* Inline code */
+.task-tab-content-simple code {
+  background-color: #f4f4f4;
+  color: #b1404f;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+}
+
+/* Strong/Bold text */
+.task-tab-content-simple strong {
+  color: #4A4A4A;
+  font-weight: 700;
+}
+
+/* Emphasis/Italic text */
+.task-tab-content-simple em {
+  font-style: italic;
+  color: #606060;
+}
+
+/* ============================================
+   LISTS
+   ============================================ */
+
+/* Unordered lists */
+.task-tab-content-simple ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  color: #4A4A4A;
+}
+
+.task-tab-content-simple ul li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Ordered lists */
+.task-tab-content-simple ol {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  color: #4A4A4A;
+}
+
+.task-tab-content-simple ol li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Nested lists */
+.task-tab-content-simple ul ul,
+.task-tab-content-simple ol ol,
+.task-tab-content-simple ul ol,
+.task-tab-content-simple ol ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   CALLOUT BOXES
+   ============================================ */
+
+/* Info box - Blue accent */
+.info-box {
+  background-color: #e7f3ff;
+  border-left: 5px solid #2196F3;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.info-box h4 {
+  color: #1976D2;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Warning box - Orange/Yellow accent */
+.warning-box {
+  background-color: #fff8e1;
+  border-left: 5px solid #ff9800;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box h4 {
+  color: #f57c00;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.warning-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Success box - Green accent */
+.success-box {
+  background-color: #e8f5e9;
+  border-left: 5px solid #4caf50;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.success-box h4 {
+  color: #388e3c;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.success-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Error box - Red accent */
+.error-box {
+  background-color: #ffebee;
+  border-left: 5px solid #f44336;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.error-box h4 {
+  color: #c62828;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.error-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   SPECIAL CONTENT BOXES
+   ============================================ */
+
+/* Definition box */
+.definition-box {
+  background-color: #f9f9f9;
+  border: 2px solid #b1404f;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.definition-box h4 {
+  color: #b1404f;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.definition-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Example box */
+.example-box {
+  background-color: #fafafa;
+  border-left: 5px solid #9e9e9e;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box h4 {
+  color: #606060;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.example-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Note box */
+.note-box {
+  background-color: #fffbf0;
+  border-left: 5px solid #ffc107;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.note-box h4 {
+  color: #f57f17;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.note-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   BLOCKQUOTES
+   ============================================ */
+
+.task-tab-content-simple blockquote {
+  background-color: #f9f9f9;
+  border-left: 4px solid #b1404f;
+  margin: 20px 0;
+  padding: 15px 20px;
+  font-style: italic;
+  color: #606060;
+}
+
+.task-tab-content-simple blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+.task-tab-content-simple table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+  background-color: #ffffff;
+}
+
+.task-tab-content-simple table thead {
+  background-color: #b1404f;
+  color: #ffffff;
+}
+
+.task-tab-content-simple table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid #ddd;
+}
+
+.task-tab-content-simple table td {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  color: #4A4A4A;
+}
+
+.task-tab-content-simple table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.task-tab-content-simple table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* ============================================
+   HORIZONTAL RULES
+   ============================================ */
+
+.task-tab-content-simple hr {
+  border: none;
+  border-top: 2px solid #e0e0e0;
+  margin: 30px 0;
+}
+
+/* ============================================
+   MATHEMATICAL FORMULAS
+   ============================================ */
+
+/* Inline math */
+.math-inline {
+  font-style: italic;
+  color: #4A4A4A;
+}
+
+/* Display math (block) */
+.math-display {
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #fafafa;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* MathJax specific styling */
+.MathJax {
+  outline: none;
+}
+
+.MathJax_Display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+
+.task-tab-content-simple a {
+  color: #b1404f;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease;
+}
+
+.task-tab-content-simple a:hover {
+  border-bottom: 1px solid #b1404f;
+}
+
+/* ============================================
+   IMAGES
+   ============================================ */
+
+.task-tab-content-simple img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   FIGURE WITH CAPTION
+   ============================================ */
+
+.task-tab-content-simple figure {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.task-tab-content-simple figure img {
+  margin: 0 auto;
+}
+
+.task-tab-content-simple figcaption {
+  margin-top: 10px;
+  color: #606060;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ============================================
+   KEYBOARD KEYS
+   ============================================ */
+
+.task-tab-content-simple kbd {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #4A4A4A;
+}
+
+/* ============================================
+   ABBREVIATIONS
+   ============================================ */
+
+.task-tab-content-simple abbr[title] {
+  border-bottom: 1px dotted #999;
+  cursor: help;
+  text-decoration: none;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .task-tab-content-simple h1 {
+    font-size: 24px;
+  }
+
+  .task-tab-content-simple h2 {
+    font-size: 20px;
+  }
+
+  .task-tab-content-simple h3 {
+    font-size: 18px;
+  }
+
+  .task-tab-content-simple h4 {
+    font-size: 16px;
+  }
+
+  .task-tab-content-simple p {
+    font-size: 15px;
+  }
+
+  .info-box,
+  .warning-box,
+  .success-box,
+  .error-box,
+  .definition-box,
+  .example-box,
+  .note-box {
+    padding: 12px 15px;
+  }
+
+  .task-tab-content-simple table {
+    font-size: 14px;
+  }
+}

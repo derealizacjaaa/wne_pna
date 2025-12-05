@@ -1,0 +1,105 @@
+<h1>Boksy i ramki informacyjne</h1>
+
+<h2>Boksy komunikatów</h2>
+
+<div class="info-box">
+  <h4>Boks informacyjny (niebieski)</h4>
+  <p>Używaj do przekazywania przydatnych informacji, kontekstu lub wskazówek.</p>
+  <p>Idealny do dodatkowych wyjaśnień.</p>
+</div>
+
+<div class="warning-box">
+  <h4>Boks ostrzegawczy (pomarańczowy)</h4>
+  <p>Używaj do ostrzeżeń, rzeczy na które trzeba uważać.</p>
+  <p>Przykład: "Upewnij się, że dane są wczytane przed wykonaniem kodu!"</p>
+</div>
+
+<div class="success-box">
+  <h4>Boks sukcesu (zielony)</h4>
+  <p>Używaj do komunikatów o sukcesie, prawidłowych wynikach.</p>
+  <p>Przykład: "Jeśli otrzymałeś ten wynik, zadanie jest poprawne!"</p>
+</div>
+
+<div class="error-box">
+  <h4>Boks błędu (czerwony)</h4>
+  <p>Używaj do opisywania typowych błędów lub problemów.</p>
+  <p>Przykład: "Ten kod zwróci błąd, ponieważ wektor jest pusty."</p>
+</div>
+
+<h2>Boksy treści specjalnych</h2>
+
+<div class="definition-box">
+  <h4>Definicja: Wektor</h4>
+  <p>Wektor to uporządkowany zbiór elementów tego samego typu w języku R.</p>
+  <p>Wektory są podstawową strukturą danych w R.</p>
+</div>
+
+<div class="example-box">
+  <h4>Przykład</h4>
+  <p>Rozważmy wektor liczb: <code>x <- c(1, 2, 3, 4, 5)</code></p>
+  <p>Średnia wynosi: $\bar{x} = 3$</p>
+  <p>Odchylenie standardowe: $s \approx 1.58$</p>
+</div>
+
+<div class="note-box">
+  <h4>Notatka</h4>
+  <p>Pamiętaj, że R jest case-sensitive!</p>
+  <p><code>Mean()</code> ≠ <code>mean()</code></p>
+</div>
+
+<h2>Praktyczne zastosowanie</h2>
+
+<p>Możesz łączyć różne elementy:</p>
+
+<div class="info-box">
+  <h4>Wskazówka</h4>
+  <p>Przed wykonaniem obliczeń sprawdź typ danych funkcją <code>class()</code>.</p>
+  <p>Przykład: <code>class(mtcars$mpg)</code> zwróci <code>"numeric"</code></p>
+</div>
+
+run(
+# Załaduj dane (bez wyświetlania)
+data(mtcars)
+x <- mtcars$mpg
+)
+
+<p>Teraz wykonajmy kod korzystając z załadowanych danych:</p>
+
+execute(
+# Sprawdź typ danych
+cat("Typ danych:", class(x), "\n")
+
+# Podstawowe statystyki
+cat("Średnia:", mean(x), "\n")
+cat("Mediana:", median(x), "\n")
+cat("Odch. stand.:", sd(x), "\n")
+)
+
+<div class="success-box">
+  <h4>Oczekiwany wynik</h4>
+  <p>Średnia MPG powinna wynosić około <strong>20.09</strong></p>
+</div>
+
+<h2>Wykres demonstracyjny</h2>
+
+<p>Stwórzmy wykres używając wcześniej załadowanych danych:</p>
+
+plot(
+hist(x,
+     main = "Rozkład zużycia paliwa (MPG)",
+     xlab = "Mile per gallon",
+     ylab = "Częstość",
+     col = "steelblue",
+     border = "white",
+     breaks = 10)
+
+# Dodaj linię średniej
+abline(v = mean(x), col = "#b1404f", lwd = 2, lty = 2)
+legend("topright", legend = "Średnia", col = "#b1404f", lwd = 2, lty = 2)
+)
+
+<div class="note-box">
+  <h4>Uwaga o współdzielonym środowisku</h4>
+  <p>Zwróć uwagę, że funkcja <code>run()</code> załadowała dane niewidocznie, a następne bloki (<code>execute()</code> i <code>plot()</code>) używają tych samych danych!</p>
+  <p>Wszystkie bloki w zadaniu współdzielą to samo środowisko R.</p>
+</div>
