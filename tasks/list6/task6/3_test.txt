@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MLE — regresja liniowa (jedna zmienna)</title>
+  <!-- MathJax v3 -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$','$'], ['\\(','\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 28px; line-height:1.5; }
+    pre { background:#f6f6f8; padding:12px; border-radius:8px; overflow:auto }
+    .formula { margin:18px 0; font-size:1.05rem }
+    h1,h2 { margin:0 0 10px 0 }
+    .note { color:#555; font-size:0.95rem }
+  </style>
+</head>
+<body>
+  <h1>Regresja liniowa (ze stałą i jedną zmienną) — gęstość i funkcja największej wiarygodności (MLE)</h1>
+
+  <h2>Założenia modelu</h2>
+  <p>Model: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$, przy $\varepsilon_i\overset{iid}{\sim}N(0,\sigma^2)$ dla $i=1,\dots,n$.</p>
+
+  <h2>Gęstość jednego obserwowanego $y_i$ (warunkowa na $x_i$)</h2>
+  <div class="formula">\[ f(y_i\mid x_i;\beta_0,\beta_1,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y_i-\beta_0-\beta_1 x_i)^2}{2\sigma^2}\right). \]</div>
+
+  <h2>Iloczyn gęstości (likelihood)</h2>
+  <p>Z uwagi na niezależność obserwacji, funkcja wiarygodności to iloczyn gęstości po wszystkich obserwacjach:</p>
+  <div class="formula">\[ L(\beta_0,\beta_1,\sigma^2) 
+    = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y_i-\beta_0-\beta_1 x_i)^2}{2\sigma^2}\right)
+    = (2\pi\sigma^2)^{-n/2}\exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n (y_i-\beta_0-\beta_1 x_i)^2\right). \]</div>
+
+  <h2>Log-wiarygodność</h2>
+  <div class="formula">\[ \ell(\beta_0,\beta_1,\sigma^2) = \log L = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i-\beta_0-\beta_1 x_i)^2. \]</div>
+
+  <h2>Maksimum względem $\beta_0,\beta_1$ (MLE — parametry regresji)</h2>
+  <p>Minimalizacja sumy kwadratów reszt daje estymatory MLE dla $\beta_0,\beta_1$ (identyczne jak estymatory OLS):</p>
+  <div class="formula">\[ \hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n (x_i-\bar{x})^2} = \frac{S_{xy}}{S_{xx}}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1\,\bar{x}. \]</div>
+  <p class="note">(gdzie $\bar{x}=\frac{1}{n}\sum x_i$, $\bar{y}=\frac{1}{n}\sum y_i$.)</p>
+
+  <h2>Maksymalizator względem $\sigma^2$ (MLE dla wariancji)</h2>
+  <div class="formula">\[ \hat{\sigma}^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (y_i-\hat{\beta}_0-\hat{\beta}_1 x_i)^2. \]</div>
+  <p class="note">Uwaga: powyższa estymacja jest estymatorem MLE; klasyczny nieobciążony estymator wariancji w regresji używa dzielenia przez $n-2$ zamiast $n$.</p>
+
+  <h2>Macierzowo (krótko)</h2>
+  <div class="formula">\[ \hat{\boldsymbol{\beta}} = (X^{\top}X)^{-1}X^{\top}y, \]</div>
+  <p class="note">gdzie $X$ to macierz projektująca $n\times 2$ z kolumnami $[1, x]$ i $\boldsymbol{\beta}=(\beta_0,\beta_1)^{\top}$.</p>
+
+  <hr />
+  <p class="note">Masz ochotę, żebym dodał przykład obliczeń w JavaScript (na przykładowych danych) lub wygenerował plik HTML z przykładem, który można ściągnąć?</p>
+
+</body>
+</html>
