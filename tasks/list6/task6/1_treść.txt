@@ -1,0 +1,8 @@
+<h2>Zadanie 6: Regresja liniowa - vacation.csv</h2>
+
+<p>Wykorzystując dane z pliku <code>vacation.csv</code> dla modelu regresji liniowej:</p>
+
+<p><strong>MILES<sub>i</sub> = β₀ + β₁ · INCOME<sub>i</sub> + ε</strong></p>
+
+<p>Oszacować parametry <strong>β₀</strong> i <strong>β₁</strong> metodą najmniejszych kwadratów</p>
+

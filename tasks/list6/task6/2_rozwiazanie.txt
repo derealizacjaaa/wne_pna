@@ -1,0 +1,421 @@
+<h3>Rozwiązanie: Maximum Likelihood Estimation dla Regresji Liniowej</h3>
+
+<h4>Krok 1: Wczytanie danych</h4>
+
+execute(
+# Wczytanie danych
+vacation <- read.csv("tasks/list6/vacation.csv")
+cat("Dane vacation.csv:\n")
+head(vacation, 10)
+cat("\nWymiary:", nrow(vacation), "obserwacji,", ncol(vacation), "zmiennych\n")
+cat("Podsumowanie:\n")
+summary(vacation)
+)
+
+<h4>Krok 2: Funkcja log-wiarygodności</h4>
+
+<p>Dla modelu regresji liniowej z błędami normalnymi N(0, σ²), funkcja log-wiarygodności to:</p>
+<p><strong>ℓ(θ) = -n/2 · ln(2π) - n/2 · ln(σ²) - 1/(2σ²) · ∑(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)²</strong></p>
+<p>gdzie θ = (β₀, β₁, ln(σ)) - parametryzujemy przez ln(σ) aby zapewnić σ > 0</p>
+
+code(
+# Funkcja log-wiarygodności
+# Parametry: theta = c(beta0, beta1, log_sigma)
+log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+
+  # Predykcje modelu
+  y_pred <- beta0 + beta1 * x
+
+  # Reszty
+  residuals <- y - y_pred
+
+  # Log-wiarygodność
+  ll <- -n/2 * log(2*pi) - n * log_sigma -
+        sum(residuals^2) / (2 * sigma^2)
+
+  return(ll)
+}
+)
+
+run(
+# Definicja funkcji (wykonywana w tle)
+log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+  y_pred <- beta0 + beta1 * x
+  residuals <- y - y_pred
+
+  ll <- -n/2 * log(2*pi) - n * log_sigma -
+        sum(residuals^2) / (2 * sigma^2)
+
+  return(ll)
+}
+)
+
+<h4>Krok 3: Gradient (wektor pierwszych pochodnych)</h4>
+
+<p>Gradient to wektor pochodnych cząstkowych:</p>
+<p><strong>∇ℓ = (∂ℓ/∂β₀, ∂ℓ/∂β₁, ∂ℓ/∂log(σ))</strong></p>
+
+<p>Wyprowadzenie:</p>
+<ul>
+  <li>∂ℓ/∂β₀ = 1/σ² · ∑(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)</li>
+  <li>∂ℓ/∂β₁ = 1/σ² · ∑x<sub>i</sub>(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)</li>
+  <li>∂ℓ/∂log(σ) = -n + 1/σ² · ∑(y<sub>i</sub> - β₀ - β₁x<sub>i</sub>)²</li>
+</ul>
+
+code(
+# Gradient funkcji log-wiarygodności
+gradient_log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+
+  # Predykcje i reszty
+  y_pred <- beta0 + beta1 * x
+  residuals <- y - y_pred
+
+  # Pochodne cząstkowe
+  d_beta0 <- sum(residuals) / sigma^2
+  d_beta1 <- sum(x * residuals) / sigma^2
+  d_log_sigma <- -n + sum(residuals^2) / sigma^2
+
+  return(c(d_beta0, d_beta1, d_log_sigma))
+}
+)
+
+run(
+# Definicja funkcji (wykonywana w tle)
+gradient_log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+  y_pred <- beta0 + beta1 * x
+  residuals <- y - y_pred
+
+  d_beta0 <- sum(residuals) / sigma^2
+  d_beta1 <- sum(x * residuals) / sigma^2
+  d_log_sigma <- -n + sum(residuals^2) / sigma^2
+
+  return(c(d_beta0, d_beta1, d_log_sigma))
+}
+)
+
+<h4>Krok 4: Hesjan (macierz drugich pochodnych)</h4>
+
+<p>Hesjan to macierz 3×3 drugich pochodnych cząstkowych:</p>
+<p><strong>H<sub>ij</sub> = ∂²ℓ/(∂θ<sub>i</sub>∂θ<sub>j</sub>)</strong></p>
+
+code(
+# Hesjan funkcji log-wiarygodności
+hessian_log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+
+  # Predykcje i reszty
+  y_pred <- beta0 + beta1 * x
+  residuals <- y - y_pred
+
+  # Macierz hesian 3x3
+  H <- matrix(0, 3, 3)
+
+  # Drugie pochodne
+  H[1,1] <- -n / sigma^2                    # d²/d(beta0)²
+  H[1,2] <- H[2,1] <- -sum(x) / sigma^2     # d²/d(beta0)d(beta1)
+  H[1,3] <- H[3,1] <- -2*sum(residuals)/sigma^2  # d²/d(beta0)d(log_sigma)
+
+  H[2,2] <- -sum(x^2) / sigma^2             # d²/d(beta1)²
+  H[2,3] <- H[3,2] <- -2*sum(x*residuals)/sigma^2  # d²/d(beta1)d(log_sigma)
+
+  H[3,3] <- -2*sum(residuals^2)/sigma^2     # d²/d(log_sigma)²
+
+  return(H)
+}
+)
+
+run(
+# Definicja funkcji (wykonywana w tle)
+hessian_log_likelihood <- function(theta, y, x) {
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+  log_sigma <- theta[3]
+  sigma <- exp(log_sigma)
+
+  n <- length(y)
+  y_pred <- beta0 + beta1 * x
+  residuals <- y - y_pred
+
+  H <- matrix(0, 3, 3)
+
+  H[1,1] <- -n / sigma^2
+  H[1,2] <- H[2,1] <- -sum(x) / sigma^2
+  H[1,3] <- H[3,1] <- -2*sum(residuals)/sigma^2
+
+  H[2,2] <- -sum(x^2) / sigma^2
+  H[2,3] <- H[3,2] <- -2*sum(x*residuals)/sigma^2
+
+  H[3,3] <- -2*sum(residuals^2)/sigma^2
+
+  return(H)
+}
+)
+
+<h4>Krok 5: Estymacja z użyciem maxLik (z śledzeniem ścieżki)</h4>
+
+<p>Użyjemy pakietu <code>maxLik</code> do znalezienia estymatorów MLE. Dodatkowo będziemy śledzić ścieżkę optymalizacji.</p>
+
+execute(
+library(maxLik)
+
+# Przygotowanie danych
+y <- vacation$MILES
+x <- vacation$INCOME
+
+# Punkt startowy (suboptymalne wartości celowe)
+# Używamy wartości odległych od prawdziwych, aby zobaczyć ścieżkę optymalizacji
+start_params <- c(beta0 = 0, beta1 = 0, log_sigma = log(200))
+
+cat("Punkt startowy:\n")
+cat("  β₀ =", start_params[1], "\n")
+cat("  β₁ =", start_params[2], "\n")
+cat("  log(σ) =", start_params[3], "(σ =", exp(start_params[3]), ")\n\n")
+
+# Zmienna globalna do śledzenia ścieżki
+optimization_path <- list()
+
+# Wrapper funkcji log-wiarygodności ze śledzeniem
+log_likelihood_tracked <- function(theta, y, x) {
+  ll <- log_likelihood(theta, y, x)
+  # Zapisz aktualny punkt
+  optimization_path <<- c(optimization_path,
+                         list(list(theta = theta, ll = ll)))
+  return(ll)
+}
+
+# Estymacja MLE z gradientem i hesjanem
+cat("=== ESTYMACJA MAXIMUM LIKELIHOOD ===\n\n")
+
+mle_result <- maxLik(
+  logLik = log_likelihood_tracked,
+  grad = gradient_log_likelihood,
+  hess = hessian_log_likelihood,
+  start = start_params,
+  method = "BFGS",
+  y = y,
+  x = x
+)
+
+# Wyniki
+cat("\nWyniki estymacji:\n")
+print(summary(mle_result))
+
+# Wyciągnięcie estymatorów
+beta0_hat <- coef(mle_result)[1]
+beta1_hat <- coef(mle_result)[2]
+log_sigma_hat <- coef(mle_result)[3]
+sigma_hat <- exp(log_sigma_hat)
+
+cat("\n=== ESTYMATORY MLE ===\n")
+cat("β₀ (wyraz wolny) =", round(beta0_hat, 4), "\n")
+cat("β₁ (współczynnik INCOME) =", round(beta1_hat, 6), "\n")
+cat("σ (odchylenie standardowe błędów) =", round(sigma_hat, 4), "\n")
+
+# Porównanie z OLS
+ols_model <- lm(MILES ~ INCOME, data = vacation)
+cat("\n=== PORÓWNANIE Z OLS ===\n")
+cat("OLS β₀ =", round(coef(ols_model)[1], 4), "\n")
+cat("OLS β₁ =", round(coef(ols_model)[2], 6), "\n")
+cat("OLS σ (residual SE) =", round(summary(ols_model)$sigma, 4), "\n")
+
+cat("\n=== STATYSTYKI MODELU ===\n")
+cat("Log-wiarygodność:", round(logLik(mle_result), 2), "\n")
+cat("AIC:", round(AIC(mle_result), 2), "\n")
+cat("Liczba iteracji:", mle_result$iterations, "\n")
+cat("Liczba ewaluacji funkcji:", length(optimization_path), "\n")
+)
+
+<h4>Krok 6: Wizualizacja dopasowania modelu</h4>
+
+plot(
+library(ggplot2)
+
+# Przygotowanie danych do wykresu
+vacation$MILES_pred <- beta0_hat + beta1_hat * vacation$INCOME
+
+# Wykres rozrzutu z linią regresji
+p1 <- ggplot(vacation, aes(x = INCOME, y = MILES)) +
+  geom_point(size = 3, color = "steelblue", alpha = 0.6) +
+  geom_line(aes(y = MILES_pred), color = "#b1404f", size = 1.2) +
+  labs(
+    title = "Regresja liniowa: MILES vs INCOME (MLE)",
+    subtitle = sprintf("MILES = %.2f + %.5f × INCOME", beta0_hat, beta1_hat),
+    x = "INCOME (dochód)",
+    y = "MILES (mile wakacyjne)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    plot.subtitle = element_text(size = 11, color = "gray40")
+  )
+
+print(p1)
+)
+
+<h4>Krok 7: Wizualizacja ścieżki optymalizacji</h4>
+
+<p>Pokażemy jak algorytm BFGS poruszał się od punktu startowego do optimum w przestrzeni parametrów (β₀, β₁).</p>
+
+plot(
+# Ekstrakcja ścieżki
+path_matrix <- t(sapply(optimization_path, function(p) p$theta))
+path_ll <- sapply(optimization_path, function(p) p$ll)
+
+# Wykres ścieżki w przestrzeni (beta0, beta1)
+par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+
+# Panel 1: Ścieżka w przestrzeni parametrów
+plot(path_matrix[, 1], path_matrix[, 2],
+     type = "o", pch = 19, col = "steelblue",
+     xlab = expression(beta[0]),
+     ylab = expression(beta[1]),
+     main = "Ścieżka optymalizacji\nw przestrzeni parametrów",
+     cex.main = 1)
+
+# Oznaczenie punktów
+points(path_matrix[1, 1], path_matrix[1, 2],
+       pch = 19, col = "green", cex = 2)
+text(path_matrix[1, 1], path_matrix[1, 2],
+     "START", pos = 3, col = "green", font = 2)
+
+points(path_matrix[nrow(path_matrix), 1],
+       path_matrix[nrow(path_matrix), 2],
+       pch = 19, col = "#b1404f", cex = 2)
+text(path_matrix[nrow(path_matrix), 1],
+     path_matrix[nrow(path_matrix), 2],
+     "OPTIMUM", pos = 3, col = "#b1404f", font = 2)
+
+# Dodanie strzałek kierunku
+arrows(path_matrix[-nrow(path_matrix), 1],
+       path_matrix[-nrow(path_matrix), 2],
+       path_matrix[-1, 1],
+       path_matrix[-1, 2],
+       length = 0.1, col = "gray50")
+
+# Panel 2: Log-wiarygodność vs iteracje
+plot(1:length(path_ll), path_ll,
+     type = "o", pch = 19, col = "steelblue",
+     xlab = "Iteracja",
+     ylab = "Log-wiarygodność",
+     main = "Zbieżność algorytmu\nBFGS",
+     cex.main = 1)
+
+abline(h = logLik(mle_result), col = "#b1404f", lty = 2, lwd = 2)
+text(length(path_ll) * 0.7, logLik(mle_result),
+     sprintf("Optimum = %.2f", logLik(mle_result)),
+     pos = 3, col = "#b1404f")
+
+grid()
+)
+
+<h4>Krok 8: Analiza residuów</h4>
+
+plot(
+par(mfrow = c(2, 2), mar = c(4, 4, 2, 1))
+
+# Reszty
+residuals <- vacation$MILES - vacation$MILES_pred
+
+# 1. Wykres residuów vs fitted
+plot(vacation$MILES_pred, residuals,
+     xlab = "Wartości dopasowane", ylab = "Reszty",
+     main = "Reszty vs Dopasowane",
+     pch = 19, col = "steelblue")
+abline(h = 0, col = "#b1404f", lwd = 2)
+grid()
+
+# 2. Q-Q plot (normalność residuów)
+qqnorm(residuals, main = "Q-Q Plot",
+       pch = 19, col = "steelblue")
+qqline(residuals, col = "#b1404f", lwd = 2)
+
+# 3. Histogram residuów
+hist(residuals, breaks = 10, col = "lightblue", border = "white",
+     main = "Histogram Residuów", xlab = "Reszty", ylab = "Częstość")
+curve(dnorm(x, mean = 0, sd = sigma_hat) * length(residuals) *
+      diff(range(residuals))/10,
+      add = TRUE, col = "#b1404f", lwd = 2)
+
+# 4. Scale-location plot
+plot(vacation$MILES_pred, sqrt(abs(residuals)),
+     xlab = "Wartości dopasowane",
+     ylab = expression(sqrt("|Reszty|")),
+     main = "Scale-Location",
+     pch = 19, col = "steelblue")
+grid()
+)
+
+<h4>Podsumowanie analityczne</h4>
+
+execute(
+cat("=== PODSUMOWANIE ANALIZY ===\n\n")
+
+# R²
+SS_total <- sum((vacation$MILES - mean(vacation$MILES))^2)
+SS_residual <- sum(residuals^2)
+R_squared <- 1 - SS_residual/SS_total
+
+cat("1. JAKOŚĆ DOPASOWANIA:\n")
+cat("   R² =", round(R_squared, 4), "\n")
+cat("   Skorygowane R² =", round(summary(ols_model)$adj.r.squared, 4), "\n")
+cat("   ", round(R_squared * 100, 2), "% zmienności MILES wyjaśnione przez INCOME\n\n")
+
+# Test istotności beta1
+se_beta1 <- sqrt(diag(vcov(mle_result)))[2]
+t_stat <- beta1_hat / se_beta1
+p_value <- 2 * (1 - pt(abs(t_stat), df = nrow(vacation) - 2))
+
+cat("2. TEST ISTOTNOŚCI β₁:\n")
+cat("   H₀: β₁ = 0 (brak związku INCOME → MILES)\n")
+cat("   Statystyka t =", round(t_stat, 3), "\n")
+cat("   p-value =", format.pval(p_value, digits = 3), "\n")
+if(p_value < 0.05) {
+  cat("   Wniosek: ODRZUCAMY H₀ - związek jest istotny (α=0.05)\n\n")
+} else {
+  cat("   Wniosek: BRAK PODSTAW do odrzucenia H₀ (α=0.05)\n\n")
+}
+
+# Interpretacja współczynników
+cat("3. INTERPRETACJA:\n")
+cat("   β₀ =", round(beta0_hat, 2),
+    "- oczekiwane MILES dla INCOME = 0\n")
+cat("   β₁ =", round(beta1_hat, 5),
+    "- wzrost o 1 dolar INCOME → wzrost o",
+    round(beta1_hat, 5), "mil\n")
+cat("   Dla wzrostu INCOME o $1000 → wzrost MILES o",
+    round(beta1_hat * 1000, 2), "mil\n\n")
+
+cat("4. ZBIEŻNOŚĆ MLE vs OLS:\n")
+cat("   Różnica β₀:", abs(beta0_hat - coef(ols_model)[1]), "\n")
+cat("   Różnica β₁:", abs(beta1_hat - coef(ols_model)[2]), "\n")
+cat("   Dla regresji liniowej: MLE ≈ OLS ✓\n")
+)
