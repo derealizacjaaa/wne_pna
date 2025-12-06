@@ -1,0 +1,14 @@
+<h1>Test podstawowy</h1>
+
+<p>Czy ten tekst jest <strong>pogrubiony</strong>?</p>
+
+<p>Test wzoru inline: $x = 5$</p>
+
+<p>Test wzoru w bloku:</p>
+
+$$y = 2$$
+
+<div class="info-box">
+  <h4>Testowy boks</h4>
+  <p>Czy ten boks się wyświetla?</p>
+</div>

@@ -194,6 +194,10 @@
   font-size: 0.9em;
   font-weight: 500;
   color: #606060;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 /* Task status icon */

@@ -64,7 +64,32 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/task-content.css"),
+
+    # MathJax configuration (must come BEFORE loading MathJax)
+    tags$script(HTML("
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+          displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+          processEscapes: true
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    ")),
+
+    # MathJax library
+    tags$script(src = "https://polyfill.io/v3/polyfill.min.js?features=es6"),
+    tags$script(
+      id = "MathJax-script",
+      src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ),
+
+    # Custom JS for MathJax + Shiny integration
+    tags$script(src = "js/mathjax-shiny.js")
   ),
 
   # Hero header
