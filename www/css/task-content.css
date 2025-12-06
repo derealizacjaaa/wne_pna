@@ -122,7 +122,7 @@
 }
 
 /* ============================================
-   CALLOUT BOXES
+   CONTENT BOXES
    ============================================ */
 
 /* Info box - Blue accent */
@@ -142,26 +142,6 @@
 }
 
 .info-box p:last-child {
-  margin-bottom: 0;
-}
-
-/* Warning box - Orange/Yellow accent */
-.warning-box {
-  background-color: #fff8e1;
-  border-left: 5px solid #ff9800;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
-}
-
-.warning-box h4 {
-  color: #f57c00;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-.warning-box p:last-child {
   margin-bottom: 0;
 }
 
@@ -185,31 +165,7 @@
   margin-bottom: 0;
 }
 
-/* Error box - Red accent */
-.error-box {
-  background-color: #ffebee;
-  border-left: 5px solid #f44336;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
-}
-
-.error-box h4 {
-  color: #c62828;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-.error-box p:last-child {
-  margin-bottom: 0;
-}
-
-/* ============================================
-   SPECIAL CONTENT BOXES
-   ============================================ */
-
-/* Definition box */
+/* Definition box - Red border */
 .definition-box {
   background-color: #f9f9f9;
   border: 2px solid #b1404f;
@@ -230,7 +186,7 @@
   margin-bottom: 0;
 }
 
-/* Example box */
+/* Example box - Gray accent, flexible width */
 .example-box {
   background-color: #fafafa;
   border-left: 5px solid #9e9e9e;
@@ -250,26 +206,6 @@
 }
 
 .example-box p:last-child {
-  margin-bottom: 0;
-}
-
-/* Note box */
-.note-box {
-  background-color: #fffbf0;
-  border-left: 5px solid #ffc107;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
-}
-
-.note-box h4 {
-  color: #f57f17;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-.note-box p:last-child {
   margin-bottom: 0;
 }
 
@@ -471,12 +407,9 @@
   }
 
   .info-box,
-  .warning-box,
   .success-box,
-  .error-box,
   .definition-box,
-  .example-box,
-  .note-box {
+  .example-box {
     padding: 12px 15px;
   }
 
