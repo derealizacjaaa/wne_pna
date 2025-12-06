@@ -252,6 +252,23 @@ The main app.R is now a **minimal orchestrator** that sources modules and initia
 - `output$task_sidebar` - Right sidebar
 - `output$main_content` - Content area
 
+## 📘 Quick Start for AI Assistants
+
+**If you're an AI assistant (Claude, ChatGPT, Gemini, etc.) creating tasks for this app:**
+
+→ **Read [AI_TASK_CREATION_GUIDE.md](AI_TASK_CREATION_GUIDE.md) first!**
+
+This comprehensive guide provides:
+- ✅ Complete syntax reference for V3 inline functions (`code()`, `execute()`, `plot()`, `run()`)
+- ✅ HTML elements and styling (headings, boxes, math formulas, tables)
+- ✅ Best practices and common patterns
+- ✅ Working examples and templates
+- ✅ Troubleshooting tips
+
+**For quick reference:** The guide includes a summary table of all available elements and their usage.
+
+---
+
 ## Task Organization System
 
 The app supports **THREE task creation methods**, auto-detected by the loader:
