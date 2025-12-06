@@ -360,9 +360,14 @@
   outline: none;
 }
 
-.MathJax_Display {
+/* Display math container - subtle gray box */
+.task-tab-content-simple .MathJax_Display {
   overflow-x: auto;
   overflow-y: hidden;
+  background-color: #f8f8f8;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 6px;
 }
 
 /* ============================================
