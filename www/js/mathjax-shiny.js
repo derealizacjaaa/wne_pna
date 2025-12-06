@@ -1,43 +1,93 @@
 // ============================================
 // MATHJAX INTEGRATION FOR SHINY
 // ============================================
-// Triggers MathJax typesetting when Shiny updates content
+// Ensures MathJax typesets content after Shiny updates
 
-// Function to typeset math (only when MathJax is ready)
-function typesetMath() {
-  // Check if MathJax is fully loaded and ready
+console.log('[MathJax-Shiny] Script loaded');
+
+// Track initialization state
+var mathJaxFullyReady = false;
+var initializationAttempts = 0;
+var MAX_INIT_ATTEMPTS = 100; // 10 seconds max
+
+// Initialize MathJax - wait for it to be fully ready
+function initializeMathJax() {
+  initializationAttempts++;
+
+  console.log('[MathJax-Shiny] Initialization attempt', initializationAttempts);
+
   if (typeof MathJax !== 'undefined' &&
-      MathJax.typesetPromise &&
       MathJax.startup &&
-      MathJax.startup.promise) {
+      MathJax.startup.promise &&
+      typeof MathJax.typesetPromise === 'function') {
 
-    // Wait for MathJax to finish starting up, then typeset
-    MathJax.startup.promise.then(function() {
-      MathJax.typesetPromise().catch(function(err) {
-        console.log('MathJax typeset error:', err);
+    console.log('[MathJax-Shiny] MathJax object found, waiting for startup...');
+
+    MathJax.startup.promise
+      .then(function() {
+        mathJaxFullyReady = true;
+        console.log('[MathJax-Shiny] ✓ MathJax is ready!');
+        // Typeset any existing content
+        typesetPage();
+      })
+      .catch(function(err) {
+        console.error('[MathJax-Shiny] ✗ Startup error:', err);
       });
-    }).catch(function(err) {
-      console.log('MathJax startup error:', err);
-    });
+
+  } else if (initializationAttempts < MAX_INIT_ATTEMPTS) {
+    // Not ready yet, try again
+    setTimeout(initializeMathJax, 100);
   } else {
-    // MathJax not ready yet, try again in 100ms
-    setTimeout(typesetMath, 100);
+    console.error('[MathJax-Shiny] ✗ Failed to initialize after', MAX_INIT_ATTEMPTS, 'attempts');
   }
 }
 
-// Trigger on Shiny output updates
-$(document).on('shiny:value', function(event) {
-  setTimeout(typesetMath, 100);
-});
+// Typeset the entire page
+function typesetPage() {
+  if (!mathJaxFullyReady) {
+    console.log('[MathJax-Shiny] Typeset called but MathJax not ready yet, ignoring');
+    return;
+  }
 
-// Trigger on initial load - wait longer for MathJax to load
+  if (typeof MathJax === 'undefined' || !MathJax.typesetPromise) {
+    console.error('[MathJax-Shiny] MathJax.typesetPromise not available');
+    return;
+  }
+
+  console.log('[MathJax-Shiny] Typesetting page...');
+
+  MathJax.typesetPromise()
+    .then(function() {
+      console.log('[MathJax-Shiny] ✓ Typeset complete');
+    })
+    .catch(function(err) {
+      console.error('[MathJax-Shiny] ✗ Typeset error:', err);
+    });
+}
+
+// Start initialization when DOM is ready
 $(document).ready(function() {
-  setTimeout(typesetMath, 1500);
+  console.log('[MathJax-Shiny] DOM ready, starting MathJax initialization');
+  initializeMathJax();
 });
 
-// Also trigger when main content updates
+// Typeset when Shiny updates outputs
+$(document).on('shiny:value', function(event) {
+  console.log('[MathJax-Shiny] Shiny value updated:', event.name);
+
+  if (mathJaxFullyReady) {
+    setTimeout(typesetPage, 150);
+  } else {
+    console.log('[MathJax-Shiny] Skipping typeset - MathJax not ready yet');
+  }
+});
+
+// Typeset when main content changes
 $(document).on('shiny:outputinvalidated', function(event) {
   if (event.name === 'main_content') {
-    setTimeout(typesetMath, 200);
+    console.log('[MathJax-Shiny] Main content invalidated');
+    if (mathJaxFullyReady) {
+      setTimeout(typesetPage, 100);
+    }
   }
 });
