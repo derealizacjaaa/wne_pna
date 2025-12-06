@@ -1,145 +1,128 @@
-# HTML Style Guide for V3 Tasks
+# HTML Style Guide for AI Assistants
 
-**Comprehensive guide to standardized HTML elements for creating beautiful, consistent task content**
+**Quick reference for AI assistants creating HTML content in V3 task files**
 
 ---
 
-## Table of Contents
+## Purpose
 
-1. [Headings](#headings)
-2. [Text Formatting](#text-formatting)
-3. [Lists](#lists)
-4. [Callout Boxes](#callout-boxes)
-5. [Special Content Boxes](#special-content-boxes)
-6. [Mathematical Formulas](#mathematical-formulas)
-7. [Tables](#tables)
-8. [Other Elements](#other-elements)
-9. [Complete Example](#complete-example)
+This guide covers **HTML elements only**. For complete task creation including R code execution, see [AI_TASK_CREATION_GUIDE.md](AI_TASK_CREATION_GUIDE.md).
+
+Use this guide when you need to format educational content with proper styling.
 
 ---
 
 ## Headings
 
-### Main Title (H1) - Red accent with bottom border
+### H1 - Main Task Title
+**Styling:** Red (#b1404f), bold, thick bottom border
 
 ```html
-<h1>Zadanie 1: Wprowadzenie do wektorów</h1>
+<h1>Zadanie 5: Analiza danych</h1>
 ```
 
-**Use for:** Main task title, primary heading
-
-**Styling:** Red color (#b1404f), bold, thick bottom border
+Use for: Main task title (one per file)
 
 ---
 
-### Subtitle (H2) - Dark gray with red left border
+### H2 - Section Title
+**Styling:** Dark gray, red left border
 
 ```html
-<h2>Część A: Tworzenie wektorów</h2>
+<h2>Część A: Podstawy</h2>
 ```
 
-**Use for:** Major sections within a task
-
-**Styling:** Dark gray text, red left border accent
+Use for: Major sections within a task
 
 ---
 
-### Sub-subtitle (H3) - Medium gray with lighter red accent
+### H3 - Subsection
+**Styling:** Medium gray, lighter red left border
 
 ```html
-<h3>Krok 1: Inicjalizacja danych</h3>
+<h3>Krok 1: Przygotowanie danych</h3>
 ```
 
-**Use for:** Subsections, steps within a major section
-
-**Styling:** Medium gray text, lighter red left border
+Use for: Steps, subsections
 
 ---
 
-### Small Heading (H4)
+### H4 - Minor Heading
+**Styling:** Dark gray, no border
 
 ```html
 <h4>Uwaga techniczna</h4>
 ```
 
-**Use for:** Minor headings, notes, technical details
-
-**Styling:** Dark gray, smaller font, no border
+Use for: Small headings, box titles
 
 ---
 
 ## Text Formatting
 
-### Paragraphs
-
+### Paragraph
 ```html
-<p>To jest zwykły akapit tekstu z wyjaśnieniem koncepcji.</p>
+<p>Zwykły tekst akapitu.</p>
 ```
 
-**Styling:** Standard text, comfortable line spacing (1.6)
+**Line spacing:** 1.6 for readability
 
 ---
 
 ### Inline Code
-
 ```html
 <p>Użyj funkcji <code>mean()</code> do obliczenia średniej.</p>
 ```
 
-**Use for:** Function names, variable names, short code snippets in text
-
 **Styling:** Red text, light gray background, monospace font
+
+Use for: Function names, variable names, short code snippets
 
 ---
 
 ### Bold Text
-
 ```html
-<p><strong>Ważne:</strong> Zawsze sprawdzaj typ danych!</p>
+<p><strong>Ważne:</strong> Sprawdź typ danych!</p>
 ```
 
-**Use for:** Emphasis, important terms
+Use for: Emphasis, important terms
 
 ---
 
 ### Italic Text
-
 ```html
 <p><em>Uwaga:</em> Ten krok jest opcjonalny.</p>
 ```
 
-**Use for:** Subtle emphasis, notes, foreign words
+Use for: Subtle emphasis, notes
 
 ---
 
 ## Lists
 
 ### Unordered List
-
 ```html
 <ul>
-  <li>Pierwszy element listy</li>
-  <li>Drugi element listy</li>
-  <li>Trzeci element listy</li>
+  <li>Pierwszy element</li>
+  <li>Drugi element</li>
+  <li>Trzeci element</li>
 </ul>
 ```
 
 ---
 
 ### Ordered List
-
 ```html
 <ol>
-  <li>Najpierw zrób to</li>
-  <li>Potem zrób tamto</li>
-  <li>Na końcu to</li>
+  <li>Krok pierwszy</li>
+  <li>Krok drugi</li>
+  <li>Krok trzeci</li>
 </ol>
 ```
 
 ---
 
 ### Nested Lists
-
 ```html
 <ol>
   <li>Główny punkt
@@ -148,77 +131,44 @@
       <li>Podpunkt b)</li>
     </ul>
   </li>
-  <li>Kolejny główny punkt</li>
+  <li>Kolejny punkt</li>
 </ol>
 ```
 
 ---
 
-## Callout Boxes
+## Content Boxes (4 Types)
 
-### Info Box (Blue)
+### 1. Info Box (Blue)
+**Use for:** Tips, helpful information, context
 
 ```html
 <div class="info-box">
   <h4>Informacja</h4>
-  <p>To jest przydatna informacja dla studenta.</p>
+  <p>Będziemy używać zbioru danych <code>mtcars</code>.</p>
 </div>
 ```
 
-**Use for:** Helpful tips, additional information, context
-
-**Styling:** Light blue background, blue left border
+**Styling:** Light blue background (#e7f3ff), blue left border
 
 ---
 
-### Warning Box (Orange/Yellow)
-
-```html
-<div class="warning-box">
-  <h4>Uwaga!</h4>
-  <p>Upewnij się, że dane są prawidłowo wczytane przed kontynuowaniem.</p>
-</div>
-```
-
-**Use for:** Warnings, cautions, things to watch out for
-
-**Styling:** Light yellow background, orange left border
-
----
-
-### Success Box (Green)
+### 2. Success Box (Green)
+**Use for:** Correct results, achievements, confirmations
 
 ```html
 <div class="success-box">
   <h4>Świetnie!</h4>
-  <p>Jeśli otrzymałeś ten wynik, zadanie jest wykonane poprawnie.</p>
+  <p>Jeśli otrzymałeś ten wynik, zadanie jest poprawne.</p>
 </div>
 ```
 
-**Use for:** Success messages, correct answers, achievements
-
-**Styling:** Light green background, green left border
+**Styling:** Light green background (#e8f5e9), green left border
 
 ---
 
-### Error Box (Red)
-
-```html
-<div class="error-box">
-  <h4>Błąd!</h4>
-  <p>Ten kod zwróci błąd, ponieważ...</p>
-</div>
-```
-
-**Use for:** Common errors, mistakes to avoid, error explanations
-
-**Styling:** Light red background, red left border
-
----
-
-## Special Content Boxes
-
-### Definition Box
+### 3. Definition Box (Red border)
+**Use for:** Formal definitions, key concepts, terminology
 
 ```html
 <div class="definition-box">
@@ -227,60 +177,41 @@
 </div>
 ```
 
-**Use for:** Formal definitions, key concepts, terminology
-
-**Styling:** Light gray background, red border all around
+**Styling:** Light gray background (#f9f9f9), red border all around
 
 ---
 
-### Example Box
+### 4. Example Box (Gray, flexible width)
+**Use for:** Examples, demonstrations, sample cases
 
 ```html
 <div class="example-box">
   <h4>Przykład</h4>
-  <p>Rozważmy wektor: <code>x <- c(1, 2, 3, 4, 5)</code></p>
-  <p>Średnia to: 3</p>
+  <p>Rozważmy wektor: <code>x <- c(1, 2, 3)</code></p>
+  <p>Średnia wynosi: 2</p>
 </div>
 ```
 
-**Use for:** Examples, demonstrations, sample cases
-
-**Styling:** Light gray background, gray left border
-
----
-
-### Note Box
-
-```html
-<div class="note-box">
-  <h4>Notatka</h4>
-  <p>Pamiętaj, że R jest case-sensitive!</p>
-</div>
-```
-
-**Use for:** Side notes, reminders, quick tips
-
-**Styling:** Light yellow/cream background, yellow left border
+**Styling:** Light gray background (#fafafa), gray left border
+**Behavior:** Width adjusts to content, centered automatically
 
 ---
 
 ## Mathematical Formulas
 
 ### Inline Math
-
-Use single dollar signs `$...$` for math within text:
+Use single dollar signs `$...$` for formulas within text:
 
 ```html
-<p>Średnia arytmetyczna to $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$</p>
+<p>Średnia to $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$</p>
 ```
 
-**Alternative:** `\(...\)` also works for inline math.
+**Renders as:** The formula appears inline with the text
 
 ---
 
-### Display Math (Block)
-
-Use double dollar signs `$$...$$` for centered math blocks:
+### Display Math (Centered)
+Use double dollar signs `$$...$$` for centered formulas:
 
 ```html
 <p>Wzór na odchylenie standardowe:</p>
@@ -290,11 +221,11 @@ s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
 $$
 ```
 
-**Alternative:** `\[...\]` also works for display math.
+**Renders as:** Centered formula in display mode
 
 ---
 
-### Common Mathematical Notation
+### Common LaTeX Syntax
 
 ```html
 <!-- Fractions -->
@@ -304,28 +235,18 @@ $\frac{a}{b}$
 $x_i$, $x^2$, $x_i^2$
 
 <!-- Greek letters -->
-$\alpha$, $\beta$, $\gamma$, $\mu$, $\sigma$, $\pi$
+$\alpha, \beta, \gamma, \mu, \sigma, \pi$
 
 <!-- Summation -->
 $\sum_{i=1}^{n} x_i$
 
-<!-- Integral -->
-$\int_{a}^{b} f(x) dx$
-
 <!-- Square root -->
-$\sqrt{x}$, $\sqrt[n]{x}$
-
-<!-- Matrices -->
-$$
-\begin{bmatrix}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{bmatrix}
-$$
+$\sqrt{x}$
 
 <!-- Statistical notation -->
-$\bar{x}$ (mean), $\hat{\beta}$ (estimator), $x \sim N(\mu, \sigma^2)$ (distribution)
+$\bar{x}$ (mean)
+$\hat{\beta}$ (estimator)
+$X \sim N(\mu, \sigma^2)$ (distribution)
 ```
 
 ---
@@ -336,26 +257,21 @@ $\bar{x}$ (mean), $\hat{\beta}$ (estimator), $x \sim N(\mu, \sigma^2)$ (distribu
 <table>
   <thead>
     <tr>
-      <th>Zmienna</th>
-      <th>Typ</th>
+      <th>Funkcja</th>
       <th>Opis</th>
+      <th>Przykład</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>x</code></td>
-      <td>numeric</td>
-      <td>Wektor liczb</td>
+      <td><code>mean()</code></td>
+      <td>Średnia</td>
+      <td><code>mean(c(1,2,3))</code></td>
     </tr>
     <tr>
-      <td><code>y</code></td>
-      <td>character</td>
-      <td>Wektor tekstowy</td>
-    </tr>
-    <tr>
-      <td><code>z</code></td>
-      <td>logical</td>
-      <td>Wektor logiczny</td>
+      <td><code>sd()</code></td>
+      <td>Odchylenie standardowe</td>
+      <td><code>sd(c(1,2,3))</code></td>
     </tr>
   </tbody>
 </table>
@@ -368,191 +284,31 @@ $\bar{x}$ (mean), $\hat{\beta}$ (estimator), $x \sim N(\mu, \sigma^2)$ (distribu
 ## Other Elements
 
 ### Blockquote
-
 ```html
 <blockquote>
-  <p>"To jest cytat lub ważna informacja."</p>
+  <p>"Ważny cytat lub informacja."</p>
 </blockquote>
 ```
 
-**Use for:** Quotes, highlighted information, excerpts
+**Styling:** Gray background, red left border, italic
 
 ---
 
 ### Horizontal Rule
-
 ```html
 <hr>
 ```
 
-**Use for:** Separating major sections
+Use for: Separating major sections
 
 ---
 
 ### Links
-
 ```html
-<p>Więcej informacji znajdziesz w <a href="https://www.r-project.org/">dokumentacji R</a>.</p>
+<p>Zobacz <a href="https://www.r-project.org/">dokumentację R</a>.</p>
 ```
 
 **Styling:** Red color, underline on hover
-
----
-
-### Images
-
-```html
-<img src="path/to/image.png" alt="Opis obrazu">
-```
-
-**With caption:**
-
-```html
-<figure>
-  <img src="path/to/image.png" alt="Wykres rozkładu">
-  <figcaption>Rysunek 1: Rozkład normalny</figcaption>
-</figure>
-```
-
----
-
-### Keyboard Keys
-
-```html
-<p>Naciśnij <kbd>Ctrl</kbd> + <kbd>Enter</kbd> aby wykonać kod.</p>
-```
-
----
-
-### Abbreviations
-
-```html
-<p><abbr title="Analysis of Variance">ANOVA</abbr> jest testem statystycznym.</p>
-```
-
----
-
-## Complete Example
-
-Here's a comprehensive example showing multiple elements together:
-
-```html
-<h1>Zadanie 3: Analiza opisowa danych</h1>
-
-<p>W tym zadaniu nauczymy się podstawowych metod analizy opisowej w R.</p>
-
-<div class="info-box">
-  <h4>Informacja</h4>
-  <p>Będziemy pracować z wbudowanym zbiorem danych <code>mtcars</code>.</p>
-</div>
-
-<h2>Część A: Podstawowe statystyki</h2>
-
-<p>Podstawowe miary statystyczne to:</p>
-
-<ul>
-  <li><strong>Średnia arytmetyczna:</strong> $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$</li>
-  <li><strong>Mediana:</strong> wartość środkowa w uporządkowanym zbiorze</li>
-  <li><strong>Odchylenie standardowe:</strong> miara rozproszenia danych</li>
-</ul>
-
-<div class="definition-box">
-  <h4>Definicja: Średnia arytmetyczna</h4>
-  <p>Średnia arytmetyczna to suma wszystkich wartości podzielona przez ich liczbę.</p>
-</div>
-
-<h3>Krok 1: Wczytanie danych</h3>
-
-<p>Najpierw załadujmy dane:</p>
-
-code(
-# Wczytanie wbudowanego zbioru danych
-data(mtcars)
-head(mtcars)
-)
-
-<h3>Krok 2: Obliczenia</h3>
-
-<p>Teraz obliczymy podstawowe statystyki dla zmiennej <code>mpg</code> (mile per gallon):</p>
-
-execute(
-# Średnia
-mean_mpg <- mean(mtcars$mpg)
-cat("Średnia MPG:", mean_mpg, "\n")
-
-# Mediana
-median_mpg <- median(mtcars$mpg)
-cat("Mediana MPG:", median_mpg, "\n")
-
-# Odchylenie standardowe
-sd_mpg <- sd(mtcars$mpg)
-cat("Odchylenie standardowe:", sd_mpg, "\n")
-)
-
-<div class="success-box">
-  <h4>Oczekiwany wynik</h4>
-  <p>Średnia MPG powinna wynosić około 20.09</p>
-</div>
-
-<h2>Część B: Wizualizacja</h2>
-
-<p>Stwórzmy histogram przedstawiający rozkład zmiennej MPG:</p>
-
-plot(
-hist(mtcars$mpg,
-     main = "Rozkład zużycia paliwa",
-     xlab = "Mile per gallon",
-     ylab = "Częstość",
-     col = "steelblue",
-     border = "white")
-)
-
-<div class="warning-box">
-  <h4>Uwaga!</h4>
-  <p>Upewnij się, że dane <code>mtcars</code> są załadowane przed wykonaniem wykresu.</p>
-</div>
-
-<h2>Podsumowanie</h2>
-
-<p>W tym zadaniu nauczyłeś się:</p>
-
-<ol>
-  <li>Obliczać podstawowe statystyki opisowe</li>
-  <li>Tworzyć histogramy w R</li>
-  <li>Interpretować wyniki analizy</li>
-</ol>
-
-<div class="note-box">
-  <h4>Do zapamiętania</h4>
-  <p>Zawsze wizualizuj dane przed przystąpieniem do zaawansowanych analiz!</p>
-</div>
-```
-
----
-
-## Best Practices
-
-### Content Organization
-
-1. **Start with H1** - One main title per task
-2. **Use H2 for major sections** - Divide task into logical parts
-3. **Use H3 for steps** - Break down complex procedures
-4. **Use boxes sparingly** - Only for important information
-5. **Balance text and code** - Mix explanations with practical examples
-
-### Accessibility
-
-1. **Use semantic HTML** - `<h1>`, `<h2>`, `<p>`, `<ul>`, etc.
-2. **Provide alt text** - Always include `alt` attribute for images
-3. **Logical heading hierarchy** - Don't skip heading levels
-4. **Descriptive links** - Avoid "click here", use descriptive text
-
-### Consistency
-
-1. **Polish language** - Use consistent Polish terminology
-2. **Formatting** - Stick to established patterns
-3. **Code style** - Use `code()`, `execute()`, `plot()` appropriately
-4. **Box usage** - Use correct box type for the message
 
 ---
 
@@ -562,62 +318,192 @@ hist(mtcars$mpg,
 |---------|------|---------|
 | Main title | `<h1>` | Task title |
 | Section | `<h2>` | Major sections |
-| Subsection | `<h3>` | Steps, subsections |
+| Subsection | `<h3>` | Steps, details |
 | Paragraph | `<p>` | Regular text |
 | Inline code | `<code>` | Function/variable names |
 | Bold | `<strong>` | Emphasis |
-| Italic | `<em>` | Subtle emphasis |
-| Info | `<div class="info-box">` | Helpful information |
-| Warning | `<div class="warning-box">` | Cautions |
-| Success | `<div class="success-box">` | Correct results |
-| Error | `<div class="error-box">` | Common mistakes |
-| Definition | `<div class="definition-box">` | Formal definitions |
-| Example | `<div class="example-box">` | Examples |
-| Note | `<div class="note-box">` | Side notes |
+| Info box | `<div class="info-box">` | Tips, context |
+| Success box | `<div class="success-box">` | Correct results |
+| Definition | `<div class="definition-box">` | Definitions |
+| Example | `<div class="example-box">` | Examples (flexible width) |
 | Inline math | `$...$` | Math in text |
-| Display math | `$$...$$` | Centered equations |
+| Display math | `$$...$$` | Centered formulas |
 | List | `<ul>` or `<ol>` | Lists |
 | Table | `<table>` | Tabular data |
 
 ---
 
-## Tips for Mathematical Formulas
+## Best Practices for AI
 
-### Common Statistics Formulas
+### ✅ DO:
 
-```html
-<!-- Mean -->
-$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$
+1. **Use semantic headings** - H1 → H2 → H3 hierarchy
+2. **Choose appropriate boxes** - Info for tips, Success for results, Definition for concepts
+3. **Format code inline** - Use `<code>` for function names in text
+4. **Use LaTeX for math** - Inline `$...$` or display `$$...$$`
+5. **Keep example boxes concise** - They adjust to content width
+6. **Structure content clearly** - Use headings to organize
 
-<!-- Variance -->
-$s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2$
+### ❌ DON'T:
 
-<!-- Standard deviation -->
-$s = \sqrt{s^2}$
+1. **Don't skip heading levels** - Go H1 → H2, not H1 → H3
+2. **Don't use deleted boxes** - No warning-box, error-box, or note-box
+3. **Don't put large content in example-box** - It centers, use regular content instead
+4. **Don't forget closing tags** - Always close `<div>`, `<p>`, etc.
+5. **Don't use deprecated classes** - Stick to the 4 box types
+6. **Don't escape LaTeX in formulas** - Use `$\bar{x}$` not `$\\bar{x}$`
 
-<!-- Correlation -->
-$r = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum(x_i - \bar{x})^2 \sum(y_i - \bar{y})^2}}$
+---
 
-<!-- Linear regression -->
-$y = \beta_0 + \beta_1 x + \epsilon$
-
-<!-- Normal distribution -->
-$X \sim N(\mu, \sigma^2)$
-
-<!-- Probability -->
-$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$
-```
-
-### Escaping Special Characters
-
-If you need a literal dollar sign, escape it:
+## Complete HTML Example
 
 ```html
-<p>This costs \$100</p>
+<h1>Zadanie 3: Statystyki opisowe</h1>
+
+<p>W tym zadaniu nauczymy się podstawowych miar statystycznych.</p>
+
+<div class="info-box">
+  <h4>Zbiór danych</h4>
+  <p>Użyjemy wbudowanego zbioru <code>mtcars</code>.</p>
+</div>
+
+<h2>Część A: Podstawowe miary</h2>
+
+<p>Średnia arytmetyczna jest zdefiniowana jako:</p>
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+
+<p>Podstawowe miary to:</p>
+
+<ul>
+  <li><strong>Średnia:</strong> $\bar{x}$</li>
+  <li><strong>Mediana:</strong> wartość środkowa</li>
+  <li><strong>Odchylenie standardowe:</strong> $s$</li>
+</ul>
+
+<div class="definition-box">
+  <h4>Definicja: Mediana</h4>
+  <p>Mediana to wartość środkowa w uporządkowanym zbiorze danych.</p>
+</div>
+
+<h2>Część B: Przykład</h2>
+
+<div class="example-box">
+  <h4>Przykład obliczenia</h4>
+  <p>Dla wektora <code>x = c(1, 2, 3, 4, 5)</code>:</p>
+  <ul>
+    <li>Średnia: 3</li>
+    <li>Mediana: 3</li>
+  </ul>
+</div>
+
+<div class="success-box">
+  <h4>Sprawdzenie</h4>
+  <p>Jeśli Twoje wyniki się zgadzają, rozwiązanie jest poprawne!</p>
+</div>
+
+<h2>Tabela funkcji</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Funkcja</th>
+      <th>Opis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>mean()</code></td>
+      <td>Średnia arytmetyczna</td>
+    </tr>
+    <tr>
+      <td><code>median()</code></td>
+      <td>Mediana</td>
+    </tr>
+    <tr>
+      <td><code>sd()</code></td>
+      <td>Odchylenie standardowe</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<blockquote>
+  <p>"Zawsze wizualizuj dane przed analizą!"</p>
+</blockquote>
 ```
 
 ---
 
-**Last Updated:** 2025-12-05
-**Version:** 1.0
-**See Also:** TASK_SYSTEM_V3_GUIDE.md, FILE_BASED_TASKS_GUIDE.md
+## Common Patterns
+
+### Pattern 1: Definition + Example
+```html
+<div class="definition-box">
+  <h4>Definicja: [Pojęcie]</h4>
+  <p>[Formalna definicja]</p>
+</div>
+
+<div class="example-box">
+  <h4>Przykład</h4>
+  <p>[Konkretny przykład]</p>
+</div>
+```
+
+### Pattern 2: Steps with Success Check
+```html
+<h3>Krok 1: [Tytuł]</h3>
+<p>[Wyjaśnienie]</p>
+
+<h3>Krok 2: [Tytuł]</h3>
+<p>[Wyjaśnienie]</p>
+
+<div class="success-box">
+  <h4>Oczekiwany wynik</h4>
+  <p>[Jak powinien wyglądać prawidłowy wynik]</p>
+</div>
+```
+
+### Pattern 3: Theory + Formula
+```html
+<h2>Teoria</h2>
+<p>[Wyjaśnienie koncepcji]</p>
+
+<p>Wzór matematyczny:</p>
+
+$$
+[formula]
+$$
+
+<div class="info-box">
+  <h4>Interpretacja</h4>
+  <p>[Jak rozumieć ten wzór]</p>
+</div>
+```
+
+---
+
+## Troubleshooting
+
+**Problem:** Math not rendering
+- Check dollar signs: `$...$` for inline, `$$...$$` for display
+- Verify LaTeX syntax
+- Don't escape backslashes in formulas
+
+**Problem:** Box not styling correctly
+- Check class name spelling: `info-box`, `success-box`, `definition-box`, `example-box`
+- Ensure proper `<div>` structure with closing `</div>`
+- Don't use deleted classes (warning-box, error-box, note-box)
+
+**Problem:** Example box too wide
+- That's normal - it takes full width for large content
+- For narrow content, it auto-adjusts and centers
+
+---
+
+**Last Updated:** 2025-12-06
+**Version:** 2.0 (Updated for 4-box system)
+**See Also:** [AI_TASK_CREATION_GUIDE.md](AI_TASK_CREATION_GUIDE.md) for complete task creation
