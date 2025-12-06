@@ -67,13 +67,7 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/task-content.css"),
 
-    # MathJax for mathematical formulas
-    tags$script(src = "https://polyfill.io/v3/polyfill.min.js?features=es6"),
-    tags$script(
-      id = "MathJax-script",
-      async = NA,
-      src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ),
+    # MathJax configuration (must come BEFORE loading MathJax)
     tags$script(HTML("
       window.MathJax = {
         tex: {
@@ -85,7 +79,17 @@ ui <- fluidPage(
           skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       };
-    "))
+    ")),
+
+    # MathJax library
+    tags$script(src = "https://polyfill.io/v3/polyfill.min.js?features=es6"),
+    tags$script(
+      id = "MathJax-script",
+      src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ),
+
+    # Custom JS for MathJax + Shiny integration
+    tags$script(src = "js/mathjax-shiny.js")
   ),
 
   # Hero header
