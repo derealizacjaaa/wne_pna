@@ -166,7 +166,7 @@
   overflow: hidden;
 }
 
-.task-item a > div {
+.task-content-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -174,7 +174,7 @@
   height: 100%;
   padding: 0 10px 0 15px;
   box-sizing: border-box;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   overflow: hidden;
 }
 
