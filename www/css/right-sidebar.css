@@ -193,7 +193,7 @@
 
 /* Task name */
 .task-name {
-  flex: 1;
+  flex: 1 1 auto;
   font-size: 0.9em;
   font-weight: 500;
   color: #606060;
@@ -201,13 +201,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+  max-width: 100%;
 }
 
 /* Task status icon */
 .task-status {
   font-size: 1.2em;
-  flex-shrink: 0;
+  flex: 0 0 auto;
   min-width: 18px;
+  max-width: 24px;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,6 +218,12 @@
 
 .task-status.status-completed {
   color: #b1404f;
+}
+
+.task-status i,
+.task-status svg {
+  max-width: 20px;
+  width: 1.2em;
 }
 
 /* Hover effects */
