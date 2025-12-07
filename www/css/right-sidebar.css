@@ -136,7 +136,7 @@
 
 /* Task items */
 .task-item {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   background: #FFFFFF;
   border-radius: 6px;
   transition: all 0.2s ease;
