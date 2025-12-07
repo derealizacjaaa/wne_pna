@@ -74,7 +74,6 @@ create_list_item <- function(list_info, is_active, stats) {
 #' @param is_active Whether this task is currently selected
 #' @return Shiny li tag
 create_task_item <- function(task_id, task_info, is_active) {
-  task_name <- task_info$name %||% sprintf("Zadanie %d", task_info$task_num)
   is_completed <- isTRUE(task_info$completed)
 
   tags$li(
@@ -82,8 +81,8 @@ create_task_item <- function(task_id, task_info, is_active) {
     actionLink(
       paste0("select_task_", task_id),
       div(
+        div(class = "task-name", "Zadanie"),
         div(class = "task-number", sprintf("%02d", task_info$task_num)),
-        div(class = "task-name", task_name),
         if (is_completed) {
           div(class = "task-status status-completed", icon("circle-check"))
         }
