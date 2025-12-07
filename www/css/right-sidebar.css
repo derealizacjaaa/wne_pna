@@ -163,6 +163,7 @@
   color: #606060;
   box-sizing: border-box;
   padding: 5px;
+  overflow: hidden;
 }
 
 .task-item a > div {
@@ -173,16 +174,20 @@
   height: 100%;
   padding: 0 10px 0 15px;
   box-sizing: border-box;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 /* Task name (left side) */
 .task-name {
-  flex: 1;
+  flex: 0 1 auto;
   font-size: 1.4em;
   font-weight: 600;
   color: #606060;
   letter-spacing: 0.01em;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .task-name::first-letter {
