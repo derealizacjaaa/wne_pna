@@ -207,7 +207,7 @@
   font-weight: bold;
   font-size: 1.1em;
   flex: 0 0 30px;
-  margin-right: 10px;
+  margin-right: 2px;
 }
 
 .task-item.active .task-number {
