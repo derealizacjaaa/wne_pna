@@ -207,11 +207,16 @@
   font-weight: bold;
   font-size: 1.1em;
   flex: 0 0 30px;
-  margin-right: 2px;
+  margin-right: 10px;
 }
 
 .task-item.active .task-number {
   background: #4A4A4A;
+}
+
+.task-number .first-digit {
+  color: #4A4A4A;
+  margin-right: 2px;
 }
 
 /* Task status icon (overlay in top left corner) */

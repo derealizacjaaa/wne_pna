@@ -76,6 +76,19 @@ create_list_item <- function(list_info, is_active, stats) {
 create_task_item <- function(task_id, task_info, is_active) {
   is_completed <- isTRUE(task_info$completed)
 
+  # Format task number: color first digit differently for double digits
+  task_num <- task_info$task_num
+  if (task_num < 10) {
+    number_display <- sprintf("0%d", task_num)
+  } else {
+    first_digit <- substr(sprintf("%02d", task_num), 1, 1)
+    second_digit <- substr(sprintf("%02d", task_num), 2, 2)
+    number_display <- tags$span(
+      tags$span(class = "first-digit", first_digit),
+      second_digit
+    )
+  }
+
   tags$li(
     class = if (is_active) "task-item active" else "task-item",
     # Status icon overlay (outside the link)
@@ -85,7 +98,7 @@ create_task_item <- function(task_id, task_info, is_active) {
     # Main clickable content
     actionLink(
       paste0("select_task_", task_id),
-      div(class = "task-number", sprintf("%02d", task_info$task_num)),
+      div(class = "task-number", number_display),
       div(class = "task-name", "Zadanie")
     )
   )
