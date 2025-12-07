@@ -238,6 +238,12 @@
 
 .task-status.status-completed {
   color: #b1404f;
+  transition: color 0.2s ease;
+}
+
+.task-item:hover .task-status.status-completed,
+.task-item.active .task-status.status-completed {
+  color: #28a745;
 }
 
 .task-status i,
