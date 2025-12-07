@@ -143,7 +143,7 @@
   border: 2px solid #e0e0e0;
   position: relative;
   overflow: visible;
-  height: 55px;
+  height: 45px;
   box-sizing: border-box;
 }
 
@@ -159,25 +159,17 @@
 }
 
 .task-item a {
-  display: block;
-  height: 100%;
-  text-decoration: none;
-  color: #606060;
-  box-sizing: border-box;
-  padding: 5px;
-  overflow: hidden;
-}
-
-.task-content-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 0 10px 0 15px;
+  text-decoration: none;
+  color: #606060;
   box-sizing: border-box;
-  flex-wrap: nowrap !important;
+  padding: 0;
   overflow: hidden;
+  flex-wrap: nowrap !important;
 }
 
 /* Task name (left side) */
