@@ -193,6 +193,7 @@
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
+  margin-left: 5px;
 }
 
 .task-name::first-letter {
@@ -214,7 +215,7 @@
   font-weight: bold;
   font-size: 0.75em;
   flex: 0 0 24px;
-  margin-right: 10px;
+  margin-right: 2px;
 }
 
 .task-item.active .task-number {
