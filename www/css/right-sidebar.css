@@ -180,7 +180,10 @@
 
 /* Task name (left side) */
 .task-name {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+  width: 85px;
+  max-width: 85px;
+  min-width: 85px;
   font-size: 1.4em;
   font-weight: 600;
   color: #606060;
