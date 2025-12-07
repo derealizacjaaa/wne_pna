@@ -219,12 +219,12 @@
   background: #4A4A4A;
 }
 
-/* Task status icon (overlay in top right corner) */
+/* Task status icon (overlay in top left corner) */
 .task-status {
   position: absolute;
   top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
+  left: 0;
+  transform: translate(-50%, -50%);
   width: 24px;
   height: 24px;
   font-size: 1.3em;
