@@ -222,8 +222,8 @@
 /* Task status icon (overlay in top left corner) */
 .task-status {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 4px;
+  left: 4px;
   transform: translate(-50%, -50%);
   width: 24px;
   height: 24px;
