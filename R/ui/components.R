@@ -85,8 +85,8 @@ create_task_item <- function(task_id, task_info, is_active) {
     # Main clickable content
     actionLink(
       paste0("select_task_", task_id),
-      div(class = "task-name", "Zadanie"),
-      div(class = "task-number", sprintf("%02d", task_info$task_num))
+      div(class = "task-number", sprintf("%02d", task_info$task_num)),
+      div(class = "task-name", "Zadanie")
     )
   )
 }
