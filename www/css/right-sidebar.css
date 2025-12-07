@@ -140,7 +140,9 @@
   transition: all 0.2s ease;
   border: 2px solid #e0e0e0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 .task-item:hover {
@@ -155,36 +157,39 @@
 }
 
 .task-item a {
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
+  display: block;
+  height: 100%;
   text-decoration: none;
   color: #606060;
+  box-sizing: border-box;
 }
 
 .task-item a > div {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  width: 100%;
-  gap: 10px;
-  flex-wrap: nowrap;
-  min-width: 0;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 0 12px;
+  gap: 8px;
+  box-sizing: border-box;
 }
 
 /* Task number badge */
 .task-number {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  max-width: 32px;
   background: #b1404f;
   color: white;
   border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 0.85em;
-  flex-shrink: 0;
+  font-size: 0.9em;
+  flex: 0 0 32px;
 }
 
 .task-item.active .task-number {
@@ -193,7 +198,7 @@
 
 /* Task name */
 .task-name {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   font-size: 0.9em;
   font-weight: 500;
   color: #606060;
@@ -201,19 +206,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 100%;
+  line-height: 1.2;
 }
 
 /* Task status icon */
 .task-status {
-  font-size: 1.2em;
-  flex: 0 0 auto;
-  min-width: 18px;
-  max-width: 24px;
-  width: auto;
-  display: flex;
+  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  flex: 0 0 20px;
+  font-size: 1.1em;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
 }
 
 .task-status.status-completed {
@@ -222,8 +228,8 @@
 
 .task-status i,
 .task-status svg {
-  max-width: 20px;
-  width: 1.2em;
+  width: 100%;
+  height: auto;
 }
 
 /* Hover effects */
