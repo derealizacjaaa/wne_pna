@@ -202,8 +202,8 @@
 
 /* Task status icon */
 .task-status {
-  margin-left: auto;
   font-size: 1.2em;
+  flex-shrink: 0;
 }
 
 .task-status.status-completed {
