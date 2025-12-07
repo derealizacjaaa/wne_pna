@@ -198,14 +198,14 @@
 
 /* Task name */
 .task-name {
-  flex: 1 1 0;
+  flex: 0 0 auto;
+  max-width: 80px;
   font-size: 0.9em;
   font-weight: 500;
   color: #606060;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0;
   line-height: 1.2;
 }
 
