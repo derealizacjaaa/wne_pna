@@ -185,7 +185,7 @@
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .task-name::first-letter {
@@ -194,10 +194,10 @@
 
 /* Task number badge (right side) */
 .task-number {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  max-width: 24px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  max-width: 30px;
   background: #b1404f;
   color: white;
   border-radius: 50%;
@@ -205,8 +205,8 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 0.75em;
-  flex: 0 0 24px;
+  font-size: 0.9em;
+  flex: 0 0 30px;
   margin-right: 2px;
 }
 
