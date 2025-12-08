@@ -137,7 +137,7 @@
 /* Task items */
 .task-item {
   margin-bottom: 16px;
-  background: #FFFFFF;
+  background-image: radial-gradient(circle at 100% 50%, #b14040 30%, #ffffff 30.5%);
   border-radius: 6px;
   transition: all 0.2s ease;
   border: 2px solid #e0e0e0;
