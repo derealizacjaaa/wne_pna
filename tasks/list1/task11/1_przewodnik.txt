@@ -1,0 +1,93 @@
+<h1>Demo: Framework stylów HTML</h1>
+
+<p>To zadanie demonstracyjne prezentuje wszystkie dostępne style HTML dla tworzenia zadań.</p>
+
+<div class="info-box">
+  <h4>Informacja</h4>
+  <p>Ten przewodnik pokazuje jak używać standardowych elementów HTML z automatycznym stylowaniem.</p>
+</div>
+
+<h2>Nagłówki i tekst</h2>
+
+<p>Dostępne są różne poziomy nagłówków:</p>
+
+<h3>To jest nagłówek H3</h3>
+
+<p>Tekst może zawierać <strong>pogrubienie</strong>, <em>kursywę</em> oraz <code>inline code</code>.</p>
+
+<h4>To jest nagłówek H4</h4>
+
+<p>Używaj odpowiednich nagłówków do organizacji treści zadania.</p>
+
+<h2>Listy</h2>
+
+<p>Lista nieuporządkowana:</p>
+
+<ul>
+  <li>Pierwszy element</li>
+  <li>Drugi element</li>
+  <li>Trzeci element z <code>kodem</code></li>
+</ul>
+
+<p>Lista uporządkowana:</p>
+
+<ol>
+  <li>Krok pierwszy</li>
+  <li>Krok drugi</li>
+  <li>Krok trzeci</li>
+</ol>
+
+<h2>Wzory matematyczne</h2>
+
+<p>Wzory inline: średnia arytmetyczna to $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$</p>
+
+<p>Wzory w bloku (wyśrodkowane):</p>
+
+<div class="example-box">
+$$
+s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
+</div>
+
+<p>Więcej przykładów:</p>
+
+<ul>
+  <li>Litery greckie: $\alpha, \beta, \gamma, \mu, \sigma, \pi$</li>
+  <li>Indeksy: $x_i, y^2, x_i^2$</li>
+  <li>Rozkład normalny: $X \sim N(\mu, \sigma^2)$</li>
+</ul>
+
+<h2>Tabele</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Funkcja</th>
+      <th>Opis</th>
+      <th>Przykład</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>mean()</code></td>
+      <td>Średnia arytmetyczna</td>
+      <td><code>mean(c(1,2,3))</code></td>
+    </tr>
+    <tr>
+      <td><code>sd()</code></td>
+      <td>Odchylenie standardowe</td>
+      <td><code>sd(c(1,2,3))</code></td>
+    </tr>
+    <tr>
+      <td><code>median()</code></td>
+      <td>Mediana</td>
+      <td><code>median(c(1,2,3))</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<blockquote>
+  <p>"Wizualizacja danych jest kluczem do ich zrozumienia."</p>
+</blockquote>

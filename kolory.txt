@@ -1,0 +1,4 @@
+#b1404 - czerowny
+#4A4A4A - czarny
+#606060 - jaśniejszy czarny
+#F4F6F9 - brudna biel
