@@ -137,8 +137,10 @@
 /* Task items */
 .task-item {
   margin-bottom: 16px;
-  background-image: radial-gradient(circle at 100% 50%, #b14040 30%, #ffffff 30.5%);
-  border-radius: 6px;
+  background-image: radial-gradient(ellipse 70% 125% at left center, #ffffff 99%, #b1404f 99.5%);
+  -webkit-mask-image: radial-gradient(circle at left center, transparent 20px, black 20.5px);
+      mask-image: radial-gradient(circle at left center, transparent 20px, black 20.5px);
+  border-radius: 0 6px 6px 0;
   transition: all 0.2s ease;
   border: 2px solid #e0e0e0;
   position: relative;
