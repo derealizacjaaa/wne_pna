@@ -201,11 +201,11 @@
   pointer-events: none;
   z-index: 0;
 
-  /* Large ellipse fill with subtle border edge */
+  /* Large ellipse fill - pure white, no border edge */
   background: radial-gradient(
     ellipse var(--task-fill-rx) var(--task-fill-ry) at left center,
-    var(--task-bg) 99%,
-    var(--task-ring-color) 99.5%
+    var(--task-bg) 100%,
+    var(--task-bg) 100%
   );
 
   /* Same smooth mask as parent */
