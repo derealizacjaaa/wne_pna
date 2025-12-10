@@ -76,7 +76,8 @@ highlight_random_letter <- function(text, seed) {
   chars <- strsplit(text, "")[[1]]
   n <- length(chars)
   # Use seed to pick a consistent "random" position
-  pos <- ((seed * 7 + 3) %% n) + 1
+  # Formula designed for good distribution across 7 letters
+  pos <- ((seed - 1) %% n) + 1
 
   # Build HTML with highlighted letter
   before <- if (pos > 1) paste0(chars[1:(pos-1)], collapse = "") else ""
