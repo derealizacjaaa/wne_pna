@@ -139,19 +139,21 @@
   margin-bottom: 16px;
   background-image: 
         radial-gradient(
-          ellipse 18px 38px at left center, 
-          transparent 15px,   /* Start przezroczystości */
-          #b14040 15px,       /* Start koloru (ostre przejście) */
-          #b14040 17px,       /* Koniec koloru */
-          transparent 17px  /* Powrót do przezroczystości */
+          ellipse 18px 24px at left center, 
+          
+          transparent 18px, /* Musi się pokrywać z maską */
+          #b14040 18.5px,   /* Start koloru (wygładzony) */
+          
+          #b14040 22.5px,   /* Koniec koloru (to daje nam ok. 3px grubości ramki) */
+          transparent 23px  /* Rozmycie końca */
         ),
         radial-gradient(
           ellipse 70% 125% at left center, 
           #ffffff 99%, 
           #b14040 99.5%
         );
-      -webkit-mask-image: radial-gradient(ellipse 15px 35px at left center, transparent 99%, black 100%);
-      mask-image: radial-gradient(ellipse 15px 35px at left center, transparent 99%, black 100%);
+      -webkit-mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
+      mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
   border-radius: 0 6px 6px 0;
   transition: all 0.2s ease;
   border: 2px solid #e0e0e0;
