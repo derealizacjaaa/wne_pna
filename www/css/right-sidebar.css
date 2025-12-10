@@ -3,32 +3,22 @@
    Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
    ======================================== */
 
-/* Task Item Gradient Variables */
+/* Task Item Ellipse Cutout Variables */
 :root {
-  /* Mask ellipse dimensions */
-  --task-mask-rx: 20px;
-  --task-mask-ry: 24px;
+  /* Ellipse cutout dimensions */
+  --task-cutout-rx: 18px;
+  --task-cutout-ry: 22px;
 
-  /* Small fixed border gradient dimensions */
-  --task-border-rx: 18px;
-  --task-border-ry: 24px;
-  --task-border-start: 18px;
-  --task-border-color-start: 18.5px;
-  --task-border-color-end: 22.5px;
-  --task-border-fade-end: 23px;
-
-  /* Large fill gradient dimensions */
-  --task-fill-rx: 70%;
-  --task-fill-ry: 125%;
-  --task-fill-color-stop: 99%;
-  --task-fill-border-stop: 99.5%;
+  /* Border ring thickness (sharp edge) */
+  --task-ring-width: 3px;
 
   /* Colors */
-  --task-gradient-color: #b14040;
-  --task-fill-color: #ffffff;
+  --task-ring-color: #b14040;
+  --task-ring-color-active: #4A4A4A;
+  --task-bg: #ffffff;
 
-  /* Transition timing */
-  --task-fill-transition: 0.3s ease;
+  /* Transition */
+  --task-transition: 0.3s ease;
 }
 
 .right-sidebar {
@@ -162,86 +152,48 @@
   padding-top: 15px;
 }
 
-/* Task items */
+/* Task items - Sharp ellipse cutout design */
 .task-item {
   margin-bottom: 16px;
-  /* Small fixed border gradient - always visible */
-  background-image:
-    radial-gradient(
-      ellipse var(--task-border-rx) var(--task-border-ry) at left center,
-      transparent var(--task-border-start),
-      var(--task-gradient-color) var(--task-border-color-start),
-      var(--task-gradient-color) var(--task-border-color-end),
-      transparent var(--task-border-fade-end)
-    );
-  background-color: var(--task-fill-color);
-  /* Mask - always visible */
-  -webkit-mask-image: radial-gradient(
-    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
-    transparent var(--task-mask-rx),
-    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
-  );
-  mask-image: radial-gradient(
-    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
-    transparent var(--task-mask-rx),
-    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
-  );
-  border-radius: 0 6px 6px 0;
-  transition: all 0.2s ease;
-  border: 2px solid #e0e0e0;
   position: relative;
-  overflow: visible;
   height: 45px;
   box-sizing: border-box;
-}
+  border-radius: 0 6px 6px 0;
+  border: 2px solid #e0e0e0;
+  overflow: visible;
+  transition: box-shadow var(--task-transition);
 
-/* Large fill gradient - pseudo-element for animation */
-.task-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  /* Large percentage gradient */
-  background-image: radial-gradient(
-    ellipse var(--task-fill-rx) var(--task-fill-ry) at left center,
-    var(--task-fill-color) var(--task-fill-color-stop),
-    var(--task-gradient-color) var(--task-fill-border-stop)
-  );
-  /* Same mask as parent */
+  /* Single gradient: ring color from center, then white fill */
+  background:
+    radial-gradient(
+      ellipse var(--task-cutout-rx) var(--task-cutout-ry) at left center,
+      var(--task-ring-color) 0,
+      var(--task-ring-color) calc(var(--task-cutout-rx) + var(--task-ring-width)),
+      var(--task-bg) calc(var(--task-cutout-rx) + var(--task-ring-width))
+    );
+
+  /* Sharp ellipse mask - cuts out the left side */
   -webkit-mask-image: radial-gradient(
-    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
-    transparent var(--task-mask-rx),
-    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+    ellipse var(--task-cutout-rx) var(--task-cutout-ry) at left center,
+    transparent var(--task-cutout-rx),
+    black var(--task-cutout-rx)
   );
   mask-image: radial-gradient(
-    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
-    transparent var(--task-mask-rx),
-    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+    ellipse var(--task-cutout-rx) var(--task-cutout-ry) at left center,
+    transparent var(--task-cutout-rx),
+    black var(--task-cutout-rx)
   );
-  opacity: 1;
-  transition: opacity var(--task-fill-transition);
-  pointer-events: none;
-  z-index: 0;
 }
 
-/* Hover state - large fill gradient fades out */
+/* Hover state */
 .task-item:hover {
-  /* Keep border color unchanged to prevent visual widening of left edge */
+  /* No changes needed - ring stays consistent */
 }
 
-.task-item:hover::after {
-  opacity: 0;
-}
-
-/* Active/selected state - large fill gradient hidden, border gradient changes color */
+/* Active/selected state - ring changes to dark gray */
 .task-item.active {
-  --task-gradient-color: #4A4A4A;
-  /* Keep border color unchanged to prevent visual widening of left edge */
+  --task-ring-color: var(--task-ring-color-active);
   box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
-}
-
-.task-item.active::after {
-  opacity: 0;
 }
 
 .task-item a {
