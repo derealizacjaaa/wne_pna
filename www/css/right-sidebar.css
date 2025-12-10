@@ -233,8 +233,9 @@
   opacity: 0;
 }
 
-/* Active/selected state - large fill gradient hidden */
+/* Active/selected state - large fill gradient hidden, border gradient changes color */
 .task-item.active {
+  --task-gradient-color: #4A4A4A;
   border-color: #b1404f;
   box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
 }
