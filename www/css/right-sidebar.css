@@ -3,6 +3,34 @@
    Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
    ======================================== */
 
+/* Task Item Gradient Variables */
+:root {
+  /* Mask ellipse dimensions */
+  --task-mask-rx: 20px;
+  --task-mask-ry: 24px;
+
+  /* Small fixed border gradient dimensions */
+  --task-border-rx: 18px;
+  --task-border-ry: 24px;
+  --task-border-start: 18px;
+  --task-border-color-start: 18.5px;
+  --task-border-color-end: 22.5px;
+  --task-border-fade-end: 23px;
+
+  /* Large fill gradient dimensions */
+  --task-fill-rx: 70%;
+  --task-fill-ry: 125%;
+  --task-fill-color-stop: 99%;
+  --task-fill-border-stop: 99.5%;
+
+  /* Colors */
+  --task-gradient-color: #b14040;
+  --task-fill-color: #ffffff;
+
+  /* Transition timing */
+  --task-fill-transition: 0.3s ease;
+}
+
 .right-sidebar {
   width: 300px;
   background: white;
@@ -137,23 +165,27 @@
 /* Task items */
 .task-item {
   margin-bottom: 16px;
-  background-image: 
-        radial-gradient(
-          ellipse 18px 24px at left center, 
-          
-          transparent 18px, /* Musi się pokrywać z maską */
-          #b14040 18.5px,   /* Start koloru (wygładzony) */
-          
-          #b14040 22.5px,   /* Koniec koloru (to daje nam ok. 3px grubości ramki) */
-          transparent 23px  /* Rozmycie końca */
-        ),
-        radial-gradient(
-          ellipse 70% 125% at left center, 
-          #ffffff 99%, 
-          #b14040 99.5%
-        );
-      -webkit-mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
-      mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
+  /* Small fixed border gradient - always visible */
+  background-image:
+    radial-gradient(
+      ellipse var(--task-border-rx) var(--task-border-ry) at left center,
+      transparent var(--task-border-start),
+      var(--task-gradient-color) var(--task-border-color-start),
+      var(--task-gradient-color) var(--task-border-color-end),
+      transparent var(--task-border-fade-end)
+    );
+  background-color: var(--task-fill-color);
+  /* Mask - always visible */
+  -webkit-mask-image: radial-gradient(
+    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
+    transparent var(--task-mask-rx),
+    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+  );
+  mask-image: radial-gradient(
+    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
+    transparent var(--task-mask-rx),
+    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+  );
   border-radius: 0 6px 6px 0;
   transition: all 0.2s ease;
   border: 2px solid #e0e0e0;
@@ -163,15 +195,52 @@
   box-sizing: border-box;
 }
 
+/* Large fill gradient - pseudo-element for animation */
+.task-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* Large percentage gradient */
+  background-image: radial-gradient(
+    ellipse var(--task-fill-rx) var(--task-fill-ry) at left center,
+    var(--task-fill-color) var(--task-fill-color-stop),
+    var(--task-gradient-color) var(--task-fill-border-stop)
+  );
+  /* Same mask as parent */
+  -webkit-mask-image: radial-gradient(
+    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
+    transparent var(--task-mask-rx),
+    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+  );
+  mask-image: radial-gradient(
+    ellipse var(--task-mask-rx) var(--task-mask-ry) at left center,
+    transparent var(--task-mask-rx),
+    var(--task-gradient-color) calc(var(--task-mask-rx) + 0.5px)
+  );
+  opacity: 1;
+  transition: opacity var(--task-fill-transition);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hover state - large fill gradient fades out */
 .task-item:hover {
-  background: white;
   border-color: #b1404f;
 }
 
+.task-item:hover::after {
+  opacity: 0;
+}
+
+/* Active/selected state - large fill gradient hidden */
 .task-item.active {
-  background: white;
   border-color: #b1404f;
   box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
+}
+
+.task-item.active::after {
+  opacity: 0;
 }
 
 .task-item a {
@@ -186,6 +255,8 @@
   padding: 0;
   overflow: hidden;
   flex-wrap: nowrap !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* Task name (left side) */
@@ -263,7 +334,7 @@
   height: auto;
 }
 
-/* Hover effects */
+/* Hover sweep effect */
 .task-item::before {
   content: '';
   position: absolute;
@@ -273,6 +344,8 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
   transition: left 0.5s;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .task-item:hover::before {
