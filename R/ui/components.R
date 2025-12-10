@@ -75,9 +75,15 @@ create_list_item <- function(list_info, is_active, stats) {
 highlight_random_letter <- function(text, seed) {
   chars <- strsplit(text, "")[[1]]
   n <- length(chars)
-  # Use seed to pick a consistent "random" position
-  # Formula designed for good distribution across 7 letters
-  pos <- ((seed - 1) %% n) + 1
+
+  # Scrambled sequence for "random" looking distribution
+  # Pattern: 2, 5, 1, 6, 3, 7, 4 (then cycles)
+  scramble <- c(2, 5, 1, 6, 3, 7, 4)
+  pos <- scramble[((seed - 1) %% length(scramble)) + 1]
+
+  # Ensure pos is within bounds for the text
+
+  pos <- ((pos - 1) %% n) + 1
 
   # Build HTML with highlighted letter
   before <- if (pos > 1) paste0(chars[1:(pos-1)], collapse = "") else ""
