@@ -226,7 +226,7 @@
 
 /* Hover state - large fill gradient fades out */
 .task-item:hover {
-  border-color: #b1404f;
+  /* Keep border color unchanged to prevent visual widening of left edge */
 }
 
 .task-item:hover::after {
@@ -236,7 +236,7 @@
 /* Active/selected state - large fill gradient hidden, border gradient changes color */
 .task-item.active {
   --task-gradient-color: #4A4A4A;
-  border-color: #b1404f;
+  /* Keep border color unchanged to prevent visual widening of left edge */
   box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
 }
 
