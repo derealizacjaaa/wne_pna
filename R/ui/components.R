@@ -68,6 +68,28 @@ create_list_item <- function(list_info, is_active, stats) {
   )
 }
 
+#' Highlight a semi-random letter in a word
+#' @param text The text to process
+#' @param seed Seed for pseudo-random selection (e.g., task number)
+#' @return HTML with one letter wrapped in highlight span
+highlight_random_letter <- function(text, seed) {
+  chars <- strsplit(text, "")[[1]]
+  n <- length(chars)
+  # Use seed to pick a consistent "random" position
+  pos <- ((seed * 7 + 3) %% n) + 1
+
+  # Build HTML with highlighted letter
+  before <- if (pos > 1) paste0(chars[1:(pos-1)], collapse = "") else ""
+  highlighted <- chars[pos]
+  after <- if (pos < n) paste0(chars[(pos+1):n], collapse = "") else ""
+
+  HTML(paste0(
+    before,
+    '<span class="highlight-letter">', highlighted, '</span>',
+    after
+  ))
+}
+
 #' Create a task item for task selection sidebar
 #' @param task_id Task identifier
 #' @param task_info Task object
@@ -86,7 +108,7 @@ create_task_item <- function(task_id, task_info, is_active) {
     actionLink(
       paste0("select_task_", task_id),
       div(class = "task-number", sprintf("%d", task_info$task_num)),
-      div(class = "task-name", "Zadanie")
+      div(class = "task-name", highlight_random_letter("Zadanie", task_info$task_num))
     )
   )
 }

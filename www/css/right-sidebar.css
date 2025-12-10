@@ -276,7 +276,8 @@
   margin-left: 15px;
 }
 
-.task-name::first-letter {
+/* Highlighted letter (semi-random position based on task number) */
+.task-name .highlight-letter {
   color: #b1404f;
 }
 
