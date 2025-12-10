@@ -1,0 +1,193 @@
+<h1>Zaawansowane przykłady</h1>
+
+<h2>Matematyka i statystyka</h2>
+
+<div class="definition-box">
+  <h4>Definicja: Estymator największej wiarygodności (MLE)</h4>
+  <p>Estymator największej wiarygodności $\hat{\theta}_{MLE}$ to wartość parametru $\theta$, która maksymalizuje funkcję wiarygodności:</p>
+</div>
+
+$$
+\hat{\theta}_{MLE} = \arg\max_{\theta} L(\theta | X) = \arg\max_{\theta} \prod_{i=1}^{n} f(x_i | \theta)
+$$
+
+<p>Często pracujemy z logarytmem funkcji wiarygodności:</p>
+
+$$
+\ell(\theta) = \log L(\theta) = \sum_{i=1}^{n} \log f(x_i | \theta)
+$$
+
+<h3>Przykład: MLE dla rozkładu normalnego</h3>
+
+<p>Dla próby $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$ estymatory MLE to:</p>
+
+$$
+\hat{\mu}_{MLE} = \frac{1}{n}\sum_{i=1}^{n} X_i = \bar{X}
+$$
+
+$$
+\hat{\sigma}^2_{MLE} = \frac{1}{n}\sum_{i=1}^{n} (X_i - \bar{X})^2
+$$
+
+<div class="example-box">
+  <h4>Przykład numeryczny</h4>
+  <p>Obliczmy estymatory MLE dla losowej próby z rozkładu normalnego.</p>
+</div>
+
+run(
+# Załaduj bibliotekę maxLik (cicho)
+library(maxLik)
+set.seed(123)
+)
+
+execute(
+# Wygeneruj próbę z N(5, 2^2)
+sample_data <- rnorm(100, mean = 5, sd = 2)
+
+# MLE dla średniej (zwykła średnia)
+mu_mle <- mean(sample_data)
+cat("μ_MLE =", round(mu_mle, 3), "\n")
+
+# MLE dla wariancji (obciążony estymator)
+sigma2_mle <- mean((sample_data - mu_mle)^2)
+cat("σ²_MLE =", round(sigma2_mle, 3), "\n")
+
+# Porównaj z prawdziwymi wartościami
+cat("\nPrawdziwe wartości: μ = 5, σ² = 4\n")
+)
+
+<h2>Wizualizacja z ggplot2</h2>
+
+<p>Możemy też tworzyć zaawansowane wykresy:</p>
+
+run(
+library(ggplot2)
+)
+
+plot(
+# Stwórz data frame
+df <- data.frame(x = sample_data)
+
+# Wykres z teoretycznym rozkładem
+ggplot(df, aes(x = x)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 bins = 20,
+                 fill = "steelblue",
+                 alpha = 0.7,
+                 color = "white") +
+  stat_function(fun = dnorm,
+                args = list(mean = mu_mle, sd = sqrt(sigma2_mle)),
+                color = "#b1404f",
+                linewidth = 1.5) +
+  labs(title = "Histogram vs teoretyczny rozkład N(μ_MLE, σ²_MLE)",
+       x = "Wartość",
+       y = "Gęstość") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+)
+
+<div class="success-box">
+  <h4>Interpretacja</h4>
+  <p>Czerwona linia pokazuje rozkład teoretyczny z parametrami oszacowanymi MLE.</p>
+  <p>Histogram empiryczny dobrze pasuje do teoretycznego rozkładu!</p>
+</div>
+
+<h2>Testy statystyczne</h2>
+
+<p>Test hipotezy $H_0: \mu = 5$ vs $H_1: \mu \neq 5$:</p>
+
+execute(
+# Test t-Studenta
+test_result <- t.test(sample_data, mu = 5)
+
+cat("Statystyka t:", round(test_result$statistic, 3), "\n")
+cat("p-wartość:", round(test_result$p.value, 4), "\n")
+cat("Przedział ufności 95%: [",
+    round(test_result$conf.int[1], 3), ",",
+    round(test_result$conf.int[2], 3), "]\n")
+)
+
+<div class="info-box">
+  <h4>Interpretacja</h4>
+  <p>Jeśli p-wartość > 0.05, nie ma podstaw do odrzucenia $H_0$.</p>
+  <p>Prawdziwa średnia $\mu = 5$ znajduje się w przedziale ufności.</p>
+</div>
+
+<h2>Regresja liniowa</h2>
+
+<p>Model regresji: $Y = \beta_0 + \beta_1 X + \epsilon$, gdzie $\epsilon \sim N(0, \sigma^2)$</p>
+
+execute(
+# Użyj danych mtcars
+model <- lm(mpg ~ wt, data = mtcars)
+
+# Pokaż współczynniki
+cat("Współczynniki regresji:\n")
+cat("β₀ (intercept):", round(coef(model)[1], 3), "\n")
+cat("β₁ (slope):", round(coef(model)[2], 3), "\n")
+
+# R²
+cat("\nR² =", round(summary(model)$r.squared, 4), "\n")
+)
+
+<p>Wizualizacja regresji:</p>
+
+plot(
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(size = 3, color = "steelblue", alpha = 0.7) +
+  geom_smooth(method = "lm", color = "#b1404f", se = TRUE, fill = "#d1808c") +
+  labs(title = "Regresja: MPG vs masa pojazdu",
+       x = "Masa (1000 lbs)",
+       y = "Mile per gallon") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+)
+
+<div class="definition-box">
+  <h4>Równanie regresji</h4>
+  <p>Na podstawie powyższych współczynników możemy zapisać:</p>
+</div>
+
+$$
+\widehat{MPG} = 37.285 - 5.344 \times \text{masa}
+$$
+
+<div class="warning-box">
+  <h4>Założenia regresji liniowej</h4>
+  <ul>
+    <li>Liniowość związku</li>
+    <li>Niezależność obserwacji</li>
+    <li>Homoskedastyczność (stała wariancja)</li>
+    <li>Normalność rozkładu reszt</li>
+  </ul>
+</div>
+
+<h2>Macierze w LaTeX</h2>
+
+<p>Można też wyświetlać macierze i układy równań:</p>
+
+$$
+\mathbf{X} = \begin{bmatrix}
+1 & x_{11} & x_{12} \\
+1 & x_{21} & x_{22} \\
+\vdots & \vdots & \vdots \\
+1 & x_{n1} & x_{n2}
+\end{bmatrix}, \quad
+\boldsymbol{\beta} = \begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\beta_2
+\end{bmatrix}
+$$
+
+<p>Estymator MLE w zapisie macierzowym:</p>
+
+$$
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}
+$$
+
+<hr>
+
+<blockquote>
+  <p>"All models are wrong, but some are useful." — George Box</p>
+</blockquote>
