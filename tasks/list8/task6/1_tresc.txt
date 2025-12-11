@@ -1,0 +1,5 @@
+<h2>Zadanie 6</h2>
+<p>Sprawdzić, czy zmienna z pliku <code>negb</code> może być modelowana
+rozkładem Poissona.</p>
+<p>Czy spełnione jest założenie o równości średniej i wariancji?<br>
+Jeśli nie — spróbować zastosować inny rozkład.</p>

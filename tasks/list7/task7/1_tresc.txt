@@ -1,0 +1,10 @@
+<h2>Zadanie 7</h2>
+<p>Z rozkładu <span class="math inline"><script type="math/tex">N(\mu,2^2)</script></span>
+wygenerowano 40 obserwacji:<br>
+0.62, -2.52, -0.31, -0.73, 2.54, -1.52, -1.18, 2.06, 2.53, 2.52,<br>
+0.66, 0.02, -0.93, -0.09, 0.81, -1.60, 2.70, 0.52, 1.75, -0.79,<br>
+3.66, -1.05, -1.32, -2.42, 0.41, -2.09, 2.67, 1.36, 0.94, 0.58,<br>
+-0.40, 1.91, 0.18, 1.41, 4.56, -0.01, -1.60, -0.07, 1.79, 2.23,<br>
+0.52, -2.81, -1.74, 0.71, 2.09, 2.25, 1.33, 0.37, -2.04, 2.29.</p>
+<p>Oszacować <span class="math inline"><script type="math/tex">\mu</script></span> metodą MNW i
+przetestować jego istotność.</p>

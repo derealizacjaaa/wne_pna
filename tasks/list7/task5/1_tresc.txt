@@ -1,0 +1,11 @@
+<h2>Zadanie 5</h2>
+<p><strong>(Na podstawie zadania 16 z [1], str. 162)</strong><br>
+Dane <code>Service</code> z <strong>resampledata</strong> — czas
+oczekiwania (w minutach) na obsługę 174 klientów.<br>
+Zakładamy rozkład Gamma.</p>
+<p>Oszacować <span class="math inline"><script type="math/tex">k</script></span> i <span class="math inline"><script type="math/tex">\theta</script></span> metodą MNW.<br>
+Sprawdzić <span class="math inline"><script type="math/tex">H_0: k=1, \theta=2</script></span> dla
+<span class="math inline"><script type="math/tex">\alpha=0.05</script></span>.</p>
+<p><span class="math display"><script type="math/tex; mode=display">
+\ln{L}(k,\theta;x)=(k-1)\sum_{i=1}^{n}\ln(x_i)-\sum_{i=1}^{n}\frac{x_i}{\theta}-nk\ln(\theta)-n\ln(\Gamma(k))
+</script></span></p>

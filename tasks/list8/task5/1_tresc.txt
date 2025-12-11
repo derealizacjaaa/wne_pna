@@ -1,0 +1,8 @@
+<h2>Zadanie 5</h2>
+<p>Zbiór danych <code>king.txt</code> zawiera wartości całkowite
+nieujemne.<br>
+Badacz podejrzewa, że zostały wygenerowane z rozkładu Poissona<br>
+z parametrem <span class="math inline"><script type="math/tex">\lambda</script></span>.</p>
+<p>Oszacować parametr <span class="math inline"><script type="math/tex">\lambda</script></span> i
+sprawdzić, czy zmienna <strong>king</strong><br>
+ma rozkład Poissona z tym parametrem.</p>

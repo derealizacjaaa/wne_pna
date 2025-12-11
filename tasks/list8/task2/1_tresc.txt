@@ -1,0 +1,8 @@
+<h2>Zadanie 2 <em>(Przykład 6.8 z [1])</em></h2>
+<p>Niech <span class="math inline"><script type="math/tex">X_{1},X_{2},\ldots, X_{n}
+\overset{i.i.d.}{\sim} \text{Unif}[0,\beta]</script></span>.<br>
+Uzyskano realizacje zmiennej losowej:<br>
+<span class="math inline"><script type="math/tex">X_{1}=1</script></span>, <span class="math inline"><script type="math/tex">X_{2}=1</script></span>, <span class="math inline"><script type="math/tex">X_{3}=1</script></span>, <span class="math inline"><script type="math/tex">X_{4}=9</script></span>.</p>
+<p>Wyznaczyć estymator parametru <span class="math inline"><script type="math/tex">\beta</script></span> metodą momentów.</p>
+<p><strong>Skomentować uzyskaną wartość oszacowania w odniesieniu do
+wartości obserwacji.</strong></p>
