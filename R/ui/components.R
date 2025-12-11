@@ -78,15 +78,17 @@ create_task_item <- function(task_id, task_info, is_active) {
 
   tags$li(
     class = if (is_active) "task-item active" else "task-item",
-    # Status icon overlay (outside the link)
-    if (is_completed) {
-      div(class = "task-status status-completed", icon("circle-check"))
-    },
-    # Main clickable content
+    # Main clickable content - modern oval layout
     actionLink(
       paste0("select_task_", task_id),
+      # Number badge (left)
       div(class = "task-number", sprintf("%d", task_info$task_num)),
-      div(class = "task-name", "Zadanie")
+      # Task name (center)
+      div(class = "task-name", "Zadanie"),
+      # Status icon (right) - only shown if completed
+      if (is_completed) {
+        div(class = "task-status status-completed", icon("circle-check"))
+      }
     )
   )
 }
