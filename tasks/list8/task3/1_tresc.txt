@@ -1,8 +1,5 @@
 <h2>Zadanie 3</h2>
-<p>Wiedząc, że wartości zmiennej <strong>led</strong> pochodzą z
-rozkładu wykładniczego<br>
-z nieznanym parametrem <span class="math inline"><script type="math/tex">\lambda</script></span>,
-wyznaczyć estymator parametru <span class="math inline"><script type="math/tex">\lambda</script></span> metodą momentów.</p>
-<p>Sprawdzić zgodność rozkładu zmiennej <strong>led</strong> z rozkładem
-wykładniczym<br>
-o parametrze <span class="math inline"><script type="math/tex">\lambda_{MM}</script></span>.</p>
+<p>Wiedząc, że wartości zmiennej <strong>led</strong> pochodzą z rozkładu wykładniczego<br>
+z nieznanym parametrem $\lambda$, wyznaczyć estymator parametru $\lambda$ metodą momentów.</p>
+<p>Sprawdzić zgodność rozkładu zmiennej <strong>led</strong> z rozkładem wykładniczym<br>
+o parametrze $\lambda_{MM}$.</p>

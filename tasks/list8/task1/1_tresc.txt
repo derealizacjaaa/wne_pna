@@ -1,6 +1,5 @@
 <h2>Zadanie 1</h2>
-<p>Niech <span class="math inline"><script type="math/tex">X_{1},X_{2},\ldots, X_{n}
-\overset{i.i.d.}{\sim} \text{Unif}[0,\beta]</script></span>.<br>
+<p>Niech $X_{1},X_{2},\ldots, X_{n} \overset{i.i.d.}{\sim} \text{Unif}[0,\beta]$.<br>
 Uzyskano realizacje zmiennej losowej:<br>
-<span class="math inline"><script type="math/tex">X_{1}=5</script></span>, <span class="math inline"><script type="math/tex">X_{2}=9</script></span>, <span class="math inline"><script type="math/tex">X_{3}=6</script></span>, <span class="math inline"><script type="math/tex">X_{4}=4</script></span>, <span class="math inline"><script type="math/tex">X_{5}=1</script></span>.</p>
-<p>Wyznaczyć estymator parametru <span class="math inline"><script type="math/tex">\beta</script></span> metodą momentów.</p>
+$X_{1}=5$, $X_{2}=9$, $X_{3}=6$, $X_{4}=4$, $X_{5}=1$.</p>
+<p>Wyznaczyć estymator parametru $\beta$ metodą momentów.</p>

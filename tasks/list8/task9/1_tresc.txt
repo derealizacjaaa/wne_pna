@@ -1,11 +1,9 @@
 <h2>Zadanie 9</h2>
-<p>Zmienna <span class="math inline"><script type="math/tex">X_{1}, X_{2}, \ldots ,
-X_{100}</script></span> jest próbą prostą<br>
-z rozkładu wykładniczego z nieznanym parametrem <span class="math inline"><script type="math/tex">\lambda</script></span>.</p>
-<p>Znaleźć <span class="math inline"><script type="math/tex">\hat{\lambda}</script></span> metodą
-momentów dla wartości ze zbioru <code>exp.csv</code>.</p>
-<p>Jeśli zmienna <span class="math inline"><script type="math/tex">X</script></span> ma rozkład
-wykładniczy, to:</p>
-<p><span class="math display"><script type="math/tex; mode=display">
+<p>Zmienna $X_{1}, X_{2}, \ldots, X_{100}$ jest próbą prostą<br>
+z rozkładu wykładniczego z nieznanym parametrem $\lambda$.</p>
+<p>Znaleźć $\hat{\lambda}$ metodą momentów dla wartości ze zbioru <code>exp.csv</code>.</p>
+<p>Jeśli zmienna $X$ ma rozkład wykładniczy, to:</p>
+
+$$
 \mathbb{E}[X]=\frac{1}{\lambda}, \qquad Var[X]=\frac{1}{\lambda^{2}}.
-</script></span></p>
+$$
