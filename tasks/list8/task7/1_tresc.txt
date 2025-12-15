@@ -1,0 +1,5 @@
+<h2>Zadanie 7</h2>
+<p>Liczba cyklonów tropikalnych na Atlantyku w latach 1851–2016 została wyznaczona<br>
+na podstawie danych ze strony NOAA.</p>
+<p>Wczytać zbiór danych <code>Lhur2.csv</code> i sprawdzić, czy roczna liczba huraganów na Atlantyku<br>
+może być modelowana rozkładem <strong>ujemnym dwumianowym</strong>.</p>

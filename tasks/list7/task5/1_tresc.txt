@@ -1,0 +1,10 @@
+<h2>Zadanie 5</h2>
+<p><strong>(Na podstawie zadania 16 z [1], str. 162)</strong><br>
+Dane <code>Service</code> z <strong>resampledata</strong> — czas oczekiwania (w minutach) na obsługę 174 klientów.<br>
+Zakładamy rozkład Gamma.</p>
+<p>Oszacować $k$ i $\theta$ metodą MNW.<br>
+Sprawdzić $H_0: k=1, \theta=2$ dla $\alpha=0.05$.</p>
+
+$$
+\ln{L}(k,\theta;x)=(k-1)\sum_{i=1}^{n}\ln(x_i)-\sum_{i=1}^{n}\frac{x_i}{\theta}-nk\ln(\theta)-n\ln(\Gamma(k))
+$$

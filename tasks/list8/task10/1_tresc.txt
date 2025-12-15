@@ -1,0 +1,3 @@
+<h2>Zadanie 10</h2>
+<p>Zmienna <code>zep</code> jest próbą prostą z rozkładu Gamma $\Gamma(\alpha,\beta)$.</p>
+<p>Znaleźć estymatory $\hat{\alpha}$ oraz $\hat{\beta}$ metodą momentów.</p>

@@ -1,0 +1,23 @@
+<h2>Zadanie 8</h2>
+<p>Ponownie dane o nagrodach BBQ.<br>
+Tym razem zakładamy <strong>rozkład normalny nieprzyjmujący wartości ujemnych</strong>.</p>
+
+$$
+f(x_i;\mu,\sigma)=
+\begin{cases}
+1-\Phi\left(\frac{\mu}{\sigma}\right), & x_i=0\\
+\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp{\left(-\frac{(x_i-\mu)^2}{2\sigma^{2}}\right)}, & x_i>0
+\end{cases}
+$$
+
+$$
+\mathbb{P}(X<0)=\Phi\left(\frac{0-\mu}{\sigma}\right)=1-\Phi\left(\frac{\mu}{\sigma}\right)
+$$
+
+<p>W R funkcję $\Phi(.)$ można zapisać jako <code>pnorm(mu/sigma, mean=0, sd=1)</code>.</p>
+
+<p>Alternatywnie – rozkład normalny <strong>obcięty w zerze</strong>:</p>
+
+$$
+f(x;\mu,\sigma)=\frac{\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp{\left(-\frac{(x-\mu)^{2}}{2\sigma^2}\right)}}{1-\Phi(0)}
+$$

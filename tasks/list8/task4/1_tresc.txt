@@ -1,0 +1,5 @@
+<h2>Zadanie 4</h2>
+<p>Zmienna <strong>gret</strong> jest próbą prostą z rozkładu normalnego.<br>
+Zakładamy, że $\mu = 0$.</p>
+<p>Wyznaczyć estymator wariancji rozkładu metodą momentów.</p>
+<p>Przetestować zgodność rozkładu zmiennej <strong>gret</strong> z rozkładem $N(0, \sigma_{MM}^{2})$.</p>

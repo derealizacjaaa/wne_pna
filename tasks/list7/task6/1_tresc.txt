@@ -1,0 +1,8 @@
+<h2>Zadanie 6</h2>
+<p>Dane <code>contest_data.csv</code> (<a href="https://www.kaggle.com/jaysobel/kcbs-bbq">źródło</a>)<br>
+Zmienna <strong>prize</strong> – nagrody w zawodach barbecue (tylko obserwacje niezerowe).</p>
+<p>Zakładamy rozkład normalny $N(\mu,\sigma^2)$.</p>
+
+$$
+\ln{L(\mu,\sigma;x)} = -\frac{n}{2}\ln(2\pi) - n\ln(\sigma) - \frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2
+$$
