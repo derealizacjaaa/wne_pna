@@ -73,8 +73,31 @@ create_list_item <- function(list_info, is_active, stats) {
 #' @param task_info Task object
 #' @param is_active Whether this task is currently selected
 #' @return Shiny li tag
-create_task_item <- function(task_id, task_info, is_active) {
+#' Create a task item for task selection sidebar
+#' @param task_id Task identifier
+#' @param task_info Task object
+#' @param is_active Whether this task is currently selected
+#' @param list_seed Optional string to seed random letter highlighting (e.g. list name)
+#' @return Shiny li tag
+create_task_item <- function(task_id, task_info, is_active, list_seed = NULL) {
   is_completed <- isTRUE(task_info$completed)
+  
+  # Logic for semi-random letter highlighting
+  base_text <- "Zadanie"
+  display_text <- if (!is.null(list_seed)) {
+    # Calculate deterministic index based on seed
+    # distinct per list, consistent within list
+    seed_val <- sum(utf8ToInt(as.character(list_seed)))
+    len <- nchar(base_text)
+    # 0-based index from modulo, +1 for R 1-based indexing
+    target_idx <- (seed_val %% len) + 1
+    
+    chars <- strsplit(base_text, "")[[1]]
+    chars[target_idx] <- paste0("<span class='highlight-letter'>", chars[target_idx], "</span>")
+    HTML(paste(chars, collapse = ""))
+  } else {
+    base_text
+  }
 
   tags$li(
     class = if (is_active) "task-item active" else "task-item",
@@ -84,9 +107,11 @@ create_task_item <- function(task_id, task_info, is_active) {
     },
     # Main clickable content
     actionLink(
-      paste0("select_task_", task_id),
-      div(class = "task-number", sprintf("%d", task_info$task_num)),
-      div(class = "task-name", "Zadanie")
+      inputId = paste0("select_task_", task_id),
+      label = tagList(
+        div(class = "task-name", display_text),
+        div(class = "task-number", sprintf("%d", task_info$task_num))
+      )
     )
   )
 }

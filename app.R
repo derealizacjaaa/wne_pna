@@ -57,15 +57,15 @@ ui <- fluidPage(
 
   # Include CSS files
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/header.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/navbar.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/layout.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/task-content.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/header.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/navbar.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/layout.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/left-sidebar.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/right-sidebar.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/progress-card.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/main-content.css?v=2"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/task-content.css?v=2"),
 
     # MathJax configuration (must come BEFORE loading MathJax)
     tags$script(HTML("

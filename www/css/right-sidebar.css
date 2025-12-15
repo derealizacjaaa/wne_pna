@@ -26,13 +26,17 @@
 .tasks-sidebar-content h3 {
   margin: 0;
   padding: 16px 15px 16px 110px;
-  background: linear-gradient(
-    to bottom,        /* Gradient idzie z góry na dół */
-    #4A4A4A 0px,      /* 1. Góra: Ciemny szary */
-    #b1404f 8px,      /* 2. Do 8px: Przejście w bordowy */
-    #b1404f 46px,     /* 3. Od 8px do 46px: Lity bordowy */
-    #4A4A4A 52px      /* 4. Od 46px do końca: Przejście w ciemny szary */
-  );
+  background: linear-gradient(to bottom,
+      /* Gradient idzie z góry na dół */
+      #4A4A4A 0px,
+      /* 1. Góra: Ciemny szary */
+      #b1404f 8px,
+      /* 2. Do 8px: Przejście w bordowy */
+      #b1404f 46px,
+      /* 3. Od 8px do 46px: Lity bordowy */
+      #4A4A4A 52px
+      /* 4. Od 46px do końca: Przejście w ciemny szary */
+    );
   color: white;
   font-size: 1.4em;
   font-weight: 600;
@@ -106,10 +110,13 @@
   flex-shrink: 0;
   align-self: stretch;
   background: linear-gradient(270deg,
-    #b1404f 0%,    /* Prawa krawędź - kolor cienia */
-    #d95e6f 50%,   /* Środek - jasny połysk */
-    #b1404f 100%   /* Lewa krawędź - kolor cienia */
-  );
+      #b1404f 0%,
+      /* Prawa krawędź - kolor cienia */
+      #d95e6f 50%,
+      /* Środek - jasny połysk */
+      #b1404f 100%
+      /* Lewa krawędź - kolor cienia */
+    );
   order: 2;
 }
 
@@ -137,41 +144,111 @@
 /* Task items */
 .task-item {
   margin-bottom: 16px;
-  background-image: 
-        radial-gradient(
-          ellipse 18px 24px at left center, 
-          
-          transparent 18px, /* Musi się pokrywać z maską */
-          #b14040 18.5px,   /* Start koloru (wygładzony) */
-          
-          #b14040 22.5px,   /* Koniec koloru (to daje nam ok. 3px grubości ramki) */
-          transparent 23px  /* Rozmycie końca */
-        ),
-        radial-gradient(
-          ellipse 70% 125% at left center, 
-          #ffffff 99%, 
-          #b14040 99.5%
-        );
-      -webkit-mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
-      mask-image: radial-gradient(ellipse 20px 24px at left center, transparent 20px, #b14040 20.5px);
-  border-radius: 0 6px 6px 0;
-  transition: all 0.2s ease;
+  /* Removed base background-image to split into pseudo elements */
+  background: white;
+  /* Fallback/Base */
+
+  /* Mask removed - Convex Round Shape */
+  border-radius: 24px 6px 6px 24px;
+  /* Round bulge on left */
+
+  transition: all 0.2s ease, background-position 0.5s ease;
   border: 2px solid #e0e0e0;
+
+  /* Solid Red Accent on Left - No Gradients */
+  border-left: 5px solid #b1404f;
+
   position: relative;
   overflow: visible;
   height: 45px;
   box-sizing: border-box;
+  z-index: 1;
+  /* Establish stacking context */
+
+  /* Simple White Background + Linear Shine */
+  background-color: white;
+  background-image: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
+  background-repeat: no-repeat;
+  background-position: -200% 0;
+  background-size: 200% 100%;
 }
 
+/* 
+   Layer 1 (Bottom): The Fill Gradient
+   This layer fades on hover and disappears on select 
+*/
+/* 
+   Layer 1 (Bottom): The Fill Gradient - RESTORED on Right
+   This layer fades on hover and disappears on select 
+*/
+.task-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  /* Behind everything */
+  border-radius: 22px 6px 6px 22px;
+  /* Match parent minus border */
+
+  /* Gradient positioned on the RIGHT side as requested */
+  background-image: radial-gradient(ellipse 70% 125% at left center,
+      #ffffff 99%,
+      #b14040 99.5%);
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* 
+   Layer 2: The Thick Gradient Left Border
+*/
+/* 
+   Removed ::before (Thick Gradient Border)
+*/
+.task-item::before {
+  display: none;
+}
+
+/* Hover States */
 .task-item:hover {
-  background: white;
+  background-color: #fafafa;
   border-color: #b1404f;
+
+  /* Animate Shine */
+  background-position: 200% 0;
 }
 
+/* Removed old shine rule */
+/* .task-item:hover::before { ... } */
+
+/* Fade out Fill on Hover */
+.task-item:hover::after {
+  opacity: 0;
+  /* "Fade with hover" - partial fade */
+}
+
+/* Active State - Modern Redesign */
 .task-item.active {
   background: white;
-  border-color: #b1404f;
-  box-shadow: 0 2px 6px rgba(177, 64, 79, 0.15);
+  border-color: transparent;
+  /* Soften the border, rely on shadow */
+  /* Maintain the red accent on left even active? Or let shadow do it? */
+  /* Let's keep the shape defined */
+  border-radius: 24px 6px 6px 24px;
+
+  box-shadow:
+    0 4px 12px rgba(177, 64, 79, 0.2),
+    0 0 0 1px rgba(177, 64, 79, 0.1);
+  /* Subtle ring instead of border */
+  transform: scale(1.02) translateX(4px);
+  /* Pop out effect */
+  z-index: 10;
+  /* Ensure it floats above others */
+}
+
+/* Fill disappears completely on select */
+.task-item.active::after {
+  opacity: 0;
 }
 
 .task-item a {
@@ -186,6 +263,19 @@
   padding: 0;
   overflow: hidden;
   flex-wrap: nowrap !important;
+  position: relative;
+  z-index: 2;
+  /* Ensure text is above all backgrounds */
+}
+
+/* Fix for Shiny wrapping content in a span */
+.task-item a .action-label {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
 /* Task name (left side) */
@@ -201,11 +291,18 @@
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
-  margin-left: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 25px;
 }
 
-.task-name::first-letter {
+.highlight-letter {
   color: #b1404f;
+}
+
+.task-item.active .task-name {
+  color: #b1404f;
+  font-weight: 700;
 }
 
 /* Task number badge (right side) */
@@ -261,22 +358,6 @@
 .task-status svg {
   width: 100%;
   height: auto;
-}
-
-/* Hover effects */
-.task-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
-  transition: left 0.5s;
-}
-
-.task-item:hover::before {
-  left: 100%;
 }
 
 /* Focus states */
