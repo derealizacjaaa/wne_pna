@@ -156,7 +156,7 @@
   border: 2px solid #e0e0e0;
 
   /* Solid Red Accent on Left - No Gradients */
-  border-left: 5px solid #b1404f;
+  border-left: 5px solid transparent;
 
   position: relative;
   overflow: visible;
@@ -190,13 +190,14 @@
   border-radius: 22px 6px 6px 22px;
   /* Match parent minus border */
 
-  /* Gradient positioned on the RIGHT side as requested */
+  /* Old Gradient (Right Rounding) - Clipped to Right Half */
   background-image: radial-gradient(ellipse 70% 125% at left center,
       #ffffff 99%,
       #b14040 99.5%);
 
   opacity: 1;
   transition: opacity 0.3s ease;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 }
 
 /* 
@@ -205,8 +206,64 @@
 /* 
    Removed ::before (Thick Gradient Border)
 */
+/* 
+   Layer 2: The New Gradient Left Border - ::before
+*/
 .task-item::before {
-  display: none;
+  content: '';
+  position: absolute;
+  /* Extend over the borders to remove the gap:
+     Top/Bottom: -2px (matches border width)
+     Left: -5px (matches bold border width)
+     Right: 0 (stops at padding edge, but clip-path handles visibility)
+  */
+  top: -2px;
+  bottom: -2px;
+  left: -5px;
+  right: 0;
+
+  z-index: -2;
+  /* Match the PARENT's outer radius exactly, since we are covering the border */
+  border-radius: 24px 6px 6px 24px;
+
+  /* New Gradient (Left Rounding) - Clipped to Left Half */
+  background-image: radial-gradient(ellipse 92.5% 140% at right center,
+      #ffffff 99%,
+      #b14040 99.5%);
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+/* 
+    RED LEFT STRIP OVERLAY (a::before)
+    Shows only on Hover/Active
+*/
+.task-item a::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  /* Cover top border area of parent relative to content */
+  /* Actually 'a' is inside. -2px from 'a' top might not be enough if 'a' has no padding */
+  /* 'a' height is 100%. Parent height 45px. */
+  /* If parent padding is 0, 'a' top is 0. */
+  /* Parent border top is 2px. So 'a' top is at 2px. */
+  /* So top: -2px brings us to top edge. */
+  bottom: -2px;
+  /* Same logic */
+  left: -5px;
+  /* Cover the 5px transparent border area */
+  width: 5px;
+
+  background-color: #b1404f;
+  border-radius: 24px 0 0 24px;
+  /* Follow container shape */
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+  /* On top of everything */
 }
 
 /* Hover States */
@@ -216,6 +273,10 @@
 
   /* Animate Shine */
   background-position: 200% 0;
+}
+
+.task-item:hover a::before {
+  opacity: 1;
 }
 
 /* Removed old shine rule */
@@ -244,6 +305,10 @@
   /* Pop out effect */
   z-index: 10;
   /* Ensure it floats above others */
+}
+
+.task-item.active a::before {
+  opacity: 1;
 }
 
 /* Fill disappears completely on select */
