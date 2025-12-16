@@ -1,71 +1,80 @@
+/* ========================================
+   HERO HEADER
+   Color Scheme: Using CSS variables from 0-variables.css
+   ======================================== */
+
 /* Hero Header Styles */
 .hero-header {
-  padding: 12px 30px;
-  color: #4A4A4A;
+  padding: var(--spacing-md) var(--spacing-3xl);
+  color: var(--color-dark);
   margin: 0;
   border-radius: 0;
-  background: #F4F6F9;
-  border-bottom: 4px solid #333333;
+  background: var(--color-light);
+  border-bottom: var(--border-width-bold) solid #333333;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
-  font-family: 'Montserrat';
-  height: 120px;
+  gap: var(--spacing-3xl);
+  font-family: var(--font-family-base);
+  height: var(--header-height);
   box-sizing: border-box;
-  min-height: 120px;
-  max-height: 120px;
+  min-height: var(--header-height);
+  max-height: var(--header-height);
 }
 
 .hero-text {
   flex: 1;
-  border-left: 3px solid #b1404f;
-  padding-left: 25px;
+  border-left: var(--border-width-thick) solid var(--color-primary);
+  padding-left: var(--spacing-2xl);
 }
 
 .hero-header h1 {
   margin: 0;
-  font-size: 1.6em;
-  font-weight: 700;
-  color: #4A4A4A;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
 }
 
 .hero-header .subtitle-top {
   margin: 2px 0 0 0;
-  font-size: 1.3em;
-  color: #606060;
+  font-size: var(--font-size-lg);
+  color: var(--color-medium);
 }
 
 .hero-header .subtitle-top-red {
   margin: 2px 0 0 0;
-  font-size: 1.3em;
-  color: #b1404f;
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
 }
 
 .hero-divider {
   border: 0;
-  height: 2px;
-  background: linear-gradient(to right, #990000, #b1404f, #F4F6F9);
-  margin: 4px 0;
+  height: var(--border-width-normal);
+  background: linear-gradient(to right, 
+    var(--color-red-dark), 
+    var(--color-primary), 
+    var(--color-light)
+  );
+  margin: var(--spacing-xs) 0;
   width: 300px;
   max-width: 100%;
 }
 
 .hero-header .subtitle-bottom {
   margin: 0;
-  font-size: 1em;
-  color: #4A4A4A;
+  font-size: var(--font-size-base);
+  color: var(--color-dark);
 }
 
 .hero-header .subtitle-bottom-red {
   margin: 0;
-  font-size: 1em;
-  color: #b1404f;
+  font-size: var(--font-size-base);
+  color: var(--color-primary);
 }
 
 .hero-logo {
   flex-shrink: 0;
-  margin-right: 20px;
+  margin-right: var(--spacing-xl);
   display: flex;
   align-items: center;
   height: 100%;

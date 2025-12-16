@@ -1,0 +1,178 @@
+/* ========================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   Central design token system for the Shiny app
+   ======================================== */
+
+:root {
+  /* ========================================
+     BRAND COLORS
+     ======================================== */
+  --color-primary: #b1404f;
+  --color-primary-light: #d95e6f;
+  --color-primary-dark: #9a3848;
+  --color-primary-darker: #8b3040;
+  
+  /* ========================================
+     NEUTRAL COLORS
+     ======================================== */
+  --color-dark: #4A4A4A;
+  --color-medium: #606060;
+  --color-light: #F4F6F9;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Grays */
+  --color-gray-100: #f9f9f9;
+  --color-gray-200: #f4f4f4;
+  --color-gray-300: #f0f0f0;
+  --color-gray-400: #e0e0e0;
+  --color-gray-500: #ccc;
+  --color-gray-600: #9e9e9e;
+  --color-gray-700: #606060;
+  
+  /* ========================================
+     ACCENT COLORS
+     ======================================== */
+  --color-success: #4caf50;
+  --color-success-dark: #388e3c;
+  --color-success-light: #e8f5e9;
+  
+  --color-warning: #f5c542;
+  --color-warning-dark: #e8b520;
+  
+  --color-info: #2196F3;
+  --color-info-dark: #1976D2;
+  --color-info-light: #e7f3ff;
+  
+  /* Additional accents */
+  --color-red-dark: #990000;
+  --color-red-accent: #c5465a;
+  --color-red-light: #d1808c;
+  
+  /* ========================================
+     SPACING SYSTEM
+     ======================================== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 15px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 25px;
+  --spacing-3xl: 30px;
+  --spacing-4xl: 40px;
+  --spacing-5xl: 60px;
+  
+  /* ========================================
+     LAYOUT DIMENSIONS
+     ======================================== */
+  --header-height: 120px;
+  --navbar-height: 56px;
+  --sidebar-left-width: 250px;
+  --sidebar-right-width: 300px;
+  --sidebar-right-pattern-width: 80px;
+  --sidebar-right-gradient-width: 20px;
+  --sidebar-right-tasks-width: 200px;
+  
+  /* ========================================
+     BORDERS
+     ======================================== */
+  --border-width-thin: 1px;
+  --border-width-normal: 2px;
+  --border-width-thick: 3px;
+  --border-width-bold: 4px;
+  --border-width-accent: 5px;
+  
+  --border-radius-sm: 3px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
+  --border-radius-xl: 8px;
+  --border-radius-2xl: 12px;
+  --border-radius-round: 50%;
+  
+  /* Specific border radii for components */
+  --border-radius-list-item: 2px 18px 14px 24px;
+  --border-radius-task-item: 24px 6px 6px 24px;
+  --border-radius-task-item-inner: 22px 6px 6px 22px;
+  
+  /* ========================================
+     SHADOWS
+     ======================================== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 12px rgba(177, 64, 79, 0.15);
+  --shadow-xl: 0 6px 16px rgba(177, 64, 79, 0.35);
+  
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(177, 64, 79, 0.15), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-card-active: 0 6px 16px rgba(177, 64, 79, 0.35), 0 3px 6px rgba(0, 0, 0, 0.12);
+  
+  --shadow-task-active: 0 4px 12px rgba(177, 64, 79, 0.2), 0 0 0 1px rgba(177, 64, 79, 0.1);
+  
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  --font-family-base: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'Courier New', Courier, monospace;
+  
+  --font-size-xs: 0.75em;
+  --font-size-sm: 0.8em;
+  --font-size-base: 1em;
+  --font-size-md: 1.1em;
+  --font-size-lg: 1.3em;
+  --font-size-xl: 1.4em;
+  --font-size-2xl: 1.6em;
+  --font-size-3xl: 2.4em;
+  --font-size-4xl: 2.8em;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1;
+  --line-height-normal: 1.2;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+  
+  /* ========================================
+     Z-INDEX LAYERS
+     ======================================== */
+  --z-index-base: 1;
+  --z-index-dropdown: 2;
+  --z-index-overlay: 5;
+  --z-index-modal: 10;
+  --z-index-popover: 100;
+  --z-index-tooltip: 1000;
+  
+  /* ========================================
+     COMPONENT-SPECIFIC
+     ======================================== */
+  
+  /* Progress bars */
+  --progress-bar-height: 5px;
+  --progress-bar-vertical-width: 12px;
+  
+  /* Task items */
+  --task-item-height: 45px;
+  --task-number-size: 30px;
+  --task-status-size: 28px;
+  
+  /* List items */
+  --list-item-min-height: 50px;
+  
+  /* Navigation buttons */
+  --nav-btn-size: 32px;
+  --nav-btn-large: 40px;
+  
+  /* Scrollbar */
+  --scrollbar-width: 8px;
+  --scrollbar-width-large: 12px;
+}

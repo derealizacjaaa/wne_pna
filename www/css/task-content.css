@@ -1,7 +1,6 @@
 /* ============================================
    TASK CONTENT STYLING FRAMEWORK
-   ============================================
-   Standardized HTML elements for V3 task content
+   Using CSS variables from 0-variables.css
    ============================================ */
 
 /* ============================================
@@ -10,43 +9,43 @@
 
 /* Main Title (H1) - Red accent with bottom border */
 .task-tab-content-simple h1 {
-  color: #b1404f;
+  color: var(--color-primary);
   font-size: 28px;
-  font-weight: 700;
-  border-bottom: 3px solid #b1404f;
+  font-weight: var(--font-weight-bold);
+  border-bottom: var(--border-width-thick) solid var(--color-primary);
   padding-bottom: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 /* Subtitle (H2) - Dark gray with subtle red left border */
 .task-tab-content-simple h2 {
-  color: #4A4A4A;
+  color: var(--color-dark);
   font-size: 24px;
-  font-weight: 600;
-  border-left: 4px solid #b1404f;
-  padding-left: 15px;
-  margin-top: 25px;
-  margin-bottom: 15px;
+  font-weight: var(--font-weight-semibold);
+  border-left: var(--border-width-bold) solid var(--color-primary);
+  padding-left: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 /* Sub-subtitle (H3) - Medium gray with lighter red accent */
 .task-tab-content-simple h3 {
-  color: #606060;
+  color: var(--color-medium);
   font-size: 20px;
-  font-weight: 600;
-  border-left: 3px solid #d1808c;
-  padding-left: 12px;
-  margin-top: 20px;
-  margin-bottom: 12px;
+  font-weight: var(--font-weight-semibold);
+  border-left: var(--border-width-thick) solid var(--color-red-light);
+  padding-left: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
 }
 
 /* Small heading (H4) */
 .task-tab-content-simple h4 {
-  color: #4A4A4A;
+  color: var(--color-dark);
   font-size: 18px;
-  font-weight: 600;
-  margin-top: 15px;
+  font-weight: var(--font-weight-semibold);
+  margin-top: var(--spacing-lg);
   margin-bottom: 10px;
 }
 
@@ -56,32 +55,32 @@
 
 /* Paragraphs - Standard text */
 .task-tab-content-simple p {
-  color: #4A4A4A;
+  color: var(--color-dark);
   font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 12px;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
 }
 
 /* Inline code */
 .task-tab-content-simple code {
-  background-color: #f4f4f4;
-  color: #b1404f;
+  background-color: var(--color-gray-200);
+  color: var(--color-primary);
   padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', Courier, monospace;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family-mono);
   font-size: 14px;
 }
 
 /* Strong/Bold text */
 .task-tab-content-simple strong {
-  color: #4A4A4A;
-  font-weight: 700;
+  color: var(--color-dark);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Emphasis/Italic text */
 .task-tab-content-simple em {
   font-style: italic;
-  color: #606060;
+  color: var(--color-medium);
 }
 
 /* ============================================
@@ -90,26 +89,26 @@
 
 /* Unordered lists */
 .task-tab-content-simple ul {
-  margin-left: 20px;
-  margin-bottom: 15px;
-  color: #4A4A4A;
+  margin-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-dark);
 }
 
 .task-tab-content-simple ul li {
-  margin-bottom: 8px;
-  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-relaxed);
 }
 
 /* Ordered lists */
 .task-tab-content-simple ol {
-  margin-left: 20px;
-  margin-bottom: 15px;
-  color: #4A4A4A;
+  margin-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-dark);
 }
 
 .task-tab-content-simple ol li {
-  margin-bottom: 8px;
-  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-relaxed);
 }
 
 /* Nested lists */
@@ -117,8 +116,8 @@
 .task-tab-content-simple ol ol,
 .task-tab-content-simple ul ol,
 .task-tab-content-simple ol ul {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 /* ============================================
@@ -127,15 +126,15 @@
 
 /* Info box - Blue accent */
 .info-box {
-  background-color: #e7f3ff;
-  border-left: 5px solid #2196F3;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
+  background-color: var(--color-info-light);
+  border-left: var(--border-width-accent) solid var(--color-info);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-md);
 }
 
 .info-box h4 {
-  color: #1976D2;
+  color: var(--color-info-dark);
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 18px;
@@ -147,15 +146,15 @@
 
 /* Success box - Green accent */
 .success-box {
-  background-color: #e8f5e9;
-  border-left: 5px solid #4caf50;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
+  background-color: var(--color-success-light);
+  border-left: var(--border-width-accent) solid var(--color-success);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-md);
 }
 
 .success-box h4 {
-  color: #388e3c;
+  color: var(--color-success-dark);
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 18px;
@@ -167,19 +166,19 @@
 
 /* Definition box - Red border */
 .definition-box {
-  background-color: #f9f9f9;
-  border: 2px solid #b1404f;
-  padding: 15px 20px;
-  margin: 20px 0;
-  border-radius: 4px;
+  background-color: var(--color-gray-100);
+  border: var(--border-width-normal) solid var(--color-primary);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-md);
 }
 
 .definition-box h4 {
-  color: #b1404f;
+  color: var(--color-primary);
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .definition-box p:last-child {
@@ -189,20 +188,20 @@
 /* Example box - Gray accent, flexible width */
 .example-box {
   background-color: #fafafa;
-  border-left: 5px solid #9e9e9e;
-  padding: 15px 20px;
-  margin: 20px auto;
-  border-radius: 4px;
+  border-left: var(--border-width-accent) solid var(--color-gray-600);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin: var(--spacing-xl) auto;
+  border-radius: var(--border-radius-md);
   display: table;
   max-width: fit-content;
 }
 
 .example-box h4 {
-  color: #606060;
+  color: var(--color-medium);
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .example-box p:last-child {
@@ -214,12 +213,12 @@
    ============================================ */
 
 .task-tab-content-simple blockquote {
-  background-color: #f9f9f9;
-  border-left: 4px solid #b1404f;
-  margin: 20px 0;
-  padding: 15px 20px;
+  background-color: var(--color-gray-100);
+  border-left: var(--border-width-bold) solid var(--color-primary);
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg) var(--spacing-xl);
   font-style: italic;
-  color: #606060;
+  color: var(--color-medium);
 }
 
 .task-tab-content-simple blockquote p:last-child {
@@ -233,34 +232,34 @@
 .task-tab-content-simple table {
   border-collapse: collapse;
   width: 100%;
-  margin: 20px 0;
-  background-color: #ffffff;
+  margin: var(--spacing-xl) 0;
+  background-color: var(--color-white);
 }
 
 .task-tab-content-simple table thead {
-  background-color: #b1404f;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .task-tab-content-simple table th {
-  padding: 12px 15px;
+  padding: var(--spacing-md) var(--spacing-lg);
   text-align: left;
-  font-weight: 600;
-  border: 1px solid #ddd;
+  font-weight: var(--font-weight-semibold);
+  border: var(--border-width-thin) solid #ddd;
 }
 
 .task-tab-content-simple table td {
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  color: #4A4A4A;
+  padding: 10px var(--spacing-lg);
+  border: var(--border-width-thin) solid #ddd;
+  color: var(--color-dark);
 }
 
 .task-tab-content-simple table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--color-gray-100);
 }
 
 .task-tab-content-simple table tbody tr:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-gray-300);
 }
 
 /* ============================================
@@ -269,8 +268,8 @@
 
 .task-tab-content-simple hr {
   border: none;
-  border-top: 2px solid #e0e0e0;
-  margin: 30px 0;
+  border-top: var(--border-width-normal) solid var(--color-gray-400);
+  margin: var(--spacing-3xl) 0;
 }
 
 /* ============================================
@@ -280,16 +279,16 @@
 /* Inline math */
 .math-inline {
   font-style: italic;
-  color: #4A4A4A;
+  color: var(--color-dark);
 }
 
 /* Display math (block) */
 .math-display {
   text-align: center;
-  margin: 20px 0;
-  padding: 15px;
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
   background-color: #fafafa;
-  border-radius: 4px;
+  border-radius: var(--border-radius-md);
   overflow-x: auto;
 }
 
@@ -303,9 +302,9 @@
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #f8f8f8;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 6px;
+  padding: var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-lg);
 }
 
 /* ============================================
@@ -313,14 +312,14 @@
    ============================================ */
 
 .task-tab-content-simple a {
-  color: #b1404f;
+  color: var(--color-primary);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-bottom 0.2s ease;
+  border-bottom: var(--border-width-thin) solid transparent;
+  transition: border-bottom var(--transition-fast);
 }
 
 .task-tab-content-simple a:hover {
-  border-bottom: 1px solid #b1404f;
+  border-bottom: var(--border-width-thin) solid var(--color-primary);
 }
 
 /* ============================================
@@ -331,8 +330,8 @@
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 20px auto;
-  border-radius: 4px;
+  margin: var(--spacing-xl) auto;
+  border-radius: var(--border-radius-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -341,7 +340,7 @@
    ============================================ */
 
 .task-tab-content-simple figure {
-  margin: 20px 0;
+  margin: var(--spacing-xl) 0;
   text-align: center;
 }
 
@@ -351,7 +350,7 @@
 
 .task-tab-content-simple figcaption {
   margin-top: 10px;
-  color: #606060;
+  color: var(--color-medium);
   font-size: 14px;
   font-style: italic;
 }
@@ -361,14 +360,14 @@
    ============================================ */
 
 .task-tab-content-simple kbd {
-  background-color: #f4f4f4;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  background-color: var(--color-gray-200);
+  border: var(--border-width-thin) solid var(--color-gray-500);
+  border-radius: var(--border-radius-sm);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
   padding: 2px 6px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-family-mono);
   font-size: 14px;
-  color: #4A4A4A;
+  color: var(--color-dark);
 }
 
 /* ============================================
@@ -376,7 +375,7 @@
    ============================================ */
 
 .task-tab-content-simple abbr[title] {
-  border-bottom: 1px dotted #999;
+  border-bottom: var(--border-width-thin) dotted #999;
   cursor: help;
   text-decoration: none;
 }
@@ -410,7 +409,7 @@
   .success-box,
   .definition-box,
   .example-box {
-    padding: 12px 15px;
+    padding: var(--spacing-md) var(--spacing-lg);
   }
 
   .task-tab-content-simple table {

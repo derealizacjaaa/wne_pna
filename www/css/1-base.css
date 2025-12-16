@@ -1,0 +1,266 @@
+/* ========================================
+   BASE STYLES & UTILITIES
+   Reusable patterns, gradients, and utility classes
+   ======================================== */
+
+/* ========================================
+   REUSABLE GRADIENTS
+   ======================================== */
+
+/* Header gradient - used in sidebars and main content headers */
+.gradient-header {
+  background: linear-gradient(
+    to bottom,
+    var(--color-dark) 0px,
+    var(--color-primary) 8px,
+    var(--color-primary) 46px,
+    var(--color-dark) 52px
+  );
+}
+
+/* Vertical accent gradient - used in sidebar edges */
+.gradient-vertical-accent {
+  background: linear-gradient(270deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 50%,
+    var(--color-primary) 100%
+  );
+}
+
+/* Horizontal accent gradient */
+.gradient-horizontal-accent {
+  background: linear-gradient(90deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 50%,
+    var(--color-primary) 100%
+  );
+}
+
+/* Active list item gradient */
+.gradient-active-item {
+  background: linear-gradient(135deg, 
+    var(--color-primary) 0%, 
+    var(--color-primary-dark) 100%
+  );
+}
+
+/* Progress bar gradients */
+.gradient-progress-complete {
+  background: linear-gradient(180deg, 
+    var(--color-red-accent) 0%, 
+    var(--color-primary) 100%
+  );
+}
+
+.gradient-progress-partial {
+  background: linear-gradient(180deg, 
+    var(--color-warning) 0%, 
+    var(--color-warning-dark) 100%
+  );
+}
+
+/* Hero divider gradient */
+.gradient-hero-divider {
+  background: linear-gradient(to right, 
+    var(--color-red-dark), 
+    var(--color-primary), 
+    var(--color-light)
+  );
+}
+
+/* ========================================
+   TEXT EFFECTS
+   ======================================== */
+
+/* Black outline text shadow */
+.text-outline-black {
+  text-shadow: 
+    -1px -1px 0 var(--color-black),
+    1px -1px 0 var(--color-black),
+    -1px 1px 0 var(--color-black),
+    1px 1px 0 var(--color-black);
+}
+
+/* 3D text effect */
+.text-3d-effect {
+  box-shadow: 
+    0 1px 0 var(--color-light),
+    0 2px 0 var(--color-light),
+    0 3px 0 var(--color-dark),
+    0 4px 0 var(--color-dark);
+}
+
+/* ========================================
+   FLEXBOX UTILITIES
+   ======================================== */
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+/* ========================================
+   BACKGROUND PATTERNS
+   ======================================== */
+
+/* Pattern used in left sidebar and collapsed state */
+.pattern-primary {
+  background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
+}
+
+/* Pattern used in right sidebar task list */
+.pattern-tasks {
+  background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(2) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linecap='square' stroke-width='0.5' stroke='%234a4a4aff' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linecap='square' stroke-width='0.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,-62)' fill='url(%23a)'/></svg>");
+}
+
+/* ========================================
+   ANIMATION UTILITIES
+   ======================================== */
+
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+
+.transition-normal {
+  transition: all var(--transition-normal);
+}
+
+.transition-smooth {
+  transition: all var(--transition-smooth);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+/* ========================================
+   COMMON COMPONENT PATTERNS
+   ======================================== */
+
+/* Shine effect for hover states */
+.shine-effect {
+  background-image: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
+  background-repeat: no-repeat;
+  background-position: -200% 0;
+  background-size: 200% 100%;
+  transition: background-position var(--transition-slow);
+}
+
+.shine-effect:hover {
+  background-position: 200% 0;
+}
+
+/* Hidden but maintains space */
+.visibility-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+/* Standard scrollbar */
+.scrollbar-styled::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.scrollbar-styled::-webkit-scrollbar-track {
+  background: var(--color-light);
+}
+
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  background: var(--color-medium);
+  border-radius: var(--border-radius-md);
+}
+
+.scrollbar-styled::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark);
+}
+
+/* Large scrollbar (for main content) */
+.scrollbar-large::-webkit-scrollbar {
+  width: var(--scrollbar-width-large);
+}
+
+.scrollbar-large::-webkit-scrollbar-track {
+  background: var(--color-light);
+  border-left: var(--border-width-thin) solid #dee2e6;
+}
+
+.scrollbar-large::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 6px;
+  border: var(--border-width-normal) solid var(--color-light);
+}
+
+.scrollbar-large::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-darker);
+}
+
+/* Firefox scrollbar */
+.scrollbar-styled,
+.scrollbar-large {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-light);
+}
+
+/* Hide scrollbar completely */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

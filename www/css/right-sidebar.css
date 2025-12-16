@@ -1,13 +1,13 @@
 /* ========================================
    RIGHT SIDEBAR - Task Selection
-   Color Scheme: #4A4A4A, #606060, #b1404f, #F4F6F9
+   Using CSS variables from 0-variables.css
    ======================================== */
 
 .right-sidebar {
-  width: 300px;
-  background: white;
+  width: var(--sidebar-right-width);
+  background: var(--color-white);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   flex-shrink: 0;
   height: 100%;
   box-sizing: border-box;
@@ -25,29 +25,27 @@
 /* Header */
 .tasks-sidebar-content h3 {
   margin: 0;
-  padding: 16px 15px 16px 110px;
+  padding: 16px var(--spacing-lg) 16px 110px;
   background: linear-gradient(to bottom,
-      /* Gradient idzie z góry na dół */
-      #4A4A4A 0px,
-      /* 1. Góra: Ciemny szary */
-      #b1404f 8px,
-      /* 2. Do 8px: Przejście w bordowy */
-      #b1404f 46px,
-      /* 3. Od 8px do 46px: Lity bordowy */
-      #4A4A4A 52px
-      /* 4. Od 46px do końca: Przejście w ciemny szary */
-    );
-  color: white;
-  font-size: 1.4em;
-  font-weight: 600;
+      var(--color-dark) 0px,
+      var(--color-primary) 8px,
+      var(--color-primary) 46px,
+      var(--color-dark) 52px);
+  color: var(--color-white);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
   text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-  box-shadow: 0 1px 0 #F4F6F9, 0 2px 0 #F4F6F9, 0 3px 0 #4A4A4A, 0 4px 0 #4A4A4A;
-  border-bottom: 4px solid #4A4A4A;
-  height: 56px;
+    -1px -1px 0 var(--color-black),
+    1px -1px 0 var(--color-black),
+    -1px 1px 0 var(--color-black),
+    1px 1px 0 var(--color-black);
+  box-shadow:
+    0 1px 0 var(--color-light),
+    0 2px 0 var(--color-light),
+    0 3px 0 var(--color-dark),
+    0 4px 0 var(--color-dark);
+  border-bottom: var(--border-width-bold) solid var(--color-dark);
+  height: var(--navbar-height);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -66,8 +64,8 @@
   height: 0;
   border-style: solid;
   border-width: 32px 54px 32px 0;
-  border-color: transparent #4A4A4A transparent transparent;
-  z-index: 1;
+  border-color: transparent var(--color-dark) transparent transparent;
+  z-index: var(--z-index-base);
 }
 
 /* Triangle fill on the right edge of header pointing left */
@@ -80,8 +78,8 @@
   height: 0;
   border-style: solid;
   border-width: 28px 50px 28px 0;
-  border-color: transparent #F4F6F9 transparent transparent;
-  z-index: 2;
+  border-color: transparent var(--color-light) transparent transparent;
+  z-index: var(--z-index-dropdown);
 }
 
 /* 3-part body container */
@@ -90,44 +88,40 @@
   flex-direction: row;
   overflow: hidden;
   align-items: stretch;
-  height: calc(100vh - 120px - 56px);
+  height: calc(100vh - var(--header-height) - var(--navbar-height));
   flex-shrink: 0;
   box-sizing: border-box;
 }
 
-/* Part 1: Pattern background (leftmost, 80px) */
+/* Part 1: Pattern background (leftmost) */
 .sidebar-pattern {
-  width: 80px;
+  width: var(--sidebar-right-pattern-width);
   flex-shrink: 0;
   align-self: stretch;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(6) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M0 0h10v20H0zM30 0v10H10V0zM10 10h10v20H10zM40 10v10H20V10zM20 20h10v20H20zM50 20v10H30V20zM30 30h10v20H30zM20 30v10H0V30zM10 20v10h-20V20zM30-10h10v20H30z'  stroke-width='2.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-84)' fill='url(%23a)'/></svg>");
   order: 1;
 }
 
-/* Part 2: Gradient (middle, 20px) */
+/* Part 2: Gradient (middle) */
 .sidebar-gradient {
-  width: 20px;
+  width: var(--sidebar-right-gradient-width);
   flex-shrink: 0;
   align-self: stretch;
   background: linear-gradient(270deg,
-      #b1404f 0%,
-      /* Prawa krawędź - kolor cienia */
-      #d95e6f 50%,
-      /* Środek - jasny połysk */
-      #b1404f 100%
-      /* Lewa krawędź - kolor cienia */
-    );
+      var(--color-primary) 0%,
+      var(--color-primary-light) 50%,
+      var(--color-primary) 100%);
   order: 2;
 }
 
-/* Part 3: Tasks list (rightmost, 200px) */
+/* Part 3: Tasks list (rightmost) */
 .sidebar-tasks-list {
-  width: 200px;
+  width: var(--sidebar-right-tasks-width);
   flex-shrink: 0;
   align-self: stretch;
   background: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(2) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f6f9ff'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linecap='square' stroke-width='0.5' stroke='%234a4a4aff' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linecap='square' stroke-width='0.5' stroke='%23b1404fff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,-62)' fill='url(%23a)'/></svg>");
   overflow-y: auto;
-  padding: 0px 7px 20px 15px;
+  padding: 0px 7px var(--spacing-xl) var(--spacing-lg);
   order: 3;
   scrollbar-gutter: stable;
   box-sizing: border-box;
@@ -138,182 +132,47 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  padding-top: 15px;
+  padding-top: var(--spacing-lg);
 }
 
-/* Task items */
+/* Task items - Clean with geometric pattern background */
 .task-item {
   margin-bottom: 16px;
-  /* Removed base background-image to split into pseudo elements */
-  background: white;
-  /* Fallback/Base */
-
-  /* Mask removed - Convex Round Shape */
-  border-radius: 24px 6px 6px 24px;
-  /* Round bulge on left */
-
-  transition: all 0.2s ease, background-position 0.5s ease;
-  border: 2px solid #e0e0e0;
-
-  /* Solid Red Accent on Left - No Gradients */
-  border-left: 5px solid transparent;
-
+  border-radius: var(--border-radius-task-item);
+  transition: all var(--transition-fast);
+  border: var(--border-width-normal) solid var(--color-gray-400);
+  border-left: var(--border-width-accent) solid var(--color-primary);
   position: relative;
   overflow: visible;
-  height: 45px;
+  height: var(--task-item-height);
   box-sizing: border-box;
-  z-index: 1;
-  /* Establish stacking context */
+  z-index: var(--z-index-base);
 
-  /* Simple White Background + Linear Shine */
-  background-color: white;
-  background-image: linear-gradient(90deg, transparent, rgba(177, 64, 79, 0.05), transparent);
-  background-repeat: no-repeat;
-  background-position: -200% 0;
-  background-size: 200% 100%;
+  /* SVG geometric pattern background */
+  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='20' height='20' patternTransform='scale(1) rotate(10)'><rect x='0' y='0' width='100%' height='100%' fill='%23f4f4f4ff'/><path d='M-10-10A10 10 0 00-20 0a10 10 0 0010 10A10 10 0 010 0a10 10 0 00-10-10zM10-10A10 10 0 000 0a10 10 0 0110 10A10 10 0 0120 0a10 10 0 00-10-10zM30-10A10 10 0 0020 0a10 10 0 0110 10A10 10 0 0140 0a10 10 0 00-10-10zM-10 10a10 10 0 00-10 10 10 10 0 0010 10A10 10 0 010 20a10 10 0 00-10-10zM10 10A10 10 0 000 20a10 10 0 0110 10 10 10 0 0110-10 10 10 0 00-10-10zM30 10a10 10 0 00-10 10 10 10 0 0110 10 10 10 0 0110-10 10 10 0 00-10-10z'  stroke-width='1' stroke='none' fill='%23b1404fff'/></pattern></defs><rect width='800%' height='800%' transform='translate(-10,0)' fill='url(%23a)'/></svg>");
+  background-color: var(--color-light);
 }
 
-/* 
-   Layer 1 (Bottom): The Fill Gradient
-   This layer fades on hover and disappears on select 
-*/
-/* 
-   Layer 1 (Bottom): The Fill Gradient - RESTORED on Right
-   This layer fades on hover and disappears on select 
-*/
-.task-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  /* Behind everything */
-  border-radius: 22px 6px 6px 22px;
-  /* Match parent minus border */
-
-  /* Old Gradient (Right Rounding) - Clipped to Right Half */
-  background-image: radial-gradient(ellipse 70% 125% at left center,
-      #ffffff 99%,
-      #b14040 99.5%);
-
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-}
-
-/* 
-   Layer 2: The Thick Gradient Left Border
-*/
-/* 
-   Removed ::before (Thick Gradient Border)
-*/
-/* 
-   Layer 2: The New Gradient Left Border - ::before
-*/
-.task-item::before {
-  content: '';
-  position: absolute;
-  /* Extend over the borders to remove the gap:
-     Top/Bottom: -2px (matches border width)
-     Left: -5px (matches bold border width)
-     Right: 0 (stops at padding edge, but clip-path handles visibility)
-  */
-  top: 0px;
-  bottom: 0px;
-  left: -3px;
-  right: 0;
-
-  z-index: -2;
-  /* Match the PARENT's outer radius exactly, since we are covering the border */
-  border-radius: 24px 6px 6px 24px;
-
-  /* New Gradient (Left Rounding) - Clipped to Left Half */
-  background-image: radial-gradient(ellipse 92.5% 140% at right center,
-      #ffffff 99%,
-      #b14040 99.5%);
-
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-
-/* 
-    RED LEFT STRIP OVERLAY (a::before)
-    Shows only on Hover/Active
-*/
+/* Remove all pseudo-elements */
+.task-item::after,
+.task-item::before,
 .task-item a::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  /* Cover top border area of parent relative to content */
-  /* Actually 'a' is inside. -2px from 'a' top might not be enough if 'a' has no padding */
-  /* 'a' height is 100%. Parent height 45px. */
-  /* If parent padding is 0, 'a' top is 0. */
-  /* Parent border top is 2px. So 'a' top is at 2px. */
-  /* So top: -2px brings us to top edge. */
-  bottom: -2px;
-  /* Same logic */
-  left: -5px;
-  /* Cover the 5px transparent border area */
-  width: 5px;
-
-  background-color: #b1404f;
-  border-radius: 24px 0 0 24px;
-  /* Follow container shape */
-
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 5;
-  /* On top of everything */
+  display: none;
 }
 
 /* Hover States */
 .task-item:hover {
-  background-color: #fafafa;
-  border-color: #b1404f;
-
-  /* Animate Shine */
-  background-position: 200% 0;
+  border-color: var(--color-primary);
+  transform: translateX(2px);
 }
 
-.task-item:hover a::before {
-  opacity: 1;
-}
-
-/* Removed old shine rule */
-/* .task-item:hover::before { ... } */
-
-/* Fade out Fill on Hover */
-.task-item:hover::after {
-  opacity: 0;
-  /* "Fade with hover" - partial fade */
-}
-
-/* Active State - Modern Redesign */
+/* Active State */
 .task-item.active {
-  background: white;
-  border-color: transparent;
-  /* Soften the border, rely on shadow */
-  /* Maintain the red accent on left even active? Or let shadow do it? */
-  /* Let's keep the shape defined */
-  border-radius: 24px 6px 6px 24px;
-
-  box-shadow:
-    0 4px 12px rgba(177, 64, 79, 0.2),
-    0 0 0 1px rgba(177, 64, 79, 0.1);
-  /* Subtle ring instead of border */
+  border-color: var(--color-primary);
+  border-left-width: 6px;
+  box-shadow: var(--shadow-task-active);
   transform: scale(1.02) translateX(4px);
-  /* Pop out effect */
-  z-index: 10;
-  /* Ensure it floats above others */
-}
-
-.task-item.active a::before {
-  opacity: 1;
-}
-
-/* Fill disappears completely on select */
-.task-item.active::after {
-  opacity: 0;
+  z-index: var(--z-index-modal);
 }
 
 .task-item a {
@@ -323,14 +182,13 @@
   justify-content: space-between;
   height: 100%;
   text-decoration: none;
-  color: #606060;
+  color: var(--color-medium);
   box-sizing: border-box;
   padding: 0;
   overflow: hidden;
   flex-wrap: nowrap !important;
   position: relative;
-  z-index: 2;
-  /* Ensure text is above all backgrounds */
+  z-index: var(--z-index-dropdown);
 }
 
 /* Fix for Shiny wrapping content in a span */
@@ -349,74 +207,72 @@
   width: 85px;
   max-width: 85px;
   min-width: 85px;
-  font-size: 1.4em;
-  font-weight: 600;
-  color: #606060;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-medium);
   letter-spacing: 0.01em;
-  line-height: 1.2;
+  line-height: var(--line-height-normal);
   white-space: nowrap;
   overflow: hidden;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-left: 25px;
+  margin-left: var(--spacing-2xl);
 }
 
 .highlight-letter {
-  color: #b1404f;
+  color: var(--color-primary);
 }
 
 .task-item.active .task-name {
-  color: #b1404f;
-  font-weight: 700;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Task number badge (right side) */
 .task-number {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  max-width: 30px;
-  background: #b1404f;
-  color: white;
-  border-radius: 50%;
+  width: var(--task-number-size);
+  height: var(--task-number-size);
+  min-width: var(--task-number-size);
+  max-width: var(--task-number-size);
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--border-radius-round);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 1.1em;
-  flex: 0 0 30px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  flex: 0 0 var(--task-number-size);
   margin-right: 10px;
 }
 
 .task-item.active .task-number {
-  background: #4A4A4A;
+  background: var(--color-dark);
 }
 
 /* Task status icon (overlay in top left corner) */
 .task-status {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: var(--spacing-xs);
+  left: var(--spacing-xs);
   transform: translate(-50%, -50%);
-  width: 28px;
-  height: 28px;
+  width: var(--task-status-size);
+  height: var(--task-status-size);
   font-size: 1.5em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
-  z-index: 10;
+  line-height: var(--line-height-tight);
+  z-index: var(--z-index-modal);
   pointer-events: none;
 }
 
 .task-status.status-completed {
-  color: #b1404f;
-  transition: color 0.2s ease;
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
 }
 
 .task-item:hover .task-status.status-completed,
 .task-item.active .task-status.status-completed {
-  color: #28a745;
+  color: var(--color-success);
 }
 
 .task-status i,
@@ -427,6 +283,6 @@
 
 /* Focus states */
 .task-item a:focus {
-  outline: 2px solid #b1404f;
-  outline-offset: 2px;
+  outline: var(--border-width-normal) solid var(--color-primary);
+  outline-offset: var(--border-width-normal);
 }

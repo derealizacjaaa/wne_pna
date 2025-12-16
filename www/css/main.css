@@ -1,3 +1,9 @@
+/* ========================================
+   MAIN LAYOUT OVERRIDES
+   Shiny-specific layout adjustments
+   Using CSS variables from 0-variables.css
+   ======================================== */
+
 /* Remove gaps and ensure full width */
 .bslib-page-fluid {
   padding-left: 0 !important;
@@ -29,5 +35,5 @@
 .main-content {
   padding: 0px;
   min-height: 800px;
-  background: white;
+  background: var(--color-white);
 }
