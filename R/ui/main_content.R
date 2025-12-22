@@ -18,7 +18,11 @@ generate_main_content <- function(current_task = NULL, list_name = NULL) {
   }
 
   content <- if (is.null(current_task)) {
-    welcome_screen()
+    if (!is.null(list_name)) {
+      list_welcome_screen(list_name)
+    } else {
+      welcome_screen()
+    }
   } else {
     task_display(current_task, list_name)
   }
@@ -45,6 +49,79 @@ welcome_screen <- function() {
         welcome_description(),
         welcome_instructions(),
         welcome_cta()
+      )
+    )
+  )
+}
+
+#' Create list welcome screen (shown when list selected but no task)
+#' @param list_name Name of the selected list
+#' @return Shiny div
+list_welcome_screen <- function(list_name) {
+  # Format list name for display (e.g., "Lista I")
+  display_name <- gsub("Lista\\s+([IVX]+)", "Lista <span class='roman-numeral'>\\1</span>", list_name)
+
+  div(
+    class = "main-content",
+    div(
+      class = "main-content-header",
+      h3(
+        icon("folder-open"),
+        HTML(paste0("&nbsp; ", display_name))
+      )
+    ),
+    div(
+      class = "main-content-body",
+      div(
+        class = "main-content-empty",
+        style = "padding: 60px 40px; text-align: center;",
+
+        # Icon
+        div(
+          icon("layer-group", class = "fa-4x"),
+          style = "color: #b1404f; opacity: 0.8; margin-bottom: 25px;"
+        ),
+
+        # Title
+        h2(
+          HTML(paste("Witaj w module: ", display_name)),
+          style = "color: #4A4A4A; margin-bottom: 20px; font-weight: 600;"
+        ),
+
+        # Description
+        p(
+          style = "color: #606060; font-size: 1.2em; max-width: 600px; margin: 0 auto 40px; line-height: 1.6;",
+          "Wybierz zadanie z menu po prawej stronie, aby rozpocząć pracę. Każde zadanie zawiera praktyczne przykłady i ćwiczenia do wykonania."
+        ),
+
+        # Instructions Box
+        div(
+          style = "background: #F4F6F9; padding: 30px; border-radius: 12px;
+                   border: 1px solid #e1e4e8; max-width: 500px; margin: 0 auto;",
+          h4(
+            style = "color: #b1404f; margin-top: 0; margin-bottom: 15px; font-weight: 600;",
+            icon("list-check"), " Dostępne zadania"
+          ),
+          p(
+            style = "margin-bottom: 0px; color: #505050;",
+            "Zadania znajdują się w panelu bocznym po prawej stronie. Kliknij na numer lub nazwę zadania, aby przejść do jego treści."
+          )
+        ),
+
+        # Arrow pointing right (visual cue)
+        div(
+          style = "margin-top: 40px; color: #b1404f; animation: bounceRight 2s infinite;",
+          icon("arrow-right-long", class = "fa-2x")
+        ),
+
+        # CSS Animation for the arrow
+        tags$style(HTML("
+          @keyframes bounceRight {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+            40% {transform: translateX(10px);}
+            60% {transform: translateX(5px);}
+          }
+        "))
       )
     )
   )
@@ -181,7 +258,11 @@ create_breadcrumb_header <- function(list_name, task_name, task_num) {
 
     crumbs <- c(crumbs, list(
       sep,
-      tags$span(class = "breadcrumb-item", formatted_list)
+      actionLink(
+        inputId = "nav_back_to_list_welcome",
+        label = formatted_list,
+        class = "breadcrumb-item breadcrumb-link"
+      )
     ))
   }
 

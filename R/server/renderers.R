@@ -90,20 +90,20 @@ render_task_sidebar <- function(output, state, list_metadata, current_list_tasks
 #' Render main content area
 render_main_content <- function(output, state, current_list_tasks, list_metadata) {
   output$main_content <- renderUI({
-    # Show welcome screen if no task selected
-    if (is.null(state$current_task())) {
-      return(generate_main_content(NULL))
-    }
-
-    # Get current task
-    tasks <- current_list_tasks()
-    task <- tasks[[state$current_task()]]
-
     # Get current list name if available
     current_list_name <- NULL
     if (!is.null(state$current_list())) {
       current_list_name <- list_metadata[[state$current_list()]]$name
     }
+
+    # Show welcome screen if no task selected
+    if (is.null(state$current_task())) {
+      return(generate_main_content(NULL, current_list_name))
+    }
+
+    # Get current task
+    tasks <- current_list_tasks()
+    task <- tasks[[state$current_task()]]
 
     # Display task
     generate_main_content(task, current_list_name)

@@ -24,21 +24,30 @@ setup_observers <- function(input, state, list_metadata, all_lists, current_list
 
   # Task selection observers
   observe_task_selection(input, state, current_list_tasks)
+
+  # Breadcrumb navigation observers
+  observe_breadcrumb_nav(input, state)
 }
 
 #' Observer for sidebar toggle button
 observe_sidebar_toggle <- function(input, state) {
-  observeEvent(input$toggle_sidebar, {
-    state$sidebar_collapsed(!state$sidebar_collapsed())
-  }, priority = 100)
+  observeEvent(input$toggle_sidebar,
+    {
+      state$sidebar_collapsed(!state$sidebar_collapsed())
+    },
+    priority = 100
+  )
 }
 
 #' Observer for home button
 observe_home_button <- function(input, state) {
-  observeEvent(input$home_btn, {
-    state$current_list(NULL)
-    state$current_task(NULL)
-  }, priority = 100)
+  observeEvent(input$home_btn,
+    {
+      state$current_list(NULL)
+      state$current_task(NULL)
+    },
+    priority = 100
+  )
 }
 
 #' Observers for list pagination
@@ -47,37 +56,43 @@ observe_list_pagination <- function(input, state, list_metadata) {
   total_pages <- ceiling(length(list_metadata) / items_per_page)
 
   # Previous page
-  observeEvent(input$list_page_prev, {
-    current_page <- state$list_page()
-    if (current_page > 1) {
-      state$list_page(current_page - 1)
-    }
-  }, ignoreInit = TRUE, priority = 100)
+  observeEvent(input$list_page_prev,
+    {
+      current_page <- state$list_page()
+      if (current_page > 1) {
+        state$list_page(current_page - 1)
+      }
+    },
+    ignoreInit = TRUE,
+    priority = 100
+  )
 
   # Next page
-  observeEvent(input$list_page_next, {
-    current_page <- state$list_page()
-    if (current_page < total_pages) {
-      state$list_page(current_page + 1)
-    }
-  }, ignoreInit = TRUE, priority = 100)
+  observeEvent(input$list_page_next,
+    {
+      current_page <- state$list_page()
+      if (current_page < total_pages) {
+        state$list_page(current_page + 1)
+      }
+    },
+    ignoreInit = TRUE,
+    priority = 100
+  )
 }
 
 #' Observers for list selection
 observe_list_selection <- function(input, state, list_metadata, all_lists) {
   observe({
     lapply(names(list_metadata), function(list_id) {
-      observeEvent(input[[paste0("select_", list_id)]], {
-        state$current_list(list_id)
+      observeEvent(input[[paste0("select_", list_id)]],
+        {
+          state$current_list(list_id)
 
-        # Reset to first task of new list
-        tasks <- all_lists[[list_id]]
-        if (!is.null(tasks) && length(tasks) > 0) {
-          state$current_task(names(tasks)[1])
-        } else {
           state$current_task(NULL)
-        }
-      }, ignoreInit = TRUE, priority = 100)
+        },
+        ignoreInit = TRUE,
+        priority = 100
+      )
     })
   })
 }
@@ -88,10 +103,25 @@ observe_task_selection <- function(input, state, current_list_tasks) {
     tasks <- current_list_tasks()
     if (!is.null(tasks)) {
       lapply(names(tasks), function(task_id) {
-        observeEvent(input[[paste0("select_task_", task_id)]], {
-          state$current_task(task_id)
-        }, ignoreInit = TRUE, priority = 100)
+        observeEvent(input[[paste0("select_task_", task_id)]],
+          {
+            state$current_task(task_id)
+          },
+          ignoreInit = TRUE,
+          priority = 100
+        )
       })
     }
   })
+}
+
+#' Observers for breadcrumb navigation
+observe_breadcrumb_nav <- function(input, state) {
+  observeEvent(input$nav_back_to_list_welcome,
+    {
+      state$current_task(NULL)
+    },
+    ignoreInit = TRUE,
+    priority = 100
+  )
 }

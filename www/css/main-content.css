@@ -145,6 +145,7 @@
   letter-spacing: 0.3px;
 }
 
+
 /* Breadcrumb separator styling */
 .main-content-header h3 .breadcrumb-separator {
   color: rgba(255, 255, 255, 0.5);
@@ -166,7 +167,8 @@
 .main-content-header h3 .breadcrumb-item {
   transition: all var(--transition-smooth);
   font-weight: var(--font-weight-medium);
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.95) !important;
+  /* Force override for links */
   padding: 8px 16px;
   border-radius: var(--border-radius-xl);
   /* Glassmorphism: semi-transparent dark with subtle gradient */
@@ -226,6 +228,22 @@
     0 4px 12px rgba(0, 0, 0, 0.35),
     0 0 20px rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.25);
+  text-decoration: none !important;
+  color: white !important;
+  cursor: default;
+}
+
+/* Specific styling for the clickable link breadcrumb */
+.main-content-header h3 a.breadcrumb-item {
+  cursor: pointer !important;
+}
+
+.main-content-header h3 a.breadcrumb-item:hover {
+  cursor: pointer !important;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.15) 100%);
 }
 
 /* Active/current breadcrumb item - More prominent styling */

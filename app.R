@@ -99,7 +99,6 @@ ui <- fluidPage(
     tags$script(src = "js/mathjax-shiny.js"),
 
     # Breadcrumb navigation
-    tags$script(src = "js/breadcrumb.js")
   ),
 
   # Hero header

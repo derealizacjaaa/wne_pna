@@ -20,7 +20,7 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
   task_items <- lapply(seq_along(tasks), function(i) {
     task_id <- names(tasks)[i]
     task_info <- tasks[[i]]
-    is_active <- task_id == current_task_id
+    is_active <- !is.null(current_task_id) && task_id == current_task_id
     # Seed with both list name and task ID to ensure variety per task AND per list
     create_task_item(task_id, task_info, is_active, list_seed = paste0(current_list_name, "_", task_id))
   })
