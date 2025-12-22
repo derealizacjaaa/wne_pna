@@ -91,6 +91,14 @@ wne_pna/
 │   ├── helpers.R.bak
 │   └── task_loader.R.bak
 │
+├── .agent/                    # Agent configuration (AI assistant rules)
+│   └── rules/
+│       └── overall.md         # Quick-reference guide for AI agents
+│
+├── .kombai/                   # Kombai configuration (alternative agent system)
+│   └── rules/
+│       └── overall.md         # Quick-reference guide (identical to .agent)
+│
 ├── CLAUDE.md                  # This file
 ├── REBUILD_NOTES.md          # Architecture rebuild documentation
 ├── TASK_SYSTEM_V3_GUIDE.md   # V3 inline functions guide
@@ -266,6 +274,21 @@ This comprehensive guide provides:
 - ✅ Troubleshooting tips
 
 **For quick reference:** The guide includes a summary table of all available elements and their usage.
+
+### Agent Rules Quick Reference
+
+For rapid task creation and execution, see the concise agent guide:
+- **[.agent/rules/overall.md](.agent/rules/overall.md)** - Action-oriented quick reference
+  - ✅ V3 Task System essentials (file structure, inline functions)
+  - ✅ HTML styling patterns (info-box, success-box, definition-box)
+  - ✅ CSS design tokens (colors, spacing)
+  - ✅ Step-by-step workflow instructions
+  - ✅ Security guidelines for code execution
+
+**When to use each guide:**
+- **AI_TASK_CREATION_GUIDE.md** → Creating task content (syntax, examples, HTML)
+- **.agent/rules/overall.md** → Quick workflow + safety rules
+- **CLAUDE.md** (this file) → Comprehensive architecture reference
 
 ---
 
