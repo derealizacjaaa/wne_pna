@@ -1,0 +1,20 @@
+<h1>Zadanie 6: Czas bezawaryjnej pracy - rozkład wykładniczy</h1>
+
+<p>Estymacja wartości przeciętnej czasu bezawaryjnej pracy maszyny.</p>
+
+<h3>Dane:</h3>
+<p>Z partii maszyn wylosowano 7 egzemplarzy i obserwowano czas pracy do awarii.</p>
+
+<p><strong>Uszkodzenia wystąpiły w chwilach (w godzinach):</strong></p>
+<p>51, 115, 150, 190, 217, 228, 350</p>
+
+<h3>Model:</h3>
+<p>Czas bezawaryjnej pracy ma rozkład wykładniczy:</p>
+<p>f(x; λ) = λ·e⁻ᵏˣ</p>
+
+<h3>Polecenie:</h3>
+<p>Znaleźć ocenę wartości przeciętnej czasu bezawaryjnej pracy maszyny</p>
+
+<p><strong>Wskazówka:</strong> Dla rozkładu wykładniczego E[X] = 1/λ, a estymator MNW dla λ to λ̂ = 1/x̄</p>
+
+<p><strong>Źródło:</strong> Zadanie 2.34 z [1]</p>

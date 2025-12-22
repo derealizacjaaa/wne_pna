@@ -1,0 +1,59 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 5: Rozkład wykładniczy vs Gamma
+
+# Generowanie danych z rozkładu wykładniczego (lambda=1)
+set.seed(123)
+wyk <- rexp(10000, rate = 1)
+
+cat("=== STATYSTYKI ROZKŁADU WYKŁADNICZEGO ===\n")
+cat("Liczba obserwacji:", length(wyk), "\n")
+cat("Średnia:", mean(wyk), "(teoretyczna: 1/λ = 1)\n")
+cat("Wariancja:", var(wyk), "(teoretyczna: 1/λ² = 1)\n\n")
+
+# Ustawienie układu wykresów (2x2)
+par(mfrow = c(2, 2))
+
+# 1. Histogram
+hist(wyk, breaks = 50, probability = TRUE,
+     main = "Rozkład wykładniczy",
+     xlab = "Wartość", ylab = "Gęstość",
+     col = "lightblue", border = "white")
+curve(dexp(x, rate = 1), add = TRUE, col = "red", lwd = 2)
+
+# 2. Dystrybuanta empiryczna
+plot(ecdf(wyk), main = "Dystrybuanta empiryczna",
+     xlab = "Wartość", ylab = "F(x)",
+     col = "blue", lwd = 2)
+curve(pexp(x, rate = 1), add = TRUE, col = "red", lwd = 2, lty = 2)
+legend("bottomright", legend = c("Empiryczna", "Teoretyczna"),
+       col = c("blue", "red"), lwd = 2, lty = c(1, 2))
+
+# 3. Q-Q plot względem rozkładu Gamma(1,1)
+# Exp(1) = Gamma(1, 1)
+qqplot(qgamma(ppoints(10000), shape = 1, rate = 1), wyk,
+       main = "Q-Q Plot: Exp(1) vs Gamma(1,1)",
+       xlab = "Kwantyle teoretyczne Gamma(1,1)",
+       ylab = "Kwantyle empiryczne Exp(1)",
+       pch = ".", col = "darkgreen")
+abline(0, 1, col = "red", lwd = 2)
+grid()
+
+# 4. Log-scale Q-Q plot
+qqplot(qgamma(ppoints(10000), shape = 1, rate = 1), wyk,
+       main = "Q-Q Plot (skala log)",
+       xlab = "Kwantyle teoretyczne Gamma(1,1)",
+       ylab = "Kwantyle empiryczne Exp(1)",
+       pch = ".", col = "purple",
+       log = "xy")
+abline(0, 1, col = "red", lwd = 2)
+
+# Przywróć domyślny układ
+par(mfrow = c(1, 1))
+
+cat("WNIOSEK:\n")
+cat("Rozkład wykładniczy Exp(1) jest równoważny Gamma(1,1)\n")
+cat("Punkty na Q-Q plot leżą idealnie na linii prostej\n")
+)

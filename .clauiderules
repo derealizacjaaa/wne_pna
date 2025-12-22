@@ -1,0 +1,62 @@
+# AI Assistant Rules for wne_pna
+
+📘 **IMPORTANT:** This project has comprehensive AI assistant guidelines.
+
+**Main Documentation:** See [`.agent/rules/overall.md`](.agent/rules/overall.md) for the complete 1000+ line project guide.
+
+**Also see:**
+- [`AI_TASK_CREATION_GUIDE.md`](AI_TASK_CREATION_GUIDE.md) - Task creation syntax and examples
+- [`TASK_SYSTEM_V3_GUIDE.md`](TASK_SYSTEM_V3_GUIDE.md) - V3 inline functions guide
+- [`DYNAMIC_LISTS_GUIDE.md`](DYNAMIC_LISTS_GUIDE.md) - Dynamic list discovery
+
+---
+
+## Quick Reference
+
+### Project Overview
+**University Tasks Hub** - R Shiny web application for managing programming exercises for analytics course at University of Warsaw (WNE UW).
+
+### Technology Stack
+- **Language:** R (v4.5.2)
+- **Framework:** Shiny (reactive web framework)
+- **Architecture:** Modular (14 focused R modules in `R/` directory)
+- **Styling:** 8 modular CSS files in `www/css/`
+- **Package Manager:** renv
+
+### Critical Guidelines
+
+1. **Read First:** Always consult `.agent/rules/overall.md` before making changes
+2. **Language:** Preserve Polish in all UI labels, task content, and user-facing text
+3. **Task Creation:** Use V3 inline functions (`code()`, `execute()`, `plot()`) - see AI_TASK_CREATION_GUIDE.md
+4. **Modular Structure:** Find code by function in `R/` subdirectories (config, tasks, ui, server)
+5. **CSS Order:** Load CSS files in exact order specified in app.R (lines 60-67)
+6. **Color Scheme:** Primary red `#b1404f` (WNE brand), dark gray `#4A4A4A`, green `#28a745`
+
+### File Structure
+```
+wne_pna/
+├── app.R                    # Main orchestrator (122 lines)
+├── R/                       # Modular source code
+│   ├── config/             # Dynamic list discovery
+│   ├── tasks/              # Display, execution, building, loading
+│   ├── ui/                 # Components, sidebars, content
+│   └── server/             # State, observers, renderers
+├── www/css/                # 8 modular CSS files
+├── tasks/                  # Task content (listN/taskM/)
+└── .agent/rules/overall.md # MAIN DOCUMENTATION (read this!)
+```
+
+### Common Tasks
+- **Add new task:** Create `tasks/listN/taskM/` folder with numbered `.txt` files
+- **Add new list:** Just create `tasks/listN/` directory (auto-discovered!)
+- **Modify UI:** Edit `R/ui/*.R` for structure, `www/css/*.css` for styling
+- **Change task behavior:** Edit `R/tasks/*.R`
+
+### Task Creation Methods
+1. **V3 Inline Functions** (★ Recommended): Mixed HTML + `code()`, `execute()`, `plot()` in `.txt` files
+2. **V2 Typed Files**: Separate `N_content.txt`, `N_code.txt`, `N_execute.txt` files  
+3. **V1 Manual**: `task.R` with `create_task()` function for complex layouts
+
+---
+
+⚠️ **IMPORTANT:** This is a summary. For complete details on architecture, conventions, and best practices, **always refer to `.agent/rules/overall.md`** before making changes.

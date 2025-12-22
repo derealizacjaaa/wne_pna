@@ -1,0 +1,68 @@
+
+Attaching package: 'bslib'
+
+The following object is masked from 'package:utils':
+
+    page
+
+Loading all tasks...
+Ôťô Loaded list4/task1 (file-based-v3)
+Ôťô Loaded list4/task2 (file-based-v3)
+Ôťô Loaded list4/task3 (file-based-v3)
+Ôťô Loaded list4/task4 (file-based-v3)
+Ôťô Loaded list4/task5 (file-based-v3)
+Ôťô Loaded list4/task6 (file-based-v3)
+Ôťô Loaded list5/task2 (file-based-v3)
+Ôťô Loaded list5/task3 (file-based-v3)
+Ôťô Loaded list5/task4 (file-based-v3)
+Ôťô Loaded list5/task5 (file-based-v3)
+Ôťô Loaded list5/task6 (file-based-v3)
+Ôťô Loaded list5/task7 (file-based-v3)
+Ôťô Loaded list5/task8 (file-based-v3)
+Ôťô Loaded list5/task9 (file-based-v3)
+Ôťô Loaded list6/task1 (file-based-v3)
+Ôťô Loaded list6/task2 (file-based-v3)
+Ôťô Loaded list6/task3 (file-based-v3)
+Ôťô Loaded list6/task4 (file-based-v3)
+Ôťô Loaded list6/task5 (file-based-v3)
+Ôťô Loaded list6/task7 (file-based-v3)
+Ôťô Loaded list6/task8 (file-based-v3)
+Ôťô Loaded list7/task1 (file-based-v3)
+Ôťô Loaded list7/task2 (file-based-v3)
+Ôťô Loaded list7/task3 (file-based-v3)
+Ôťô Loaded list7/task4 (file-based-v3)
+Ôťô Loaded list7/task5 (file-based-v3)
+Ôťô Loaded list7/task6 (file-based-v3)
+Ôťô Loaded list7/task7 (file-based-v3)
+Ôťô Loaded list7/task8 (file-based-v3)
+Ôťô Loaded list8/task1 (file-based-v3)
+Ôťô Loaded list8/task2 (file-based-v3)
+Ôťô Loaded list8/task3 (file-based-v3)
+Ôťô Loaded list8/task4 (file-based-v3)
+Ôťô Loaded list8/task5 (file-based-v3)
+Ôťô Loaded list8/task6 (file-based-v3)
+Ôťô Loaded list8/task7 (file-based-v3)
+Ôťô Loaded list8/task8 (file-based-v3)
+Ôťô Loaded list8/task9 (file-based-v3)
+Ôťô Loaded list8/task10 (file-based-v3)
+===========================================
+TASK SUMMARY
+===========================================
+
+­čôü list1: 0 tasks (0 completed, 0%)
+­čôü list2: 0 tasks (0 completed, 0%)
+­čôü list3: 0 tasks (0 completed, 0%)
+­čôü list4: 6 tasks (0 completed, 0%)
+­čôü list5: 8 tasks (0 completed, 0%)
+­čôü list6: 7 tasks (0 completed, 0%)
+­čôü list7: 8 tasks (0 completed, 0%)
+­čôü list8: 10 tasks (0 completed, 0%)
+­čôü list10: 0 tasks (0 completed, 0%)
+
+­čôŐ Overall: 39 tasks across 9 lists (0 completed, 0%)
+===========================================
+
+Checking for issues...
+
+SUCCESS: All tasks loaded correctly as V3 (or manual/V2)!
+There were 47 warnings (use warnings() to see them)

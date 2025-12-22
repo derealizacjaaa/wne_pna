@@ -1,4 +1,4 @@
-<h2>Wizualizacja z ggplot2</h2>
+<h1>Wizualizacja z ggplot2</h1>
 
 <p><strong>ggplot2</strong> to zaawansowany pakiet do tworzenia wizualizacji w R, oparty na <em>Grammar of Graphics</em>. Oferuje znacznie większą elastyczność i lepszą estetykę niż podstawowa funkcja <code>plot()</code>.</p>
 

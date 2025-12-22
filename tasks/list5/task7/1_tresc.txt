@@ -1,0 +1,22 @@
+<h1>Zadanie 7: Rozkład geometryczny - strzelcy do celu</h1>
+
+<p>Estymacja prawdopodobieństwa trafienia na podstawie rozkładu geometrycznego.</p>
+
+<h3>Dane:</h3>
+<p>Pięciu strzelców strzelało do celu do momentu pierwszego trafienia:</p>
+<ul>
+  <li>Pierwszy trafił za trzecim strzałem</li>
+  <li>Drugi za czwartym strzałem</li>
+  <li>Trzeci za trzecim strzałem</li>
+  <li>Czwarty za drugim strzałem</li>
+  <li>Piąty za siódmym strzałem</li>
+</ul>
+
+<h3>Rozkład geometryczny:</h3>
+<p>Opisuje prawdopodobieństwo, że pierwsze "sukces" nastąpi przy k-tej próbie:</p>
+<p>P(X = k) = (1 - p)^(k-1) · p, dla k = 1, 2, 3, ...</p>
+
+<h3>Polecenie:</h3>
+<p>Przyjmując, że prawdopodobieństwo trafienia jednym strzałem jest stałe, oszacuj to prawdopodobieństwo</p>
+
+<p><strong>Źródło:</strong> Zadanie 2.35 z [1]</p>

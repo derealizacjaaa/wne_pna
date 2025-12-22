@@ -1,9 +1,0 @@
-<h2>Zadanie 5: Rozkład wykładniczy vs Gamma</h2>
-
-<p>Porównanie rozkładu wykładniczego z rozkładem Gamma.</p>
-
-<h3>Teoria:</h3>
-<p>Rozkład wykładniczy Exp(λ) jest szczególnym przypadkiem rozkładu Gamma(1, λ)</p>
-
-<h3>Polecenie:</h3>
-<p>Wygenerować zmienną <code>wyk</code> z 10000 obserwacjami z rozkładu wykładniczego (λ=1) i sporządzić Q-Q plot względem rozkładu Gamma(1,1)</p>

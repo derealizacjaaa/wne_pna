@@ -20,7 +20,6 @@ create_code_output_tabs <- function(code,
                                     auto_execute = TRUE,
                                     use_auto_labels = TRUE,
                                     use_comments = TRUE) {
-
   # Generate output if requested
   output <- if (auto_execute && language == "r") {
     execute_code(code, use_auto_labels, use_comments)
@@ -51,7 +50,6 @@ create_code_output_tabs <- function(code,
 create_multi_code_tabs <- function(exercises,
                                    code_tab_title = "Kod",
                                    output_tab_title = "Wynik") {
-
   # Create shared environment for all exercises
   shared_env <- new.env()
 
@@ -96,72 +94,4 @@ create_multi_code_tabs <- function(exercises,
       div(all_output_blocks)
     )
   )
-}
-
-#' Auto-generate basic task from content.txt and code.txt
-#'
-#' Two scenarios:
-#' 1. content.txt only → Single "Treść" tab, completed = FALSE
-#' 2. content.txt + code.txt → Three tabs (Treść/Kod/Wynik), completed = TRUE
-#'
-#' @param task_dir Path to task directory
-#' @return Task structure or NULL if content.txt missing
-auto_generate_basic_task <- function(task_dir) {
-  content_file <- file.path(task_dir, "content.txt")
-  code_file <- file.path(task_dir, "code.txt")
-
-  # content.txt is required
-  if (!file.exists(content_file)) {
-    return(NULL)
-  }
-
-  content_text <- paste(readLines(content_file, warn = FALSE), collapse = "\n")
-  has_code <- file.exists(code_file) && file.info(code_file)$size > 0
-
-  if (has_code) {
-    # Scenario 2: Content + Code → 3 tabs (completed)
-    code_text <- paste(readLines(code_file, warn = FALSE), collapse = "\n")
-
-    code_output_tabs <- create_code_output_tabs(
-      code = code_text,
-      code_tab_title = "Kod",
-      output_tab_title = "Wynik",
-      language = "r",
-      auto_execute = TRUE
-    )
-
-    task_tabs <- list(
-      nav_panel(
-        title = "Treść",
-        div(class = "task-tab-content-simple", HTML(content_text))
-      ),
-      code_output_tabs[[1]],  # Code tab
-      code_output_tabs[[2]]   # Output tab
-    )
-
-    content <- page_navbar(title = "", id = "task_tabs", !!!task_tabs)
-
-    list(
-      content = content,
-      completed = TRUE,
-      auto_generated = TRUE
-    )
-
-  } else {
-    # Scenario 1: Content only → Single tab (uncompleted)
-    content <- page_navbar(
-      title = "",
-      id = "task_tabs",
-      nav_panel(
-        title = "Treść",
-        div(class = "task-tab-content-simple", HTML(content_text))
-      )
-    )
-
-    list(
-      content = content,
-      completed = FALSE,
-      auto_generated = TRUE
-    )
-  }
 }

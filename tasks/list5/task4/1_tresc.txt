@@ -1,0 +1,19 @@
+<h1>Zadanie 4: Rozkład jednostajny - estymacja MNW</h1>
+
+<p>Estymacja parametru rozkładu jednostajnego metodą największej wiarygodności.</p>
+
+<h3>Rozkład:</h3>
+<p>X ~ Unif(0, θ)</p>
+
+<p><strong>Funkcja gęstości:</strong></p>
+<p>f(x; θ) = 1/θ, dla 0 ≤ x ≤ θ</p>
+
+<h3>Dane:</h3>
+<p>Próba: 1.24, 2.00, 1.27, 0.04, 2.83</p>
+
+<h3>Polecenie:</h3>
+<p>Znaleźć estymator największej wiarygodności (MNW) parametru θ</p>
+
+<p><strong>Uwaga:</strong> Dla rozkładu jednostajnego estymator MNW to max(x₁, ..., xₙ)</p>
+
+<p><strong>Źródło:</strong> Przykład 6.4 z [3]</p>

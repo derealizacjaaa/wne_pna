@@ -1,0 +1,43 @@
+Checking path: tasks/list1/task1
+Exists? TRUE
+Files:
+[1] "1_tresc.txt"       "2_rozwiazanie.txt"
+
+Trying build_task_from_files_v3...
+build_task_from_files_v3 ERROR: could not find function "div"
+
+Trying direct parse_task_files_v3...
+[[1]]
+[[1]]$path
+[1] "tasks/list1/task1/1_tresc.txt"
+
+[[1]]$order
+[1] 1
+
+[[1]]$subtask
+[1] "main"
+
+[[1]]$title
+[1] "tresc"
+
+[[1]]$basename
+[1] "1_tresc.txt"
+
+
+[[2]]
+[[2]]$path
+[1] "tasks/list1/task1/2_rozwiazanie.txt"
+
+[[2]]$order
+[1] 2
+
+[[2]]$subtask
+[1] "main"
+
+[[2]]$title
+[1] "rozwiazanie"
+
+[[2]]$basename
+[1] "2_rozwiazanie.txt"
+
+

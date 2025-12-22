@@ -1,4 +1,4 @@
-<h2>Zadanie 8</h2>
+<h1>Zadanie 8</h1>
 <p>Ponownie dane o nagrodach BBQ.<br>
 Tym razem zakładamy <strong>rozkład normalny nieprzyjmujący wartości ujemnych</strong>.</p>
 

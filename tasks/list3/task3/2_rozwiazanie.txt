@@ -1,0 +1,62 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 3: Q-Q plot dla rozkładu normalnego
+
+# Wczytanie danych
+dane <- read.csv("PNA_Z03.csv")
+
+# Wyodrębnienie zmiennej x
+x <- dane$x
+
+cat("=== DANE ===\n")
+cat("Liczba obserwacji:", length(x), "\n")
+cat("Średnia:", mean(x), "\n")
+cat("Odchylenie std:", sd(x), "\n")
+cat("Min:", min(x), "\n")
+cat("Max:", max(x), "\n\n")
+
+# Ustawienie układu wykresów (1x2)
+par(mfrow = c(1, 2))
+
+# 1. Histogram z krzywą normalną
+hist(x, breaks = 30, probability = TRUE,
+     main = "Histogram danych",
+     xlab = "Wartość",
+     ylab = "Gęstość",
+     col = "lightblue",
+     border = "white")
+
+# Dodanie krzywej rozkładu normalnego
+curve(dnorm(x, mean = mean(dane$x), sd = sd(dane$x)),
+      add = TRUE, col = "red", lwd = 2)
+legend("topright", legend = "Rozkład normalny",
+       col = "red", lwd = 2)
+
+# 2. Q-Q plot
+qqnorm(x, main = "Q-Q Plot (Normal Distribution)",
+       xlab = "Kwantyle teoretyczne (rozkład normalny)",
+       ylab = "Kwantyle empiryczne (dane)",
+       pch = 19, col = "blue", cex = 0.7)
+qqline(x, col = "red", lwd = 2)
+grid()
+
+# Przywróć domyślny układ
+par(mfrow = c(1, 1))
+
+# Test normalności Shapiro-Wilka
+cat("=== TEST NORMALNOŚCI SHAPIRO-WILKA ===\n")
+if (length(x) <= 5000) {
+  test <- shapiro.test(x)
+  print(test)
+  cat("\nInterpretacja:\n")
+  if (test$p.value > 0.05) {
+    cat("Dane pochodzą z rozkładu normalnego (p > 0.05)\n")
+  } else {
+    cat("Dane NIE pochodzą z rozkładu normalnego (p < 0.05)\n")
+  }
+} else {
+  cat("Próba zbyt duża dla testu Shapiro-Wilka (max 5000 obs.)\n")
+}
+)

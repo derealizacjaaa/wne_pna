@@ -1,4 +1,4 @@
-<h2>Zadanie 1</h2>
+<h1>Zadanie 1</h1>
 <p>Niech $X_{1},X_{2},\ldots, X_{n} \overset{i.i.d.}{\sim} \text{Unif}[0,\beta]$.<br>
 Uzyskano realizacje zmiennej losowej:<br>
 $X_{1}=5$, $X_{2}=9$, $X_{3}=6$, $X_{4}=4$, $X_{5}=1$.</p>

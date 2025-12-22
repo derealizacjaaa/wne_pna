@@ -1,0 +1,22 @@
+<h1>Zadanie 2: Analiza danych z CSV - mecze Anglia vs Szkocja</h1>
+
+<p>W tym zadaniu wczytasz dane z pliku CSV i stworzysz wykresy rozproszenia.</p>
+
+<h3>Dane:</h3>
+<p>Plik <code>EngScoResults.csv</code> zawiera dane o meczach między Anglią a Szkocją:</p>
+<ul>
+  <li>Competition - rodzaj rozgrywek</li>
+  <li>Host - gospodarz meczu</li>
+  <li>Rok - rok rozgrywek</li>
+  <li>Goals Scotland - gole Szkocji</li>
+  <li>Goals England - gole Anglii</li>
+</ul>
+
+<h3>Polecenie:</h3>
+<p>Wczytać dane z pliku <code>EngScoResults.csv</code> i sporządzić wykresy rozproszenia dla:</p>
+<ol>
+  <li>Liczby zdobytych goli przez Anglików w czasie</li>
+  <li>Liczby zdobytych goli przez Szkotów w meczach w Szkocji</li>
+</ol>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>read.csv()</code> i <code>plot()</code></p>

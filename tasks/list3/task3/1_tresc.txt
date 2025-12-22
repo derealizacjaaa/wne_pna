@@ -1,0 +1,15 @@
+<h1>Zadanie 3: Wykres kwantylowy (Q-Q plot)</h1>
+
+<p>W tym zadaniu stworzysz wykres kwantylowy do oceny normalności rozkładu danych.</p>
+
+<h3>Teoria:</h3>
+<p><strong>Q-Q plot (quantile-quantile plot)</strong> to metoda graficzna porównania dwóch rozkładów poprzez wykres ich kwantyli.</p>
+<ul>
+  <li>Jeśli punkty leżą blisko linii prostej - rozkłady są podobne</li>
+  <li>Używany do sprawdzenia, czy dane pochodzą z rozkładu normalnego</li>
+</ul>
+
+<h3>Polecenie:</h3>
+<p>Sporządzić wykres kwantylowy zmiennej z pliku <code>PNA_Z03.csv</code>, zakładając rozkład normalny</p>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>qqnorm()</code> i <code>qqline()</code></p>

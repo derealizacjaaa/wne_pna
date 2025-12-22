@@ -1,0 +1,21 @@
+Loading all tasks...
+===========================================
+TASK SUMMARY
+===========================================
+
+📁 list1: 0 tasks (0 completed, 0%)
+📁 list2: 0 tasks (0 completed, 0%)
+📁 list3: 0 tasks (0 completed, 0%)
+📁 list4: 0 tasks (0 completed, 0%)
+📁 list5: 0 tasks (0 completed, 0%)
+📁 list6: 0 tasks (0 completed, 0%)
+📁 list7: 0 tasks (0 completed, 0%)
+📁 list8: 0 tasks (0 completed, 0%)
+📁 list10: 0 tasks (0 completed, 0%)
+
+📊 Overall: 0 tasks across 9 lists (0 completed, 0%)
+===========================================
+
+Checking for issues...
+
+SUCCESS: All tasks loaded correctly as V3 (or manual/V2)!

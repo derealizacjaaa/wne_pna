@@ -3,117 +3,210 @@
    Using CSS variables from 0-variables.css
    ======================================== */
 
-/* Main navbar container - integrate with header gradient */
-.main-content-body .navbar {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  min-height: 0 !important;
-  height: var(--navbar-height) !important;
-  position: absolute;
-  top: 0;
-  right: 10px;
-  z-index: var(--z-index-modal);
+/* ========================================
+   MODERN NAVBAR STYLES - INTEGRATED WITH HEADER
+   Using CSS variables from 0-variables.css
+   ======================================== */
+
+/* Container for the task tabs */
+.task-tabs-container {
+  height: 100%;
+  position: relative;
+  margin-left: auto;
+  z-index: 5;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-end;
-  padding-right: 0 !important;
-  width: auto !important;
 }
 
-/* Remove any container padding/margin around navbar */
-.main-content-body > div:first-child {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.main-content-body .bslib-page-navbar {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Hide navbar brand - we have it in header */
-.main-content-body .navbar-brand {
-  display: none !important;
-}
-
-/* Navigation tabs styling - positioned in header */
-.main-content-body .nav-tabs {
+/* Remove standard BS nav-tabs borders */
+.task-tabs-container .nav-tabs {
   border: none !important;
   background: transparent !important;
   padding: 0 !important;
   margin: 0 !important;
   display: flex;
-  align-items: center;
-  height: var(--navbar-height);
+  align-items: stretch;
+  height: 100%;
+  gap: 0;
 }
 
-.main-content-body .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
+/* Nav Item container - full height */
+.task-tabs-container .nav-tabs>li,
+.task-tabs-container .nav-tabs>.nav-item {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Base Nav Link Styling - Full height with pattern and distinct borders */
+.task-tabs-container .nav-link {
+  color: rgba(255, 255, 255, 0.95) !important;
   border: none !important;
-  background: transparent !important;
-  padding: 16px var(--spacing-xl) !important;
-  font-weight: var(--font-weight-medium);
-  font-size: 0.95em;
+  /* Base background */
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0.12) 100%) !important;
+  padding: 0 32px !important;
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.05em;
+  /* Thin black text outline for readability */
+  text-shadow:
+    -1px -1px 0 rgba(0, 0, 0, 0.5),
+    1px -1px 0 rgba(0, 0, 0, 0.5),
+    -1px 1px 0 rgba(0, 0, 0, 0.5),
+    1px 1px 0 rgba(0, 0, 0, 0.5);
   transition: all var(--transition-smooth);
   position: relative;
   border-radius: 0 !important;
-  margin: 0 2px !important;
-  height: var(--navbar-height);
+  margin: 0 !important;
+  height: 100%;
   display: flex;
   align-items: center;
+  /* No blur for clearer buttons */
+  overflow: hidden;
+  /* Distinct right border - gradient from transparent to visible */
+  border-right: 3px solid transparent !important;
+  background-clip: padding-box;
+  box-shadow:
+    inset -3px 0 0 rgba(0, 0, 0, 0.3),
+    inset 3px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Header-style diamond pattern overlay on buttons */
+.task-tabs-container .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg id='patternId' width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='a' patternUnits='userSpaceOnUse' width='87' height='167.624' patternTransform='scale(0.5) rotate(160)'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='none'/%3E%3Cpath d='m25.394 135.647-6.349 14.817L40 199.375l20.954-48.91-6.348-14.818L40 169.74zM40 32.786 31.742 52.06 40 71.335l8.258-19.275zM25.394 66.879 40 100.972 54.606 66.88l-6.348-14.82L40 71.335 31.742 52.06zm29.212-29.638L48.258 52.06l6.348 14.82 6.348-14.82zM25.394 66.88l6.348-14.819-6.348-14.819-6.349 14.819zm-6.349-14.82 6.349-14.819-6.349-14.818-6.348 14.82zm35.561-14.819 6.348 14.819 6.35-14.817-6.35-14.82zM25.394 66.88l-6.349 14.818L40 130.608l20.954-48.911-6.348-14.818L40 100.972zm0 0-6.349-14.82-6.348 14.818 6.348 14.819zm29.212 0 6.348 14.818 6.35-14.819-6.35-14.818zm12.697-29.636L60.954 52.06l6.35 14.818L73.65 52.06zm0 0 6.348 14.817L80 37.241l-6.348-14.818zm0 29.635-6.349 14.819 6.35 14.818 6.348-14.818zm0 0 6.349 14.819L80 66.879 73.65 52.06zm0 29.637 6.348 14.82L80 96.514l-6.348-14.818zm-41.91 39.357-6.348-14.819-6.348 14.82 6.348 14.817zm29.213 0 6.348 14.818 6.35-14.817-6.35-14.82zm12.697.001 6.348 14.817L80 135.872l-6.348-14.819zM25.393-31.75l-6.348 14.817L40 31.977l20.954-48.91-6.348-14.818L40 2.342zM12.697 66.88l6.348-14.819-6.348-14.817L6.348 52.06zm0-29.636-6.35-14.82L0 37.24l6.348 14.82zm0 59.272 6.348-14.818-6.348-14.819-6.35 14.819zm0-29.637L6.348 52.06 0 66.88l6.348 14.817zm0 29.637-6.35-14.818L0 96.515l6.348 14.82zm0 39.358-6.35-14.82L0 135.872l6.348 14.818z' transform='translate(3.5,0)' stroke-linecap='square' stroke-width='5' stroke='%23000000' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%25' height='800%25' transform='translate(-188,-668.992)' fill='url(%23a)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.task-tabs-container .nav-link:hover::before {
+  opacity: 0.25;
+}
+
+/* Shimmer effect on hover */
+.task-tabs-container .nav-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.task-tabs-container .nav-link:hover::after {
+  left: 100%;
 }
 
 /* Hover effect for nav tabs */
-.main-content-body .nav-link:hover {
+.task-tabs-container .nav-link:hover {
   color: var(--color-white) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.14) 50%,
+      rgba(255, 255, 255, 0.22) 100%) !important;
+  box-shadow:
+    inset -3px 0 0 rgba(0, 0, 0, 0.4),
+    inset 3px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.5);
 }
 
-/* Active tab styling */
-.main-content-body .nav-link.active {
+/* Active tab styling - Full height with BLACK bottom accent */
+.task-tabs-container .nav-tabs .nav-link.active,
+.task-tabs-container .task-nav-link.active,
+.task-tabs-container .nav-link.active {
   color: var(--color-white) !important;
-  background: rgba(255, 255, 255, 0.15) !important;
-  font-weight: var(--font-weight-semibold);
-  border-bottom: var(--border-width-thick) solid var(--color-white) !important;
+  background: linear-gradient(180deg,
+      rgba(177, 64, 79, 0.95) 0%,
+      rgba(177, 64, 79, 0.80) 50%,
+      rgba(177, 64, 79, 1) 100%) !important;
+  font-weight: var(--font-weight-bold);
+  font-size: 1.1em;
+  border: none !important;
+  /* BLACK bottom accent */
+  box-shadow:
+    inset 0 -5px 0 var(--color-black),
+    inset -3px 0 0 rgba(0, 0, 0, 0.4),
+    inset 3px 0 0 rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Underline animation for tabs */
-.main-content-body .nav-link::after {
+/* Pattern visibility boost on active tab */
+.task-tabs-container .nav-link.active::before {
+  opacity: 0.3;
+}
+
+/* Pulsing glow for active tab - BLACK accent */
+.task-tabs-container .nav-link.active::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  width: 0;
-  height: var(--border-width-thick);
-  background: var(--color-white);
-  transition: all var(--transition-smooth);
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 0;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--color-black) 30%,
+      var(--color-black) 70%,
+      transparent 100%);
+  opacity: 1;
+  animation: none;
+  pointer-events: none;
 }
 
-.main-content-body .nav-link:hover::after {
-  width: 80%;
-}
 
-.main-content-body .nav-link.active::after {
-  width: 100%;
-}
 
 /* Icons in navbar */
-.main-content-body .navbar .fa,
-.main-content-body .navbar .fas,
-.main-content-body .navbar .far {
+.task-tabs-container .nav-link .fa,
+.task-tabs-container .nav-link .fas,
+.task-tabs-container .nav-link .far {
   margin-right: 6px;
   opacity: 0.9;
-  transition: opacity var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
-.main-content-body .nav-link:hover .fa,
-.main-content-body .nav-link:hover .fas,
-.main-content-body .nav-link:hover .far {
+.task-tabs-container .nav-link:hover .fa,
+.task-tabs-container .nav-link:hover .fas,
+.task-tabs-container .nav-link:hover .far {
   opacity: 1;
+  transform: scale(1.1);
+}
+
+.task-tabs-container .nav-link.active .fa,
+.task-tabs-container .nav-link.active .fas,
+.task-tabs-container .nav-link.active .far,
+.task-tabs-container .nav-tabs>li.active>.nav-link .fa,
+.task-tabs-container .nav-tabs>li.active>.nav-link .fas,
+.task-tabs-container .nav-tabs>li.active>.nav-link .far {
+  animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 /* Tab content area styling */
@@ -132,16 +225,12 @@
   min-height: 0;
 }
 
-/* Hide the page navbar container */
-.main-content-body .bslib-page-navbar > .navbar {
-  border-bottom: none !important;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -150,8 +239,17 @@
 
 /* Responsive navbar adjustments */
 @media (max-width: 768px) {
-  .main-content-body .nav-link {
-    padding: 14px 16px !important;
-    font-size: 0.9em;
+  .task-tabs-container .nav-link {
+    padding: 10px 16px !important;
+    font-size: 0.85em;
   }
+}
+
+/* Remove left visual border for the first tab when not active */
+/* Remove left visual border for the first tab when not active */
+.task-tabs-container .nav-tabs>li:first-child>.nav-link:not(.active),
+.task-tabs-container .nav-tabs>.nav-item:first-child>.nav-link:not(.active),
+.task-tabs-container .nav-link:first-child:not(.active) {
+  /* Keep only the right shadow (negative x-offset), remove left shadow (positive x-offset) */
+  box-shadow: inset -3px 0 0 rgba(0, 0, 0, 0.4) !important;
 }

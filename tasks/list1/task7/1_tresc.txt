@@ -1,0 +1,21 @@
+<h1>Zadanie 7: Macierz w modelach przestrzeni stanów</h1>
+
+<p>W modelach przestrzeni stanów używa się czasami macierzy <strong>F</strong> o specjalnej strukturze.</p>
+
+<h3>Polecenie:</h3>
+<p>Utwórz macierz <strong>F</strong> o wymiarach 11×11, gdzie:</p>
+<ul>
+  <li>Pierwszy wiersz zawiera same -1</li>
+  <li>Pozostałe wiersze tworzą macierz jednostkową przesunętą o 1 w dół (macierz identyczności pod przekątną)</li>
+</ul>
+
+<p><strong>Wzór macierzy:</strong></p>
+<pre>
+F = [-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1]
+    [ 1  0  0  0  0  0  0  0  0  0  0]
+    [ 0  1  0  0  0  0  0  0  0  0  0]
+    [ 0  0  1  0  0  0  0  0  0  0  0]
+    ...
+</pre>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>diag()</code> i podstawiania macierzowego</p>

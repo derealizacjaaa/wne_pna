@@ -77,9 +77,9 @@ cat("Średnia wynosi:", mean(x))
 Use these specific HTML patterns to maintain design consistency.
 
 ### Headings
-*   `<h1>Title</h1>` - Main Task Title (Red, bold)
-*   `<h2>Section</h2>` - Major Section (Dark text, red border left)
-*   `<h3>Subsection</h3>` - Steps (Medium gray)
+*   `<h1>Title</h1>` - Main Task Title (e.g., inside "Treść" tab).
+*   `<h2>Section</h2>` - Major Section (e.g., "Rozwiązanie", "Wykres").
+*   `<h3>Subsection</h3>` - Steps or sub-parts within a section.
 
 ### Information Boxes (Use these classes)
 1.  **Info (Blue):** Tips, context.

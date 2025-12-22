@@ -1,0 +1,34 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 2: Statystyki opisowe - konie w Polsce
+
+# Dane: liczba koni w Polsce (1947-1974)
+konie <- c(2.0, 2.3, 2.7, 2.8, 2.9, 2.7, 2.6, 2.6, 2.5, 2.6, 2.7, 2.8, 2.8, 2.7,
+           2.7, 2.6, 2.6, 2.6, 2.6, 2.6, 2.7, 2.6, 2.6, 2.5, 2.4, 2.4, 2.3)
+
+cat("Dane - liczba koni (mln szt.):\n")
+print(konie)
+cat("\nLiczba obserwacji:", length(konie), "\n\n")
+
+# Średnia
+srednia <- mean(konie)
+cat("Średnia liczba koni:", srednia, "mln\n")
+
+# Mediana
+mediana <- median(konie)
+cat("Mediana:", mediana, "mln\n")
+
+# Odchylenie standardowe
+odchylenie_std <- sd(konie)
+cat("Odchylenie standardowe:", odchylenie_std, "mln\n")
+
+# Współczynnik zmienności (CV)
+wspolczynnik_zmiennosci <- (odchylenie_std / srednia) * 100
+cat("Współczynnik zmienności:", round(wspolczynnik_zmiennosci, 2), "%\n\n")
+
+# Podsumowanie
+cat("Podsumowanie statystyczne:\n")
+print(summary(konie))
+)

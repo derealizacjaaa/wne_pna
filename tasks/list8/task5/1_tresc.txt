@@ -1,4 +1,4 @@
-<h2>Zadanie 5</h2>
+<h1>Zadanie 5</h1>
 <p>Zbiór danych <code>king.txt</code> zawiera wartości całkowite nieujemne.<br>
 Badacz podejrzewa, że zostały wygenerowane z rozkładu Poissona<br>
 z parametrem $\lambda$.</p>

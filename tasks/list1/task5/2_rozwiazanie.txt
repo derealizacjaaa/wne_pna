@@ -1,0 +1,47 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 5: Operacje na wektorze d
+
+# Wektor d z Zadania 2
+d <- c(-1, 1, 0, -2, 3, 0, 2)
+
+cat("Wektor d:\n")
+print(d)
+
+# a) Elementy równe 0
+cat("\na) Elementy równe 0:\n")
+print(d == 0)
+cat("Indeksy:", which(d == 0), "\n")
+
+# b) Elementy dodatnie
+cat("\nb) Elementy dodatnie:\n")
+print(d > 0)
+cat("Wartości:", d[d > 0], "\n")
+
+# c) Elementy ujemne
+cat("\nc) Elementy ujemne:\n")
+print(d < 0)
+cat("Wartości:", d[d < 0], "\n")
+
+# d) Liczba elementów nieujemnych
+liczba_nieujemnych <- sum(d >= 0)
+cat("\nd) Liczba elementów nieujemnych:", liczba_nieujemnych, "\n")
+
+# e) Wektor d2 z dodatnich elementów
+d2 <- d[d > 0]
+cat("\ne) Wektor d2 (dodatnie elementy):\n")
+print(d2)
+
+# f) Wektor d3 z ujemnych elementów
+d3 <- d[d < 0]
+cat("\nf) Wektor d3 (ujemne elementy):\n")
+print(d3)
+
+# g) Wektor d4 - kopia d z ujemnymi zastąpionymi przez 999999999
+d4 <- d
+d4[d4 < 0] <- 999999999
+cat("\ng) Wektor d4 (ujemne zastąpione przez 999999999):\n")
+print(d4)
+)

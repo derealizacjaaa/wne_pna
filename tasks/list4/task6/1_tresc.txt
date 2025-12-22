@@ -1,0 +1,20 @@
+<h1>Zadanie 6: Przedziały ufności dla parametrów regresji</h1>
+
+<p>Wyznaczanie przedziałów ufności dla parametrów modelu regresji.</p>
+
+<h3>Model:</h3>
+<p>MILES<sub>i</sub> = β₀ + β₁·INCOME<sub>i</sub> + β₂·AGE<sub>i</sub> + β₃·KIDS<sub>i</sub> + ε<sub>i</sub></p>
+
+<h3>Polecenie:</h3>
+<p>Wykorzystując dane z pliku <code>vacation.csv</code> dla powyższego modelu, wyznacz przedziały ufności dla parametrów na poziomie ufności 0.90</p>
+
+<p><strong>Przedział ufności dla β:</strong></p>
+<p>β̂ ± t<sub>α/2</sub> · SE(β̂)</p>
+
+<p><strong>W R:</strong></p>
+<ul>
+  <li><code>confint(model, level = 0.90)</code></li>
+  <li>Alternatywnie ręczne obliczenia z macierzy kowariancji</li>
+</ul>
+
+<p><strong>Interpretacja:</strong> Z 90% pewnością prawdziwa wartość parametru znajduje się w obliczonym przedziale</p>

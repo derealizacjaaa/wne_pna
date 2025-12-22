@@ -1,0 +1,17 @@
+<h1>Zadanie 3: Rozkład wykładniczy - funkcja wiarygodności</h1>
+
+<p>Funkcja wiarygodności dla rozkładu wykładniczego.</p>
+
+<h3>Rozkład wykładniczy:</h3>
+<p>Dane pochodzą z rozkładu wykładniczego z nieznanym parametrem λ.</p>
+
+<p><strong>Funkcja gęstości:</strong></p>
+<p>f(x; λ) = λ·e⁻ᵏˣ, dla x ≥ 0</p>
+
+<h3>Zastosowanie:</h3>
+<p>Rozkład wykładniczy modeluje czas między kolejnymi zdarzeniami w procesie Poissona (np. czas do awarii, czas oczekiwania).</p>
+
+<h3>Polecenie:</h3>
+<p>Sporządzić wykres funkcji wiarygodności</p>
+
+<p><strong>Wskazówka:</strong> Dla próby x₁, x₂, ..., xₙ funkcja wiarygodności to L(λ) = ∏ λ·e⁻ᵏˣⁱ</p>

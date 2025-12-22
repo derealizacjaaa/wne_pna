@@ -1,4 +1,4 @@
-<h2>Zadanie Przykładowe: System V3</h2>
+<h1>Zadanie Przykładowe: System V3</h1>
 
 <p>To jest przykład zadania utworzonego przy użyciu <strong>nowego systemu V3</strong>.</p>
 

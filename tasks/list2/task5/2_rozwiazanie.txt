@@ -1,0 +1,53 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 5: Przedział ufności dla popytu na waluty
+
+# Przykładowe dane z 10 obserwacji (w tys. dolarów)
+# (Należy wprowadzić rzeczywiste dane z zadania)
+popyt <- c(18.5, 22.3, 19.7, 21.1, 20.5, 23.2, 19.9, 21.8, 20.4, 22.6)
+
+cat("Dane - popyt na dolary (10 dni):\n")
+print(popyt)
+cat("\n")
+
+# Parametry
+n <- length(popyt)
+poziom_ufnosci <- 0.95
+alpha <- 1 - poziom_ufnosci
+
+# Statystyki z próby
+srednia <- mean(popyt)
+odchylenie_std <- sd(popyt)
+
+cat("Statystyki z próby:\n")
+cat("n =", n, "\n")
+cat("Średnia =", round(srednia, 2), "tys. $\n")
+cat("Odchylenie std =", round(odchylenie_std, 2), "tys. $\n\n")
+
+# Stopnie swobody
+df <- n - 1
+
+# Wartość krytyczna z rozkładu t-Studenta
+t_krytyczne <- qt(1 - alpha/2, df)
+cat("Wartość krytyczna t(", df, ") =", round(t_krytyczne, 4), "\n\n")
+
+# Błąd standardowy
+blad_std <- odchylenie_std / sqrt(n)
+
+# Margines błędu
+margines <- t_krytyczne * blad_std
+
+# Przedział ufności
+dolna_granica <- srednia - margines
+gorna_granica <- srednia + margines
+
+cat("=== PRZEDZIAŁ UFNOŚCI (95%) ===\n")
+cat("[", round(dolna_granica, 2), ",", round(gorna_granica, 2), "] tys. $\n\n")
+
+cat("INTERPRETACJA:\n")
+cat("Z 95% pewnością możemy stwierdzić, że średnia wielkość\n")
+cat("popytu na dolary nocą wynosi między", round(dolna_granica, 2),
+    "a", round(gorna_granica, 2), "tys. dolarów.\n")
+)

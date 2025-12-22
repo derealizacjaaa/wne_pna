@@ -1,0 +1,20 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 4: Obliczenie sumy kwadratów
+
+# Utworzenie wektora liczb od 1 do 300
+liczby <- 1:300
+
+# Obliczenie sumy kwadratów
+suma_kwadratow <- sum(liczby^2)
+
+cat("Suma kwadratów od 1 do 300:\n")
+cat("Σ(i²) dla i=1 do 300 =", suma_kwadratow, "\n")
+
+# Weryfikacja wzorem: n(n+1)(2n+1)/6
+n <- 300
+wzor <- n * (n + 1) * (2 * n + 1) / 6
+cat("\nWeryfikacja wzorem: n(n+1)(2n+1)/6 =", wzor, "\n")
+)

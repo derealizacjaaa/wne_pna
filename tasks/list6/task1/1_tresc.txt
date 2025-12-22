@@ -1,0 +1,9 @@
+<h1>Zadanie 1: Wykres funkcji dwóch zmiennych</h1>
+
+<p>Narysować wykres funkcji określonej wzorem:</p>
+
+<p><strong>f(x,y) = sin(x²/2 - y²/4) · cos(2x - e^y)</strong></p>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji do tworzenia wykresów 3D (np. persp, contour, lub pakiet plotly)</p>
+
+<p><strong>Źródło:</strong> Na podstawie [2]</p>

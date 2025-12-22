@@ -1,4 +1,4 @@
-<h2>Zadanie 2 <em>(Przykład 6.8 z [1])</em></h2>
+<h1>Zadanie 2 <em>(Przykład 6.8 z [1])</em></h1>
 <p>Niech $X_{1},X_{2},\ldots, X_{n} \overset{i.i.d.}{\sim} \text{Unif}[0,\beta]$.<br>
 Uzyskano realizacje zmiennej losowej:<br>
 $X_{1}=1$, $X_{2}=1$, $X_{3}=1$, $X_{4}=9$.</p>

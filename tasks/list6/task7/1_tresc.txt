@@ -1,0 +1,22 @@
+<h1>Zadanie 7: Rozkład Weibulla - prędkość wiatru</h1>
+
+<p>Rozkład <strong>Weibulla</strong> jest często używany do modelowania prędkości wiatru.</p>
+
+<p><strong>Funkcja gęstości:</strong></p>
+<p>f(x; k, λ) = (k/λ^k) · x^(k-1) · e^(-(x/λ)^k), dla x ≥ 0</p>
+
+<p>gdzie:</p>
+<ul>
+  <li><strong>k</strong> - parametr kształtu</li>
+  <li><strong>λ</strong> - parametr skali</li>
+</ul>
+
+<h3>Zadania:</h3>
+<ol>
+  <li>Na podstawie zbioru danych <code>Turbine$AveSpeed</code> z pakietu DAAG</li>
+  <li>Wyznaczyć estymatory MNW parametrów k i λ</li>
+  <li>Sporządzić wykres funkcji wiarygodności</li>
+  <li>Porównać rozkład empiryczny z teoretycznym</li>
+</ol>
+
+<p><strong>Źródło:</strong> Na podstawie [1], str. 144</p>

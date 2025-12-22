@@ -20,12 +20,15 @@
   box-sizing: border-box;
   min-height: var(--header-height);
   max-height: var(--header-height);
+  position: relative;
 }
 
 .hero-text {
   flex: 1;
   border-left: var(--border-width-thick) solid var(--color-primary);
   padding-left: var(--spacing-2xl);
+  position: relative;
+  z-index: 1;
 }
 
 .hero-header h1 {
@@ -33,18 +36,42 @@
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .hero-header .subtitle-top {
   margin: 2px 0 0 0;
   font-size: var(--font-size-lg);
   color: var(--color-medium);
+  transition: all var(--transition-smooth);
 }
 
 .hero-header .subtitle-top-red {
   margin: 2px 0 0 0;
   font-size: var(--font-size-lg);
   color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  text-shadow: 0 0 20px rgba(177, 64, 79, 0.3);
+  transition: all var(--transition-smooth);
+}
+
+.hero-header .subtitle-top-red:hover {
+  text-shadow: 0 0 30px rgba(177, 64, 79, 0.5);
+  transform: translateX(2px);
 }
 
 .hero-divider {
@@ -58,6 +85,16 @@
   margin: var(--spacing-xs) 0;
   width: 300px;
   max-width: 100%;
+  animation: dividerGlow 3s ease-in-out infinite;
+}
+
+@keyframes dividerGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(177, 64, 79, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(177, 64, 79, 0.6);
+  }
 }
 
 .hero-header .subtitle-bottom {
@@ -70,6 +107,7 @@
   margin: 0;
   font-size: var(--font-size-base);
   color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
 }
 
 .hero-logo {
@@ -78,10 +116,23 @@
   display: flex;
   align-items: center;
   height: 100%;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-smooth);
+}
+
+.hero-logo:hover {
+  transform: scale(1.05);
 }
 
 .hero-logo img {
   height: 90px;
   width: auto;
   max-height: 90px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: filter var(--transition-smooth);
+}
+
+.hero-logo:hover img {
+  filter: drop-shadow(0 6px 12px rgba(177, 64, 79, 0.2));
 }

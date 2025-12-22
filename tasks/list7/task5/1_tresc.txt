@@ -1,4 +1,4 @@
-<h2>Zadanie 5</h2>
+<h1>Zadanie 5</h1>
 <p><strong>(Na podstawie zadania 16 z [1], str. 162)</strong><br>
 Dane <code>Service</code> z <strong>resampledata</strong> — czas oczekiwania (w minutach) na obsługę 174 klientów.<br>
 Zakładamy rozkład Gamma.</p>

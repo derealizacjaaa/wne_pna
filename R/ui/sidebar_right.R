@@ -11,7 +11,6 @@
 #' @param all_lists Full task structure (unused but kept for compatibility)
 #' @return Shiny div with sidebar content
 generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all_lists = NULL) {
-
   # Handle empty state
   if (is.null(tasks) || length(tasks) == 0) {
     return(empty_task_sidebar())
@@ -29,7 +28,7 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
   # Build sidebar structure
   div(
     class = "tasks-sidebar-content",
-    h3(icon("list"), " ", current_list_name),
+    h3(div(class = "header-pattern-overlay"), icon("list"), " ", current_list_name),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),
@@ -48,7 +47,7 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
 empty_task_sidebar <- function(message = "Brak zadań w tej liście") {
   div(
     class = "tasks-sidebar-content",
-    h3(icon("list"), " Zadania"),
+    h3(div(class = "header-pattern-overlay"), icon("list"), " Zadania"),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),
@@ -66,7 +65,7 @@ empty_task_sidebar <- function(message = "Brak zadań w tej liście") {
 placeholder_task_sidebar <- function() {
   div(
     class = "tasks-sidebar-content",
-    h3(icon("list"), " Zadania"),
+    h3(div(class = "header-pattern-overlay"), icon("list"), " Zadania"),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),

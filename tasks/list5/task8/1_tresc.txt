@@ -1,0 +1,20 @@
+<h1>Zadanie 8: Mecze piłkarskie - rozkład Poissona</h1>
+
+<p>Analiza wyników meczów piłki nożnej z wykorzystaniem rozkładu Poissona.</p>
+
+<h3>Dane:</h3>
+<p>Zbiór danych <code>Auld_Enemy.txt</code> zawiera wyniki meczów piłki nożnej między Anglią a Szkocją.</p>
+
+<h3>Model:</h3>
+<p>Liczba bramek w meczu może być modelowana rozkładem Poissona.</p>
+
+<p><strong>Funkcja gęstości rozkładu Poissona:</strong></p>
+<p>P(X = k) = (λᵏ · e⁻ᵏ) / k!</p>
+
+<h3>Zadania:</h3>
+<ol>
+  <li>Wczytać dane <code>Auld_Enemy.txt</code></li>
+  <li>Oszacować parametr λ dla liczby bramek</li>
+  <li>Sporządzić wykres funkcji wiarygodności</li>
+  <li>Porównać rozkład empiryczny z teoretycznym</li>
+</ol>

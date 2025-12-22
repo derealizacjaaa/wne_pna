@@ -1,0 +1,9 @@
+<h1>Zadanie 3: Wykres funkcji na określonym obszarze</h1>
+
+<p>Na obszarze <strong>[-2, 2] × [-2, 2]</strong> sporządzić wykres funkcji:</p>
+
+<p><strong>f(x,y) = sin(5x) · cos(5y) / 5</strong></p>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji persp() lub image() do wizualizacji funkcji na podanym obszarze</p>
+
+<p><strong>Źródło:</strong> Na podstawie [3]</p>

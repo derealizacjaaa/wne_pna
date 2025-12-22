@@ -1,0 +1,16 @@
+<h1>Zadanie 2: Symulacja Monte Carlo - test Jarque-Bera</h1>
+
+<p>Eksperyment symulacyjny sprawdzający poprawność testu Jarque-Bera.</p>
+
+<h3>Polecenie:</h3>
+<p>Przeprowadzić eksperyment składający się z <strong>10 000 powtórzeń</strong>:</p>
+<ol>
+  <li>Wygenerować zmienną o <strong>100 obserwacjach</strong> z rozkładu t-Studenta z <strong>12 stopniami swobody</strong></li>
+  <li>Przeprowadzić test Jarque-Bera</li>
+  <li>W każdym powtórzeniu zapisać wynik (statystykę testową lub wynik zero-jedynkowy)</li>
+  <li>Sprawdzić, w jakim procencie przypadków test wskazuje prawidłowy wynik</li>
+</ol>
+
+<p><strong>Test Jarque-Bera:</strong> Testuje normalność rozkładu na podstawie skośności i kurtozy</p>
+
+<p><strong>Wskazówka:</strong> Użyj pętli <code>for</code> lub funkcji <code>replicate()</code></p>

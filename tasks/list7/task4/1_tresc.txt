@@ -1,4 +1,4 @@
-<h2>Zadanie 4</h2>
+<h1>Zadanie 4</h1>
 <p>Zmienna <strong>gret</strong> jest próbą prostą z rozkładu normalnego.<br>
 Zakładamy, że $\mu = 0$.</p>
 <p>Wyznaczyć estymator wariancji rozkładu metodą momentów.</p>

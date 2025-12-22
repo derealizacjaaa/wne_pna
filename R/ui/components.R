@@ -177,3 +177,31 @@ pagination_buttons <- function(has_prev, has_next) {
     )
   )
 }
+
+#' Create breadcrumb navigation trail
+#' @param current_list Current list name (e.g., "Lista I")
+#' @param current_task Current task number (e.g., 1)
+#' @return Shiny div with breadcrumb
+breadcrumb_trail <- function(current_list = NULL, current_task = NULL) {
+  items <- list(
+    tags$span(class = "breadcrumb-item", "-wne"),
+    tags$span(class = "breadcrumb-separator", "/"),
+    tags$span(class = "breadcrumb-item", "pna")
+  )
+  
+  if (!is.null(current_list)) {
+    items <- c(items, list(
+      tags$span(class = "breadcrumb-separator", "/"),
+      tags$span(class = "breadcrumb-item", tolower(gsub(" ", "", current_list)))
+    ))
+  }
+  
+  if (!is.null(current_task)) {
+    items <- c(items, list(
+      tags$span(class = "breadcrumb-separator", "/"),
+      tags$span(class = "breadcrumb-item", sprintf("task%d", current_task))
+    ))
+  }
+  
+  div(class = "navbar-breadcrumb", !!!items)
+}

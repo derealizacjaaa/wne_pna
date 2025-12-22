@@ -1,0 +1,4 @@
+<h2>Zadanie 1</h2>
+<p>Niech $X_{1},X_{2},\ldots, X_{n} \overset{i.i.d.}{\sim} \text{Unif}[0,\beta]$.<br>
+Uzyskano realizacje zmiennej losowej:<br>
+<p>Wyznaczyć estymator parametru $\beta$ metodą momentów.</p>

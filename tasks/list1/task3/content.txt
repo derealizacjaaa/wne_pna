@@ -1,9 +1,0 @@
-<h2>Zadanie 3: Przekształcenie wektora</h2>
-
-<p>W tym zadaniu nauczysz się przekształcać wektory za pomocą operacji arytmetycznych.</p>
-
-<h3>Polecenie:</h3>
-<p>Wprowadź wektor <strong>s</strong> = [1, 2, 3, 4, 5]</p>
-<p>i <strong>jednym przekształceniem</strong> uzyskaj wektor <strong>s</strong> = [101, 102, 103, 104, 105]</p>
-
-<p><strong>Wskazówka:</strong> Pomyśl o dodawaniu stałej wartości do całego wektora</p>

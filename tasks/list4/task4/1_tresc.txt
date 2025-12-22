@@ -1,0 +1,21 @@
+<h1>Zadanie 4: Metoda Najmniejszych Kwadratów (MNK)</h1>
+
+<p>Estymacja parametrów modelu liniowego metodą najmniejszych kwadratów.</p>
+
+<h3>Model:</h3>
+<p>y<sub>i</sub> = β₀ + β₁x<sub>i</sub> + ε<sub>i</sub></p>
+
+<h3>Polecenie:</h3>
+<p>Dla danego modelu liniowego oszacuj parametry β₀ i β₁ używając metody najmniejszych kwadratów.</p>
+
+<p><strong>Wzory MNK:</strong></p>
+<ul>
+  <li>β̂₁ = Cov(x,y) / Var(x)</li>
+  <li>β̂₀ = ȳ - β̂₁·x̄</li>
+</ul>
+
+<p><strong>W R:</strong></p>
+<ul>
+  <li>Funkcja <code>lm(y ~ x)</code></li>
+  <li>Ręczne obliczenia używając <code>cov()</code> i <code>var()</code></li>
+</ul>

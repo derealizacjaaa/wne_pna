@@ -1,0 +1,32 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 1: Wariancja w R
+
+# Utworzenie przykładowego wektora
+x <- c(1, 2, 3, 4, 5)
+
+cat("Wektor x:", x, "\n\n")
+
+# Obliczenie wariancji funkcją var()
+wariancja_r <- var(x)
+cat("Wariancja obliczona przez var():", wariancja_r, "\n\n")
+
+# Ręczne obliczenie wariancji z próby (dzielenie przez n-1)
+n <- length(x)
+srednia <- mean(x)
+wariancja_proba <- sum((x - srednia)^2) / (n - 1)
+cat("Wariancja z próby (n-1):", wariancja_proba, "\n")
+
+# Ręczne obliczenie wariancji z populacji (dzielenie przez n)
+wariancja_populacja <- sum((x - srednia)^2) / n
+cat("Wariancja z populacji (n):", wariancja_populacja, "\n\n")
+
+# Porównanie
+cat("Czy var() = wariancja z próby?", wariancja_r == wariancja_proba, "\n")
+cat("Czy var() = wariancja z populacji?", wariancja_r == wariancja_populacja, "\n\n")
+
+cat("ODPOWIEDŹ: Funkcja var() w R oblicza wariancję z PRÓBY,\n")
+cat("           czyli dzieli przez (n-1), a nie przez n.\n")
+)

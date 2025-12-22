@@ -1,0 +1,14 @@
+<h1>Zadanie 17: Zaawansowane testy statystyczne</h1>
+
+<p>To zadanie obejmuje zaawansowane metody testowania hipotez statystycznych.</p>
+
+<h3>Temat:</h3>
+<p>Porównanie średnich, wariancji lub proporcji przy użyciu odpowiednich testów statystycznych.</p>
+
+<h3>Metody:</h3>
+<ul>
+  <li>Test t-Studenta</li>
+  <li>Test chi-kwadrat</li>
+  <li>ANOVA</li>
+  <li>Testy nieparametryczne</li>
+</ul>

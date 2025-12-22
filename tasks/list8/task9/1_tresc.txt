@@ -1,4 +1,4 @@
-<h2>Zadanie 9</h2>
+<h1>Zadanie 9</h1>
 <p>Zmienna $X_{1}, X_{2}, \ldots, X_{100}$ jest próbą prostą<br>
 z rozkładu wykładniczego z nieznanym parametrem $\lambda$.</p>
 <p>Znaleźć $\hat{\lambda}$ metodą momentów dla wartości ze zbioru <code>exp.csv</code>.</p>

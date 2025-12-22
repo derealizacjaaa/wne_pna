@@ -1,0 +1,46 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 12: Test dla proporcji
+
+# Dane
+n <- 200           # wielkość próby
+x <- 170           # liczba sukcesów
+p_0 <- 0.90        # hipotetyczna proporcja
+alpha <- 0.05
+
+cat("=== TEST DLA PROPORCJI ===\n\n")
+cat("H₀: p = 0.90\n")
+cat("H₁: p ≠ 0.90\n\n")
+
+# Proporcja w próbie
+p_hat <- x / n
+cat("Proporcja w próbie: p̂ =", p_hat, "\n\n")
+
+# Statystyka testowa
+z_stat <- (p_hat - p_0) / sqrt(p_0 * (1 - p_0) / n)
+cat("Statystyka z =", round(z_stat, 4), "\n\n")
+
+# Wartość krytyczna
+z_kryt <- qnorm(1 - alpha/2)
+cat("Wartość krytyczna =", round(z_kryt, 4), "\n\n")
+
+# Wartość p
+p_value <- 2 * pnorm(-abs(z_stat))
+cat("Wartość p =", round(p_value, 6), "\n\n")
+
+# Test prop.test
+cat("=== WERYFIKACJA za pomocą prop.test() ===\n")
+wynik <- prop.test(x, n, p = p_0)
+print(wynik)
+
+cat("\n=== DECYZJA ===\n")
+if (p_value < alpha) {
+  cat("ODRZUCAMY H₀\n")
+  cat("Proporcja różni się istotnie od 90%\n")
+} else {
+  cat("NIE MA PODSTAW do odrzucenia H₀\n")
+  cat("Proporcja nie różni się istotnie od 90%\n")
+}
+)

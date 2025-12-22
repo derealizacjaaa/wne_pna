@@ -1,0 +1,15 @@
+<h1>Zadanie 8: Funkcje i programowanie w R</h1>
+
+<p>W tym zadaniu nauczysz się tworzyć własne funkcje w R.</p>
+
+<h3>Temat:</h3>
+<p>Tworzenie funkcji, pętle, instrukcje warunkowe i programowanie funkcyjne w R.</p>
+
+<h3>Zakres:</h3>
+<ul>
+  <li>Definiowanie funkcji</li>
+  <li>Argumenty funkcji (domyślne wartości)</li>
+  <li>Zwracanie wartości</li>
+  <li>Funkcje apply, lapply, sapply</li>
+  <li>Funkcje anonimowe</li>
+</ul>

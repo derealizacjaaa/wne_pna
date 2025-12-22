@@ -28,6 +28,41 @@
 #   3_wykres.txt          → Tab: "Wykres"
 # ============================================
 
+#' Process files into structured tab data
+#'
+#' @param file_info List of parsed file objects
+#' @param task_dir Task directory path
+#' @param task_env Shared environment
+#' @return List of tab data objects (id, title, content)
+process_tabs_data <- function(file_info, task_dir, task_env) {
+  # Sort by order, then by subtask
+  file_info <- file_info[order(
+    sapply(file_info, function(x) x$order),
+    sapply(file_info, function(x) x$subtask)
+  )]
+
+  # Group by order
+  orders <- unique(sapply(file_info, function(x) x$order))
+
+  lapply(orders, function(ord) {
+    # Get all files for this tab order
+    tab_files <- Filter(function(x) x$order == ord, file_info)
+
+    # Get tab title (capitalize first letter)
+    tab_title <- get_tab_title_v3(tab_files[[1]]$title)
+
+    # Build tab content with shared task environment
+    tab_content <- build_tab_content_v3(tab_files, task_dir, task_env)
+
+    list(
+      id = paste0("v3-", ord), # Simple unique ID
+      order = ord,
+      title = tab_title,
+      content = tab_content
+    )
+  })
+}
+
 #' Build task from numbered .txt files (V3)
 #'
 #' @param task_dir Path to task directory
@@ -63,10 +98,74 @@ build_task_from_files_v3 <- function(task_dir) {
   task_env <- new.env(parent = .GlobalEnv)
 
   # Group files by tab order
-  tabs <- create_tabs_from_files_v3(file_info, task_dir, task_env)
+  # tabs <- create_tabs_from_files_v3(file_info, task_dir, task_env)
 
-  # Build navbar with tabs
-  content <- page_navbar(title = "", id = "task_tabs", !!!tabs)
+  # MANUALLY BUILD BOOTSTRAP 5 TABS TO SEPARATE HEADER AND CONTENT
+
+  # Generate unique suffix based on task directory name
+  task_suffix <- basename(task_dir)
+
+  # 1. Process all tabs first
+  tab_data <- process_tabs_data(file_info, task_dir, task_env)
+
+  # 2. Build Header UI (ul.nav.nav-tabs)
+  header_ui <- div(
+    class = "task-tabs-container",
+    tags$ul(
+      class = "nav nav-tabs",
+      id = paste0("task_tabs_nav_", task_suffix),
+      role = "tablist",
+      lapply(tab_data, function(tab) {
+        is_active <- tab$order == 1
+
+        # Unique IDs
+        tab_id <- paste0("tab-", tab$id, "-", task_suffix)
+        pane_id <- paste0("pane-", tab$id, "-", task_suffix)
+
+        tags$li(
+          class = "nav-item",
+          role = "presentation",
+          tags$button(
+            # Custom class 'task-nav-link' for our JS handler
+            # 'nav-link' kept for Bootstrap styling
+            class = paste("nav-link task-nav-link", if (is_active) "active" else ""),
+            id = tab_id,
+
+            # Custom data attribute for our JS to find the target pane
+            `data-task-target` = paste0("#", pane_id),
+
+            # REMOVED: data-bs-toggle, data-toggle, href
+            # We do NOT want Bootstrap to handle this click
+
+            type = "button",
+            role = "tab",
+            `aria-controls` = pane_id,
+            `aria-selected` = if (is_active) "true" else "false",
+            tab$title
+          )
+        )
+      })
+    )
+  )
+
+  # 3. Build Content UI (div.tab-content)
+  content_ui <- div(
+    class = "tab-content",
+    id = paste0("task_tabs_content_", task_suffix),
+    lapply(tab_data, function(tab) {
+      is_active <- tab$order == 1
+      pane_id <- paste0("pane-", tab$id, "-", task_suffix)
+
+      div(
+        # Removed 'fade' to ensure immediate visibility toggling without debris
+        class = paste("tab-pane", if (is_active) "active" else ""),
+        id = pane_id,
+        role = "tabpanel",
+        `aria-labelledby` = paste0("tab-", tab$id, "-", task_suffix),
+        tab$content
+      )
+    })
+  )
 
   # Determine completion status (has execute, plot, or run blocks)
   completed <- any(sapply(file_info, function(f) {
@@ -75,55 +174,21 @@ build_task_from_files_v3 <- function(task_dir) {
   }))
 
   list(
-    content = content,
+    content = content_ui, # The body content (panes)
+    header_ui = header_ui, # The header content (tabs)
     completed = completed,
     auto_generated = TRUE,
     file_based_v3 = TRUE
   )
 }
 
-#' Parse task filenames (V3) into structured info
-#'
-#' @param files Vector of file paths
-#' @return List of file info objects
-parse_task_files_v3 <- function(files) {
-  lapply(files, function(f) {
-    basename_file <- basename(f)
-
-    # Pattern V3: {order}{subtask}_{title}.txt
-    # Examples: 1_tresc.txt, 2a_rozwiazanie.txt, 3_wykres.txt
-    pattern <- "^(\\d+)([a-z]?)_(.+)\\.txt$"
-
-    if (grepl(pattern, basename_file)) {
-      order <- as.numeric(gsub(pattern, "\\1", basename_file))
-      subtask <- gsub(pattern, "\\2", basename_file)
-      title <- gsub(pattern, "\\3", basename_file)
-
-      # If subtask is empty, use "main" as default
-      if (nchar(subtask) == 0) {
-        subtask <- "main"
-      }
-
-      list(
-        path = f,
-        order = order,
-        subtask = subtask,
-        title = title,
-        basename = basename_file
-      )
-    } else {
-      NULL
-    }
-  })
-}
-
-#' Create tabs from parsed file info (V3)
+#' Process files into structured tab data
 #'
 #' @param file_info List of parsed file objects
 #' @param task_dir Task directory path
-#' @param task_env Shared environment for the entire task
-#' @return List of nav_panel objects
-create_tabs_from_files_v3 <- function(file_info, task_dir, task_env) {
+#' @param task_env Shared environment
+#' @return List of tab data objects (id, title, content)
+process_tabs_data <- function(file_info, task_dir, task_env) {
   # Sort by order, then by subtask
   file_info <- file_info[order(
     sapply(file_info, function(x) x$order),
@@ -133,7 +198,7 @@ create_tabs_from_files_v3 <- function(file_info, task_dir, task_env) {
   # Group by order
   orders <- unique(sapply(file_info, function(x) x$order))
 
-  tabs <- lapply(orders, function(ord) {
+  lapply(orders, function(ord) {
     # Get all files for this tab order
     tab_files <- Filter(function(x) x$order == ord, file_info)
 
@@ -143,13 +208,13 @@ create_tabs_from_files_v3 <- function(file_info, task_dir, task_env) {
     # Build tab content with shared task environment
     tab_content <- build_tab_content_v3(tab_files, task_dir, task_env)
 
-    nav_panel(
+    list(
+      id = paste0("v3-", ord), # Simple unique ID
+      order = ord,
       title = tab_title,
-      tab_content
+      content = tab_content
     )
   })
-
-  tabs
 }
 
 #' Get formatted tab title from filename title
@@ -266,7 +331,7 @@ parse_content_blocks <- function(content) {
       # If we hit a quote, skip the entire string
       if (char == '"' || char == "'") {
         quote_char <- char
-        i <- i + 1  # Move past opening quote
+        i <- i + 1 # Move past opening quote
 
         # Scan to find closing quote, handling escapes
         while (i <= nchar(content)) {
@@ -289,7 +354,23 @@ parse_content_blocks <- function(content) {
         next
       }
 
-      # Not in a string - count parentheses
+      # Not in a string - check for comments
+      if (char == "#") {
+        # Found a comment - skip until newline
+        i <- i + 1
+        while (i <= nchar(content)) {
+          current_char <- substring(content, i, i)
+          if (current_char == "\n") {
+            # End of comment
+            break
+          }
+          i <- i + 1
+        }
+        # Continue to next char (which is the newline or next char after end of string)
+        next
+      }
+
+      # Not in string or comment - count parentheses
       if (char == "(") {
         paren_count <- paren_count + 1
       } else if (char == ")") {
@@ -325,37 +406,35 @@ render_content_block <- function(block, task_env = NULL) {
   if (block$type == "html") {
     # Raw HTML content
     div(class = "task-tab-content-simple", HTML(block$content))
-
   } else if (block$type == "code") {
     # Display code with syntax highlighting (not executed)
     code_block(block$content, language = "r")
-
   } else if (block$type == "execute") {
     # Execute code and show output with task environment
     output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = task_env)
     code_output(output)
-
   } else if (block$type == "plot") {
     # Execute code with plot handling with task environment
     output <- execute_code(block$content, use_auto_labels = TRUE, use_comments = TRUE, envir = task_env)
     code_output(output)
-
   } else if (block$type == "run") {
     # Execute code silently without displaying output (for initialization/setup)
     # This is useful for loading libraries, defining functions, preparing data, etc.
-    tryCatch({
-      eval(parse(text = block$content), envir = task_env)
-    }, error = function(e) {
-      # If there's an error, show it
-      div(
-        style = "padding: 20px 60px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 15px 0;",
-        tags$strong("Error in run() block:"),
-        tags$pre(style = "margin-top: 10px;", conditionMessage(e))
-      )
-    })
+    tryCatch(
+      {
+        eval(parse(text = block$content), envir = task_env)
+      },
+      error = function(e) {
+        # If there's an error, show it
+        div(
+          style = "padding: 20px 60px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 15px 0;",
+          tags$strong("Error in run() block:"),
+          tags$pre(style = "margin-top: 10px;", conditionMessage(e))
+        )
+      }
+    )
     # Return empty div (no visible output)
     div()
-
   } else {
     # Unknown type - display as text
     div(
@@ -363,4 +442,40 @@ render_content_block <- function(block, task_env = NULL) {
       pre(block$content)
     )
   }
+}
+
+#' Parse task filenames into structured info (V3)
+#'
+#' @param files Vector of file paths
+#' @return List of file info objects
+parse_task_files_v3 <- function(files) {
+  lapply(files, function(f) {
+    basename_file <- basename(f)
+
+    # Pattern: {order}{subtask}_{title}.txt
+    # Examples: 1_tresc.txt, 2_rozwiazanie.txt, 2a_wariant.txt
+    pattern <- "^(\\d+)([a-z]?)_(.+)\\.txt$"
+
+    if (grepl(pattern, basename_file)) {
+      order <- as.numeric(gsub(pattern, "\\1", basename_file))
+      subtask <- gsub(pattern, "\\2", basename_file)
+      title <- gsub(pattern, "\\3", basename_file) # This is the title/type
+
+      # If subtask is empty, use "main" as default
+      if (nchar(subtask) == 0) {
+        subtask <- "main"
+      }
+
+      list(
+        path = f,
+        order = order,
+        subtask = subtask,
+        title = title,
+        basename = basename_file
+      )
+    } else {
+      # Skip files that don't match pattern
+      NULL
+    }
+  })
 }

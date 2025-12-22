@@ -1,0 +1,10 @@
+<h1>Zadanie 12: Test dla proporcji</h1>
+
+<p>Test hipotezy dotyczącej proporcji w populacji.</p>
+
+<h3>Teoria:</h3>
+<p>Dla dużych prób testujemy H₀: p = p₀ używając statystyki z:</p>
+<p>z = (p̂ - p₀) / √(p₀(1-p₀)/n)</p>
+
+<h3>Przykład:</h3>
+<p>Producent twierdzi, że 90% jego produktów jest bez wad. W próbie 200 sztuk znaleziono 170 bez wad. Czy możemy potwierdzić twierdzenie producenta?</p>

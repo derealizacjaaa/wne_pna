@@ -1,0 +1,21 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# ==========================================
+# Plik: Z1_Nazwisko.R
+# ==========================================
+
+# Zadanie 1: Utworzenie pliku i komentarzy
+cat("Plik R został utworzony pomyślnie!\n")
+
+# To jest komentarz - linia rozpoczynająca się od #
+# Komentarze są ignorowane przez interpreter R
+# Służą do dokumentowania kodu
+
+# Przykład komentarza dla zadania:
+# Zadanie 2: Wprowadzenie wektorów i macierzy
+# ...
+
+cat("Komentarze zostały dodane\n")
+)

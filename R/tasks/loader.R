@@ -69,19 +69,8 @@ find_all_tasks <- function(list_dir) {
   task_folders <- list_contents[file.info(list_contents)$isdir]
   task_folders <- task_folders[grepl("/task\\d+$", task_folders)]
 
-  # Legacy task files (taskN.R files)
-  task_files <- list_contents[!file.info(list_contents)$isdir]
-  task_files <- task_files[grepl("^task\\d+\\.R$", basename(task_files))]
-
-  # Only include legacy files if no folder exists
-  task_files <- Filter(function(f) {
-    task_id <- gsub("\\.R$", "", basename(f))
-    !dir.exists(file.path(list_dir, task_id))
-  }, task_files)
-
-  # Combine and sort by task number
-  all_tasks <- c(task_folders, task_files)
-  all_tasks[order(extract_number(all_tasks))]
+  # Sort by task number
+  task_folders[order(extract_number(task_folders))]
 }
 
 #' Load a single task from path
@@ -96,28 +85,30 @@ load_single_task <- function(task_path, list_id, list_num) {
 
   task <- NULL
 
-  tryCatch({
-    if (is_folder) {
-      task <- load_folder_task(task_path, list_id, task_id)
-    } else {
-      task <- load_legacy_task(task_path, list_id, task_id)
+  tryCatch(
+    {
+      if (is_folder) {
+        task <- load_folder_task(task_path, list_id, task_id)
+      } else {
+        task <- load_legacy_task(task_path, list_id, task_id)
+      }
+
+      # Add metadata to task
+      if (!is.null(task)) {
+        task$list_id <- list_id
+        task$list_num <- list_num
+        task$task_id <- task_id
+        task$task_num <- task_num
+        task$completed <- task$completed %||% FALSE
+      }
+
+      task
+    },
+    error = function(e) {
+      warning(sprintf("Error loading %s/%s: %s", list_id, task_id, e$message))
+      NULL
     }
-
-    # Add metadata to task
-    if (!is.null(task)) {
-      task$list_id <- list_id
-      task$list_num <- list_num
-      task$task_id <- task_id
-      task$task_num <- task_num
-      task$completed <- task$completed %||% FALSE
-    }
-
-    task
-
-  }, error = function(e) {
-    warning(sprintf("Error loading %s/%s: %s", list_id, task_id, e$message))
-    NULL
-  })
+  )
 }
 
 #' Load task from folder (manual, file-based, or auto-generated)
@@ -146,39 +137,10 @@ load_folder_task <- function(task_path, list_id, task_id) {
     return(task)
   }
 
-  # Priority 3: File-based V2 mode (numbered .txt files with types)
-  task <- build_task_from_files(task_path)
-  if (!is.null(task)) {
-    cat(sprintf("✓ Loaded %s/%s (file-based-v2)\n", list_id, task_id))
-    return(task)
-  }
-
-  # Priority 4: Old auto-generation mode (content.txt + code.txt)
-  task <- auto_generate_basic_task(task_path)
-  if (!is.null(task)) {
-    cat(sprintf("✓ Loaded %s/%s (auto-generated-old)\n", list_id, task_id))
-    return(task)
-  }
-
   NULL
 }
 
-#' Load legacy task from .R file
-#' @param task_path Path to task file
-#' @param list_id List identifier
-#' @param task_id Task identifier
-#' @return Task object or NULL
-load_legacy_task <- function(task_path, list_id, task_id) {
-  task_env <- new.env()
-  source(task_path, local = task_env)
 
-  if (exists("create_task", envir = task_env)) {
-    cat(sprintf("✓ Loaded %s/%s (legacy)\n", list_id, task_id))
-    return(task_env$create_task())
-  }
-
-  NULL
-}
 
 #' Extract numeric part from string
 #' @param x Character vector
@@ -274,14 +236,18 @@ print_task_summary <- function(all_lists) {
 
   for (list_id in names(all_lists)) {
     stats <- get_list_stats(all_lists, list_id)
-    cat(sprintf("📁 %s: %d tasks (%d completed, %d%%)\n",
-                list_id, stats$total, stats$completed, stats$percentage))
+    cat(sprintf(
+      "📁 %s: %d tasks (%d completed, %d%%)\n",
+      list_id, stats$total, stats$completed, stats$percentage
+    ))
   }
 
   cat("\n")
   overall <- get_overall_stats(all_lists)
-  cat(sprintf("📊 Overall: %d tasks across %d lists (%d completed, %d%%)\n",
-              overall$total_tasks, overall$total_lists,
-              overall$completed_tasks, overall$percentage))
+  cat(sprintf(
+    "📊 Overall: %d tasks across %d lists (%d completed, %d%%)\n",
+    overall$total_tasks, overall$total_lists,
+    overall$completed_tasks, overall$percentage
+  ))
   cat("===========================================\n")
 }

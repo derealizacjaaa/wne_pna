@@ -1,0 +1,7 @@
+<h1>Zadanie 10: Test dla granicy plastyczności stali</h1>
+
+<p>Zbadano 10 kawałków stali ze względu na granicę plastyczności (w kg/cm²):</p>
+<p>3570, 3700, 3650, 3590, 3720, 3710, 3550, 3720, 3580, 3630</p>
+
+<h3>Polecenie:</h3>
+<p>Zakładając rozkład normalny, przetestować hipotezę o wartości średniej granicy plastyczności</p>

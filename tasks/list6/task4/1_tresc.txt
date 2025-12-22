@@ -1,0 +1,9 @@
+<h1>Zadanie 4: Wykres funkcji sinusoidalnej</h1>
+
+<p>Na obszarze <strong>[-1, 1] × [-1, 1]</strong> sporządzić wykres funkcji:</p>
+
+<p><strong>f(x,y) = sin(10(x² + y²)) / 10</strong></p>
+
+<p><strong>Wskazówka:</strong> Funkcja tworzy koncentryczne wzory wokół początku układu współrzędnych</p>
+
+<p><strong>Źródło:</strong> Na podstawie [3]</p>

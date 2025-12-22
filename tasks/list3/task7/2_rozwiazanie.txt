@@ -1,0 +1,49 @@
+<h2>Rozwiązanie</h2>
+<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+
+code(
+# Zadanie 7: Funkcje warunkowe
+
+# Funkcja sprawdzająca parzystość
+czy_parzysta <- function(n) {
+  if (n %% 2 == 0) {
+    return("parzysta")
+  } else {
+    return("nieparzysta")
+  }
+}
+
+cat("=== FUNKCJA Z IF-ELSE ===\n")
+cat("czy_parzysta(4):", czy_parzysta(4), "\n")
+cat("czy_parzysta(7):", czy_parzysta(7), "\n\n")
+
+# Funkcja klasyfikująca liczbę
+klasyfikuj <- function(x) {
+  if (x > 0) {
+    "dodatnia"
+  } else if (x < 0) {
+    "ujemna"
+  } else {
+    "zero"
+  }
+}
+
+cat("=== FUNKCJA Z IF-ELSE IF ===\n")
+cat("klasyfikuj(5):", klasyfikuj(5), "\n")
+cat("klasyfikuj(-3):", klasyfikuj(-3), "\n")
+cat("klasyfikuj(0):", klasyfikuj(0), "\n\n")
+
+# Funkcja z instrukcją switch
+ocena_slownie <- function(ocena) {
+  switch(as.character(ocena),
+         "2" = "niedostateczny",
+         "3" = "dostateczny",
+         "4" = "dobry",
+         "5" = "bardzo dobry",
+         "nieznana ocena")
+}
+
+cat("=== FUNKCJA ZE SWITCH ===\n")
+cat("ocena_slownie(5):", ocena_slownie(5), "\n")
+cat("ocena_slownie(3):", ocena_slownie(3), "\n")
+)

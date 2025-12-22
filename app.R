@@ -24,8 +24,7 @@ source("R/config/metadata.R")
 source("R/tasks/display.R")
 source("R/tasks/executor.R")
 source("R/tasks/builder.R")
-source("R/tasks/builder_v2.R")  # File-based builder (typed files)
-source("R/tasks/builder_v3.R")  # File-based builder (inline functions)
+source("R/tasks/builder_v3.R") # File-based builder (inline functions)
 source("R/tasks/loader.R")
 
 # UI components
@@ -57,10 +56,13 @@ ui <- fluidPage(
 
   # Include CSS files
   tags$head(
+    # Custom Task Navigation Handler
+    tags$script(src = "js/task_navigation.js"),
+
     # CSS Variables & Base Styles (load first)
     tags$link(rel = "stylesheet", type = "text/css", href = "css/0-variables.css?v=3"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/1-base.css?v=3"),
-    
+
     # Component Styles
     tags$link(rel = "stylesheet", type = "text/css", href = "css/main.css?v=3"),
     tags$link(rel = "stylesheet", type = "text/css", href = "css/header.css?v=3"),
@@ -94,7 +96,10 @@ ui <- fluidPage(
     ),
 
     # Custom JS for MathJax + Shiny integration
-    tags$script(src = "js/mathjax-shiny.js")
+    tags$script(src = "js/mathjax-shiny.js"),
+
+    # Breadcrumb navigation
+    tags$script(src = "js/breadcrumb.js")
   ),
 
   # Hero header
@@ -134,7 +139,6 @@ ui <- fluidPage(
 # ============================================
 
 server <- function(input, output, session) {
-
   # Initialize reactive state
   state <- init_reactive_state()
 

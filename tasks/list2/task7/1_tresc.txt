@@ -1,0 +1,13 @@
+<h1>Zadanie 7: Przedział ufności dla udziału rynku IBM</h1>
+
+<p>W tym zadaniu wyznaczysz przedział ufności dla proporcji przy dużej próbie.</p>
+
+<h3>Dane:</h3>
+<p>Analityk chce oszacować procent rynku mikrokomputerów opanowany przez IBM.</p>
+
+<p>Próba losowa złożona z <strong>590 spółek</strong> używających mikrokomputery dała rezultat, że <strong>500 spółek miało komputery IBM</strong>.</p>
+
+<h3>Polecenie:</h3>
+<p>Podać 95% przedział ufności dla procentu rynku opanowanego przez IBM</p>
+
+<p><strong>Uwaga:</strong> Jest to typowy problem estymacji proporcji przy dużej próbie</p>

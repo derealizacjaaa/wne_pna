@@ -1,0 +1,15 @@
+<h1>Zadanie 3: Symulacja Monte Carlo - rozkład normalny</h1>
+
+<p>Eksperyment sprawdzający zachowanie testu Jarque-Bera dla danych z rozkładu normalnego.</p>
+
+<h3>Polecenie:</h3>
+<ol>
+  <li>Wygenerować zmienną o <strong>30 obserwacjach</strong> z rozkładu normalnego o parametrach μ=0, σ²=1</li>
+  <li>Sprawdzić normalność rozkładu za pomocą testu Jarque-Bera</li>
+  <li>Zadanie powtórzyć <strong>10 000 razy</strong></li>
+  <li>Sprawdzić, w jakim procencie przypadków test wskazuje prawidłowy wynik</li>
+</ol>
+
+<p><strong>Uwaga:</strong> Dla prawdziwie normalnych danych test powinien odrzucać H₀ (brak normalności) w około 5% przypadków (na poziomie istotności α=0.05)</p>
+
+<p><strong>Wskazówka:</strong> Zlicz ile razy p-value < 0.05</p>

@@ -1,4 +1,4 @@
-<h2>Zadanie 6</h2>
+<h1>Zadanie 6</h1>
 <p>Dane <code>contest_data.csv</code> (<a href="https://www.kaggle.com/jaysobel/kcbs-bbq">źródło</a>)<br>
 Zmienna <strong>prize</strong> – nagrody w zawodach barbecue (tylko obserwacje niezerowe).</p>
 <p>Zakładamy rozkład normalny $N(\mu,\sigma^2)$.</p>

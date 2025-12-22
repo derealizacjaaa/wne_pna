@@ -1,0 +1,12 @@
+<h1>Zadanie 9: Macierz jednostkowa</h1>
+
+<p>W tym zadaniu utworzysz macierz jednostkową i zweryfikujesz jej właściwości.</p>
+
+<h3>Polecenie:</h3>
+<p>Utwórz macierz jednostkową <strong>I₅</strong> o wymiarach 5×5.</p>
+
+<p>Sprawdź, czy po pomnożeniu jej przez dowolny wektor <strong>v</strong> długości 5 otrzymujesz z powrotem ten sam wektor.</p>
+
+<p><strong>Własność macierzy jednostkowej:</strong> I × v = v</p>
+
+<p><strong>Wskazówka:</strong> Użyj funkcji <code>diag()</code> do utworzenia macierzy jednostkowej</p>
