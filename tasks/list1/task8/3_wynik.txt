@@ -1,0 +1,15 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+x <- 1:10
+T_matrix <- outer(x, x)
+
+cat("Macierz T (Tabliczka mnożenia 10x10):\n")
+print(T_matrix)
+)
+
+<div class="success-box">
+  <h4>Alternatywa</h4>
+  <p>Można to również osiągnąć mnożąc wektor kolumnowy przez wierszowy: <code>x %*% t(x)</code> (wynik macierzowy).</p>
+</div>

@@ -1,0 +1,11 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+i <- 1:300
+kwadraty <- i^2
+suma <- sum(kwadraty)
+
+cat("Suma kwadratów liczb od 1 do 300 wynosi:\n")
+print(suma)
+)

@@ -1,5 +1,5 @@
-<h2>Rozwiązanie</h2>
-<p>Poniżej przedstawiono przykładowe rozwiązanie zadania.</p>
+<h2>Kod</h2>
+<p>Poniżej przedstawiono kod rozwiązania.</p>
 
 code(
 # ==========================================

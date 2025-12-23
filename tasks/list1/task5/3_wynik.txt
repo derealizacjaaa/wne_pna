@@ -1,0 +1,30 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+d <- c(-1, 1, 0, -2, 3, 0, 2)
+cat("Wektor d:", d, "\n\n")
+
+indeksy_0 <- which(d == 0)
+cat("a) Indeksy elementów równych 0:", indeksy_0, "\n")
+
+dodatnie <- d[d > 0]
+cat("b) Elementy dodatnie:", dodatnie, "\n")
+
+ujemne <- d[d < 0]
+cat("c) Elementy ujemne:", ujemne, "\n")
+
+liczba_nieujemnych <- sum(d >= 0)
+cat("d) Liczba elementów nieujemnych:", liczba_nieujemnych, "\n")
+
+d2 <- d[d > 0]
+cat("e) Wektor d2:", d2, "\n")
+
+d3 <- d[d < 0]
+cat("f) Wektor d3:", d3, "\n")
+
+d4 <- d
+d4[d4 < 0] <- 999999999
+cat("g) Wektor d4:\n")
+print(d4)
+)

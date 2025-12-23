@@ -1,0 +1,14 @@
+<h2>Kod</h2>
+<p>Tworzenie tabliczki mnożenia za pomocą iloczynu zewnętrznego <code>outer()</code>.</p>
+
+code(
+# Wektor liczb od 1 do 10
+x <- 1:10
+
+# Użycie funkcji outer() do wykonania operacji na każdej parze elementów
+# Domyślnie outer() wykonuje mnożenie (*)
+T_matrix <- outer(x, x)
+
+cat("Macierz T (Tabliczka mnożenia 10x10):\n")
+print(T_matrix)
+)

@@ -1,0 +1,19 @@
+<h2>Kod</h2>
+<p>Macierze diagonalne i ich potęgowanie.</p>
+
+code(
+# Tworzymy wektor wartości na przekątną
+diag_values <- c(2, 4, 6, 8)
+
+# Tworzymy macierz diagonalną D
+D <- diag(diag_values)
+
+cat("Macierz D:\n")
+print(D)
+
+# Obliczamy D^2 (macierzowo)
+D_sq <- D %*% D
+
+cat("\nMacierz D^2:\n")
+print(D_sq)
+)

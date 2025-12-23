@@ -1,0 +1,13 @@
+<h2>Kod</h2>
+<p>W R operacje arytmetyczne na wektorach są zwektoryzowane - dodanie liczby do wektora dodaje ją do każdego elementu.</p>
+
+code(
+# Wektor wejściowy s
+s <- c(1, 2, 3, 4, 5)
+cat("Wektor początkowy s:", s, "\n")
+
+# Jedno przekształcenie: dodanie 100 do każdego elementu
+s_new <- s + 100
+
+cat("Wektor po przekształceniu:", s_new, "\n")
+)

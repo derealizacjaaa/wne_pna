@@ -1,0 +1,13 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+diag_values <- c(2, 4, 6, 8)
+D <- diag(diag_values)
+cat("Macierz D:\n")
+print(D)
+
+D_sq <- D %*% D
+cat("\nMacierz D^2:\n")
+print(D_sq)
+)

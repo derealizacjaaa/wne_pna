@@ -1,0 +1,18 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+I5 <- diag(5)
+cat("Macierz jednostkowa I₅ (5×5):\n")
+print(I5)
+
+v <- c(2, 5, 3, 7, 1)
+cat("\nWektor v:\n")
+print(v)
+
+wynik <- I5 %*% v
+cat("\nWynik I₅ × v:\n")
+print(wynik)
+
+cat("\nCzy I₅ × v = v?", all(wynik == v), "\n")
+)

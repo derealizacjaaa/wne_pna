@@ -1,0 +1,38 @@
+<h2>Kod</h2>
+<p>Operacje logiczne i indeksowanie na wektorze d.</p>
+
+code(
+# Odtworzenie wektora d z zadania 2
+d <- c(-1, 1, 0, -2, 3, 0, 2)
+cat("Wektor d:", d, "\n\n")
+
+# a) Elementy równe 0
+indeksy_0 <- which(d == 0)
+cat("a) Indeksy elementów równych 0:", indeksy_0, "\n")
+
+# b) Elementy dodatnie
+dodatnie <- d[d > 0]
+cat("b) Elementy dodatnie:", dodatnie, "\n")
+
+# c) Elementy ujemne
+ujemne <- d[d < 0]
+cat("c) Elementy ujemne:", ujemne, "\n")
+
+# d) Liczba elementów nieujemnych (>= 0)
+liczba_nieujemnych <- sum(d >= 0)
+cat("d) Liczba elementów nieujemnych:", liczba_nieujemnych, "\n")
+
+# e) Wektor d2 - elementy dodatnie
+d2 <- d[d > 0]
+cat("e) Wektor d2:", d2, "\n")
+
+# f) Wektor d3 - elementy ujemne
+d3 <- d[d < 0]
+cat("f) Wektor d3:", d3, "\n")
+
+# g) Wektor d4 - kopia d z ujemnymi zastąpionymi przez 999...
+d4 <- d
+d4[d4 < 0] <- 999999999
+cat("g) Wektor d4:\n")
+print(d4)
+)

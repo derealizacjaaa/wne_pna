@@ -1,0 +1,7 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+cat("Plik R został utworzony pomyślnie!\n")
+cat("Komentarze zostały dodane\n")
+)

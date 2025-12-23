@@ -1,0 +1,17 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+n <- 11
+F_matrix <- matrix(0, nrow = n, ncol = n)
+F_matrix[1, ] <- -1
+F_matrix[2:n, 1:(n-1)] <- diag(n-1)
+
+cat("Macierz F (11x11):\n")
+print(F_matrix)
+)
+
+<div class="info-box">
+  <h4>Komentarz</h4>
+  <p>Wykorzystaliśmy fakt, że macierz jednostkowa przesunięta o 1 w dół to po prostu wstawienie <code>diag()</code> w blok przesunięty względem początku macierzy.</p>
+</div>

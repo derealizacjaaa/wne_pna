@@ -1,0 +1,16 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+s <- c(1, 2, 3, 4, 5)
+cat("Wektor początkowy s:", s, "\n")
+
+s_new <- s + 100
+
+cat("Wektor po przekształceniu:", s_new, "\n")
+)
+
+<div class="success-box">
+  <h4>Wyjaśnienie</h4>
+  <p>Operacja <code>s + 100</code> dodaje wartość 100 do każdego elementu wektora s, zamieniając [1, 2, 3...] na [101, 102, 103...].</p>
+</div>

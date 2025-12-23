@@ -1,0 +1,16 @@
+<h2>Kod</h2>
+<p>Obliczamy sumę kwadratów liczb od 1 do 300.</p>
+
+code(
+# Tworzymy wektor liczb od 1 do 300
+i <- 1:300
+
+# Podnosimy każdą liczbę do kwadratu (operacja na wektorze)
+kwadraty <- i^2
+
+# Sumujemy wszystkie elementy
+suma <- sum(kwadraty)
+
+cat("Suma kwadratów liczb od 1 do 300 wynosi:\n")
+print(suma)
+)

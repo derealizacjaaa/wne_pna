@@ -1,0 +1,20 @@
+<h2>Wynik</h2>
+<p>Rezultat wykonania kodu:</p>
+
+execute(
+values_a <- rep(log(10), 7)
+cat("Wektor a (ln(10) x 7):\n")
+print(values_a)
+
+vec_b <- c(1/3, 1/2, 1/6, 1/7)
+cat("\nWektor b (ułamki):\n")
+print(vec_b)
+
+vec_c <- c(pi, pi/3, pi/5, pi/7)
+cat("\nWektor c (wartości PI):\n")
+print(vec_c)
+
+vec_d <- c(-1, 1, 0, -2, 3, 0, 2)
+cat("\nWektor d:\n")
+print(vec_d)
+)
