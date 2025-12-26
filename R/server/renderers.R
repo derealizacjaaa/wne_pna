@@ -54,8 +54,14 @@ render_dynamic_layout <- function(output, state) {
             class = "main-content-header",
             h3(
               style = "flex: 1; height: 100%;", # Ensure h3 grows to fill space and height
-              # Static Home Breadcrumb
-              tags$span(class = "breadcrumb-item", icon("home"), " Strona główna"),
+              # Link to Home
+              tags$a(
+                id = "nav_back_to_home",
+                class = "breadcrumb-item breadcrumb-link action-button",
+                href = "#",
+                icon("home"),
+                " Strona główna"
+              ),
               # Dynamic Breadcrumbs
               uiOutput("header_list_crumb", inline = TRUE),
               uiOutput("header_task_crumb", inline = TRUE),
@@ -110,17 +116,6 @@ render_task_sidebar <- function(output, state, list_metadata, current_list_tasks
 
 #' Render main content area (Breadcrumbs & Body)
 render_main_content <- function(output, state, current_list_tasks, list_metadata) {
-  # Robust deduplication for "has task" state
-  # logic: prevent list crumb re-render when switching between tasks
-  has_task_val <- reactiveVal(FALSE)
-
-  observe({
-    val <- !is.null(state$current_task())
-    if (val != has_task_val()) {
-      has_task_val(val)
-    }
-  })
-
   # 1. Render List Breadcrumb
   output$header_list_crumb <- renderUI({
     # Get current list name if available
@@ -129,12 +124,9 @@ render_main_content <- function(output, state, current_list_tasks, list_metadata
       current_list_name <- list_metadata[[state$current_list()]]$name
     }
 
-    # Depend ONLY on the deduped value
-    has_task <- has_task_val()
-
+    # Always generate unified crumb (always a link)
     generate_list_crumb(
-      list_name = current_list_name,
-      has_task = has_task
+      list_name = current_list_name
     )
   })
 

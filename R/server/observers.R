@@ -124,4 +124,14 @@ observe_breadcrumb_nav <- function(input, state) {
     ignoreInit = TRUE,
     priority = 100
   )
+
+  # Home navigation
+  observeEvent(input$nav_back_to_home,
+    {
+      state$current_list(NULL)
+      state$current_task(NULL)
+    },
+    ignoreInit = TRUE,
+    priority = 100
+  )
 }

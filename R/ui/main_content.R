@@ -7,7 +7,10 @@
 #' @param list_name Name of the current list (optional)
 #' @param has_task Boolean, true if a task is currently selected
 #' @return List of Shiny tags
-generate_list_crumb <- function(list_name = NULL, has_task = FALSE) {
+#' Generate list breadcrumb (dynamic link)
+#' @param list_name Name of the current list (optional)
+#' @return List of Shiny tags
+generate_list_crumb <- function(list_name = NULL) {
   if (is.null(list_name)) {
     return(list())
   }
@@ -27,29 +30,17 @@ generate_list_crumb <- function(list_name = NULL, has_task = FALSE) {
     }
   }
 
-  # If we have a task, the list should be clickable (to go back to list welcome)
-  if (has_task) {
-    crumbs <- c(crumbs, list(
-      sep,
-      tags$a(
-        id = "nav_back_to_list_welcome",
-        class = "breadcrumb-item breadcrumb-link action-button",
-        href = "#",
-        icon("folder-open"),
-        HTML(paste0("&nbsp; ", display_name))
-      )
-    ))
-  } else {
-    # List Welcome - Just the item (non-clickable)
-    crumbs <- c(crumbs, list(
-      sep,
-      tags$span(
-        class = "breadcrumb-item",
-        icon("folder-open"),
-        HTML(paste0("&nbsp; ", display_name))
-      )
-    ))
-  }
+  # Always clickable to allow navigation back to welcome screen (even if already there, it's consistent)
+  crumbs <- c(crumbs, list(
+    sep,
+    tags$a(
+      id = "nav_back_to_list_welcome",
+      class = "breadcrumb-item breadcrumb-link action-button",
+      href = "#",
+      icon("folder-open"),
+      HTML(paste0("&nbsp; ", display_name))
+    )
+  ))
 
   return(tagList(crumbs))
 }
