@@ -67,21 +67,9 @@ create_list_item <- function(list_info, is_active, stats) {
     )
   )
 }
-
-#' Create a task item for task selection sidebar
-#' @param task_id Task identifier
-#' @param task_info Task object
-#' @param is_active Whether this task is currently selected
-#' @return Shiny li tag
-#' Create a task item for task selection sidebar
-#' @param task_id Task identifier
-#' @param task_info Task object
-#' @param is_active Whether this task is currently selected
-#' @param list_seed Optional string to seed random letter highlighting (e.g. list name)
-#' @return Shiny li tag
 create_task_item <- function(task_id, task_info, is_active, list_seed = NULL) {
   is_completed <- isTRUE(task_info$completed)
-  
+
   # Logic for semi-random letter highlighting
   base_text <- "Zadanie"
   display_text <- if (!is.null(list_seed)) {
@@ -91,7 +79,7 @@ create_task_item <- function(task_id, task_info, is_active, list_seed = NULL) {
     len <- nchar(base_text)
     # 0-based index from modulo, +1 for R 1-based indexing
     target_idx <- (seed_val %% len) + 1
-    
+
     chars <- strsplit(base_text, "")[[1]]
     chars[target_idx] <- paste0("<span class='highlight-letter'>", chars[target_idx], "</span>")
     HTML(paste(chars, collapse = ""))
@@ -188,20 +176,20 @@ breadcrumb_trail <- function(current_list = NULL, current_task = NULL) {
     tags$span(class = "breadcrumb-separator", "/"),
     tags$span(class = "breadcrumb-item", "pna")
   )
-  
+
   if (!is.null(current_list)) {
     items <- c(items, list(
       tags$span(class = "breadcrumb-separator", "/"),
       tags$span(class = "breadcrumb-item", tolower(gsub(" ", "", current_list)))
     ))
   }
-  
+
   if (!is.null(current_task)) {
     items <- c(items, list(
       tags$span(class = "breadcrumb-separator", "/"),
       tags$span(class = "breadcrumb-item", sprintf("task%d", current_task))
     ))
   }
-  
+
   div(class = "navbar-breadcrumb", !!!items)
 }

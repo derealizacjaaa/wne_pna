@@ -72,7 +72,25 @@ cat("Średnia wynosi:", mean(x))
 
 ---
 
-## 3. HTML & STYLING GUIDE
+## 3. APPLICATION LAYOUT & HEADER STRUCTURE
+
+The application uses a **Full-Width Header** layout with simplified sidebars.
+
+### Header Structure (3-Column Flex)
+The header (`.main-content-header`) spans the full viewport width and aligns perfectly with the columns below:
+1.  **Left Column:** Matches `Left Sidebar` width. Contains the centered **Home** button.
+2.  **Middle Column:** Matches `Main Content` width.
+    *   **Breadcrumbs:** Left-aligned, vertically centered.
+    *   **Tabs/Controls:** Right-aligned, fill full height (`align-items: stretch`).
+3.  **Right Column:** Matches `Right Sidebar` width. Empty spacer for alignment.
+
+### Sidebar Structure
+*   **Left Sidebar:** Starts immediately with the list of task lists. No header.
+*   **Right Sidebar:** Starts immediately with the task list. No header.
+
+---
+
+## 4. HTML & STYLING GUIDE
 
 Use these specific HTML patterns to maintain design consistency.
 
@@ -108,7 +126,7 @@ Use these specific HTML patterns to maintain design consistency.
 
 ---
 
-## 4. CSS VARIABLES & DESIGN TOKENS
+## 5. CSS VARIABLES & DESIGN TOKENS
 Use these values if you need to create custom styles or visualizations.
 
 **Colors:**
@@ -123,7 +141,7 @@ Use these values if you need to create custom styles or visualizations.
 
 ---
 
-## 5. AGENT WORKFLOW INSTRUCTIONS
+## 6. AGENT WORKFLOW INSTRUCTIONS
 
 **When creating a NEW TASK:**
 1.  Create directory: `mkdir -p tasks/list{N}/task{M}`.
@@ -143,7 +161,7 @@ Use these values if you need to create custom styles or visualizations.
 
 ---
 
-## 6. SECURITY & SAFETY (CRITICAL)
+## 7. SECURITY & SAFETY (CRITICAL)
 
 > [!WARNING]
 > **Arbitrary Code Execution Risk**

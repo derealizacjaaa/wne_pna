@@ -3,6 +3,8 @@
 # ============================================
 # Generates the right sidebar for selecting tasks within a list
 
+library(shiny)
+
 #' Generate right sidebar with task selection
 #'
 #' @param tasks List of tasks in current list
@@ -10,7 +12,8 @@
 #' @param current_list_name Name of current list
 #' @param all_lists Full task structure (unused but kept for compatibility)
 #' @return Shiny div with sidebar content
-generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all_lists = NULL) {
+generate_task_sidebar <- function(tasks, current_task_id, current_list_name,
+                                  all_lists = NULL) {
   # Handle empty state
   if (is.null(tasks) || length(tasks) == 0) {
     return(empty_task_sidebar())
@@ -21,14 +24,19 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
     task_id <- names(tasks)[i]
     task_info <- tasks[[i]]
     is_active <- !is.null(current_task_id) && task_id == current_task_id
-    # Seed with both list name and task ID to ensure variety per task AND per list
-    create_task_item(task_id, task_info, is_active, list_seed = paste0(current_list_name, "_", task_id))
+    # Seed with both list name and task ID to ensure variety per task AND
+    # per list
+    create_task_item(
+      task_id,
+      task_info,
+      is_active,
+      list_seed = paste0(current_list_name, "_", task_id)
+    )
   })
 
   # Build sidebar structure
   div(
     class = "tasks-sidebar-content",
-    h3(div(class = "header-pattern-overlay"), icon("list"), " ", current_list_name),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),
@@ -47,7 +55,6 @@ generate_task_sidebar <- function(tasks, current_task_id, current_list_name, all
 empty_task_sidebar <- function(message = "Brak zadań w tej liście") {
   div(
     class = "tasks-sidebar-content",
-    h3(div(class = "header-pattern-overlay"), icon("list"), " Zadania"),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),
@@ -65,7 +72,6 @@ empty_task_sidebar <- function(message = "Brak zadań w tej liście") {
 placeholder_task_sidebar <- function() {
   div(
     class = "tasks-sidebar-content",
-    h3(div(class = "header-pattern-overlay"), icon("list"), " Zadania"),
     div(
       class = "tasks-sidebar-body",
       div(class = "sidebar-pattern"),

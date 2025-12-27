@@ -12,8 +12,8 @@
   transition: all var(--transition-normal);
   border-left: var(--border-width-bold) solid var(--color-dark);
   border-right: var(--border-width-bold) solid var(--color-dark);
-  height: calc(100vh - var(--header-height));
-  max-height: calc(100vh - var(--header-height));
+  height: 100%;
+  max-height: 100%;
   min-height: 0;
 }
 
@@ -24,8 +24,8 @@
 /* Main content container with header */
 .main-content {
   padding: 0;
-  height: calc(100vh - var(--header-height));
-  max-height: calc(100vh - var(--header-height));
+  height: 100%;
+  max-height: 100%;
   min-height: 0;
   background: var(--color-white);
   display: flex;
@@ -53,8 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0 0 var(--spacing-xl);
-  /* Reduced from 5xl (60px) to xl (20px) */
+  padding: 0;
   flex-shrink: 0;
   flex: 0 0 auto;
   position: relative;
@@ -125,29 +124,24 @@
   }
 }
 
-.main-content-header h3 {
+
+/* Header Content Wrapper - replaces h3 container styles */
+.header-content-wrapper {
   margin: 0;
   color: var(--color-white);
   font-size: 1.25em;
-  /* Increased size (was 0.9em) */
   font-weight: var(--font-weight-medium);
   font-family: var(--font-family-base);
-  /* Removed text shadow for cleaner look */
   padding: 0;
   box-shadow: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  /* Increased gap */
   position: relative;
   z-index: 10;
-  /* Ensure on top */
   letter-spacing: 0.3px;
 }
 
 
 /* Breadcrumb separator styling */
-.main-content-header h3 .breadcrumb-separator {
+.main-content-header .breadcrumb-separator {
   color: rgba(255, 255, 255, 0.5);
   font-weight: var(--font-weight-bold);
   margin: 0 8px;
@@ -157,14 +151,14 @@
   display: inline-block;
 }
 
-.main-content-header h3:hover .breadcrumb-separator {
+.main-content-header:hover .breadcrumb-separator {
   opacity: 0.9;
   color: rgba(255, 255, 255, 0.8);
   transform: scale(1.1);
 }
 
 /* Breadcrumb item styling - Glassmorphism Design */
-.main-content-header h3 .breadcrumb-item {
+.main-content-header .breadcrumb-item {
   transition: all var(--transition-smooth);
   font-weight: var(--font-weight-medium);
   color: rgba(255, 255, 255, 0.95) !important;
@@ -189,20 +183,17 @@
   animation: slideInFromLeft 0.4s ease backwards;
 }
 
-.main-content-header h3 .breadcrumb-item:nth-child(1) {
+/* Animation delays - simplified sequence */
+.breadcrumb-item {
   animation-delay: 0s;
 }
 
-.main-content-header h3 .breadcrumb-item:nth-child(3) {
+.main-content-header .breadcrumb-item:nth-of-type(2) {
   animation-delay: 0.1s;
 }
 
-.main-content-header h3 .breadcrumb-item:nth-child(5) {
+.main-content-header .breadcrumb-item:nth-of-type(3) {
   animation-delay: 0.15s;
-}
-
-.main-content-header h3 .breadcrumb-item:nth-child(7) {
-  animation-delay: 0.2s;
 }
 
 @keyframes slideInFromLeft {
@@ -217,7 +208,7 @@
   }
 }
 
-.main-content-header h3 .breadcrumb-item:hover {
+.main-content-header .breadcrumb-item:hover {
   background: linear-gradient(135deg,
       rgba(0, 0, 0, 0.45) 0%,
       rgba(0, 0, 0, 0.35) 50%,
@@ -234,11 +225,11 @@
 }
 
 /* Specific styling for the clickable link breadcrumb */
-.main-content-header h3 a.breadcrumb-item {
+.main-content-header a.breadcrumb-item {
   cursor: pointer !important;
 }
 
-.main-content-header h3 a.breadcrumb-item:hover {
+.main-content-header a.breadcrumb-item:hover {
   cursor: pointer !important;
   background: linear-gradient(135deg,
       rgba(255, 255, 255, 0.15) 0%,
@@ -247,7 +238,7 @@
 }
 
 /* Active/current breadcrumb item - More prominent styling */
-.main-content-header h3 .breadcrumb-item:last-child {
+.main-content-header .breadcrumb-item:last-child {
   color: var(--color-white);
   font-weight: var(--font-weight-semibold);
   background: linear-gradient(135deg,
@@ -262,7 +253,7 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.main-content-header h3 .breadcrumb-item:last-child:hover {
+.main-content-header .breadcrumb-item:last-child:hover {
   background: linear-gradient(135deg,
       rgba(177, 64, 79, 0.85) 0%,
       rgba(177, 64, 79, 0.7) 50%,
@@ -275,7 +266,7 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.main-content-header h3 .breadcrumb-item:last-child:active {
+.main-content-header .breadcrumb-item:last-child:active {
   transform: translateY(-1px) scale(0.98);
   transition: transform 0.1s ease;
 }
@@ -285,7 +276,7 @@
   flex: 1 1 auto;
   background: var(--color-white);
   min-height: 0;
-  max-height: calc(100vh - var(--header-height) - var(--navbar-height));
+  max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   position: static;

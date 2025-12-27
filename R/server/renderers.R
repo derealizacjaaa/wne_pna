@@ -26,56 +26,86 @@ setup_renderers <- function(output, state, list_metadata, all_lists, current_lis
 #' Render dynamic layout based on sidebar state
 render_dynamic_layout <- function(output, state) {
   output$dynamic_layout <- renderUI({
-    div(
-      class = if (state$sidebar_collapsed()) "app-container sidebar-collapsed" else "app-container",
-
-      # Toggle button for collapsed state
-      if (state$sidebar_collapsed()) {
-        actionButton(
-          "toggle_sidebar",
-          label = NULL,
-          icon = icon("bars"),
-          class = "sidebar-toggle-btn-collapsed"
-        )
-      },
-
-      # LEFT SIDEBAR (collapsible)
-      if (!state$sidebar_collapsed()) {
-        div(class = "left-sidebar", uiOutput("list_sidebar"))
-      },
-
-      # MAIN CONTENT
+    tagList(
+      # FULL WIDTH HEADER
       div(
-        class = "main-area",
+        class = "main-content-header full-width-header",
         div(
-          class = "main-content",
+          class = "header-content-wrapper",
+          style = "display: flex; align-items: stretch; width: 100%; height: 100%;",
+
+          # 1. LEFT COLUMN - Matches Left Sidebar Width
           div(
-            class = "main-content-header",
-            class = "main-content-header",
-            h3(
-              style = "flex: 1; height: 100%;", # Ensure h3 grows to fill space and height
-              # Link to Home
-              tags$a(
-                id = "nav_back_to_home",
-                class = "breadcrumb-item breadcrumb-link action-button",
-                href = "#",
-                icon("home"),
-                " Strona główna"
-              ),
-              # Dynamic Breadcrumbs
-              uiOutput("header_list_crumb", inline = TRUE),
-              uiOutput("header_task_crumb", inline = TRUE),
-              # Dynamic Header Controls (Tabs etc.) - Inside h3 for correct sizing/layout
-              uiOutput("header_controls", style = "margin-left: auto; height: 100%; display: flex; align-items: stretch;")
+            style = "width: var(--sidebar-left-width); display: flex; justify-content: center; align-items: center; flex-shrink: 0; padding: 0 10px; height: 100%;",
+            # Home Button centered here
+            tags$a(
+              id = "nav_back_to_home",
+              class = "breadcrumb-item breadcrumb-link action-button",
+              href = "#",
+              icon("home"),
+              " Strona główna"
             )
           ),
-          # Dynamic Body Content
-          uiOutput("main_content_body", class = "main-content-body")
+
+          # 2. MIDDLE COLUMN - Matches Main Content Width
+          div(
+            style = "flex: 1; display: flex; align-items: stretch; padding: 0 0 0 20px; min-width: 0; height: 100%;",
+
+            # Dynamic Breadcrumbs (Left aligned - Vertically Centered)
+            div(
+              style = "display: flex; align-items: center; gap: 5px; flex-shrink: 1; overflow: hidden; height: 100%;",
+              uiOutput("header_list_crumb", inline = FALSE, container = tags$div, style = "height: 100%; display: flex; align-items: center;"),
+              uiOutput("header_task_crumb", inline = FALSE, container = tags$div, style = "height: 100%; display: flex; align-items: center;")
+            ),
+
+            # Dynamic Header Controls (Right aligned - Stretched)
+            div(
+              style = "margin-left: auto; height: 100%; display: flex; align-items: stretch; flex-shrink: 0;",
+              uiOutput("header_controls", style = "height: 100%; display: flex; align-items: stretch; width: 100%;", container = tags$div)
+            )
+          ),
+
+          # 3. RIGHT COLUMN - Matches Right Sidebar Width
+          div(
+            style = "width: var(--sidebar-right-width); flex-shrink: 0; height: 100%;"
+          )
         )
       ),
 
-      # RIGHT SIDEBAR
-      div(class = "right-sidebar", uiOutput("task_sidebar"))
+      # MAIN APP CONTAINER
+      div(
+        class = if (state$sidebar_collapsed()) "app-container sidebar-collapsed" else "app-container",
+
+        # Toggle button for collapsed state
+        if (state$sidebar_collapsed()) {
+          actionButton(
+            "toggle_sidebar",
+            label = NULL,
+            icon = icon("bars"),
+            class = "sidebar-toggle-btn-collapsed"
+          )
+        },
+
+        # LEFT SIDEBAR (collapsible)
+        if (!state$sidebar_collapsed()) {
+          div(class = "left-sidebar", uiOutput("list_sidebar"))
+        },
+
+        # MAIN CONTENT
+        div(
+          class = "main-area",
+          div(
+            class = "main-content",
+            # Header removed from here
+
+            # Dynamic Body Content
+            uiOutput("main_content_body", class = "main-content-body")
+          )
+        ),
+
+        # RIGHT SIDEBAR
+        div(class = "right-sidebar", uiOutput("task_sidebar"))
+      )
     )
   })
 }

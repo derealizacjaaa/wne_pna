@@ -5,7 +5,7 @@
 
 .left-sidebar {
   width: var(--sidebar-left-width);
-  height: calc(100vh - var(--header-height));
+  height: 100%;
   background: var(--color-primary);
   overflow: hidden;
   transition: all var(--transition-normal);
@@ -28,191 +28,9 @@
 }
 
 /* Section 1: Header - Fixed height, no grow/shrink */
-.lists-sidebar-header {
-  background: linear-gradient(
-    to bottom,
-    var(--color-dark) 0px,
-    var(--color-primary) 8px,
-    var(--color-primary) 46px,
-    var(--color-dark) 52px
-  );
-  border-bottom: var(--border-width-bold) solid var(--color-dark);
-  padding-left: 0px;
-  height: var(--navbar-height);
-  min-height: var(--navbar-height);
-  max-height: var(--navbar-height);
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  position: relative;
-  flex: 0 0 var(--navbar-height);
-}
 
-/* Zigzag dark section - Black base layer */
-.lists-sidebar-header::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 75px;
-  height: 100%;
-  background: var(--color-dark);
-  clip-path: polygon(
-    0 0,
-    60px 0,
-    75px 10px,
-    60px 30px,
-    70px 42px,
-    60px 56px,
-    0 56px
-  );
-  z-index: 0;
-}
 
-/* Zigzag dark section - White layer (5px offset to left) */
-.lists-sidebar-header::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 70px;
-  height: 100%;
-  background: var(--color-light);
-  clip-path: polygon(
-    0 0,
-    55px 0,
-    70px 10px,
-    55px 30px,
-    65px 42px,
-    55px 56px,
-    0 56px
-  );
-  z-index: var(--z-index-base);
-}
 
-/* Home button container - Third layer */
-.sidebar-home-btn-container {
-  width: 65px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  z-index: var(--z-index-dropdown);
-  background: var(--color-dark);
-  clip-path: polygon(
-    0 0,
-    50px 0,
-    65px 10px,
-    50px 30px,
-    60px 42px,
-    50px 56px,
-    0 56px
-  );
-}
-
-/* Home button in dark section */
-.sidebar-home-btn {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  border-radius: var(--border-radius-md);
-  color: var(--color-light);
-  font-size: var(--font-size-xl);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  padding: 0;
-  margin-left: 15.5px;
-}
-
-.sidebar-home-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--color-primary);
-  transform: scale(1.05);
-}
-
-.lists-sidebar-header-inner {
-  background: transparent;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px 0 5px;
-  flex: 1;
-  position: relative;
-  z-index: var(--z-index-base);
-}
-
-.lists-sidebar-header h3 {
-  margin: 0;
-  color: var(--color-light);
-  margin-left: var(--spacing-lg);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  white-space: nowrap;
-  text-shadow:
-    -1px -1px 0 var(--color-black),
-    1px -1px 0 var(--color-black),
-    -1px 1px 0 var(--color-black),
-    1px 1px 0 var(--color-black);
-  padding-bottom: var(--spacing-xs);
-  box-shadow: 
-    0 1px 0 var(--color-light),
-    0 2px 0 var(--color-light),
-    0 3px 0 var(--color-dark),
-    0 4px 0 var(--color-dark);
-}
-
-.lists-sidebar-header .sidebar-toggle-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-light);
-  font-size: var(--font-size-base);
-  cursor: pointer;
-  padding: 0px;
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-normal);
-  border-radius: var(--border-radius-md);
-  position: absolute;
-  top: 2px;
-  right: 2px;
-}
-
-/* Lines for toggle button */
-.lists-sidebar-header .sidebar-toggle-btn::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: -7px;
-  width: 29px;
-  height: var(--border-width-normal);
-  background: var(--color-dark);
-}
-
-.lists-sidebar-header .sidebar-toggle-btn::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: -2px;
-  width: var(--border-width-normal);
-  height: 26px;
-  background: var(--color-light);
-}
-
-.lists-sidebar-header .sidebar-toggle-btn:hover {
-  color: var(--color-dark);
-  background: rgba(244, 246, 249, 0.2);
-}
 
 /* Section 2: Menu - Fixed height based on content */
 .lists-sidebar-menu {
@@ -239,10 +57,9 @@
   width: var(--spacing-xl);
   height: 100%;
   background: linear-gradient(270deg,
-    var(--color-primary) 0%,
-    var(--color-primary-light) 50%,
-    var(--color-primary) 100%
-  );
+      var(--color-primary) 0%,
+      var(--color-primary-light) 50%,
+      var(--color-primary) 100%);
   z-index: var(--z-index-base);
 }
 
@@ -255,10 +72,9 @@
   width: 10px;
   height: 100%;
   background: linear-gradient(90deg,
-    var(--color-primary) 0%,
-    var(--color-primary-light) 50%,
-    var(--color-primary) 100%
-  );
+      var(--color-primary) 0%,
+      var(--color-primary-light) 50%,
+      var(--color-primary) 100%);
   z-index: var(--z-index-base);
 }
 
@@ -370,10 +186,9 @@
 }
 
 .list-item.active {
-  background: linear-gradient(135deg, 
-    var(--color-primary) 0%, 
-    var(--color-primary-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-dark) 100%);
   border-color: var(--color-dark);
   border-left-color: var(--color-dark);
   box-shadow: var(--shadow-card-active);
@@ -414,17 +229,15 @@
 
 .progress-bar-fill-vertical {
   width: 100%;
-  background: linear-gradient(180deg, 
-    var(--color-red-accent) 0%, 
-    var(--color-primary) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--color-red-accent) 0%,
+      var(--color-primary) 100%);
 }
 
 .progress-bar-fill-vertical.partial {
-  background: linear-gradient(180deg, 
-    var(--color-warning) 0%, 
-    var(--color-warning-dark) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--color-warning) 0%,
+      var(--color-warning-dark) 100%);
   box-shadow: 0 0 4px rgba(232, 181, 32, 0.3);
 }
 
